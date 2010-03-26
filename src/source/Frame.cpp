@@ -20,6 +20,23 @@
 namespace Aquila
 {
     /**
+     * Creates the frame object - sets signal source and frame boundaries.
+     *
+     * Frame should not change original data, so the source is a const
+     * reference.
+     *
+     * @param source const reference to signal source
+     * @param indexBegin position of first sample of this frame in the source
+     * @param indexEnd position of last sample of this frame in the source
+     */
+    Frame::Frame(const SignalSource& source, unsigned int indexBegin,
+            unsigned int indexEnd):
+        m_source(source), m_begin(indexBegin), m_end(indexEnd)
+    {
+    }
+
+
+    /**
      * Assigns another iterator in a memberwise fashion.
      *
      * @param other right-hand value iterator
@@ -85,11 +102,11 @@ namespace Aquila
     /**
      * Dereferences the iterator.
      *
-     * @return a const reference to signal sample value.
+     * @return signal sample value.
      */
-    const int& Frame::iterator::operator*() const
+    const int Frame::iterator::operator*() const
     {
-        return frame->sourceChannel[idx];
+        return frame->m_source.sample(idx);
     }
 
     /**
@@ -101,21 +118,4 @@ namespace Aquila
     {
         return idx - frame->m_begin;
     }
-
-
-    /**
-     * Creates the frame object - sets signal source and frame boundaries.
-     *
-     * Frame should not change original data, so the source is a const
-     * reference.
-     *
-     * @param source const reference to signal source
-     * @param indexBegin position of first sample of this frame in the source
-     * @param indexEnd position of last sample of this frame in the source
-     */
-	Frame::Frame(const std::vector<int>& source, unsigned int indexBegin,
-	        unsigned int indexEnd):
-		m_begin(indexBegin), m_end(indexEnd), sourceChannel(source)
-	{
-	}
 }

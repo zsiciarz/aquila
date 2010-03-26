@@ -365,7 +365,7 @@ namespace Aquila
             indexBegin = i * samplesPerNonOverlap;
             indexEnd = indexBegin + samplesPerFrame;
             if (indexEnd < size)
-                frames.push_back(new Frame(source, indexBegin, indexEnd));
+                frames.push_back(new Frame(*this, indexBegin, indexEnd));
             else
                 break;
         }

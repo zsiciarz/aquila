@@ -19,6 +19,7 @@
 #define FRAME_H
 
 #include "../global.h"
+#include "SignalSource.h"
 #include <iterator>
 #include <vector>
 
@@ -30,49 +31,13 @@ namespace Aquila
      * The Frame class wraps a signal frame (short fragment of a signal).
      * Frame samples are accessed by STL-compatible iterators.
 	 */
-    class AQUILA_EXPORT Frame
+    class AQUILA_EXPORT Frame : public SignalSource
 	{
 	public:
-	    class iterator;
-	    friend class iterator;
+        class iterator;
+        friend class iterator;
 
-	    /**
-         * Iterator class enabling frame data access.
-	     *
-         * It is a forward iterator with a range from the first sample in the
-         * frame to "one past last" sample.
-	     */
-        class AQUILA_EXPORT iterator :
-            public std::iterator<std::forward_iterator_tag, int>
-	    {
-	    public:
-            /**
-             * Creates a frame iterator associated with a given frame.
-             *
-             * @param fr pointer to a frame on which the iterator will work
-             * @param index sample index (in the global data source!)
-             */
-            explicit iterator(const Frame* fr, unsigned int index = 0):
-                frame(fr), idx(index)
-            {
-            }
-
-	        iterator& operator=(const iterator& other);
-	        bool operator==(const iterator& other) const;
-	        bool operator!=(const iterator& other) const;
-	        iterator& operator++();
-	        iterator operator++(int);
-	        const int& operator*() const;
-
-	        unsigned int getPosition() const;
-
-	    private:
-            const Frame* frame;
-	        unsigned int idx;
-	    };
-
-
-		Frame(const std::vector<int>& source, unsigned int indexBegin,
+        Frame(const SignalSource& source, unsigned int indexBegin,
 		        unsigned int indexEnd);
 
         /**
@@ -80,7 +45,38 @@ namespace Aquila
          *
          * @return frame length as a number of samples
          */
-        unsigned int getLength() const { return m_end - m_begin; }
+        virtual std::size_t getSamplesCount() const
+        {
+            return m_end - m_begin;
+        }
+
+        /**
+         * Returns signal sample frequency.
+         *
+         * @return sample frequency of the original signal
+         */
+        virtual FrequencyType getSampleFrequency() const
+        {
+            return m_source.getSampleFrequency();
+        }
+
+        /**
+         * Returns number of bits per sample.
+         */
+        virtual unsigned short getBitsPerSample() const
+        {
+            return m_source.getBitsPerSample();
+        }
+
+        /**
+         * Gives access to frame samples, indexed from 0 to length()-1.
+         *
+         * @param position index of the sample in the frame
+         */
+        virtual int sample(std::size_t position) const
+        {
+            return m_source.sample(m_begin + position);
+        }
 
         /**
          * Returns an iterator pointing to the first sample in the frame.
@@ -92,6 +88,41 @@ namespace Aquila
          */
         iterator end() const { return iterator(this, m_end + 1); }
 
+        /**
+         * Iterator class enabling frame data access.
+         *
+         * It is a forward iterator with a range from the first sample in the
+         * frame to "one past last" sample.
+         */
+        class AQUILA_EXPORT iterator :
+            public std::iterator<std::forward_iterator_tag, int>
+        {
+        public:
+            /**
+             * Creates a frame iterator associated with a given frame.
+             *
+             * @param fr pointer to a frame on which the iterator will work
+             * @param index sample index (in the global data source!)
+             */
+            explicit iterator(const Frame* fr, unsigned int index = 0):
+                frame(fr), idx(index)
+            {
+            }
+
+            iterator& operator=(const iterator& other);
+            bool operator==(const iterator& other) const;
+            bool operator!=(const iterator& other) const;
+            iterator& operator++();
+            iterator operator++(int);
+            const int operator*() const;
+
+            unsigned int getPosition() const;
+
+        private:
+            const Frame* frame;
+            std::size_t idx;
+        };
+
 	private:
         /**
          * First and last sample of this frame in the data array/vector.
@@ -99,9 +130,9 @@ namespace Aquila
         unsigned int m_begin, m_end;
 
         /**
-         * A const reference to signal source (audio channel).
+         * A const reference to original source (eg. a WAVE file).
          */
-        const std::vector<int>& sourceChannel;
+        const SignalSource& m_source;
 	};
 }
 
