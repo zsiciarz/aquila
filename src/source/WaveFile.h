@@ -147,6 +147,17 @@ namespace Aquila
             return LChTab.size();
         }
 
+        /**
+         * Returns sample value at a given position in source channel.
+         *
+         * @param position sample position (from 0 to channel length)
+         * @return sample value
+         */
+        virtual int sample(std::size_t position) const
+        {
+            return getDataVector()[position];
+        }
+
         unsigned int getAudioLength() const;
 
         /**

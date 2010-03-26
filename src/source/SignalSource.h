@@ -31,6 +31,7 @@ namespace Aquila
         virtual FrequencyType getSampleFrequency() const = 0;
         virtual unsigned short getBitsPerSample() const = 0;
         virtual std::size_t getSamplesCount() const = 0;
+        virtual int sample(std::size_t position) const = 0;
         std::size_t length() const { return getSamplesCount(); }
     };
 }
