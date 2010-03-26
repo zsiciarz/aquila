@@ -73,22 +73,6 @@ namespace Aquila
             return m_source.sample(m_begin + position);
         }
 
-        /**
-         * Returns an iterator pointing to the first sample in the frame.
-         */
-        iterator begin() const
-        {
-            return iterator(this, 0);
-        }
-
-        /**
-         * Returns an iterator pointing to the "one past last" sample.
-         */
-        iterator end() const
-        {
-            return iterator(this, getSamplesCount());
-        }
-
 	private:
         /**
          * First and last sample of this frame in the data array/vector.

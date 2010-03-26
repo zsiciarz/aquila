@@ -33,7 +33,28 @@ namespace Aquila
         virtual unsigned short getBitsPerSample() const = 0;
         virtual std::size_t getSamplesCount() const = 0;
         virtual int sample(std::size_t position) const = 0;
-        std::size_t length() const { return getSamplesCount(); }
+        std::size_t length() const
+        {
+            return getSamplesCount();
+        }
+
+        class iterator;
+
+        /**
+         * Returns an iterator pointing to the first sample in the source.
+         */
+        iterator begin() const
+        {
+            return iterator(this, 0);
+        }
+
+        /**
+         * Returns an iterator pointing to the "one past last" sample.
+         */
+        iterator end() const
+        {
+            return iterator(this, getSamplesCount());
+        }
 
         /**
          * Iterator class enabling sequential data access.
