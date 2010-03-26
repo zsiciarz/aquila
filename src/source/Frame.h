@@ -20,8 +20,6 @@
 
 #include "../global.h"
 #include "SignalSource.h"
-#include <iterator>
-#include <vector>
 
 namespace Aquila
 {
@@ -34,9 +32,6 @@ namespace Aquila
     class AQUILA_EXPORT Frame : public SignalSource
 	{
 	public:
-        class iterator;
-        friend class iterator;
-
         Frame(const SignalSource& source, unsigned int indexBegin,
 		        unsigned int indexEnd);
 
@@ -81,47 +76,18 @@ namespace Aquila
         /**
          * Returns an iterator pointing to the first sample in the frame.
          */
-        iterator begin() const { return iterator(this, m_begin); }
+        iterator begin() const
+        {
+            return iterator(this, 0);
+        }
 
         /**
          * Returns an iterator pointing to the "one past last" sample.
          */
-        iterator end() const { return iterator(this, m_end + 1); }
-
-        /**
-         * Iterator class enabling frame data access.
-         *
-         * It is a forward iterator with a range from the first sample in the
-         * frame to "one past last" sample.
-         */
-        class AQUILA_EXPORT iterator :
-            public std::iterator<std::forward_iterator_tag, int>
+        iterator end() const
         {
-        public:
-            /**
-             * Creates a frame iterator associated with a given frame.
-             *
-             * @param fr pointer to a frame on which the iterator will work
-             * @param index sample index (in the global data source!)
-             */
-            explicit iterator(const Frame* fr, unsigned int index = 0):
-                frame(fr), idx(index)
-            {
-            }
-
-            iterator& operator=(const iterator& other);
-            bool operator==(const iterator& other) const;
-            bool operator!=(const iterator& other) const;
-            iterator& operator++();
-            iterator operator++(int);
-            const int operator*() const;
-
-            unsigned int getPosition() const;
-
-        private:
-            const Frame* frame;
-            std::size_t idx;
-        };
+            return iterator(this, getSamplesCount());
+        }
 
 	private:
         /**
