@@ -144,7 +144,7 @@ namespace Aquila
          */
         virtual std::size_t getSamplesCount() const
         {
-            return LChTab.size();
+            return getDataVector().size();
         }
 
         /**
@@ -171,9 +171,9 @@ namespace Aquila
          *
          * @return address of the first element
          */
-        int* getData()
+        const int* getData()
         {
-            return &LChTab[0];
+            return &(getDataVector())[0];
         }
 
         /**

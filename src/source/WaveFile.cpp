@@ -115,7 +115,7 @@ namespace Aquila
 
         // when we have the data, it is possible to create frames
         if (frameLength != 0)
-            divideFrames(LChTab);
+            divideFrames(getDataVector());
     }
 
     /**
@@ -225,7 +225,7 @@ namespace Aquila
         overlap = newOverlap;
 
         clearFrames();
-        divideFrames(LChTab);
+        divideFrames(getDataVector());
     }
 
     /**
