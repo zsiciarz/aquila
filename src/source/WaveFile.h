@@ -199,12 +199,44 @@ namespace Aquila
         /**
          * Returns a const reference to channel source.
          *
-         * @param source which channel to use as a source
          * @return source vector
          */
-        const ChannelType& getDataVector(StereoChannel source = LEFT) const
+        const ChannelType& getDataVector() const
         {
-            return (LEFT == source) ? LChTab : RChTab;
+            return (LEFT == m_sourceChannel) ? LChTab : RChTab;
+        }
+
+        /**
+         * Sets new frame length.
+         *
+         * @param frameLength new frame length in milliseconds
+         */
+        void setFrameLength(unsigned int frameLength)
+        {
+            m_frameLength = frameLength;
+        }
+
+        /**
+         * Sets new frame overlap.
+         *
+         * @param overlap overlap between adjacent frames (0 < overlap < 1)
+         */
+        void setFrameOverlap(double overlap)
+        {
+            m_overlap = overlap;
+        }
+
+        /**
+         * Determines which channel (stereo only) will be used as data source.
+         *
+         * @param whichChannel LEFT or RIGHT (the default setting is LEFT)
+         */
+        void setSourceChannel(StereoChannel whichChannel)
+        {
+            if (!isStereo())
+                return;
+
+            m_sourceChannel = whichChannel;
         }
 
         void saveFrames(const std::string& filename, unsigned int begin,
@@ -229,7 +261,7 @@ namespace Aquila
         unsigned int getSamplesPerFrame() const
         {
             unsigned int bytesPerFrame = static_cast<unsigned int>(
-                    hdr.BytesPerSec * frameLength / 1000.0);
+                    hdr.BytesPerSec * m_frameLength / 1000.0);
 
             return bytesPerFrame / hdr.BytesPerSamp;
         }
@@ -283,12 +315,17 @@ namespace Aquila
         /**
          * Frame length (in milliseconds).
          */
-        unsigned int frameLength;
+        unsigned int m_frameLength;
 
         /**
          * Overlap between frames - fraction of frame length (0 < overlap < 1).
          */
-        double overlap;
+        double m_overlap;
+
+        /**
+         * Which channel will be used in stereo recordings as data source.
+         */
+        StereoChannel m_sourceChannel;
 
         /**
          * Next power of 2 larger than number of samples per frame.

@@ -25,7 +25,7 @@
 namespace Aquila
 {
     WaveFile::WaveFile(const std::string& filename):
-        frameLength(0), overlap(0.66)
+        m_frameLength(0), m_overlap(0.0), m_sourceChannel(LEFT)
     {
         load(filename);
     }
@@ -44,7 +44,8 @@ namespace Aquila
      * @param frameOverlap overlap between adjacent frames
      */
     WaveFile::WaveFile(unsigned int frameLengthMs, double frameOverlap):
-        frameLength(frameLengthMs), overlap(frameOverlap)
+        m_frameLength(frameLengthMs), m_overlap(frameOverlap),
+        m_sourceChannel(LEFT)
     {
     }
 
@@ -55,7 +56,7 @@ namespace Aquila
      */
     WaveFile::~WaveFile()
     {
-        if (frameLength != 0)
+        if (m_frameLength != 0)
             clearFrames();
     }
 
@@ -75,7 +76,7 @@ namespace Aquila
         filename = file;
         LChTab.clear();
         RChTab.clear();
-        if (frameLength != 0)
+        if (m_frameLength != 0)
             clearFrames();
 
         // first we read header from the stream
@@ -114,7 +115,7 @@ namespace Aquila
         delete [] data;
 
         // when we have the data, it is possible to create frames
-        if (frameLength != 0)
+        if (m_frameLength != 0)
             divideFrames(getDataVector());
     }
 
@@ -151,9 +152,9 @@ namespace Aquila
         // calculate the boundaries of a fragment of the source channel
         // which correspond to given frame numbers
         unsigned int startPos = static_cast<unsigned int>(
-                begin * samples * (1 - overlap));
+                begin * samples * (1 - m_overlap));
         unsigned int endPos = static_cast<unsigned int>(
-                (end + 1) * samples * (1 - overlap) + samples * overlap);
+                (end + 1) * samples * (1 - m_overlap) + samples * m_overlap);
         if (endPos > LChTab.size())
             endPos = LChTab.size();
 
@@ -220,9 +221,9 @@ namespace Aquila
     void WaveFile::recalculate(unsigned int newFrameLength, double newOverlap)
     {
         if (newFrameLength != 0)
-            frameLength = newFrameLength;
+            m_frameLength = newFrameLength;
 
-        overlap = newOverlap;
+        m_overlap = newOverlap;
 
         clearFrames();
         divideFrames(getDataVector());
@@ -349,7 +350,7 @@ namespace Aquila
         // total number of frames; also set zero-padded length
         samplesPerFrame = getSamplesPerFrame();
         unsigned int samplesPerNonOverlap =
-            static_cast<unsigned int>(samplesPerFrame * (1 - overlap));
+            static_cast<unsigned int>(samplesPerFrame * (1 - m_overlap));
         unsigned int framesCount =
             (hdr.WaveSize / hdr.BytesPerSamp) / samplesPerNonOverlap;
         unsigned int power =
