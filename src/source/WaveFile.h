@@ -85,6 +85,26 @@ namespace Aquila
         }
 
         /**
+         * Checks if this is a mono recording.
+         *
+         * @return true if there is only one channel
+         */
+        bool isMono() const
+        {
+            return 1 == getChannelsNum();
+        }
+
+        /**
+         * Checks if this is a stereo recording.
+         *
+         * @return true if there are two channels
+         */
+        bool isStereo() const
+        {
+            return 2 == getChannelsNum();
+        }
+
+        /**
          * Returns signal sample frequency.
          *
          * @return sample frequency in Hz
@@ -109,7 +129,7 @@ namespace Aquila
          *
          * @return 1 for 8b-mono, 2 for 8b-stereo or 16b-mono, 4 dor 16b-stereo
          */
-        unsigned int getBytesPerSamp() const
+        unsigned int getBytesPerSample() const
         {
             return hdr.BytesPerSamp;
         }
