@@ -8,3 +8,4 @@
 include_directories("${CMAKE_INSTALL_PREFIX}/include")
 
 add_subdirectory(wave_info)
+add_subdirectory(wave_iteration)
