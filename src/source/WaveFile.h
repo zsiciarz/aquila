@@ -43,9 +43,9 @@ namespace Aquila
     {
     public:
         /**
-         * Audio channel representation as an integer vector.
+         * Audio channel representation as a vector.
          */
-        typedef std::vector<int> ChannelType;
+        typedef std::vector<SampleType> ChannelType;
 
         /**
          * Data from both channels.
@@ -153,7 +153,7 @@ namespace Aquila
          * @param position sample position (from 0 to channel length)
          * @return sample value
          */
-        virtual int sample(std::size_t position) const
+        virtual SampleType sample(std::size_t position) const
         {
             return getDataVector()[position];
         }
@@ -171,7 +171,7 @@ namespace Aquila
          *
          * @return address of the first element
          */
-        const int* getData()
+        const SampleType* getData()
         {
             return &(getDataVector())[0];
         }

@@ -32,7 +32,7 @@ namespace Aquila
         virtual FrequencyType getSampleFrequency() const = 0;
         virtual unsigned short getBitsPerSample() const = 0;
         virtual std::size_t getSamplesCount() const = 0;
-        virtual int sample(std::size_t position) const = 0;
+        virtual SampleType sample(std::size_t position) const = 0;
         std::size_t length() const
         {
             return getSamplesCount();
@@ -145,7 +145,7 @@ namespace Aquila
              *
              * @return signal sample value.
              */
-            const int operator*() const
+            const SampleType operator*() const
             {
                 return m_source->sample(idx);
             }

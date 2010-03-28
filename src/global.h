@@ -47,6 +47,11 @@ namespace Aquila
     const char* const VERSION_STRING = "3.0.0-dev";
 
     /**
+     * Sample value type.
+     */
+    typedef int SampleType;
+
+    /**
      * Sample frequency type.
      */
     typedef unsigned int FrequencyType;
