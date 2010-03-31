@@ -13,6 +13,7 @@ set(Aquila_VERSION_PATCH 0)
 ################################################################################
 
 option(Aquila_BUILD_EXAMPLES "Build example programs?" ON)
+option(Aquila_BUILD_TESTS "Build test programs?" ON)
 
 
 ################################################################################
