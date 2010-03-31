@@ -65,6 +65,12 @@ if(Aquila_BUILD_EXAMPLES)
     add_subdirectory(examples)
 endif(Aquila_BUILD_EXAMPLES)
 
+#tests
+if(Aquila_BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
+endif(Aquila_BUILD_TESTS)
+
 
 ################################################################################
 #
