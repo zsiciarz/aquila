@@ -5,6 +5,13 @@
 ################################################################################
 
 
+# .wav files
+set(Aquila_TEST_WAVEFILE_8B_MONO "${Aquila_TEST_DATA_PATH}/8b_mono.wav")
+set(Aquila_TEST_WAVEFILE_8B_STEREO "${Aquila_TEST_DATA_PATH}/8b_stereo.wav")
+set(Aquila_TEST_WAVEFILE_16B_MONO "${Aquila_TEST_DATA_PATH}/16b_mono.wav")
+set(Aquila_TEST_WAVEFILE_16B_STEREO "${Aquila_TEST_DATA_PATH}/16b_stereo.wav")
+
+
 # bits per sample
 add_executable(bits_per_sample bits_per_sample.cpp)
 target_link_libraries(bits_per_sample Aquila)
