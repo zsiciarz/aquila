@@ -46,3 +46,31 @@ add_test(sample_frequency_run sample_frequency ${Aquila_TEST_WAVEFILE_8B_MONO})
 add_test(sample_frequency_read sample_frequency ${Aquila_TEST_WAVEFILE_8B_MONO})
 set_tests_properties(sample_frequency_read
     PROPERTIES PASS_REGULAR_EXPRESSION "44100")
+
+
+# wave size
+add_executable(wave_size wave_size.cpp)
+target_link_libraries(wave_size Aquila)
+
+add_test(wave_size_run wave_size ${Aquila_TEST_WAVEFILE_8B_MONO})
+add_test(wave_size_8b_mono wave_size ${Aquila_TEST_WAVEFILE_8B_MONO})
+set_tests_properties(wave_size_8b_mono
+    PROPERTIES PASS_REGULAR_EXPRESSION "4552")
+
+add_test(wave_size_16b_stereo wave_size ${Aquila_TEST_WAVEFILE_16B_STEREO})
+set_tests_properties(wave_size_16b_stereo
+    PROPERTIES PASS_REGULAR_EXPRESSION "18208")
+
+
+# samples count
+add_executable(samples_count samples_count.cpp)
+target_link_libraries(samples_count Aquila)
+
+add_test(samples_count_run samples_count ${Aquila_TEST_WAVEFILE_8B_MONO})
+add_test(samples_count_8b_mono samples_count ${Aquila_TEST_WAVEFILE_8B_MONO})
+set_tests_properties(samples_count_8b_mono
+    PROPERTIES PASS_REGULAR_EXPRESSION "4552")
+
+add_test(samples_count_16b_stereo samples_count ${Aquila_TEST_WAVEFILE_16B_STEREO})
+set_tests_properties(samples_count_16b_stereo
+    PROPERTIES PASS_REGULAR_EXPRESSION "4552")
