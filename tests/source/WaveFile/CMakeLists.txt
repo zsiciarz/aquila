@@ -74,3 +74,13 @@ set_tests_properties(samples_count_8b_mono
 add_test(samples_count_16b_stereo samples_count ${Aquila_TEST_WAVEFILE_16B_STEREO})
 set_tests_properties(samples_count_16b_stereo
     PROPERTIES PASS_REGULAR_EXPRESSION "4552")
+
+
+# audio length
+add_executable(audio_length audio_length.cpp)
+target_link_libraries(audio_length Aquila)
+
+add_test(audio_length_run audio_length ${Aquila_TEST_WAVEFILE_8B_MONO})
+add_test(audio_length_read audio_length ${Aquila_TEST_WAVEFILE_8B_MONO})
+set_tests_properties(audio_length_read
+    PROPERTIES PASS_REGULAR_EXPRESSION "103")
