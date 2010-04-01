@@ -51,8 +51,6 @@ namespace Aquila
 
         const WindowDataType& getWindowData();
 
-		static double apply(WindowType type, unsigned int n, unsigned int N);
-
 	private:
         /**
          * Window function type.

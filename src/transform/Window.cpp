@@ -49,27 +49,6 @@ namespace Aquila
     }
 
     /**
-     * Returns window value for a given window type, size and position.
-     *
-     * Window is first looked up in cache. If it doesn't exist,
-     * it is generated. The cached value is then returned.
-     *
-     * @param type window function type
-     * @param n sample position in the window
-     * @param N window length
-     * @return window value for n-th sample
-     */
-    double Window::apply(WindowType type, unsigned int n, unsigned int N)
-    {
-        KeyType key = std::make_pair(type, N);
-
-        if (windowsCache.find(key) == windowsCache.end())
-            createWindow(key);
-
-        return windowsCache[key][n];
-    }
-
-    /**
      * Generates new window vector for a given type and size.
      *
      * Rectangular window is handled separately because it does not need
