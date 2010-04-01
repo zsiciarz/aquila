@@ -24,6 +24,31 @@ namespace Aquila
     Window::WindowsCacheType Window::windowsCache;
 
     /**
+     * Creates a Window object of given type and size.
+     *
+     * @param type which window function to use
+     * @param length how many samples to create
+     */
+    Window::Window(WindowType type, unsigned int length):
+        m_type(type), m_length(length)
+    {
+    }
+
+    /**
+     * Returns window data vector.
+     *
+     * @return window data for current object, may be retrieved from cache
+     */
+    const Window::WindowDataType& Window::getWindowData()
+    {
+        KeyType key = std::make_pair(m_type, m_length);
+        if (windowsCache.find(key) == windowsCache.end())
+            createWindow(key);
+
+        return windowsCache[key];
+    }
+
+    /**
      * Returns window value for a given window type, size and position.
      *
      * Window is first looked up in cache. If it doesn't exist,
@@ -59,15 +84,15 @@ namespace Aquila
 
         if (type != WIN_RECT)
         {
-            WindowDataType window;
-            window.reserve(N);
-            std::generate_n(std::back_inserter(window), N, WinGenerator(type, N));
-            windowsCache[windowKey] = window;
+            WindowDataType data;
+            data.reserve(N);
+            std::generate_n(std::back_inserter(data), N, WinGenerator(type, N));
+            windowsCache[windowKey] = data;
         }
         else
         {
-            WindowDataType window(N, 1.0);
-            windowsCache[windowKey] = window;
+            WindowDataType data(N, 1.0);
+            windowsCache[windowKey] = data;
         }
 	}
 

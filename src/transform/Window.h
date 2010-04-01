@@ -19,6 +19,7 @@
 #define WINDOW_H
 
 #include "../global.h"
+#include <cstddef>
 #include <map>
 #include <utility>
 #include <vector>
@@ -41,18 +42,32 @@ namespace Aquila
     class AQUILA_EXPORT Window
 	{
 	public:
-		static double apply(WindowType type, unsigned int n, unsigned int N);
-
-	private:
-        /**
-         * Key type for the window cache.
-         */
-        typedef std::pair<WindowType, unsigned int> KeyType;
-
         /**
          *  Window vector type.
          */
         typedef std::vector<double> WindowDataType;
+
+        Window(WindowType type, unsigned int length);
+
+        const WindowDataType& getWindowData();
+
+		static double apply(WindowType type, unsigned int n, unsigned int N);
+
+	private:
+        /**
+         * Window function type.
+         */
+        WindowType m_type;
+
+        /**
+         * Window length.
+         */
+        std::size_t m_length;
+
+        /**
+         * Key type for the window cache.
+         */
+        typedef std::pair<WindowType, unsigned int> KeyType;
 
         /**
          * Cache type.
