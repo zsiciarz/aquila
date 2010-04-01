@@ -41,6 +41,7 @@ set (Aquila_HEADERS
     src/source/SignalSource.h
     src/source/Frame.h
     src/source/WaveFile.h
+    src/transform/Window.h
 )
 
 # library sources
@@ -48,6 +49,7 @@ set (Aquila_SOURCES
     src/source/SignalSource.cpp
     src/source/Frame.cpp
     src/source/WaveFile.cpp
+    src/transform/Window.cpp
 )
 
 
