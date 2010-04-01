@@ -39,7 +39,7 @@ namespace Aquila
      *
      * @return window data for current object, may be retrieved from cache
      */
-    const Window::WindowDataType& Window::getWindowData()
+    const Window::WindowDataType& Window::getData()
     {
         KeyType key = std::make_pair(m_type, m_length);
         if (windowsCache.find(key) == windowsCache.end())

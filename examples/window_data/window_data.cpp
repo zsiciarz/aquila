@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     }
 
     Aquila::Window window(type, length);
-    const Aquila::Window::WindowDataType& data = window.getWindowData();
+    const Aquila::Window::WindowDataType& data = window.getData();
     for (unsigned int i = 0; i < data.size(); ++i)
     {
         std::cout << i << " " << data[i] << std::endl;

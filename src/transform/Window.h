@@ -49,7 +49,7 @@ namespace Aquila
 
         Window(WindowType type, unsigned int length);
 
-        const WindowDataType& getWindowData();
+        const WindowDataType& getData();
 
 	private:
         /**
