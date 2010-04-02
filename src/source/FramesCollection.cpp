@@ -61,6 +61,9 @@ namespace Aquila
 
     void FramesCollection::clear()
     {
+        if (m_frames.empty())
+            return;
+
         for(std::size_t i = 0, size = m_frames.size(); i < size; ++i)
         {
             delete m_frames[i];

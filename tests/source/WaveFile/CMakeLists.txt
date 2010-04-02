@@ -84,3 +84,33 @@ add_test(audio_length_run audio_length ${Aquila_TEST_WAVEFILE_8B_MONO})
 add_test(audio_length_read audio_length ${Aquila_TEST_WAVEFILE_8B_MONO})
 set_tests_properties(audio_length_read
     PROPERTIES PASS_REGULAR_EXPRESSION "103")
+
+
+# frames count
+add_executable(frames_count frames_count.cpp)
+target_link_libraries(frames_count Aquila)
+
+add_test(frames_count_run frames_count ${Aquila_TEST_WAVEFILE_8B_MONO})
+add_test(frames_count_0_0 frames_count ${Aquila_TEST_WAVEFILE_8B_MONO})
+set_tests_properties(frames_count_0_0
+    PROPERTIES PASS_REGULAR_EXPRESSION "0")
+
+add_test(frames_count_10_0 frames_count ${Aquila_TEST_WAVEFILE_8B_MONO} 10)
+set_tests_properties(frames_count_10_0
+    PROPERTIES PASS_REGULAR_EXPRESSION "10")
+
+add_test(frames_count_20_0 frames_count ${Aquila_TEST_WAVEFILE_8B_MONO} 20)
+set_tests_properties(frames_count_20_0
+    PROPERTIES PASS_REGULAR_EXPRESSION "5")
+
+add_test(frames_count_0_05 frames_count ${Aquila_TEST_WAVEFILE_8B_MONO} 0 0.5)
+set_tests_properties(frames_count_0_05
+    PROPERTIES PASS_REGULAR_EXPRESSION "0")
+
+add_test(frames_count_10_05 frames_count ${Aquila_TEST_WAVEFILE_8B_MONO} 10 0.5)
+set_tests_properties(frames_count_10_05
+    PROPERTIES PASS_REGULAR_EXPRESSION "19")
+
+add_test(frames_count_20_066 frames_count ${Aquila_TEST_WAVEFILE_8B_MONO} 20 0.66)
+set_tests_properties(frames_count_20_066
+    PROPERTIES PASS_REGULAR_EXPRESSION "13")

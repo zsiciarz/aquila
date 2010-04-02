@@ -233,8 +233,12 @@ namespace Aquila
          *
          * @return frame vector length
          */
-        std::size_t getFramesCount() const
+        std::size_t getFramesCount()
         {
+            // no frames yet, but the frame length is set
+            if (0 == m_frames.count() && m_frameLength != 0)
+                divideFrames();
+            
             return m_frames.count();
         }
 
