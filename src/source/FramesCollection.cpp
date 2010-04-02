@@ -26,6 +26,14 @@ namespace Aquila
     {
     }
 
+    /**
+     * Destroys the collection, clearing the container.
+     */
+    FramesCollection::~FramesCollection()
+    {
+        clear();
+    }
+
     void FramesCollection::divideFrames(const SignalSource &source,
                                         unsigned int samplesPerFrame,
                                         unsigned int samplesPerOverlap)

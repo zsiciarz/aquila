@@ -30,6 +30,7 @@ namespace Aquila
     {
     public:
         FramesCollection();
+        ~FramesCollection();
 
         void divideFrames(const SignalSource& source,
                           unsigned int samplesPerFrame,
