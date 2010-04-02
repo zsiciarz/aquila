@@ -130,88 +130,6 @@ namespace Aquila
                 static_cast<double>(hdr.BytesPerSec) * 1000);
     }
 
-
-
-    /**
-     * Saves selected frame span to a new file.
-     *
-     * @param filename where to save frames
-     * @param begin number of the first frame
-     * @param end number of the last frame
-     * @throw FormatException not allowed to save 8b-mono files
-     */
-    void WaveFile::saveFrames(const std::string& filename, unsigned int begin,
-            unsigned int end) const
-    {
-        if (1 == hdr.Channels && 8 == hdr.BitsPerSamp)
-        {
-            throw FormatException("Save error: 8-bit mono files are not supported yet!");
-        }
-        unsigned int samples = getSamplesPerFrame();
-
-        // calculate the boundaries of a fragment of the source channel
-        // which correspond to given frame numbers
-        unsigned int startPos = static_cast<unsigned int>(
-                begin * samples * (1 - m_overlap));
-        unsigned int endPos = static_cast<unsigned int>(
-                (end + 1) * samples * (1 - m_overlap) + samples * m_overlap);
-        if (endPos > LChTab.size())
-            endPos = LChTab.size();
-
-        // number of data bytes in the resulting wave file
-        unsigned int waveSize = (endPos - startPos) * hdr.BytesPerSamp;
-
-        // prepare a new header and write it to file stream
-        WaveHeader newHdr;
-        std::strncpy(newHdr.RIFF, hdr.RIFF, 4);
-        newHdr.DataLength = waveSize + sizeof(WaveHeader);
-        std::strncpy(newHdr.WAVE, hdr.WAVE, 4);
-        std::strncpy(newHdr.fmt_, hdr.fmt_, 4);
-        newHdr.SubBlockLength = hdr.SubBlockLength;
-        newHdr.formatTag = hdr.formatTag;
-        newHdr.Channels = hdr.Channels;
-        newHdr.SampFreq = hdr.SampFreq;
-        newHdr.BytesPerSec = hdr.BytesPerSec;
-        newHdr.BytesPerSamp = hdr.BytesPerSamp;
-        newHdr.BitsPerSamp = hdr.BitsPerSamp;
-        std::strncpy(newHdr.data, hdr.data, 4);
-        newHdr.WaveSize = waveSize;
-
-        std::fstream fs;
-        fs.open(filename.c_str(), std::ios::out | std::ios::binary);
-        fs.write((char*)&newHdr, sizeof(WaveHeader));
-
-        // convert our data from source channels to a temporary buffer
-        short* data = new short[waveSize/2];
-        for (unsigned int i = startPos, di = 0; i < endPos; ++i, ++di)
-        {
-            if (16 == hdr.BitsPerSamp)
-            {
-                if (2 == hdr.Channels)
-                {
-                    data[2*di] = LChTab[i];
-                    data[2*di+1] = RChTab[i];
-                }
-                else
-                {
-                    data[di] = LChTab[i];
-                }
-            }
-            else
-            {
-                if (2 == hdr.Channels)
-                {
-                    data[di/2] = ((RChTab[i] + 128) << 8) | (LChTab[i] + 128);
-                }
-            }
-        }
-
-        // write the raw data to file and clean the buffer
-        fs.write((char*)data, waveSize);
-        fs.close();
-        delete [] data;
-    }
-
     /**
      * Recalculates frame division, taking new arguments into consideration.
      *
@@ -353,9 +271,6 @@ namespace Aquila
             static_cast<unsigned int>(samplesPerFrame * (1 - m_overlap));
         unsigned int framesCount =
             (hdr.WaveSize / hdr.BytesPerSamp) / samplesPerNonOverlap;
-        unsigned int power =
-            static_cast<unsigned int>(std::log(double(samplesPerFrame))/log(2.0));
-        zeroPaddedLength = 1 << (power + 1);
 
         frames.reserve(framesCount);
         unsigned int indexBegin = 0, indexEnd = 0;

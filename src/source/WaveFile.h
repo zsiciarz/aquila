@@ -239,9 +239,6 @@ namespace Aquila
             m_sourceChannel = whichChannel;
         }
 
-        void saveFrames(const std::string& filename, unsigned int begin,
-                        unsigned int end) const;
-
         /**
          * Returns number of frames in the file.
          *
@@ -265,13 +262,6 @@ namespace Aquila
 
             return bytesPerFrame / hdr.BytesPerSamp;
         }
-
-        /**
-         * Returns frame length (in samples) after zero padding (ZP).
-         *
-         * @return padded frame length is a power of 2
-         */
-        unsigned int getSamplesPerFrameZP() const { return zeroPaddedLength; }
 
         void recalculate(unsigned int newFrameLength = 0,
                          double newOverlap = 0.66);
@@ -326,11 +316,6 @@ namespace Aquila
          * Which channel will be used in stereo recordings as data source.
          */
         StereoChannel m_sourceChannel;
-
-        /**
-         * Next power of 2 larger than number of samples per frame.
-         */
-        unsigned int zeroPaddedLength;
 
         void loadHeader(std::fstream& file);
         void loadRawData(std::fstream& file, short* buffer, int bufferLength);
