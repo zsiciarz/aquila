@@ -101,6 +101,11 @@ namespace Aquila
             unsigned int _N;
 
             /**
+             * Position in window.
+             */
+            mutable unsigned int n;
+
+            /**
              * Pointer to window function.
              */
             double (*windowMethod)(unsigned int, unsigned int);
