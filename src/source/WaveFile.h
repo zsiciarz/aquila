@@ -20,6 +20,7 @@
 
 #include "../global.h"
 #include "Frame.h"
+#include "FramesCollection.h"
 #include "SignalSource.h"
 #include <cstddef>
 #include <string>
@@ -249,20 +250,6 @@ namespace Aquila
             return frames.size();
         }
 
-
-        /**
-         * Returns number of samples in a single frame.
-         *
-         * @return samples per frame = bytes per frame / bytes per sample
-         */
-        unsigned int getSamplesPerFrame() const
-        {
-            unsigned int bytesPerFrame = static_cast<unsigned int>(
-                    hdr.BytesPerSec * m_frameLength / 1000.0);
-
-            return bytesPerFrame / hdr.BytesPerSamp;
-        }
-
         void recalculate(unsigned int newFrameLength = 0,
                          double newOverlap = 0.66);
 
@@ -317,6 +304,11 @@ namespace Aquila
          */
         StereoChannel m_sourceChannel;
 
+        /**
+         * Frames collection.
+         */
+        FramesCollection m_frames;
+
         void loadHeader(std::fstream& file);
         void loadRawData(std::fstream& file, short* buffer, int bufferLength);
         void convert16Stereo(short* data, unsigned int channelSize);
@@ -324,6 +316,19 @@ namespace Aquila
         void convert8Stereo(short* data, unsigned int channelSize);
         void convert8Mono(short* data, unsigned int channelSize);
         void splitBytes(short twoBytes, unsigned char& lb, unsigned char& hb);
+
+        /**
+         * Returns number of samples in a single frame.
+         *
+         * @return samples per frame = bytes per frame / bytes per sample
+         */
+        unsigned int getSamplesPerFrame() const
+        {
+            unsigned int bytesPerFrame = static_cast<unsigned int>(
+                    hdr.BytesPerSec * m_frameLength / 1000.0);
+
+            return bytesPerFrame / hdr.BytesPerSamp;
+        }
 
         void divideFrames(const ChannelType& source);
         void clearFrames();
