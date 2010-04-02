@@ -2,6 +2,7 @@
 #include "aquila/source/WaveFile.h"
 #include <algorithm>
 #include <cstdlib>
+#include <functional>
 #include <iostream>
 
 int main(int argc, char *argv[])
