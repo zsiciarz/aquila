@@ -48,16 +48,6 @@ namespace Aquila
          */
         typedef std::vector<SampleType> ChannelType;
 
-        /**
-         * Data from both channels.
-         */
-        ChannelType LChTab, RChTab;
-
-        /**
-         * Pointers to signal frames.
-         */
-        std::vector<Frame*> frames;
-
         explicit WaveFile(const std::string& filename);
         ~WaveFile();
 
@@ -245,7 +235,7 @@ namespace Aquila
          */
         std::size_t getFramesCount() const
         {
-            return frames.size();
+            return m_frames.count();
         }
 
         void recalculate(unsigned int newFrameLength = 0,
@@ -281,6 +271,11 @@ namespace Aquila
          * Header structure.
          */
         WaveHeader hdr;
+
+        /**
+         * Data from both channels.
+         */
+        ChannelType LChTab, RChTab;
 
         /**
          * Frame length (in milliseconds).
