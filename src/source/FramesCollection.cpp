@@ -35,6 +35,17 @@ namespace Aquila
         clear();
     }
 
+    /**
+     * Performs the actual frame division.
+     *
+     * Frames are only "pointing" to the original source. There is no copying
+     * of sample data. Each frame can be considered as a standalone fragment
+     * of the source data.
+     *
+     * @param source a reference to source object
+     * @param samplesPerFrame how many samples will each frame hold
+     * @param samplesPerOverlap how many samples are common to adjacent frames
+     */
     void FramesCollection::divideFrames(const SignalSource &source,
                                         unsigned int samplesPerFrame,
                                         unsigned int samplesPerOverlap)
@@ -59,6 +70,9 @@ namespace Aquila
         }
     }
 
+    /**
+     * Deletes all contained frames and clears the collection.
+     */
     void FramesCollection::clear()
     {
         if (m_frames.empty())

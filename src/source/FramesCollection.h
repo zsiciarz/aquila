@@ -26,6 +26,9 @@
 
 namespace Aquila
 {
+    /**
+     * A lightweight wrapper for a vector of Frames.
+     */
     class AQUILA_EXPORT FramesCollection
     {
     public:
