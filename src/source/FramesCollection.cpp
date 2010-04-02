@@ -25,4 +25,37 @@ namespace Aquila
     FramesCollection::FramesCollection()
     {
     }
+
+    void FramesCollection::divideFrames(const SignalSource &source,
+                                        unsigned int samplesPerFrame,
+                                        unsigned int samplesPerOverlap)
+    {
+        const std::size_t sourceSize = source.getSamplesCount();
+        const unsigned int nonOverlapped = samplesPerFrame - samplesPerOverlap;
+        const unsigned int framesCount = sourceSize / nonOverlapped;
+
+        m_frames.reserve(framesCount);
+        unsigned int indexBegin = 0, indexEnd = 0;
+        for (std::size_t i = 0; i < framesCount; ++i)
+        {
+            // calculate each frame boundaries
+            // when frame end exceeds source size, break out
+            indexBegin = i * nonOverlapped;
+            indexEnd = indexBegin + samplesPerFrame;
+            if (indexEnd < sourceSize)
+                m_frames.push_back(new Frame(source, indexBegin, indexEnd));
+            else
+                break;
+        }
+    }
+
+    void FramesCollection::clear()
+    {
+        for(std::size_t i = 0, size = m_frames.size(); i < size; ++i)
+        {
+            delete m_frames[i];
+        }
+
+        m_frames.clear();
+    }
 }

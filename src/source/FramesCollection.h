@@ -20,6 +20,8 @@
 
 #include "../global.h"
 #include "Frame.h"
+#include "SignalSource.h"
+#include <cstddef>
 #include <vector>
 
 namespace Aquila
@@ -29,11 +31,16 @@ namespace Aquila
     public:
         FramesCollection();
 
+        void divideFrames(const SignalSource& source,
+                          unsigned int samplesPerFrame,
+                          unsigned int samplesPerOverlap);
+        void clear();
+
     private:
         /**
          * Frames vector.
          */
-        std::vector<Frame> m_frames;
+        std::vector<Frame*> m_frames;
     };
 }
 
