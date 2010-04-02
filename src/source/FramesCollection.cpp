@@ -22,7 +22,8 @@ namespace Aquila
     /**
      * Creates the frames collection.
      */
-    FramesCollection::FramesCollection()
+    FramesCollection::FramesCollection():
+        m_samplesPerFrame(0)
     {
     }
 
@@ -38,6 +39,7 @@ namespace Aquila
                                         unsigned int samplesPerFrame,
                                         unsigned int samplesPerOverlap)
     {
+        m_samplesPerFrame = samplesPerFrame;
         const std::size_t sourceSize = source.getSamplesCount();
         const unsigned int nonOverlapped = samplesPerFrame - samplesPerOverlap;
         const unsigned int framesCount = sourceSize / nonOverlapped;

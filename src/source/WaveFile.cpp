@@ -57,7 +57,7 @@ namespace Aquila
     WaveFile::~WaveFile()
     {
         if (m_frameLength != 0)
-            clearFrames();
+            m_frames.clear();
     }
 
     /**
@@ -77,7 +77,7 @@ namespace Aquila
         LChTab.clear();
         RChTab.clear();
         if (m_frameLength != 0)
-            clearFrames();
+            m_frames.clear();
 
         // first we read header from the stream
         // then as we know now the data size, we create a temporary
@@ -116,7 +116,7 @@ namespace Aquila
 
         // when we have the data, it is possible to create frames
         if (m_frameLength != 0)
-            divideFrames(getDataVector());
+            divideFrames();
     }
 
     /**
@@ -143,8 +143,8 @@ namespace Aquila
 
         m_overlap = newOverlap;
 
-        clearFrames();
-        divideFrames(getDataVector());
+        m_frames.clear();
+        divideFrames();
     }
 
     /**
@@ -258,46 +258,19 @@ namespace Aquila
      *
      * Number of samples in an individual frame does not depend on the
      * overlap value. The overlap affects total number of frames.
-     *
-     * @param source const reference to source chanel
      */
-    void WaveFile::divideFrames(const WaveFile::ChannelType& source)
+    void WaveFile::divideFrames()
     {
-        // calculate how many samples are in the part of the frame
-        // which does NOT overlap, and use that value to find out
-        // total number of frames; also set zero-padded length
-        samplesPerFrame = getSamplesPerFrame();
-        unsigned int samplesPerNonOverlap =
-            static_cast<unsigned int>(samplesPerFrame * (1 - m_overlap));
-        unsigned int framesCount =
-            (hdr.WaveSize / hdr.BytesPerSamp) / samplesPerNonOverlap;
+        // calculate how many bytes are in the the frame
+        // based on frame length in milliseconds and number of bytes per sec
+        unsigned int bytesPerFrame = static_cast<unsigned int>(
+                hdr.BytesPerSec * m_frameLength / 1000.0);
 
-        frames.reserve(framesCount);
-        unsigned int indexBegin = 0, indexEnd = 0;
-        for (unsigned int i = 0, size = source.size(); i < framesCount; ++i)
-        {
-            // calculate frame boundaries in the source channel
-            // when frame end exceeds channel size, break out
-            indexBegin = i * samplesPerNonOverlap;
-            indexEnd = indexBegin + samplesPerFrame;
-            if (indexEnd < size)
-                frames.push_back(new Frame(*this, indexBegin, indexEnd));
-            else
-                break;
-        }
-    }
+        unsigned int samplesPerFrame = bytesPerFrame / hdr.BytesPerSamp;
+        unsigned int samplesPerOverlap =
+            static_cast<unsigned int>(samplesPerFrame * m_overlap);
 
-    /**
-     * Deletes all frame objects and clears the vector.
-     */
-    void WaveFile::clearFrames()
-    {
-        for(unsigned int i = 0, size = frames.size(); i < size; ++i)
-        {
-            delete frames[i];
-        }
-
-        frames.clear();
+        m_frames.divideFrames(*this, samplesPerFrame, samplesPerOverlap);
     }
 }
 

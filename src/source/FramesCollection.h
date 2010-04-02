@@ -37,11 +37,36 @@ namespace Aquila
                           unsigned int samplesPerOverlap);
         void clear();
 
+        /**
+         * Returns number of frames in the collection.
+         *
+         * @return frames' container size
+         */
+        std::size_t count() const
+        {
+            return m_frames.size();
+        }
+
+        /**
+         * Returns number of samples in each frame.
+         *
+         * @return frame size in samples
+         */
+        unsigned int getSamplesPerFrame() const
+        {
+            return m_samplesPerFrame;
+        }
+
     private:
         /**
          * Frames vector.
          */
         std::vector<Frame*> m_frames;
+
+        /**
+         * Number of samples in each frame.
+         */
+        unsigned int m_samplesPerFrame;
     };
 }
 

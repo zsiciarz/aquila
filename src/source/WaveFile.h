@@ -285,11 +285,6 @@ namespace Aquila
         WaveHeader hdr;
 
         /**
-         * Number of samples per frame.
-         */
-        unsigned int samplesPerFrame;
-
-        /**
          * Frame length (in milliseconds).
          */
         unsigned int m_frameLength;
@@ -316,22 +311,7 @@ namespace Aquila
         void convert8Stereo(short* data, unsigned int channelSize);
         void convert8Mono(short* data, unsigned int channelSize);
         void splitBytes(short twoBytes, unsigned char& lb, unsigned char& hb);
-
-        /**
-         * Returns number of samples in a single frame.
-         *
-         * @return samples per frame = bytes per frame / bytes per sample
-         */
-        unsigned int getSamplesPerFrame() const
-        {
-            unsigned int bytesPerFrame = static_cast<unsigned int>(
-                    hdr.BytesPerSec * m_frameLength / 1000.0);
-
-            return bytesPerFrame / hdr.BytesPerSamp;
-        }
-
-        void divideFrames(const ChannelType& source);
-        void clearFrames();
+        void divideFrames();
     };
 }
 
