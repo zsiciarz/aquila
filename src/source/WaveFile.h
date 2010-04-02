@@ -59,8 +59,6 @@ namespace Aquila
         std::vector<Frame*> frames;
 
         explicit WaveFile(const std::string& filename);
-        explicit WaveFile(unsigned int frameLengthMs = 0,
-                double frameOverlap = 0.66);
         ~WaveFile();
 
         void load(const std::string& file);

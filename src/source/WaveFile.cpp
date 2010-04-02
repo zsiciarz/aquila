@@ -31,25 +31,6 @@ namespace Aquila
     }
 
     /**
-     * Creates the WaveFile object.
-     *
-     * By default, no frame division will be performed after loading data
-     * from file.
-     * If frameLengthMs is given and is not 0, all calls to load() will
-     * perform frame division.
-     * Adjacent frames can overlap each other, the default overlap length
-     * is 66% of frame length.
-     *
-     * @param frameLengthMs frame length in milliseconds (0 - dont use frames)
-     * @param frameOverlap overlap between adjacent frames
-     */
-    WaveFile::WaveFile(unsigned int frameLengthMs, double frameOverlap):
-        m_frameLength(frameLengthMs), m_overlap(frameOverlap),
-        m_sourceChannel(LEFT)
-    {
-    }
-
-    /**
      * Deletes the WaveFile object.
      *
      * If there was any frame division, deletes all frames.
