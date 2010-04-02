@@ -55,6 +55,18 @@ set (Aquila_SOURCES
 
 ################################################################################
 #
+# Compiler-specific workarounds
+#
+################################################################################
+
+if(MSVC)
+    # disable "strncpy is deprecated" warning and enable math constants
+    add_definitions("/D_CRT_NONSTDC_NO_DEPRECATE /D_USE_MATH_DEFINES")
+endif(MSVC)
+
+
+################################################################################
+#
 # Building and linking
 #
 ################################################################################
