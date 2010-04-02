@@ -40,6 +40,7 @@ set (Aquila_HEADERS
     src/Exceptions.h
     src/source/SignalSource.h
     src/source/Frame.h
+    src/source/FramesCollection.h
     src/source/WaveFile.h
     src/transform/Window.h
 )
@@ -48,6 +49,7 @@ set (Aquila_HEADERS
 set (Aquila_SOURCES
     src/source/SignalSource.cpp
     src/source/Frame.cpp
+    src/source/FramesCollection.cpp
     src/source/WaveFile.cpp
     src/transform/Window.cpp
 )
