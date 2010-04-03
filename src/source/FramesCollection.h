@@ -37,7 +37,7 @@ namespace Aquila
 
         void divideFrames(const SignalSource& source,
                           unsigned int samplesPerFrame,
-                          unsigned int samplesPerOverlap);
+                          unsigned int samplesPerOverlap = 0);
         void clear();
 
         /**
