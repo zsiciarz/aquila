@@ -41,6 +41,7 @@ set (Aquila_HEADERS
     src/source/SignalSource.h
     src/source/Frame.h
     src/source/FramesCollection.h
+    src/source/ArrayData.h
     src/source/WaveFile.h
     src/transform/Window.h
 )
