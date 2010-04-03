@@ -33,6 +33,14 @@ namespace Aquila
         virtual unsigned short getBitsPerSample() const = 0;
         virtual std::size_t getSamplesCount() const = 0;
         virtual SampleType sample(std::size_t position) const = 0;
+
+        /**
+         * Returns number of samples in the source.
+         *
+         * This method is an alias to getSamplesCount().
+         *
+         * @return samples count
+         */
         std::size_t length() const
         {
             return getSamplesCount();
