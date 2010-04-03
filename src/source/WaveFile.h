@@ -235,20 +235,23 @@ namespace Aquila
          */
         std::size_t getFramesCount()
         {
-            // no frames yet, but the frame length is set
-            if (0 == m_frames.count() && m_frameLength != 0)
-                divideFrames();
-            
-            return m_frames.count();
+            return frames().count();
         }
 
         /**
          * Gives read-only access to frames collection.
          *
+         * Ensures that the frame division happens before accessing frames
+         * collection.
+         *
          * @return a reference to frames collection
          */
         const FramesCollection& frames()
         {
+            // no frames yet, but the frame length is set
+            if (0 == m_frames.count() && m_frameLength != 0)
+                divideFrames();
+
             return m_frames;
         }
 
