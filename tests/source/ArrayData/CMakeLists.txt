@@ -1,8 +1,11 @@
 ################################################################################
 #
-# Unit tests for signal source classes.
+# Unit tests for ArrayData class.
 #
 ################################################################################
 
-add_subdirectory(ArrayData)
-add_subdirectory(WaveFile)
+# iteration
+add_executable(iteration iteration.cpp)
+target_link_libraries(iteration Aquila)
+
+add_test(iteration_run iteration)
