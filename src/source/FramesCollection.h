@@ -33,6 +33,9 @@ namespace Aquila
     {
     public:
         FramesCollection();
+        FramesCollection(const SignalSource& source,
+                         unsigned int samplesPerFrame,
+                         unsigned int samplesPerOverlap = 0);
         ~FramesCollection();
 
         void divideFrames(const SignalSource& source,

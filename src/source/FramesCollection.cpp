@@ -20,11 +20,25 @@
 namespace Aquila
 {
     /**
-     * Creates the frames collection.
+     * Creates an empty frames collection.
      */
     FramesCollection::FramesCollection():
         m_samplesPerFrame(0)
     {
+    }
+
+    /**
+     * Creates a collection and creates frames from the source.
+     *
+     * @param source a reference to source object
+     * @param samplesPerFrame how many samples will each frame hold
+     * @param samplesPerOverlap how many samples are common to adjacent frames
+     */
+    FramesCollection::FramesCollection(const SignalSource &source,
+                                       unsigned int samplesPerFrame,
+                                       unsigned int samplesPerOverlap)
+    {
+        divideFrames(source, samplesPerFrame, samplesPerOverlap);
     }
 
     /**
