@@ -242,6 +242,16 @@ namespace Aquila
             return m_frames.count();
         }
 
+        /**
+         * Gives read-only access to frames collection.
+         *
+         * @return a reference to frames collection
+         */
+        const FramesCollection& frames()
+        {
+            return m_frames;
+        }
+
         void recalculate(unsigned int newFrameLength = 0,
                          double newOverlap = 0.66);
 
