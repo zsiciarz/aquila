@@ -7,7 +7,7 @@
 
 namespace Aquila
 {
-    template <typename Numeric = double>
+    template <typename Numeric = SampleType>
     class ArrayData : public SignalSource
     {
     public:
