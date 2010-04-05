@@ -78,7 +78,7 @@ namespace Aquila
             indexBegin = i * nonOverlapped;
             indexEnd = indexBegin + samplesPerFrame;
             if (indexEnd < sourceSize)
-                m_frames.push_back(new Frame(source, indexBegin, indexEnd));
+                m_frames.push_back(Frame(source, indexBegin, indexEnd));
             else
                 break;
         }
@@ -89,14 +89,6 @@ namespace Aquila
      */
     void FramesCollection::clear()
     {
-        if (m_frames.empty())
-            return;
-
-        for(std::size_t i = 0, size = m_frames.size(); i < size; ++i)
-        {
-            delete m_frames[i];
-        }
-
         m_frames.clear();
     }
 }

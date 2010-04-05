@@ -67,7 +67,7 @@ namespace Aquila
         /**
          * Frames vector.
          */
-        std::vector<Frame*> m_frames;
+        std::vector<Frame> m_frames;
 
         /**
          * Number of samples in each frame.
