@@ -28,6 +28,7 @@ namespace Aquila
      * An ecapsulation of a single frame of the signal.
      *
      * The Frame class wraps a signal frame (short fragment of a signal).
+     * It is a lightweight object which can be copied by value.
      * Frame samples are accessed by STL-compatible iterators.
 	 */
     class AQUILA_EXPORT Frame : public SignalSource
