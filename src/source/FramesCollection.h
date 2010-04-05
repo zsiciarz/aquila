@@ -31,7 +31,12 @@ namespace Aquila
      */
     class AQUILA_EXPORT FramesCollection
     {
+        typedef std::vector<Frame> Container;
+
     public:
+        typedef Container::iterator iterator;
+        typedef Container::const_iterator const_iterator;
+
         FramesCollection();
         FramesCollection(const SignalSource& source,
                          unsigned int samplesPerFrame,
@@ -63,11 +68,31 @@ namespace Aquila
             return m_samplesPerFrame;
         }
 
+        iterator begin()
+        {
+            return m_frames.begin();
+        }
+
+        const_iterator begin() const
+        {
+            return m_frames.begin();
+        }
+
+        iterator end()
+        {
+            return m_frames.end();
+        }
+
+        const_iterator end() const
+        {
+            return m_frames.end();
+        }
+
     private:
         /**
-         * Frames vector.
+         * Frames container.
          */
-        std::vector<Frame> m_frames;
+        Container m_frames;
 
         /**
          * Number of samples in each frame.
