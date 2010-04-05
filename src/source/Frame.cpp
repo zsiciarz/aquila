@@ -31,7 +31,31 @@ namespace Aquila
      */
     Frame::Frame(const SignalSource& source, unsigned int indexBegin,
             unsigned int indexEnd):
-        m_source(source), m_begin(indexBegin), m_end(indexEnd)
+        m_source(&source), m_begin(indexBegin), m_end(indexEnd)
     {
+    }
+
+    /**
+     * Copy constructor.
+     *
+     * @param other reference to another frame
+     */
+    Frame::Frame(const Frame &other):
+        m_source(other.m_source), m_begin(other.m_begin), m_end(other.m_end)
+    {
+    }
+
+    /**
+     * Assignes another frame to this one using copy-and-swap idiom.
+     *
+     * @param other reference to another frame
+     * @return reference to the current object
+     */
+    Frame& Frame::operator=(const Frame& other)
+    {
+        Frame temp(other);
+        swap(temp);
+
+        return *this;
     }
 }

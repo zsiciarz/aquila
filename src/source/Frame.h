@@ -20,6 +20,7 @@
 
 #include "../global.h"
 #include "SignalSource.h"
+#include <algorithm>
 
 namespace Aquila
 {
@@ -34,6 +35,8 @@ namespace Aquila
 	public:
         Frame(const SignalSource& source, unsigned int indexBegin,
 		        unsigned int indexEnd);
+        Frame(const Frame& other);
+        Frame& operator=(const Frame& other);
 
         /**
          * Returns the frame length.
@@ -52,7 +55,7 @@ namespace Aquila
          */
         virtual FrequencyType getSampleFrequency() const
         {
-            return m_source.getSampleFrequency();
+            return m_source->getSampleFrequency();
         }
 
         /**
@@ -60,7 +63,7 @@ namespace Aquila
          */
         virtual unsigned short getBitsPerSample() const
         {
-            return m_source.getBitsPerSample();
+            return m_source->getBitsPerSample();
         }
 
         /**
@@ -70,7 +73,7 @@ namespace Aquila
          */
         virtual int sample(std::size_t position) const
         {
-            return m_source.sample(m_begin + position);
+            return m_source->sample(m_begin + position);
         }
 
 	private:
@@ -80,9 +83,21 @@ namespace Aquila
         unsigned int m_begin, m_end;
 
         /**
-         * A const reference to original source (eg. a WAVE file).
+         * A pointer to constant original source (eg. a WAVE file).
          */
-        const SignalSource& m_source;
+        const SignalSource* m_source;
+
+        /**
+         * Swaps the frame with another one - cannot not throw!
+         *
+         * @param other reference to swapped frame
+         */
+        void swap(Frame& other) throw()
+        {
+            std::swap(m_begin,  other.m_begin);
+            std::swap(m_end,    other.m_end);
+            std::swap(m_source, other.m_source);
+        }
 	};
 }
 
