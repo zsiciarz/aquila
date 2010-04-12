@@ -86,6 +86,7 @@ endif(Aquila_BUILD_EXAMPLES)
 #tests
 if(Aquila_BUILD_TESTS)
     enable_testing()
+    add_custom_target(tests)
     add_subdirectory(tests)
 endif(Aquila_BUILD_TESTS)
 
