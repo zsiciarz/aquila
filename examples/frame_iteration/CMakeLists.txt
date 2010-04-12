@@ -4,5 +4,4 @@
 #
 ################################################################################
 
-add_executable(frame_iteration frame_iteration.cpp)
-target_link_libraries(frame_iteration Aquila)
+aquila_example(frame_iteration)

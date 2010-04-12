@@ -7,6 +7,15 @@
 # all examples use installed headers, not the ones in the source distribution
 include_directories("${CMAKE_INSTALL_PREFIX}/include")
 
+
+# a common setup for most of the examples
+macro(aquila_example example)
+  add_executable(${example} EXCLUDE_FROM_ALL ${example}.cpp)
+  add_dependencies(examples ${example})
+  target_link_libraries(${example} Aquila)
+endmacro(aquila_example)
+
+
 add_subdirectory(frame_iteration)
 
 add_subdirectory(wave_info)

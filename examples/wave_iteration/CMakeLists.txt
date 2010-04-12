@@ -4,5 +4,4 @@
 #
 ################################################################################
 
-add_executable(wave_iteration wave_iteration.cpp)
-target_link_libraries(wave_iteration Aquila)
+aquila_example(wave_iteration)

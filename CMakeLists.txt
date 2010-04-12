@@ -79,6 +79,7 @@ add_library(Aquila ${Aquila_HEADERS} ${Aquila_SOURCES})
 
 # examples
 if(Aquila_BUILD_EXAMPLES)
+    add_custom_target(examples)
     add_subdirectory(examples)
 endif(Aquila_BUILD_EXAMPLES)
 

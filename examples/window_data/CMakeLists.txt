@@ -4,5 +4,4 @@
 #
 ################################################################################
 
-add_executable(window_data window_data.cpp)
-target_link_libraries(window_data Aquila)
+aquila_example(window_data)
