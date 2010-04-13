@@ -28,4 +28,13 @@ namespace Aquila
         m_title(title)
     {
     }
+
+    /**
+     * Plots all data from a given source.
+     *
+     * @param source data source
+     */
+    void plot(const SignalSource& source)
+    {
+    }
 }

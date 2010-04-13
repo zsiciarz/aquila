@@ -18,6 +18,7 @@
 #ifndef TEXTPLOT_H
 #define TEXTPLOT_H
 
+#include "../source/SignalSource.h"
 #include <string>
 
 namespace Aquila
@@ -49,6 +50,8 @@ namespace Aquila
         {
             m_title = title;
         }
+
+        void plot(const SignalSource& source);
 
     private:
         /**
