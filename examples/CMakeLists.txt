@@ -22,3 +22,5 @@ add_subdirectory(wave_info)
 add_subdirectory(wave_iteration)
 add_subdirectory(window_data)
 add_subdirectory(window_plot)
+
+add_subdirectory(text_plot)

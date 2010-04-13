@@ -16,6 +16,7 @@
  */
 
 #include "TextPlot.h"
+#include <iostream>
 
 namespace Aquila
 {
@@ -34,7 +35,8 @@ namespace Aquila
      *
      * @param source data source
      */
-    void plot(const SignalSource& source)
+    void TextPlot::plot(const SignalSource& source)
     {
+        std::cout << m_title << std::endl;
     }
 }
