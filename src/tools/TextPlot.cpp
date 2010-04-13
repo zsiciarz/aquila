@@ -16,7 +16,9 @@
  */
 
 #include "TextPlot.h"
+#include <algorithm>
 #include <iostream>
+#include <vector>
 
 namespace Aquila
 {
@@ -38,5 +40,30 @@ namespace Aquila
     void TextPlot::plot(const SignalSource& source)
     {
         std::cout << m_title << std::endl;
+
+        const SampleType max = *std::max_element(source.begin(), source.end());
+        const SampleType min = *std::min_element(source.begin(), source.end());
+        const SampleType range = max - min;
+        const std::size_t length = source.length();
+        std::cout << "Data range: " << min << " - " << max << std::endl;
+
+        std::vector< std::vector<char> > plot(length);
+        for (std::size_t i = 0; i < length; ++i)
+        {
+            std::vector<char> column(range + 2, ' ');
+            std::size_t y = range -
+                            static_cast<std::size_t>((range - 1) * source.sample(i) / max);
+            column[y] = '*';
+            plot[i] = column;
+        }
+
+        for (unsigned int i = 0; i < range + 2; ++i)
+        {
+            for (unsigned int j = 0; j < length; ++j)
+            {
+                std::cout << plot[j][i];
+            }
+            std::cout << "\n";
+        }
     }
 }
