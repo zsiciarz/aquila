@@ -44,6 +44,7 @@ set (Aquila_HEADERS
     src/source/ArrayData.h
     src/source/WaveFile.h
     src/transform/Window.h
+    src/tools/TextPlot.h
 )
 
 # library sources
@@ -53,6 +54,7 @@ set (Aquila_SOURCES
     src/source/FramesCollection.cpp
     src/source/WaveFile.cpp
     src/transform/Window.cpp
+    src/tools/TextPlot.cpp
 )
 
 
