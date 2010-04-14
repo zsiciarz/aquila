@@ -103,3 +103,18 @@ endif(Aquila_BUILD_TESTS)
 install(TARGETS Aquila ARCHIVE DESTINATION lib LIBRARY DESTINATION lib)
 install(DIRECTORY src/ DESTINATION include/aquila FILES_MATCHING PATTERN "*.h")
 install(FILES CHANGELOG LICENSE README DESTINATION ${CMAKE_INSTALL_PREFIX})
+
+
+################################################################################
+#
+# Uninstalling
+#
+################################################################################
+
+CONFIGURE_FILE(
+  "${CMAKE_CURRENT_SOURCE_DIR}/uninstall.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake"
+  IMMEDIATE @ONLY)
+
+ADD_CUSTOM_TARGET(uninstall
+  "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake")
