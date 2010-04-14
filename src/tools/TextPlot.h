@@ -21,6 +21,7 @@
 #include "../source/SignalSource.h"
 #include <algorithm>
 #include <cmath>
+#include <cstddef>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -56,6 +57,18 @@ namespace Aquila
             m_title = title;
         }
 
+        /**
+         * Sets plot dimensions.
+         *
+         * @param width plot width, currently ignored
+         * @param height plot height
+         */
+        void setSize(std::size_t width, std::size_t height)
+        {
+            m_width = width;
+            m_height = height;
+        }
+
         void plot(const SignalSource& source);
 
         template<typename Numeric>
@@ -87,18 +100,17 @@ namespace Aquila
             const double max = *std::max_element(begin, end);
             const double min = *std::min_element(begin, end);
             const double range = max - min;
-            const std::size_t columnSize = 16; // todo: make this customizable
 
             for (std::size_t xPos = 0; xPos < plot.size(); ++xPos)
             {
-                plot[xPos].resize(columnSize, ' ');
+                plot[xPos].resize(m_height, ' ');
                 double normalizedValue = (*begin++ - min) / range;
-                std::size_t yPos = columnSize - static_cast<std::size_t>(
-                    std::ceil(columnSize * normalizedValue));
+                std::size_t yPos = m_height - static_cast<std::size_t>(
+                    std::ceil(m_height * normalizedValue));
 
                 // bound the value so it stays within vector dimension
-                if (yPos >= columnSize)
-                    yPos = columnSize - 1;
+                if (yPos >= m_height)
+                    yPos = m_height - 1;
                 plot[xPos][yPos] = '*';
             }
 
@@ -116,6 +128,16 @@ namespace Aquila
          * Output stream.
          */
         std::ostream& m_out;
+
+        /**
+         * Plot width - currently ignored.
+         */
+        std::size_t m_width;
+
+        /**
+         * Plot height.
+         */
+        std::size_t m_height;
     };
 }
 

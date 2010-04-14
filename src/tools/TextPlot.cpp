@@ -25,7 +25,7 @@ namespace Aquila
      * @param title plot title (optional, default is "Data plot")
      */
     TextPlot::TextPlot(const std::string &title, std::ostream &out):
-        m_title(title), m_out(out)
+        m_title(title), m_out(out), m_width(64), m_height(16)
     {
     }
 
@@ -48,11 +48,10 @@ namespace Aquila
     void TextPlot::drawPlotMatrix(const PlotMatrixType &plot)
     {
         const std::size_t length = plot.size();
-        const std::size_t columnSize = plot[0].size();
 
         m_out << "\n" << m_title << "\n";
         // output the plot data, flushing only at the end
-        for (unsigned int y = 0; y < columnSize; ++y)
+        for (unsigned int y = 0; y < m_height; ++y)
         {
             for (unsigned int x = 0; x < length; ++x)
             {
