@@ -19,6 +19,7 @@
 #define TEXTPLOT_H
 
 #include "../source/SignalSource.h"
+#include <iostream>
 #include <string>
 
 namespace Aquila
@@ -29,7 +30,8 @@ namespace Aquila
     class TextPlot
     {
     public:
-        TextPlot(const std::string& title = "Data plot");
+        TextPlot(const std::string& title = "Data plot",
+                 std::ostream& out = std::cout);
 
         /**
          * Returns the title of the plot.
@@ -58,6 +60,11 @@ namespace Aquila
          * Plot title.
          */
         std::string m_title;
+
+        /**
+         * Output stream.
+         */
+        std::ostream& m_out;
     };
 }
 

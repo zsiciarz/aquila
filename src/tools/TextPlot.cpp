@@ -17,7 +17,6 @@
 
 #include "TextPlot.h"
 #include <algorithm>
-#include <iostream>
 #include <vector>
 
 namespace Aquila
@@ -27,8 +26,8 @@ namespace Aquila
      *
      * @param title plot title (optional, default is "Data plot")
      */
-    TextPlot::TextPlot(const std::string &title):
-        m_title(title)
+    TextPlot::TextPlot(const std::string &title, std::ostream &out):
+        m_title(title), m_out(out)
     {
     }
 
@@ -39,14 +38,13 @@ namespace Aquila
      */
     void TextPlot::plot(const SignalSource& source)
     {
-        std::cout << m_title << std::endl;
+        m_out << m_title << std::endl;
 
         const SampleType max = *std::max_element(source.begin(), source.end());
         const SampleType min = *std::min_element(source.begin(), source.end());
         const SampleType range = max - min;
         const std::size_t length = source.length();
         const std::size_t columnSize = 10; // todo: make this customizable
-        std::cout << "Data range: " << min << " - " << max << std::endl;
 
         std::vector< std::vector<char> > plot(length);
         for (std::size_t xPos = 0; xPos < length; ++xPos)
@@ -56,22 +54,21 @@ namespace Aquila
                                       static_cast<double>(range);
             std::size_t yPos = columnSize -
                                static_cast<std::size_t>(columnSize * normalizedValue);
-            std::cout << normalizedValue << ": " << yPos << std::endl;
             // bound the value so it stays within vector dimension
             if (yPos >= columnSize)
                 yPos = columnSize - 1;
             plot[xPos][yPos] = '*';
         }
 
-        // output the plot data
+        // output the plot data, flushing only at the end
         for (unsigned int y = 0; y < columnSize; ++y)
         {
             for (unsigned int x = 0; x < length; ++x)
             {
-                std::cout << plot[x][y];
+                m_out << plot[x][y];
             }
-            std::cout << "\n";
+            m_out << "\n";
         }
-        std::cout.flush();
+        m_out.flush();
     }
 }
