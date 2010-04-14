@@ -71,11 +71,32 @@ namespace Aquila
 
         void plot(const SignalSource& source);
 
+        /**
+         * An overload for plotting vectors.
+         *
+         * @param data a numeric vector
+         */
         template<typename Numeric>
         void plot(const std::vector<Numeric> data)
         {
             PlotMatrixType plot(data.size());
             doPlot(plot, data.begin(), data.end());
+        }
+
+        /**
+         * An overload for plotting regular C-style arrays.
+         *
+         * In theory, we could use the template argument trick to omit the
+         * `length` argument, however, that is possible only for static arrays.
+         *
+         * @param data the array
+         * @param length array size
+         */
+        template<typename Numeric>
+        void plot(Numeric data[], std::size_t length)
+        {
+            PlotMatrixType plot(length);
+            doPlot(plot, data, data + length);
         }
 
     private:
