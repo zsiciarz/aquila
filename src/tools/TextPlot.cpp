@@ -16,8 +16,6 @@
  */
 
 #include "TextPlot.h"
-#include <algorithm>
-#include <vector>
 
 namespace Aquila
 {
@@ -38,28 +36,21 @@ namespace Aquila
      */
     void TextPlot::plot(const SignalSource& source)
     {
-        m_out << m_title << std::endl;
+        PlotMatrixType plot(source.length());
+        doPlot(plot, source.begin(), source.end());
+    }
 
-        const SampleType max = *std::max_element(source.begin(), source.end());
-        const SampleType min = *std::min_element(source.begin(), source.end());
-        const SampleType range = max - min;
-        const std::size_t length = source.length();
-        const std::size_t columnSize = 10; // todo: make this customizable
+    /**
+     * "Draws" the plot to the output stream.
+     *
+     * @param plot internal plot data
+     */
+    void TextPlot::drawPlotMatrix(const PlotMatrixType &plot)
+    {
+        const std::size_t length = plot.size();
+        const std::size_t columnSize = plot[0].size();
 
-        std::vector< std::vector<char> > plot(length);
-        for (std::size_t xPos = 0; xPos < length; ++xPos)
-        {
-            plot[xPos].resize(columnSize, ' ');
-            double normalizedValue = (source.sample(xPos) - min) /
-                                      static_cast<double>(range);
-            std::size_t yPos = columnSize -
-                               static_cast<std::size_t>(columnSize * normalizedValue);
-            // bound the value so it stays within vector dimension
-            if (yPos >= columnSize)
-                yPos = columnSize - 1;
-            plot[xPos][yPos] = '*';
-        }
-
+        m_out << "\n" << m_title << "\n";
         // output the plot data, flushing only at the end
         for (unsigned int y = 0; y < columnSize; ++y)
         {

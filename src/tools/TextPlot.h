@@ -19,8 +19,11 @@
 #define TEXTPLOT_H
 
 #include "../source/SignalSource.h"
+#include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <string>
+#include <vector>
 
 namespace Aquila
 {
@@ -55,7 +58,55 @@ namespace Aquila
 
         void plot(const SignalSource& source);
 
+        template<typename Numeric>
+        void plot(const std::vector<Numeric> data)
+        {
+            PlotMatrixType plot(data.size());
+            doPlot(plot, data.begin(), data.end());
+        }
+
     private:
+        /**
+         * The internal representation of the plot.
+         */
+        typedef std::vector< std::vector<char> > PlotMatrixType;
+
+        /**
+         * Prepares an internal "pixel" matrix and calls drawPlotMatrix().
+         *
+         * The template parameter is an iterator type, therefore the plotter
+         * can be more generic.
+         *
+         * @param plot reference to the plot matrix
+         * @param begin an iterator pointing to the beginning of plotted data
+         * @param end an iterator pointing "one past end" of plotted data
+         */
+        template <typename Iterator>
+        void doPlot(PlotMatrixType& plot, Iterator begin, Iterator end)
+        {
+            const double max = *std::max_element(begin, end);
+            const double min = *std::min_element(begin, end);
+            const double range = max - min;
+            const std::size_t columnSize = 16; // todo: make this customizable
+
+            for (std::size_t xPos = 0; xPos < plot.size(); ++xPos)
+            {
+                plot[xPos].resize(columnSize, ' ');
+                double normalizedValue = (*begin++ - min) / range;
+                std::size_t yPos = columnSize - static_cast<std::size_t>(
+                    std::ceil(columnSize * normalizedValue));
+
+                // bound the value so it stays within vector dimension
+                if (yPos >= columnSize)
+                    yPos = columnSize - 1;
+                plot[xPos][yPos] = '*';
+            }
+
+            drawPlotMatrix(plot);
+        }
+
+        void drawPlotMatrix(const PlotMatrixType& plot);
+
         /**
          * Plot title.
          */
