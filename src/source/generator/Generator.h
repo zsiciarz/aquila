@@ -77,7 +77,9 @@ namespace Aquila
             return m_buffer[position];
         }
 
-    private:
+        virtual void generate() = 0;
+
+    protected:
         /**
          * Sample frequency of the data.
          */
