@@ -17,6 +17,7 @@
 
 #include "SineGenerator.h"
 #include <cmath>
+#include <iostream>
 
 namespace Aquila
 {
@@ -28,16 +29,18 @@ namespace Aquila
      */
     SineGenerator::SineGenerator(FrequencyType sampleFrequency,
                                  std::size_t bufferSize):
-        Generator(sampleFrequency, bufferSize), m_frequency(0)
+        Generator(sampleFrequency, bufferSize)
     {
     }
 
     void SineGenerator::generate()
     {
-        double normalizedFrequency = m_frequency / static_cast<double>(m_sampleFrequency);
+        double normalizedFrequency = m_frequency /
+                                     static_cast<double>(m_sampleFrequency);
         for (std::size_t i = 0, size = m_buffer.size(); i < size; ++i)
         {
-            m_buffer[i] = std::sin(2.0 * M_PI * normalizedFrequency * i);
+            m_buffer[i] = m_amplitude *
+                          std::sin(2.0 * M_PI * normalizedFrequency * i);
         }
     }
 }

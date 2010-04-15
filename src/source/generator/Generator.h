@@ -77,6 +77,26 @@ namespace Aquila
             return m_buffer[position];
         }
 
+        /**
+         * Sets frequency of the generated signal.
+         *
+         * @param frequency signal frequency
+         */
+        void setFrequency(FrequencyType frequency)
+        {
+            m_frequency = frequency;
+        }
+
+        /**
+         * Sets amplitude of the generated signal.
+         *
+         * @param amplitude signal amplitude
+         */
+        void setAmplitude(SampleType amplitude)
+        {
+            m_amplitude = amplitude;
+        }
+
         virtual void generate() = 0;
 
     protected:
@@ -89,6 +109,16 @@ namespace Aquila
          * Internal data buffer.
          */
         std::vector<SampleType> m_buffer;
+
+        /**
+         * Frequency of the generated signal (not always used).
+         */
+        FrequencyType m_frequency;
+
+        /**
+         * Amplitude of the generated signal (not always used).
+         */
+        SampleType m_amplitude;
     };
 }
 

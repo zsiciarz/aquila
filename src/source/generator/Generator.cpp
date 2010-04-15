@@ -26,7 +26,8 @@ namespace Aquila
      * @param bufferSize internal buffer length
      */
     Generator::Generator(FrequencyType sampleFrequency, std::size_t bufferSize):
-        m_sampleFrequency(sampleFrequency), m_buffer(bufferSize)
+        m_sampleFrequency(sampleFrequency), m_buffer(bufferSize),
+        m_frequency(0), m_amplitude(0)
     {
     }
 }

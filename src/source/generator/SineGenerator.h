@@ -27,15 +27,7 @@ namespace Aquila
     public:
         SineGenerator(FrequencyType sampleFrequency, std::size_t bufferSize);
 
-        void setFrequency(FrequencyType frequency)
-        {
-            m_frequency = frequency;
-        }
-
         virtual void generate();
-
-    private:
-        FrequencyType m_frequency;
     };
 }
 
