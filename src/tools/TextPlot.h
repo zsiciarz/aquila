@@ -69,7 +69,16 @@ namespace Aquila
             m_height = height;
         }
 
-        void plot(const SignalSource& source);
+        /**
+         * Plots all data from a given source.
+         *
+         * @param source data source
+         */
+        void plot(const SignalSource& source)
+        {
+            PlotMatrixType plot(source.length());
+            doPlot(plot, source.begin(), source.end());
+        }
 
         /**
          * An overload for plotting vectors.
