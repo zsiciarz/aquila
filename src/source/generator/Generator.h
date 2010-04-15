@@ -18,12 +18,75 @@
 #ifndef GENERATOR_H
 #define GENERATOR_H
 
+#include "../SignalSource.h"
+#include "../../global.h"
+#include <cstddef>
+#include <vector>
+
 namespace Aquila
 {
-    class Generator
+    class Generator : public SignalSource
     {
     public:
-        Generator();
+        /**
+         * Creates the generator object.
+         *
+         * @param sampleFrequency sample frequency of the data in array
+         * @param bufferSize the size of an internal sample buffer
+         */
+        Generator(FrequencyType sampleFrequency, std::size_t bufferSize);
+
+        /**
+         * Returns signal sample frequency.
+         *
+         * @return sample frequency in Hz
+         */
+        virtual FrequencyType getSampleFrequency() const
+        {
+            return m_sampleFrequency;
+        }
+
+        /**
+         * Returns number of bits per sample
+         *
+         * @return 8 * number of bytes per sample
+         */
+        virtual unsigned short getBitsPerSample() const
+        {
+            return 8 * sizeof(SampleType);
+        }
+
+        /**
+         * Returns the length of generator's internal buffer.
+         *
+         * @return samples count
+         */
+        virtual std::size_t getSamplesCount() const
+        {
+            return m_buffer.size();
+        }
+
+        /**
+         * Returns sample value at a given position in the buffer.
+         *
+         * @param position sample position (from 0 to buffer length - 1)
+         * @return sample value
+         */
+        virtual SampleType sample(std::size_t position) const
+        {
+            return m_buffer[position];
+        }
+
+    private:
+        /**
+         * Sample frequency of the data.
+         */
+        FrequencyType m_sampleFrequency;
+
+        /**
+         * Internal data buffer.
+         */
+        std::vector<SampleType> m_buffer;
     };
 }
 

@@ -19,7 +19,8 @@
 
 namespace Aquila
 {
-    Generator::Generator()
+    Generator::Generator(FrequencyType sampleFrequency, std::size_t bufferSize):
+        m_sampleFrequency(sampleFrequency), m_buffer(bufferSize)
     {
     }
 }
