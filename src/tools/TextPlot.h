@@ -77,7 +77,7 @@ namespace Aquila
          * @param data a numeric vector
          */
         template<typename Numeric>
-        void plot(const std::vector<Numeric> data)
+        void plot(const std::vector<Numeric>& data)
         {
             PlotMatrixType plot(data.size());
             doPlot(plot, data.begin(), data.end());
