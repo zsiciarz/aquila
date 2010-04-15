@@ -22,6 +22,9 @@
 
 namespace Aquila
 {
+    /**
+     * Sine wave generator.
+     */
     class SineGenerator : public Generator
     {
     public:

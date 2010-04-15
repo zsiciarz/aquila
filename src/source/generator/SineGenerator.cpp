@@ -33,6 +33,9 @@ namespace Aquila
     {
     }
 
+    /**
+     * Fills the buffer with generated sine samples.
+     */
     void SineGenerator::generate()
     {
         double normalizedFrequency = m_frequency /
