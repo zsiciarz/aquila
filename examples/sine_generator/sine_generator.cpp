@@ -4,9 +4,7 @@
 int main(int argc, char *argv[])
 {
     Aquila::SineGenerator generator(1000, 64);
-    generator.setFrequency(32);
-    generator.setAmplitude(255);
-    generator.generate();
+    generator.setFrequency(32).setAmplitude(255).generate();
     Aquila::TextPlot plot("Sine wave");
     plot.plot(generator);
 

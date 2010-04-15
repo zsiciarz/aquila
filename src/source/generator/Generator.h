@@ -81,20 +81,26 @@ namespace Aquila
          * Sets frequency of the generated signal.
          *
          * @param frequency signal frequency
+         * @return the current object for fluent interface
          */
-        void setFrequency(FrequencyType frequency)
+        Generator& setFrequency(FrequencyType frequency)
         {
             m_frequency = frequency;
+
+            return *this;
         }
 
         /**
          * Sets amplitude of the generated signal.
          *
          * @param amplitude signal amplitude
+         * @return the current object for fluent interface
          */
-        void setAmplitude(SampleType amplitude)
+        Generator& setAmplitude(SampleType amplitude)
         {
             m_amplitude = amplitude;
+
+            return *this;
         }
 
         virtual void generate() = 0;
