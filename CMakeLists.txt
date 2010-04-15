@@ -43,6 +43,7 @@ set (Aquila_HEADERS
     src/source/FramesCollection.h
     src/source/ArrayData.h
     src/source/WaveFile.h
+    src/source/generator/Generator.h
     src/transform/Window.h
     src/tools/TextPlot.h
 )
@@ -53,6 +54,7 @@ set (Aquila_SOURCES
     src/source/Frame.cpp
     src/source/FramesCollection.cpp
     src/source/WaveFile.cpp
+    src/source/generator/Generator.cpp
     src/transform/Window.cpp
     src/tools/TextPlot.cpp
 )
