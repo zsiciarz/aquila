@@ -55,7 +55,7 @@ namespace Aquila
         }
 
         // FFT calculation using "butterflies"
-        // code ported from Matlab, based on book by Tomasz P. Zieliñski
+        // code ported from Matlab, based on book by Tomasz P. ZieliÅ„ski
 
         // FFT stages count
         unsigned int numStages = static_cast<unsigned int>(
