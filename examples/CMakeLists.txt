@@ -24,3 +24,5 @@ add_subdirectory(window_data)
 add_subdirectory(window_plot)
 
 add_subdirectory(text_plot)
+
+add_subdirectory(fft_comparison)
