@@ -48,3 +48,6 @@ Authors
 =======
 
 Zbigniew Siciarz <antyqjon@interia.pl>
+
+This library includes code from Takuya Ooura's mathematical software packages,
+which are available at http://www.kurims.kyoto-u.ac.jp/~ooura/.
