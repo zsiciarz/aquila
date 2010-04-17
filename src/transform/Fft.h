@@ -20,13 +20,14 @@
 
 #include "../global.h"
 #include <cstddef>
+#include <boost/noncopyable.hpp>
 
 namespace Aquila
 {
     /**
      * An interface for FFT calculation classes.
      */
-    class Fft
+    class Fft : boost::noncopyable
     {
     public:
         /**
