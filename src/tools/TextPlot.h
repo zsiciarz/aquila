@@ -69,7 +69,16 @@ namespace Aquila
             m_height = height;
         }
 
-        void plot(const SignalSource& source);
+        /**
+         * Plots all data from a given source.
+         *
+         * @param source data source
+         */
+        void plot(const SignalSource& source)
+        {
+            PlotMatrixType plot(source.length());
+            doPlot(plot, source.begin(), source.end());
+        }
 
         /**
          * An overload for plotting vectors.
@@ -77,7 +86,7 @@ namespace Aquila
          * @param data a numeric vector
          */
         template<typename Numeric>
-        void plot(const std::vector<Numeric> data)
+        void plot(const std::vector<Numeric>& data)
         {
             PlotMatrixType plot(data.size());
             doPlot(plot, data.begin(), data.end());

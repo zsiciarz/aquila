@@ -27,6 +27,8 @@ find_package(Boost COMPONENTS system filesystem REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
 
+# libraries bundled with Aquila
+add_subdirectory(lib)
 
 ################################################################################
 #
@@ -45,6 +47,9 @@ set (Aquila_HEADERS
     src/source/WaveFile.h
     src/source/generator/Generator.h
     src/source/generator/SineGenerator.h
+    src/transform/Fft.h
+    src/transform/AquilaFft.h
+    src/transform/OouraFft.h
     src/transform/Window.h
     src/tools/TextPlot.h
 )
@@ -57,6 +62,8 @@ set (Aquila_SOURCES
     src/source/WaveFile.cpp
     src/source/generator/Generator.cpp
     src/source/generator/SineGenerator.cpp
+    src/transform/AquilaFft.cpp
+    src/transform/OouraFft.cpp
     src/transform/Window.cpp
     src/tools/TextPlot.cpp
 )
@@ -82,6 +89,9 @@ endif(MSVC)
 
 # main Aquila library
 add_library(Aquila ${Aquila_HEADERS} ${Aquila_SOURCES})
+
+# linking with extra libs
+target_link_libraries(Aquila Ooura_fft)
 
 # examples
 if(Aquila_BUILD_EXAMPLES)
