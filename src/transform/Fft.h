@@ -40,6 +40,13 @@ namespace Aquila
         }
 
         /**
+         * Destroys the transform object - does nothing.
+         */
+        virtual ~Fft()
+        {
+        }
+
+        /**
          * Applies the transformation to the signal.
          *
          * @param x input signal
