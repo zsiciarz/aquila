@@ -45,6 +45,9 @@ set (Aquila_HEADERS
     src/source/FramesCollection.h
     src/source/ArrayData.h
     src/source/WaveFile.h
+    src/transform/Fft.h
+    src/transform/AquilaFft.h
+    src/transform/OouraFft.h
     src/transform/Window.h
     src/tools/TextPlot.h
 )
@@ -55,6 +58,8 @@ set (Aquila_SOURCES
     src/source/Frame.cpp
     src/source/FramesCollection.cpp
     src/source/WaveFile.cpp
+    src/transform/AquilaFft.cpp
+    src/transform/OouraFft.cpp
     src/transform/Window.cpp
     src/tools/TextPlot.cpp
 )
