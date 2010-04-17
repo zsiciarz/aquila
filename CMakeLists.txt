@@ -27,6 +27,8 @@ find_package(Boost COMPONENTS system filesystem REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
 
+# libraries bundled with Aquila
+add_subdirectory(lib)
 
 ################################################################################
 #
@@ -78,6 +80,9 @@ endif(MSVC)
 
 # main Aquila library
 add_library(Aquila ${Aquila_HEADERS} ${Aquila_SOURCES})
+
+# linking with extra libs
+target_link_libraries(Aquila Ooura_fft)
 
 # examples
 if(Aquila_BUILD_EXAMPLES)
