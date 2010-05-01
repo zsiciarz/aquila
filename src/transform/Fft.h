@@ -50,9 +50,17 @@ namespace Aquila
          * Applies the transformation to the signal.
          *
          * @param x input signal
-         * @param spectrum output specturm
+         * @param spectrum output spectrum
          */
         virtual void fft(double x[], ComplexType spectrum[]) = 0;
+
+        /**
+         * Applies the inverse transform to the spectrum.
+         *
+         * @param spectrum input spectrum
+         * @param x output signal
+         */
+        virtual void ifft(ComplexType spectrum[], double x[]) = 0;
 
     protected:
         /**
