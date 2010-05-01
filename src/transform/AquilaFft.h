@@ -53,6 +53,8 @@ namespace Aquila
         }
 
         virtual void fft(double x[], ComplexType spectrum[]);
+        virtual void ifft(ComplexType spectrum[], double x[]);
+
 
 
     private:

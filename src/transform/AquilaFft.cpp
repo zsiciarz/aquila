@@ -30,7 +30,7 @@ namespace Aquila
      * Applies the transformation to the signal.
      *
      * @param x input signal
-     * @param spectrum output specturm
+     * @param spectrum output spectrum
      */
     void AquilaFft::fft(double x[], ComplexType spectrum[])
     {
@@ -93,6 +93,17 @@ namespace Aquila
                 Wi = Wi_cache[k][p];
             }
         }
+    }
+
+    /**
+     * Applies the inverse transform to the spectrum.
+     *
+     * @param spectrum input spectrum
+     * @param x output signal
+     */
+    void AquilaFft::ifft(ComplexType spectrum[], double x[])
+    {
+        // TO BE IMPLEMENTED!
     }
 
     /**
