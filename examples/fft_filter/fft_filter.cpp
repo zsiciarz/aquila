@@ -10,7 +10,7 @@ void plotSpectrum(Aquila::ComplexType spectrum[], size_t SIZE, const char* title
 int main()
 {
     // input signal parameters
-    const std::size_t SIZE = 128;
+    const std::size_t SIZE = 64;
     const Aquila::FrequencyType sampleFreq = 2000;
     const double dt = 1.0/sampleFreq;
     const Aquila::FrequencyType f1 = 96, f2 = 813;
@@ -21,6 +21,8 @@ int main()
     {
         x[i] = 32*std::sin(2*M_PI*f1*i*dt) + 8*std::sin(2*M_PI*f2*i*dt + 0.75*M_PI);
     }
+    Aquila::TextPlot plt("Signal waveform before filtration");
+    plt.plot(x, SIZE);
 
     // calculate the FFT
     Aquila::OouraFft fft(SIZE);
@@ -50,6 +52,12 @@ int main()
     std::transform(spectrum, spectrum + SIZE, filterSpectrum, spectrum,
                    std::multiplies<Aquila::ComplexType>());
     plotSpectrum(spectrum, SIZE, "Signal spectrum after filtration");
+
+    // Inverse FFT moves us back to time domain
+    double x1[SIZE];
+    fft.ifft(spectrum, x1);
+    plt.setTitle("Signal waveform after filtration");
+    plt.plot(x1, SIZE);
 
     return 0;
 }
