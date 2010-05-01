@@ -68,11 +68,12 @@ int main()
 void plotSpectrum(Aquila::ComplexType spectrum[], size_t SIZE, const char* title)
 {
     // prepare the spectrum for plotting (only half of it is important)
-    double absSpectrum[SIZE/2];
+    double* absSpectrum = new double[SIZE/2];
     for (std::size_t i = 0; i < SIZE/2; ++i)
     {
         absSpectrum[i] = std::abs(spectrum[i]);
     }
     Aquila::TextPlot plt(title);
     plt.plot(absSpectrum, SIZE/2);
+    delete [] absSpectrum;
 }
