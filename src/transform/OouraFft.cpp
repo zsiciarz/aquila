@@ -51,7 +51,7 @@ namespace Aquila
      * Applies the transformation to the signal.
      *
      * @param x input signal
-     * @param spectrum output specturm
+     * @param spectrum output spectrum
      */
     void OouraFft::fft(double x[], ComplexType spectrum[])
     {
@@ -68,5 +68,28 @@ namespace Aquila
 
         // let's call the C function from Ooura's package
         cdft(2*N, -1, a, ip, w);
+    }
+
+    /**
+     * Applies the inverse transform to the spectrum.
+     *
+     * @param spectrum input spectrum
+     * @param x output signal
+     */
+    void OouraFft::ifft(ComplexType spectrum[], double x[])
+    {
+        // We assume here that a complex<double> has the same
+        // representation in memory as two consecutive doubles
+        BOOST_STATIC_ASSERT(sizeof(ComplexType[2]) == sizeof(double[4]));
+        double* a = reinterpret_cast<double*>(spectrum);
+
+        // Ooura's function
+        cdft(2*N, 1, a, ip, w);
+
+        // copy the data to the double array and scale it
+        for (size_t i = 0; i < N; ++i)
+        {
+            x[i] = a[2*i] / static_cast<double>(N);
+        }
     }
 }
