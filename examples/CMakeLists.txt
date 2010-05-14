@@ -16,6 +16,8 @@ macro(aquila_example example)
 endmacro(aquila_example)
 
 
+add_subdirectory(utility_functions)
+
 add_subdirectory(frame_iteration)
 
 add_subdirectory(wave_info)

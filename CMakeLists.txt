@@ -39,6 +39,7 @@ add_subdirectory(lib)
 # library headers
 set (Aquila_HEADERS
     src/global.h
+    src/functions.h
     src/Exceptions.h
     src/source/SignalSource.h
     src/source/Frame.h
