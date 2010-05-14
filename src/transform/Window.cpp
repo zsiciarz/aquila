@@ -146,7 +146,7 @@ namespace Aquila
      * @param N window size
      */
     Window::WinGenerator::WinGenerator(WindowType type, unsigned int N):
-        _N(N), n(0)
+        N_(N), n(0)
     {
         switch (type)
         {
@@ -180,6 +180,6 @@ namespace Aquila
      */
     double Window::WinGenerator::operator()() const
     {
-        return windowMethod(n++, _N);
+        return windowMethod(n++, N_);
     }
 }

@@ -98,7 +98,7 @@ namespace Aquila
             /**
              * Window size.
              */
-            unsigned int _N;
+            unsigned int N_;
 
             /**
              * Position in window.
