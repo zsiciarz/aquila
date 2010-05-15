@@ -48,6 +48,7 @@ set (Aquila_HEADERS
     src/source/WaveFile.h
     src/source/generator/Generator.h
     src/source/generator/SineGenerator.h
+    src/source/generator/WhiteNoiseGenerator.h
     src/transform/Fft.h
     src/transform/AquilaFft.h
     src/transform/OouraFft.h
@@ -63,6 +64,7 @@ set (Aquila_SOURCES
     src/source/WaveFile.cpp
     src/source/generator/Generator.cpp
     src/source/generator/SineGenerator.cpp
+    src/source/generator/WhiteNoiseGenerator.cpp
     src/transform/AquilaFft.cpp
     src/transform/OouraFft.cpp
     src/transform/Window.cpp
