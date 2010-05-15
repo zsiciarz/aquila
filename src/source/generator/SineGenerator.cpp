@@ -17,7 +17,6 @@
 
 #include "SineGenerator.h"
 #include <cmath>
-#include <iostream>
 
 namespace Aquila
 {
@@ -25,7 +24,6 @@ namespace Aquila
      * Creates the generator object.
      *
      * @param sampleFrequency sample frequency of the signal
-     * @param bufferSize internal buffer length
      */
     SineGenerator::SineGenerator(FrequencyType sampleFrequency):
         Generator(sampleFrequency)
@@ -42,7 +40,7 @@ namespace Aquila
         m_buffer.resize(samplesCount);
         double normalizedFrequency = m_frequency /
                                      static_cast<double>(m_sampleFrequency);
-        for (std::size_t i = 0, size = m_buffer.size(); i < size; ++i)
+        for (std::size_t i = 0; i < samplesCount; ++i)
         {
             m_buffer[i] = m_amplitude *
                           std::sin(2.0 * M_PI * normalizedFrequency * i);
