@@ -5,8 +5,6 @@
 #include <cmath>
 #include <functional>
 
-void plotSpectrum(Aquila::ComplexType spectrum[], size_t SIZE, const char* title);
-
 int main()
 {
     // input signal parameters
@@ -28,7 +26,8 @@ int main()
     Aquila::OouraFft fft(SIZE);
     Aquila::ComplexType spectrum[SIZE];
     fft.fft(x, spectrum);
-    plotSpectrum(spectrum, SIZE, "Signal spectrum before filtration");
+    plt.setTitle("Signal spectrum before filtration");
+    plt.plotSpectrum(spectrum, SIZE);
 
     // generate a low-pass filter spectrum
     Aquila::ComplexType filterSpectrum[SIZE];
@@ -45,13 +44,15 @@ int main()
             filterSpectrum[i] = 0.0;
         }
     }
-    plotSpectrum(filterSpectrum, SIZE, "Filter spectrum");
+    plt.setTitle("Filter spectrum");
+    plt.plotSpectrum(filterSpectrum, SIZE);
 
     // the following line does the multiplication of two spectra
     // (which is complementary to convolution in time domain)
     std::transform(spectrum, spectrum + SIZE, filterSpectrum, spectrum,
                    std::multiplies<Aquila::ComplexType>());
-    plotSpectrum(spectrum, SIZE, "Signal spectrum after filtration");
+    plt.setTitle("Signal spectrum after filtration");
+    plt.plotSpectrum(spectrum, SIZE);
 
     // Inverse FFT moves us back to time domain
     double x1[SIZE];
@@ -60,20 +61,4 @@ int main()
     plt.plot(x1, SIZE);
 
     return 0;
-}
-
-/**
- * This is a shortcut for plotting only the first half of the spectrum.
- */
-void plotSpectrum(Aquila::ComplexType spectrum[], size_t SIZE, const char* title)
-{
-    // prepare the spectrum for plotting (only half of it is important)
-    double* absSpectrum = new double[SIZE/2];
-    for (std::size_t i = 0; i < SIZE/2; ++i)
-    {
-        absSpectrum[i] = std::abs(spectrum[i]);
-    }
-    Aquila::TextPlot plt(title);
-    plt.plot(absSpectrum, SIZE/2);
-    delete [] absSpectrum;
 }

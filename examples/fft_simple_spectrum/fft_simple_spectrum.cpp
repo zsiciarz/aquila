@@ -1,5 +1,4 @@
 #include "aquila/global.h"
-#include "aquila/source/ArrayData.h"
 #include "aquila/transform/OouraFft.h"
 #include "aquila/tools/TextPlot.h"
 #include <cmath>
@@ -25,14 +24,8 @@ int main()
     Aquila::ComplexType spectrum[SIZE];
     fft.fft(x, spectrum);
 
-    // prepare the spectrum for plotting (only half of it is important)
-    double absSpectrum[SIZE/2];
-    for (std::size_t i = 0; i < SIZE/2; ++i)
-    {
-        absSpectrum[i] = std::abs(spectrum[i]);
-    }
     plt.setTitle("Spectrum");
-    plt.plot(absSpectrum, SIZE/2);
+    plt.plotSpectrum(spectrum, SIZE);
 
     return 0;
 }
