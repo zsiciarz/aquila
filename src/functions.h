@@ -86,6 +86,14 @@ namespace Aquila
     {
         return std::rand() % (to - from) + from;
     }
+
+    /**
+     * Returns a pseudorandom double number from 0 to 1.
+     */
+    double randomDouble()
+    {
+        return std::rand() / static_cast<double>(RAND_MAX);
+    }
 }
 
 #endif // FUNCTIONS_H
