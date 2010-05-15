@@ -23,7 +23,7 @@
 namespace Aquila
 {
     /**
-     * Pink noise generator.
+     * Pink noise generator using Voss algorithm.
      */
     class PinkNoiseGenerator : public Generator
     {
@@ -34,9 +34,25 @@ namespace Aquila
 
     private:
         double pinkSample();
+
+        /**
+         * Number of white noise samples to use in Voss algorithm.
+         */
         enum { whiteSamplesNum = 20 };
+
+        /**
+         * An internal buffer for white noise samples.
+         */
         double whiteSamples[whiteSamplesNum];
+
+        /**
+         * A key marking which of the white noise samples should change.
+         */
         int key;
+
+        /**
+         * Maximum key value.
+         */
         int maxKey;
     };
 }
