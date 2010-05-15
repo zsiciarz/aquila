@@ -32,7 +32,7 @@ namespace Aquila
      * @return value in dB
      */
     template<typename Numeric>
-    Numeric dB(Numeric value)
+    inline Numeric dB(Numeric value)
     {
         return 20.0 * std::log10(value);
     }
@@ -43,7 +43,7 @@ namespace Aquila
      * @param value input value (complex number)
      * @return magnitude in dB
      */
-    double dB(ComplexType value)
+    inline double dB(ComplexType value)
     {
         return dB(std::abs(value));
     }
@@ -56,7 +56,7 @@ namespace Aquila
      * @return value in dB, relative to reference value
      */
     template<typename Numeric>
-    Numeric dB(Numeric value, Numeric refValue)
+    inline Numeric dB(Numeric value, Numeric refValue)
     {
         return 20.0 * std::log10(value / refValue);
     }
@@ -70,7 +70,7 @@ namespace Aquila
      * @return bounded value
      */
     template<typename Numeric>
-    Numeric clamp(Numeric min, Numeric value, Numeric max)
+    inline Numeric clamp(Numeric min, Numeric value, Numeric max)
     {
         return std::max(min, std::min(value, max));
     }
@@ -82,7 +82,7 @@ namespace Aquila
      * @param to upper limit
      * @return random number
      */
-    int random(int from, int to)
+    inline int random(int from, int to)
     {
         return std::rand() % (to - from) + from;
     }
@@ -90,7 +90,7 @@ namespace Aquila
     /**
      * Returns a pseudorandom double number from 0 to 1.
      */
-    double randomDouble()
+    inline double randomDouble()
     {
         return std::rand() / static_cast<double>(RAND_MAX);
     }
