@@ -27,6 +27,8 @@ add_subdirectory(window_plot)
 
 add_subdirectory(text_plot)
 
+add_subdirectory(sine_generator)
+
 add_subdirectory(fft_comparison)
 add_subdirectory(fft_simple_spectrum)
 add_subdirectory(fft_filter)
