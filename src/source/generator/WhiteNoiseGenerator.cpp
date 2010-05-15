@@ -40,7 +40,7 @@ namespace Aquila
         m_buffer.resize(samplesCount);
         for (std::size_t i = 0; i < samplesCount; ++i)
         {
-            m_buffer[i] = m_amplitude * randomDouble();
+            m_buffer[i] = m_amplitude * (randomDouble() - 0.5);
         }
     }
 }

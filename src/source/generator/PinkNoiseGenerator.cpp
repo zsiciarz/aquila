@@ -44,7 +44,7 @@ namespace Aquila
         key = 0;
         for (std::size_t i = 0; i < whiteSamplesNum; ++i)
         {
-            whiteSamples[i] = randomDouble();
+            whiteSamples[i] = randomDouble() - 0.5;
         }
 
         for (std::size_t i = 0; i < samplesCount; ++i)
@@ -71,7 +71,7 @@ namespace Aquila
         for (std::size_t i = 0; i < whiteSamplesNum; ++i)
         {
             if (diff & (1 << i))
-                whiteSamples[i] = randomDouble();
+                whiteSamples[i] = randomDouble() - 0.5;
             sum += whiteSamples[i];
         }
 
