@@ -72,7 +72,7 @@ namespace Aquila
          *
          * @param position index of the sample in the frame
          */
-        virtual int sample(std::size_t position) const
+        virtual SampleType sample(std::size_t position) const
         {
             return m_source->sample(m_begin + position);
         }

@@ -49,7 +49,7 @@ namespace Aquila
     /**
      * Sample value type.
      */
-    typedef int SampleType;
+    typedef double SampleType;
 
     /**
      * Sample frequency type.
