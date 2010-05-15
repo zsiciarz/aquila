@@ -50,4 +50,22 @@ namespace Aquila
         }
         m_out.flush();
     }
+
+    /**
+     * A shorthand for plotting only the first half of magnitude spectrum.
+     *
+     * @param spectrum an array of complex numbers
+     * @param length size of the spectrum (total, not half!)
+     */
+    void TextPlot::plotSpectrum(Aquila::ComplexType spectrum[], std::size_t length)
+    {
+        double* absSpectrum = new double[length/2];
+        for (std::size_t i = 0; i < length/2; ++i)
+        {
+            absSpectrum[i] = std::abs(spectrum[i]);
+        }
+        plot(absSpectrum, length/2);
+
+        delete [] absSpectrum;
+    }
 }

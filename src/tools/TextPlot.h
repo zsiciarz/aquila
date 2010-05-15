@@ -18,6 +18,7 @@
 #ifndef TEXTPLOT_H
 #define TEXTPLOT_H
 
+#include "../global.h"
 #include "../source/SignalSource.h"
 #include <algorithm>
 #include <cmath>
@@ -107,6 +108,8 @@ namespace Aquila
             PlotMatrixType plot(length);
             doPlot(plot, data, data + length);
         }
+
+        void plotSpectrum(Aquila::ComplexType spectrum[], std::size_t length);
 
     private:
         /**
