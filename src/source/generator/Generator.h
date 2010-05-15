@@ -32,9 +32,8 @@ namespace Aquila
          * Creates the generator object.
          *
          * @param sampleFrequency sample frequency of the data in array
-         * @param bufferSize the size of an internal sample buffer
          */
-        Generator(FrequencyType sampleFrequency, std::size_t bufferSize);
+        Generator(FrequencyType sampleFrequency);
 
         /**
          * Returns signal sample frequency.
@@ -103,7 +102,12 @@ namespace Aquila
             return *this;
         }
 
-        virtual void generate() = 0;
+        /**
+         * Generates a given number of samples.
+         *
+         * @param samplesCount how many samples to generate
+         */
+        virtual void generate(std::size_t samplesCount) = 0;
 
     protected:
         /**

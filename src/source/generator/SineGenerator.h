@@ -28,9 +28,9 @@ namespace Aquila
     class SineGenerator : public Generator
     {
     public:
-        SineGenerator(FrequencyType sampleFrequency, std::size_t bufferSize);
+        SineGenerator(FrequencyType sampleFrequency);
 
-        virtual void generate();
+        virtual void generate(std::size_t samplesCount);
     };
 }
 

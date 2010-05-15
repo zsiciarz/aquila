@@ -27,17 +27,19 @@ namespace Aquila
      * @param sampleFrequency sample frequency of the signal
      * @param bufferSize internal buffer length
      */
-    SineGenerator::SineGenerator(FrequencyType sampleFrequency,
-                                 std::size_t bufferSize):
-        Generator(sampleFrequency, bufferSize)
+    SineGenerator::SineGenerator(FrequencyType sampleFrequency):
+        Generator(sampleFrequency)
     {
     }
 
     /**
      * Fills the buffer with generated sine samples.
+     *
+     * @param samplesCount how many samples to generate
      */
-    void SineGenerator::generate()
+    void SineGenerator::generate(std::size_t samplesCount)
     {
+        m_buffer.resize(samplesCount);
         double normalizedFrequency = m_frequency /
                                      static_cast<double>(m_sampleFrequency);
         for (std::size_t i = 0, size = m_buffer.size(); i < size; ++i)
