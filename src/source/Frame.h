@@ -79,14 +79,14 @@ namespace Aquila
 
 	private:
         /**
-         * First and last sample of this frame in the data array/vector.
-         */
-        unsigned int m_begin, m_end;
-
-        /**
          * A pointer to constant original source (eg. a WAVE file).
          */
         const SignalSource* m_source;
+
+        /**
+         * First and last sample of this frame in the data array/vector.
+         */
+        unsigned int m_begin, m_end;
 
         /**
          * Swaps the frame with another one - cannot not throw!
