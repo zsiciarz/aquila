@@ -28,8 +28,22 @@ namespace Aquila
      * An ecapsulation of a single frame of the signal.
      *
      * The Frame class wraps a signal frame (short fragment of a signal).
-     * It is a lightweight object which can be copied by value.
-     * Frame samples are accessed by STL-compatible iterators.
+     * Frame itself can be considered as a signal source, being a "window"
+     * over original signal data. It is a lightweight object which can be
+     * copied by value. No data are copied - only the pointer to source
+     * and frame boundaries.
+     *
+     * Frame samples are accessed by STL-compatible iterators, as is the
+     * case with all SignalSource-derived classes. Frame sample number N
+     * is the same as sample number FRAME_BEGIN+N in the original source.
+     *
+     * Example (source size = N, frame size = M, frame starts at 8th sample):
+     *
+     * @verbatim
+     * sample number:          0       8                                       N
+     * original source:        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+     * frame:                          |xxxxxxxxxxxx|
+     * sample number in frame:         0             M              @endverbatim
 	 */
     class AQUILA_EXPORT Frame : public SignalSource
 	{
@@ -61,6 +75,8 @@ namespace Aquila
 
         /**
          * Returns number of bits per sample.
+         *
+         * @return sample size in bits
          */
         virtual unsigned short getBitsPerSample() const
         {
@@ -71,6 +87,7 @@ namespace Aquila
          * Gives access to frame samples, indexed from 0 to length()-1.
          *
          * @param position index of the sample in the frame
+         * @return sample value
          */
         virtual SampleType sample(std::size_t position) const
         {
@@ -89,7 +106,7 @@ namespace Aquila
         unsigned int m_begin, m_end;
 
         /**
-         * Swaps the frame with another one - cannot not throw!
+         * Swaps the frame with another one - cannot throw!
          *
          * @param other reference to swapped frame
          */
