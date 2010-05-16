@@ -26,6 +26,20 @@ namespace Aquila
 {
     /**
      * Wrapper around a C-style array.
+     *
+     * This is a very simple wrapper for a traditional C-style array,
+     * providing a way to use the arrays in Aquila DSP algorithms which
+     * require SignalSource-derived objects. The class is a template,
+     * parametrized by the type of numeric data stored in the array.
+     *
+     * A plain array does not carry any information about sample rate,
+     * so ArrayData's constructor expects sample frequency as its third
+     * argument.
+     *
+     * ArrayData doesn't take ownership of the array, nor does it copy the
+     * data. It also lacks any array bounds checking in the sample()
+     * method for performance reasons. (A future version may conditionally
+     * check the position argument.)
      */
     template <typename Numeric = SampleType>
     class AQUILA_EXPORT ArrayData : public SignalSource
@@ -77,6 +91,8 @@ namespace Aquila
 
         /**
          * Returns sample value at a given position in the array.
+         *
+         * Doesn't check that the position is valid array index.
          *
          * @param position sample position (from 0 to array length - 1)
          * @return sample value
