@@ -28,9 +28,27 @@ namespace Aquila
 {
     /**
      * A lightweight wrapper for a vector of Frames.
+     *
+     * This class is neccessary to perform signal division into frames,
+     * which are then stored in container (currently std::vector). The frame
+     * objects are stored by value as they are very light and cheap to copy.
+     *
+     * The reason this wrapper was created is to create some abstraction for
+     * groups of frames, which can by saved or processed together. For example,
+     * a spectrogram is an array of spectra calculated individually for each
+     * frame. Sometimes the calculation doesn't involve the whole signal,
+     * so a part of it is divided into frames, stored in a FramesCollection
+     * and then processed.
+     *
+     * Individual frame objects can by accessed by iterating over the collection
+     * using begin() and end() methods. These calls simply return iterators
+     * pointing to the underlying container.
      */
     class AQUILA_EXPORT FramesCollection
     {
+        /**
+         * Internal storage type.
+         */
         typedef std::vector<Frame> Container;
 
     public:
