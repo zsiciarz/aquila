@@ -31,7 +31,8 @@ namespace Aquila
      */
     Frame::Frame(const SignalSource& source, unsigned int indexBegin,
             unsigned int indexEnd):
-        m_source(&source), m_begin(indexBegin), m_end(indexEnd)
+        m_source(&source), m_begin(indexBegin),
+        m_end((indexEnd > source.getSamplesCount()) ? source.getSamplesCount() : indexEnd)
     {
     }
 
