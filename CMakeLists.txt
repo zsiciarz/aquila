@@ -59,7 +59,6 @@ set (Aquila_HEADERS
 
 # library sources
 set (Aquila_SOURCES
-    src/source/SignalSource.cpp
     src/source/Frame.cpp
     src/source/FramesCollection.cpp
     src/source/WaveFile.cpp

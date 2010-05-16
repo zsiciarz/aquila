@@ -51,7 +51,17 @@ namespace Aquila
     class AQUILA_EXPORT SignalSource
     {
     public:
-        SignalSource();
+        /**
+         * The constructor does nothing.
+         *
+         * Included for symmetry with the destructor, but a compiler-generated
+         * constructor would suffice.
+         */
+        SignalSource() {}
+
+        /**
+         * The destructor does nothing, but must be defined as virtual.
+         */
         virtual ~SignalSource() {}
 
         /**
@@ -82,7 +92,7 @@ namespace Aquila
         virtual std::size_t getSamplesCount() const = 0;
 
         /**
-         * Returns sample located at the `position` in the signal.
+         * Returns sample located at the "position" in the signal.
          *
          * Needs reimplementing in derived classes.
          *
