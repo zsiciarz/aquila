@@ -32,7 +32,7 @@ namespace Aquila
     /**
      * A utility class to "draw" data plots in the console applications.
      */
-    class TextPlot
+    class AQUILA_EXPORT TextPlot
     {
     public:
         TextPlot(const std::string& title = "Data plot",

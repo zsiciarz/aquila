@@ -25,7 +25,10 @@
 
 namespace Aquila
 {
-    class Generator : public SignalSource
+    /**
+     * The base interface for signal generators.
+     */
+    class AQUILA_EXPORT Generator : public SignalSource
     {
     public:
         /**

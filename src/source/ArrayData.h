@@ -28,7 +28,7 @@ namespace Aquila
      * Wrapper around a C-style array.
      */
     template <typename Numeric = SampleType>
-    class ArrayData : public SignalSource
+    class AQUILA_EXPORT ArrayData : public SignalSource
     {
     public:
         /**

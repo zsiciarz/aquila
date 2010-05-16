@@ -30,7 +30,7 @@ namespace Aquila
     /**
      * A wrapper for the FFT algorithm found in Ooura mathematical packages.
      */
-    class OouraFft : public Fft
+    class AQUILA_EXPORT OouraFft : public Fft
     {
     public:
         OouraFft(std::size_t length);

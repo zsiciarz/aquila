@@ -25,7 +25,7 @@ namespace Aquila
     /**
      * Pink noise generator using Voss algorithm.
      */
-    class PinkNoiseGenerator : public Generator
+    class AQUILA_EXPORT PinkNoiseGenerator : public Generator
     {
     public:
         PinkNoiseGenerator(FrequencyType sampleFrequency);

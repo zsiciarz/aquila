@@ -27,7 +27,7 @@ namespace Aquila
     /**
      * An interface for FFT calculation classes.
      */
-    class Fft : boost::noncopyable
+    class AQUILA_EXPORT Fft : boost::noncopyable
     {
     public:
         /**

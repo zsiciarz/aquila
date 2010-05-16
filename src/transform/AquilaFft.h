@@ -29,7 +29,7 @@ namespace Aquila
      */
     const double LN_2 = 0.69314718055994530941723212145818;
 
-    class AquilaFft : public Fft
+    class AQUILA_EXPORT AquilaFft : public Fft
     {
     public:
         /**

@@ -25,7 +25,7 @@ namespace Aquila
     /**
      * White noise generator.
      */
-    class WhiteNoiseGenerator : public Generator
+    class AQUILA_EXPORT WhiteNoiseGenerator : public Generator
     {
     public:
         WhiteNoiseGenerator(FrequencyType sampleFrequency);
