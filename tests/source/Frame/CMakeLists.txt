@@ -4,6 +4,13 @@
 #
 ################################################################################
 
+# sample frequency
+aquila_test(frame_sample_frequency)
+add_test(frame_sample_frequency_run frame_sample_frequency)
+set_tests_properties(frame_sample_frequency_run
+    PROPERTIES PASS_REGULAR_EXPRESSION "22050")
+
+
 # samples count
 aquila_test(frame_samples_count)
 add_test(frame_samples_count1 frame_samples_count 0 1)
