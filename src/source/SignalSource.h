@@ -26,6 +26,27 @@ namespace Aquila
 {
     /**
      * An abstraction of any signal source.
+     *
+     * This is the base class for all signal sources cooperating with the
+     * library, be it an array, a text file or a WAVE binary file. Most of
+     * algorithms defined in the library expect a pointer or a reference
+     * to SignalSource. As it is an abstract virtual base class, it cannot
+     * be instantiated on its own. The library ships with a few derived
+     * classes for a quick start, including ArrayData, WaveFile etc.
+     *
+     * Signal sources support the concept of iteration. Use
+     * SignalSource::begin() and SignalSource::end() to obtain iterator objects,
+     * which allow per-sample data access. The iterators work well with
+     * C++ standard library algorithms, so feel free to use them instead of
+     * manually looping and calling SignalSource::sample().
+     *
+     * To create your own type of signal source, inherit this class and define
+     * concrete implementations for the following methods:
+     *
+     * - getSampleFrequency()
+     * - getBitsPerSample()
+     * - getSamplesCount()
+     * - sample()
      */
     class AQUILA_EXPORT SignalSource
     {
@@ -36,12 +57,16 @@ namespace Aquila
         /**
          * Returns sample frequency of the signal.
          *
+         * Needs reimplementing in derived classes.
+         *
          * @return sample frequency in Hz
          */
         virtual FrequencyType getSampleFrequency() const = 0;
 
         /**
          * Returns number of bits per signal sample.
+         *
+         * Needs reimplementing in derived classes.
          *
          * @return sample size in bits
          */
@@ -50,12 +75,16 @@ namespace Aquila
         /**
          * Returns number of samples in the source.
          *
+         * Needs reimplementing in derived classes.
+         *
          * @return samples count
          */
         virtual std::size_t getSamplesCount() const = 0;
 
         /**
          * Returns sample located at the `position` in the signal.
+         *
+         * Needs reimplementing in derived classes.
          *
          * @param position sample index in the signal
          * @return sample value
@@ -65,7 +94,8 @@ namespace Aquila
         /**
          * Returns number of samples in the source.
          *
-         * This method is an alias to getSamplesCount().
+         * This method is an alias to getSamplesCount() and it should not be
+         * implemented in derived classes.
          *
          * @return samples count
          */
@@ -78,6 +108,8 @@ namespace Aquila
 
         /**
          * Returns an iterator pointing to the first sample in the source.
+         *
+         * @return iterator
          */
         iterator begin() const
         {
@@ -86,6 +118,8 @@ namespace Aquila
 
         /**
          * Returns an iterator pointing to the "one past last" sample.
+         *
+         * @return iterator
          */
         iterator end() const
         {
