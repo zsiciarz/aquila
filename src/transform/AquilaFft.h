@@ -29,6 +29,9 @@ namespace Aquila
      */
     const double LN_2 = 0.69314718055994530941723212145818;
 
+    /**
+     * A custom implementation of FFT radix-2 algorithm.
+     */
     class AQUILA_EXPORT AquilaFft : public Fft
     {
     public:

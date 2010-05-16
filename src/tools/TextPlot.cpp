@@ -23,6 +23,7 @@ namespace Aquila
      * Creates the plot object.
      *
      * @param title plot title (optional, default is "Data plot")
+     * @param out where to output the plot data (default is std::cout)
      */
     TextPlot::TextPlot(const std::string &title, std::ostream &out):
         m_title(title), m_out(out), m_width(64), m_height(16)

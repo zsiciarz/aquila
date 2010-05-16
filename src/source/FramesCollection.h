@@ -34,7 +34,14 @@ namespace Aquila
         typedef std::vector<Frame> Container;
 
     public:
+        /**
+         * An iterator for the collection.
+         */
         typedef Container::iterator iterator;
+
+        /**
+         * A const iterator for the collection.
+         */
         typedef Container::const_iterator const_iterator;
 
         FramesCollection();
@@ -68,21 +75,41 @@ namespace Aquila
             return m_samplesPerFrame;
         }
 
+        /**
+         * Returns an iterator pointing to the first frame.
+         *
+         * @return iterator
+         */
         iterator begin()
         {
             return m_frames.begin();
         }
 
+        /**
+         * Returns a const iterator pointing to the first frame.
+         *
+         * @return iterator
+         */
         const_iterator begin() const
         {
             return m_frames.begin();
         }
 
+        /**
+         * Returns an iterator pointing one-past-last frame.
+         *
+         * @return iterator
+         */
         iterator end()
         {
             return m_frames.end();
         }
 
+        /**
+         * Returns a const iterator pointing one-past-last frame.
+         *
+         * @return iterator
+         */
         const_iterator end() const
         {
             return m_frames.end();

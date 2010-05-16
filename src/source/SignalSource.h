@@ -24,14 +24,42 @@
 
 namespace Aquila
 {
+    /**
+     * An abstraction of any signal source.
+     */
     class AQUILA_EXPORT SignalSource
     {
     public:
         SignalSource();
         virtual ~SignalSource() {}
+
+        /**
+         * Returns sample frequency of the signal.
+         *
+         * @return sample frequency in Hz
+         */
         virtual FrequencyType getSampleFrequency() const = 0;
+
+        /**
+         * Returns number of bits per signal sample.
+         *
+         * @return sample size in bits
+         */
         virtual unsigned short getBitsPerSample() const = 0;
+
+        /**
+         * Returns number of samples in the source.
+         *
+         * @return samples count
+         */
         virtual std::size_t getSamplesCount() const = 0;
+
+        /**
+         * Returns sample located at the `position` in the signal.
+         *
+         * @param position sample index in the signal
+         * @return sample value
+         */
         virtual SampleType sample(std::size_t position) const = 0;
 
         /**
@@ -78,7 +106,7 @@ namespace Aquila
              * Creates an iterator associated with a given source.
              *
              * @param source pointer to a source on which the iterator will work
-             * @param index index of the sample in the source
+             * @param i index of the sample in the source
              */
             explicit iterator(const SignalSource* source, unsigned int i = 0):
                 m_source(source), idx(i)

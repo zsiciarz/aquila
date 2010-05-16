@@ -24,6 +24,11 @@
 
 namespace Aquila
 {
+    /**
+     * Creates a wave file object and immediately loads data from file.
+     *
+     * @param filename full path to .wav file
+     */
     WaveFile::WaveFile(const std::string& filename):
         m_frameLength(0), m_overlap(0.0), m_sourceChannel(LEFT)
     {
