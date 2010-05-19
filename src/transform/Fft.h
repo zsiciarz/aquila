@@ -26,6 +26,19 @@ namespace Aquila
 {
     /**
      * An interface for FFT calculation classes.
+     *
+     * The abstract interface for FFT algorithm allows switching between
+     * implementations at runtime, or selecting a most effective implementation
+     * for the current platform.
+     *
+     * The FFT objects are not intended to be copied.
+     *
+     * Some of FFT implementations prepare a "plan" or create a coefficient
+     * cache only once, and then run the transform on multiple sets of data.
+     * Aquila expresses this approach by defining a meaningful constructor
+     * for the base FFT interface. A derived class should calculate the
+     * plan once - in the constructor (based on FFT length). Later calls
+     * to fft() / ifft() should reuse the already created plan/cache.
      */
     class AQUILA_EXPORT Fft : boost::noncopyable
     {
@@ -41,13 +54,16 @@ namespace Aquila
 
         /**
          * Destroys the transform object - does nothing.
+         *
+         * As the derived classes may perform some deinitialization in
+         * their destructors, it must be declared as virtual.
          */
         virtual ~Fft()
         {
         }
 
         /**
-         * Applies the transformation to the signal.
+         * Applies the forward FFT transform to the signal.
          *
          * @param x input signal
          * @param spectrum output spectrum
@@ -55,7 +71,7 @@ namespace Aquila
         virtual void fft(double x[], ComplexType spectrum[]) = 0;
 
         /**
-         * Applies the inverse transform to the spectrum.
+         * Applies the inverse FFT transform to the spectrum.
          *
          * @param spectrum input spectrum
          * @param x output signal
