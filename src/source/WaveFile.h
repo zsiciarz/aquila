@@ -37,8 +37,27 @@ namespace Aquila
     /**
      * Wave file data access.
      *
-     * WaveFile class enables .wav file header and data access, either
-     * per sample or per frame.
+     * Binary files in WAVE format (.wav extension) can serve as data input for
+     * Aquila. With this class, you can read the metadata and the actual
+     * waveform data from the file. The supported formats are:
+     *
+     * - 8-bit mono
+     * - 8-bit stereo*
+     * - 16-bit mono
+     * - 16-bit stereo*
+     *
+     * *For stereo data, both channels are read into memory, but only one
+     * of them can be processed at a time. By default this is the left channel,
+     * but you can switch to the other one by calling setSourceChannel().
+     *
+     * There are no requirements for sample frequency of the data.
+     *
+     * The actual data can be accessed per sample, or per frame. Frames are
+     * stored in a FramesCollection object, a reference to which can be
+     * obtained by calling WaveFile::frames(). This method takes care of
+     * dividing the signal into frames of correct length and overlap and
+     * therefore is the most convenient way to handle data in a per-frame
+     * approach.
      */
     class AQUILA_EXPORT WaveFile : public SignalSource
     {
