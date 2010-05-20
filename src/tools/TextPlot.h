@@ -31,6 +31,12 @@ namespace Aquila
 {
     /**
      * A utility class to "draw" data plots in the console applications.
+     *
+     * TextPlot is used for quick-and-dirty data plotting in console programs.
+     * It also serves as a way to take a peek into signal data. The class is
+     * very simple and - intentionally - lacks a lot of configuration options.
+     * A more serious tool will be neccessary to create pretty images.
+     * For example, a frontend to gnuplot is taken under consideration.
      */
     class AQUILA_EXPORT TextPlot
     {
