@@ -36,6 +36,16 @@ namespace Aquila
 	/**
      * Class defining different window types as static methods.
      *
+     * In signal processing, window functions are used to "cut out" a part
+     * of the signal. The simplest window is a rectangular one - this happens
+     * when you take a part of the signal literally as it is, with no
+     * modifications. This is fast, but it makes the later signal analysis less
+     * precise in frequency resolution. Several other windows exist, each of
+     * which has its own advantages and disadvantages in signal processing.
+     *
+     * If you're not satisfied with rectangular window, and you don't know which
+     * of the others to choose, give Hamming a try.
+     *
      * Windows are cached with window type combined with its length
      * as a key. It is an efficient way to reduce calls to math functions.
 	 */
