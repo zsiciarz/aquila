@@ -49,6 +49,7 @@ set (Aquila_HEADERS
     src/source/generator/Generator.h
     src/source/generator/SineGenerator.h
     src/source/generator/SquareGenerator.h
+    src/source/generator/TriangleGenerator.h
     src/source/generator/PinkNoiseGenerator.h
     src/source/generator/WhiteNoiseGenerator.h
     src/transform/Fft.h
@@ -66,6 +67,7 @@ set (Aquila_SOURCES
     src/source/generator/Generator.cpp
     src/source/generator/SineGenerator.cpp
     src/source/generator/SquareGenerator.cpp
+    src/source/generator/TriangleGenerator.cpp
     src/source/generator/PinkNoiseGenerator.cpp
     src/source/generator/WhiteNoiseGenerator.cpp
     src/transform/AquilaFft.cpp
