@@ -80,6 +80,22 @@ namespace Aquila
         }
 
         /**
+         * Returns sample data (read-only!) as a const C-style array.
+         *
+         * Because vector guarantees to be contiguous in memory, we can
+         * return the address of the first element in the vector.
+         * It is valid only before next operation which modifies the vector,
+         * but as we use it only to copy that memory to another buffer,
+         * we can do that safely.
+         *
+         * @return C-style array containing sample data
+         */
+        virtual const SampleType* toArray() const
+        {
+            return &(m_buffer)[0];
+        }
+
+        /**
          * Sets frequency of the generated signal.
          *
          * @param frequency signal frequency

@@ -118,6 +118,19 @@ namespace Aquila
             return m_data[position];
         }
 
+        /**
+         * Returns sample data (read-only!) as a const C-style array.
+         *
+         * This is the simplest implementation as it just exposes the data
+         * member.
+         *
+         * @return C-style array containing sample data
+         */
+        virtual const SampleType* toArray() const
+        {
+            return m_data;
+        }
+
     private:
         /**
          * Pointer to the data array - not owned by the object!

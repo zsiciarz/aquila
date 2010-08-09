@@ -102,6 +102,15 @@ namespace Aquila
         virtual SampleType sample(std::size_t position) const = 0;
 
         /**
+         * Returns sample data (read-only!) as a const C-style array.
+         *
+         * Needs reimplementing in derived classes.
+         *
+         * @return C-style array containing sample data
+         */
+        virtual const SampleType* toArray() const = 0;
+
+        /**
          * Returns number of samples in the source.
          *
          * This method is an alias to getSamplesCount() and it should not be

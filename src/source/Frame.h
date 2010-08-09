@@ -21,6 +21,7 @@
 #include "../global.h"
 #include "SignalSource.h"
 #include <algorithm>
+#include <cstddef>
 
 namespace Aquila
 {
@@ -92,6 +93,19 @@ namespace Aquila
         virtual SampleType sample(std::size_t position) const
         {
             return m_source->sample(m_begin + position);
+        }
+
+        /**
+         * Returns sample data (read-only!) as a const C-style array.
+         *
+         * Calculates, using C++ pointer arithmetics, where does the frame
+         * start in the original source, after its convertion to an array.
+         *
+         * @return C-style array containing sample data
+         */
+        virtual const SampleType* toArray() const
+        {
+            return m_source->toArray() + static_cast<std::ptrdiff_t>(m_begin);
         }
 
 	private:
