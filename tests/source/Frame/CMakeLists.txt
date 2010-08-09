@@ -15,7 +15,7 @@ set_tests_properties(frame_sample_frequency_run
 aquila_test(frame_bits_per_sample)
 add_test(frame_bits_per_sample_run frame_bits_per_sample)
 set_tests_properties(frame_bits_per_sample_run
-    PROPERTIES PASS_REGULAR_EXPRESSION "8")
+    PROPERTIES PASS_REGULAR_EXPRESSION "1")
 
 
 # samples count

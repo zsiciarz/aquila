@@ -20,6 +20,7 @@
 
 #include "../global.h"
 #include "SignalSource.h"
+#include <algorithm>
 #include <cstddef>
 
 namespace Aquila
@@ -36,9 +37,14 @@ namespace Aquila
      * so ArrayData's constructor expects sample frequency as its third
      * argument.
      *
-     * ArrayData doesn't take ownership of the array, nor does it copy the
-     * data. It also lacks any array bounds checking in the sample()
-     * method for performance reasons. (A future version may conditionally
+     * ArrayData doesn't take ownership of the original array. However,
+     * if the data is of some different type than SampleType, it is copied
+     * and converted to SampleType, and that copy is owned by object.
+     * If the data is an array of SampleType values, no copying occurs
+     * and the data are immediately accessible.
+     *
+     * ArrayData also lacks any array bounds checking in the sample()
+     * method - for performance reasons. (A future version may conditionally
      * check the position argument.)
      */
     template <typename Numeric = SampleType>
@@ -54,9 +60,19 @@ namespace Aquila
          */
         ArrayData(Numeric* data, std::size_t dataLength,
                   FrequencyType sampleFrequency):
-            m_data(data), m_dataLength(dataLength),
+            m_data(0), m_dataLength(dataLength), m_owns(false),
             m_sampleFrequency(sampleFrequency)
         {
+            convertArray(data);
+        }
+
+        /**
+         * Releases the memory if the object owns its data.
+         */
+        ~ArrayData()
+        {
+            if (m_owns)
+                delete [] m_data;
         }
 
         /**
@@ -76,7 +92,7 @@ namespace Aquila
          */
         virtual unsigned short getBitsPerSample() const
         {
-            return 8 * sizeof(Numeric);
+            return 8 * sizeof(SampleType);
         }
 
         /**
@@ -99,14 +115,14 @@ namespace Aquila
          */
         virtual SampleType sample(std::size_t position) const
         {
-            return static_cast<SampleType>(m_data[position]);
+            return m_data[position];
         }
 
     private:
         /**
          * Pointer to the data array - not owned by the object!
          */
-        Numeric* m_data;
+        SampleType* m_data;
 
         /**
          * Array size.
@@ -114,10 +130,48 @@ namespace Aquila
         std::size_t m_dataLength;
 
         /**
+         * Whether the object owns its data table.
+         */
+        bool m_owns;
+
+        /**
          * Sample frequency of the data.
          */
         FrequencyType m_sampleFrequency;
+
+        void convertArray(Numeric* data);
     };
+
+    /**
+     * Converts a general numeric array to SampleType array.
+     *
+     * Converted data are owned by the object and are freed in the destructor.
+     *
+     * @param data array to convert
+     */
+    template <typename Numeric>
+    void ArrayData<Numeric>::convertArray(Numeric* data)
+    {
+        m_data = new SampleType[m_dataLength];
+        m_owns = true;
+        std::copy(data, data + m_dataLength, m_data);
+    }
+
+    /**
+     * "Converts" a SampleType array to SampleType array.
+     *
+     * This specialization exists for faster handling of SampleType arrays of
+     * data. It merely copies the pointer and does not make the ArrayData
+     * object an owner of the data.
+     *
+     * @param data array to "convert"
+     */
+    template <>
+    void ArrayData<SampleType>::convertArray(SampleType* data)
+    {
+        m_owns = false;
+        m_data = data;
+    }
 }
 
 #endif // ARRAYDATA_H

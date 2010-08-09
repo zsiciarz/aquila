@@ -11,10 +11,7 @@ int main(int argc, char *argv[])
     Aquila::ArrayData<boost::int8_t> d(a, SIZE, 22050);
 
     Aquila::Frame frame(d, 0, 1);
-    std::cout << frame.getBitsPerSample();
+    std::cout << (frame.getBitsPerSample() == 8 * sizeof(Aquila::SampleType));
 
     return 0;
 }
-
-
-

@@ -18,10 +18,10 @@ int main(int argc, char *argv[])
     boost::int64_t a3[SIZE] = {0};
     Aquila::ArrayData<boost::int64_t> d3(a3, SIZE, 22050);
 
-    std::cout << d0.getBitsPerSample() << " "
-              << d1.getBitsPerSample() << " "
-              << d2.getBitsPerSample() << " "
-              << d3.getBitsPerSample();
+    std::cout << (d0.getBitsPerSample() == 8 * sizeof(Aquila::SampleType)) << " "
+              << (d1.getBitsPerSample() == 8 * sizeof(Aquila::SampleType)) << " "
+              << (d2.getBitsPerSample() == 8 * sizeof(Aquila::SampleType)) << " "
+              << (d3.getBitsPerSample() == 8 * sizeof(Aquila::SampleType));
     return 0;
 }
 
