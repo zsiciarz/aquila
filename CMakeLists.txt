@@ -55,6 +55,7 @@ set (Aquila_HEADERS
     src/transform/Fft.h
     src/transform/AquilaFft.h
     src/transform/OouraFft.h
+    src/transform/Spectrogram.h
     src/transform/Window.h
     src/tools/TextPlot.h
 )
@@ -72,6 +73,7 @@ set (Aquila_SOURCES
     src/source/generator/WhiteNoiseGenerator.cpp
     src/transform/AquilaFft.cpp
     src/transform/OouraFft.cpp
+    src/transform/Spectrogram.cpp
     src/transform/Window.cpp
     src/tools/TextPlot.cpp
 )
