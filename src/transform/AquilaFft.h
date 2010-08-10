@@ -55,7 +55,7 @@ namespace Aquila
             clearFftWiCache();
         }
 
-        virtual void fft(double x[], ComplexType spectrum[]);
+        virtual void fft(const SampleType x[], ComplexType spectrum[]);
         virtual void ifft(ComplexType spectrum[], double x[]);
 
 

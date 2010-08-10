@@ -68,7 +68,7 @@ namespace Aquila
          * @param x input signal
          * @param spectrum output spectrum
          */
-        virtual void fft(double x[], ComplexType spectrum[]) = 0;
+        virtual void fft(const SampleType x[], ComplexType spectrum[]) = 0;
 
         /**
          * Applies the inverse FFT transform to the spectrum.

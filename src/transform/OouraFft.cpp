@@ -53,7 +53,7 @@ namespace Aquila
      * @param x input signal
      * @param spectrum output spectrum
      */
-    void OouraFft::fft(double x[], ComplexType spectrum[])
+    void OouraFft::fft(const SampleType x[], ComplexType spectrum[])
     {
         // We assume here that a complex<double> has the same
         // representation in memory as two consecutive doubles

@@ -32,7 +32,7 @@ namespace Aquila
      * @param x input signal
      * @param spectrum output spectrum
      */
-    void AquilaFft::fft(double x[], ComplexType spectrum[])
+    void AquilaFft::fft(const SampleType x[], ComplexType spectrum[])
     {
         // bit-reversing the samples - a requirement of radix-2
         // instead of reversing in place, put the samples to result array
