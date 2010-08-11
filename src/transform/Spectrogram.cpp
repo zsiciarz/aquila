@@ -18,6 +18,7 @@
 #include "Spectrogram.h"
 #include "OouraFft.h"
 #include "../source/Frame.h"
+#include <cstring> // for memset
 
 namespace Aquila
 {
@@ -28,14 +29,17 @@ namespace Aquila
         m_data(new SpectrogramDataType(m_frameCount))
     {
         std::size_t i = 0;
+
         ComplexType* spectrumArray = new ComplexType[m_spectrumSize];
         for (FramesCollection::iterator iFrame = frames.begin(); iFrame != frames.end(); ++iFrame, ++i)
         {
             // a reference to ease typing
             SpectrumType& frameSpectrum = (*m_data)[i];
+            std::memset(spectrumArray, 0, m_spectrumSize * sizeof(ComplexType));
             m_fft->fft(iFrame->toArray(), spectrumArray);
             frameSpectrum.assign(spectrumArray, spectrumArray + m_spectrumSize);
         }
         delete [] spectrumArray;
+
     }
 }
