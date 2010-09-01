@@ -4,6 +4,7 @@ project(Aquila CXX)
 set(Aquila_VERSION_MAJOR 3)
 set(Aquila_VERSION_MINOR 0)
 set(Aquila_VERSION_PATCH 0)
+set(Aquila_VERSION_SUFFIX "-dev")
 
 
 ################################################################################
