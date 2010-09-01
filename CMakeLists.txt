@@ -37,7 +37,7 @@ add_subdirectory(lib)
 ################################################################################
 
 # library headers
-set (Aquila_HEADERS
+set(Aquila_HEADERS
     src/global.h
     src/functions.h
     src/Exceptions.h
@@ -61,7 +61,7 @@ set (Aquila_HEADERS
 )
 
 # library sources
-set (Aquila_SOURCES
+set(Aquila_SOURCES
     src/source/Frame.cpp
     src/source/FramesCollection.cpp
     src/source/WaveFile.cpp
