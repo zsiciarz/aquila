@@ -16,7 +16,7 @@
  */
 
 #include "Spectrogram.h"
-#include "OouraFft.h"
+#include "FftFactory.h"
 #include "../source/Frame.h"
 #include <cstring> // for memset
 
@@ -25,7 +25,9 @@ namespace Aquila
     Spectrogram::Spectrogram(FramesCollection& frames):
         m_frameCount(frames.count()),
         m_spectrumSize(frames.getSamplesPerFrame()),
-        m_fft(new OouraFft(m_spectrumSize)),
+        // the following line converts an auto_ptr<Fft> returned by getFft
+        // to a shared_ptr<Fft> stored in m_fft class member
+        m_fft(FftFactory::getFft(m_spectrumSize).release()),
         m_data(new SpectrogramDataType(m_frameCount))
     {
         std::size_t i = 0;
@@ -39,7 +41,7 @@ namespace Aquila
             m_fft->fft(iFrame->toArray(), spectrumArray);
             frameSpectrum.assign(spectrumArray, spectrumArray + m_spectrumSize);
         }
-        delete [] spectrumArray;
 
+        delete [] spectrumArray;
     }
 }

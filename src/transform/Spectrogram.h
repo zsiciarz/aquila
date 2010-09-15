@@ -87,9 +87,9 @@ namespace Aquila
         std::size_t m_spectrumSize;
 
         /**
-         * A pointer to FFT algorithm class.
+         * A shared pointer to FFT algorithm class.
          */
-        Fft* m_fft;
+        boost::shared_ptr<Fft> m_fft;
 
         /**
          * A shared pointer to spectrogram data.
