@@ -1,7 +1,8 @@
 #include "aquila/global.h"
-#include "aquila/transform/OouraFft.h"
+#include "aquila/transform/FftFactory.h"
 #include "aquila/tools/TextPlot.h"
 #include <cmath>
+#include <memory>
 
 int main()
 {
@@ -20,9 +21,9 @@ int main()
     plt.plot(x, SIZE);
 
     // calculate the FFT
-    Aquila::OouraFft fft(SIZE);
+    std::auto_ptr<Aquila::Fft> fft = Aquila::FftFactory::getFft(SIZE);
     Aquila::ComplexType spectrum[SIZE];
-    fft.fft(x, spectrum);
+    fft->fft(x, spectrum);
 
     plt.setTitle("Spectrum");
     plt.plotSpectrum(spectrum, SIZE);

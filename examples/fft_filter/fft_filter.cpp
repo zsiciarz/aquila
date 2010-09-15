@@ -1,9 +1,10 @@
 #include "aquila/global.h"
-#include "aquila/transform/OouraFft.h"
+#include "aquila/transform/FftFactory.h"
 #include "aquila/tools/TextPlot.h"
 #include <algorithm>
 #include <cmath>
 #include <functional>
+#include <memory>
 
 int main()
 {
@@ -23,9 +24,9 @@ int main()
     plt.plot(x, SIZE);
 
     // calculate the FFT
-    Aquila::OouraFft fft(SIZE);
+    std::auto_ptr<Aquila::Fft> fft = Aquila::FftFactory::getFft(SIZE);
     Aquila::ComplexType spectrum[SIZE];
-    fft.fft(x, spectrum);
+    fft->fft(x, spectrum);
     plt.setTitle("Signal spectrum before filtration");
     plt.plotSpectrum(spectrum, SIZE);
 
@@ -56,7 +57,7 @@ int main()
 
     // Inverse FFT moves us back to time domain
     double x1[SIZE];
-    fft.ifft(spectrum, x1);
+    fft->ifft(spectrum, x1);
     plt.setTitle("Signal waveform after filtration");
     plt.plot(x1, SIZE);
 
