@@ -71,6 +71,7 @@ namespace Aquila
         ~WaveFile();
 
         void load(const std::string& file);
+        static void save(const SignalSource& source, const std::string& file);
 
         /**
          * Returns the filename.
