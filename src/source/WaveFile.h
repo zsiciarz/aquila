@@ -361,6 +361,8 @@ namespace Aquila
         void convert8Stereo(short* data, unsigned int channelSize);
         void convert8Mono(short* data, unsigned int channelSize);
         void splitBytes(short twoBytes, unsigned char& lb, unsigned char& hb);
+        static void save16Mono(const SignalSource& source, short* data, unsigned int waveSize);
+        static void save8Mono(const SignalSource& source, short* data, unsigned int waveSize);
         void divideFrames();
     };
 }
