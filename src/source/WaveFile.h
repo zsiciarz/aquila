@@ -35,6 +35,26 @@ namespace Aquila
     enum StereoChannel { LEFT, RIGHT };
 
     /**
+     * .wav file header structure.
+     */
+    struct WaveHeader
+    {
+        char   RIFF[4];
+        boost::uint32_t DataLength;
+        char   WAVE[4];
+        char   fmt_[4];
+        boost::uint32_t SubBlockLength;
+        boost::uint16_t formatTag;
+        boost::uint16_t Channels;
+        boost::uint32_t SampFreq;
+        boost::uint32_t BytesPerSec;
+        boost::uint16_t BytesPerSamp;
+        boost::uint16_t BitsPerSamp;
+        char   data[4];
+        boost::uint32_t WaveSize;
+    };
+
+    /**
      * Wave file data access.
      *
      * Binary files in WAVE format (.wav extension) can serve as data input for
@@ -300,26 +320,6 @@ namespace Aquila
 
     private:
         /**
-         * .wav file header structure.
-         */
-        struct WaveHeader
-        {
-            char   RIFF[4];
-            boost::uint32_t DataLength;
-            char   WAVE[4];
-            char   fmt_[4];
-            boost::uint32_t SubBlockLength;
-            boost::uint16_t formatTag;
-            boost::uint16_t Channels;
-            boost::uint32_t SampFreq;
-            boost::uint32_t BytesPerSec;
-            boost::uint16_t BytesPerSamp;
-            boost::uint16_t BitsPerSamp;
-            char   data[4];
-            boost::uint32_t WaveSize;
-        };
-
-        /**
          * Full path of the .wav file.
          */
         std::string filename;
@@ -361,8 +361,6 @@ namespace Aquila
         void convert8Stereo(short* data, unsigned int channelSize);
         void convert8Mono(short* data, unsigned int channelSize);
         void splitBytes(short twoBytes, unsigned char& lb, unsigned char& hb);
-        static void save16Mono(const SignalSource& source, short* data, unsigned int waveSize);
-        static void save8Mono(const SignalSource& source, short* data, unsigned int waveSize);
         void divideFrames();
     };
 }

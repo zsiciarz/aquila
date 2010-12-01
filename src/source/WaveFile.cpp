@@ -16,6 +16,7 @@
  */
 
 #include "WaveFile.h"
+#include "WaveFileHandler.h"
 #include "../Exceptions.h"
 #include <cmath>
 #include <cstring>
@@ -113,89 +114,8 @@ namespace Aquila
      */
     void WaveFile::save(const SignalSource& source, const std::string& filename)
     {
-        // start with preparing a .wav file header
-        boost::uint32_t frequency = static_cast<boost::uint32_t>(
-            source.getSampleFrequency());
-        // saving only mono files at the moment
-        boost::uint16_t channels = 1;
-        boost::uint16_t bitsPerSample = source.getBitsPerSample();
-        // higher dynamic sources will be converted down to 16 bits per sample
-        if (bitsPerSample > 16)
-        {
-            bitsPerSample = 16;
-        }
-        //boost::uint16_t bitsPerSample = source.getBitsPerSample();
-        boost::uint32_t bytesPerSec = frequency * channels * bitsPerSample / 8;
-        boost::uint32_t waveSize = source.getSamplesCount() * channels * bitsPerSample / 8;
-
-        WaveHeader header;
-        strncpy(header.RIFF, "RIFF", 4);
-        // DataLength is the file size excluding first two header fields -
-        // - RIFF and DataLength itself, which together take 8 bytes to store
-        header.DataLength = waveSize + sizeof(WaveHeader) - 8;
-        strncpy(header.WAVE, "WAVE", 4);
-        strncpy(header.fmt_, "fmt ", 4);
-        header.SubBlockLength = 16;
-        header.formatTag = 1;
-        header.Channels = channels;
-        header.SampFreq = frequency;
-        header.BytesPerSec = bytesPerSec;
-        header.BytesPerSamp = header.Channels * bitsPerSample / 8;
-        header.BitsPerSamp = bitsPerSample;
-        strncpy(header.data, "data", 4);
-        header.WaveSize = waveSize;
-
-        std::ofstream fs;
-        fs.open(filename.c_str(), std::ios::out | std::ios::binary);
-        fs.write((const char*)(&header), sizeof(WaveHeader));
-
-        short* data = new short[waveSize/2];
-        if (16 == bitsPerSample)
-        {
-            save16Mono(source, data, waveSize/2);
-        }
-        else
-        {
-            save8Mono(source, data, waveSize/2);
-        }
-        fs.write((const char*)data, waveSize);
-
-        delete [] data;
-        fs.close();
-    }
-
-    /**
-     * Saves the source data to an array of 16-bit values.
-     *
-     * @param source original signal source
-     * @param data the data buffer to be written
-     * @param dataSize size of the buffer
-     */
-    void WaveFile::save16Mono(const SignalSource& source, short* data, unsigned int dataSize)
-    {
-        for (unsigned int i = 0; i < dataSize; ++i)
-        {
-            short sample = static_cast<short>(source.sample(i));
-            data[i] = sample;
-        }
-    }
-
-    /**
-     * Saves the source data to an array of 8-bit values encoded as shorts.
-     *
-     * @param source original signal source
-     * @param data the data buffer to be written
-     * @param dataSize size of the buffer
-     */
-    void WaveFile::save8Mono(const SignalSource& source, short* data, unsigned int dataSize)
-    {
-        for (unsigned int i = 0; i < dataSize; ++i)
-        {
-            unsigned char sample1 = static_cast<unsigned char>(source.sample(2 * i) + 128);
-            unsigned char sample2 = static_cast<unsigned char>(source.sample(2 * i + 1) + 128);
-            short hb = sample1, lb = sample2;
-            data[i] = ((hb << 8) & 0xFF00) | (lb & 0x00FF);
-        }
+        WaveFileHandler handler;
+        handler.save(source, filename);
     }
 
     /**

@@ -47,6 +47,7 @@ set(Aquila_HEADERS
     src/source/FramesCollection.h
     src/source/ArrayData.h
     src/source/WaveFile.h
+    src/source/WaveFileHandler.h
     src/source/generator/Generator.h
     src/source/generator/SineGenerator.h
     src/source/generator/SquareGenerator.h
@@ -67,6 +68,7 @@ set(Aquila_SOURCES
     src/source/Frame.cpp
     src/source/FramesCollection.cpp
     src/source/WaveFile.cpp
+    src/source/WaveFileHandler.cpp
     src/source/generator/Generator.cpp
     src/source/generator/SineGenerator.cpp
     src/source/generator/SquareGenerator.cpp
