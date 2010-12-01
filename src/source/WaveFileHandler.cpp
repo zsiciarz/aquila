@@ -22,22 +22,61 @@
 
 namespace Aquila
 {
-    WaveFileHandler::WaveFileHandler()
+    WaveFileHandler::WaveFileHandler(const std::string& filename):
+        m_filename(filename)
     {
+    }
+
+    void WaveFileHandler::readHeaderAndChannels(WaveHeader &header,
+        WaveFile::ChannelType& leftChannel, WaveFile::ChannelType& rightChannel)
+    {
+        // first we read header from the stream
+        // then as we know now the data size, we create a temporary
+        // buffer and read raw data into that buffer
+        std::fstream fs;
+        fs.open(m_filename.c_str(), std::ios::in | std::ios::binary);
+        fs.read((char*)(&header), sizeof(WaveHeader));
+        short* data = new short[header.WaveSize/2];
+        fs.read((char*)data, header.WaveSize);
+        fs.close();
+
+        // initialize data channels (using right channel only in stereo mode)
+        unsigned int channelSize = header.WaveSize/header.BytesPerSamp;
+        leftChannel.resize(channelSize);
+        if (2 == header.Channels)
+            rightChannel.resize(channelSize);
+
+        // most important conversion happens right here
+        if (16 == header.BitsPerSamp)
+        {
+            if (2 == header.Channels)
+                decode16bitStereo(leftChannel, rightChannel, data, channelSize);
+            else
+                decode16bit(leftChannel, data, channelSize);
+        }
+        else
+        {
+            if (2 == header.Channels)
+                decode8bitStereo(leftChannel, rightChannel, data, channelSize);
+            else
+                decode8bit(leftChannel, data, channelSize);
+        }
+
+        // clear the buffer
+        delete [] data;
     }
 
     /**
      * Saves the given signal source as a .wav file.
      *
      * @param source source of the data to save
-     * @param filename destination file
      */
-    void WaveFileHandler::save(const SignalSource& source, const std::string& filename)
+    void WaveFileHandler::save(const SignalSource& source)
     {
         WaveHeader header;
         createHeader(source, header);
         std::ofstream fs;
-        fs.open(filename.c_str(), std::ios::out | std::ios::binary);
+        fs.open(m_filename.c_str(), std::ios::out | std::ios::binary);
         fs.write((const char*)(&header), sizeof(WaveHeader));
 
         std::size_t waveSize = header.WaveSize;
@@ -55,6 +94,7 @@ namespace Aquila
         delete [] data;
         fs.close();
     }
+
 
     /**
      * Populates a .wav file header with values obtained from the source.
@@ -91,19 +131,49 @@ namespace Aquila
         header.WaveSize = waveSize;
     }
 
-    void WaveFileHandler::decode16bit(short *data, std::size_t channelSize)
+    void WaveFileHandler::decode16bit(WaveFile::ChannelType& channel, short* data, std::size_t channelSize)
     {
         for (std::size_t i = 0; i < channelSize; ++i)
         {
-            //LChTab[i] = data[i];
+            channel[i] = data[i];
         }
     }
 
-    void WaveFileHandler::decode8bit(short *data, std::size_t channelSize)
+    void WaveFileHandler::decode16bitStereo(WaveFile::ChannelType& leftChannel,
+        WaveFile::ChannelType& rightChannel, short* data, std::size_t channelSize)
     {
         for (std::size_t i = 0; i < channelSize; ++i)
         {
-            //LChTab[i] = data[i];
+            leftChannel[i] = data[2*i];
+            rightChannel[i] = data[2*i+1];
+        }
+    }
+
+    void WaveFileHandler::decode8bit(WaveFile::ChannelType& channel, short* data, std::size_t channelSize)
+    {
+        // low byte and high byte of a 16b word
+        unsigned char lb, hb;
+        for (std::size_t i = 0; i < channelSize; ++i)
+        {
+            splitBytes(data[i / 2], lb, hb);
+            // only one channel collects samples
+            channel[i] = lb - 128;
+        }
+    }
+
+    void WaveFileHandler::decode8bitStereo(WaveFile::ChannelType& leftChannel,
+        WaveFile::ChannelType& rightChannel, short* data, std::size_t channelSize)
+    {
+        // low byte and high byte of a 16b word
+        unsigned char lb, hb;
+        for (std::size_t i = 0; i < channelSize; ++i)
+        {
+            splitBytes(data[i / 2], lb, hb);
+            // left channel is in low byte, right in high
+            // values are unipolar, so we move them by half
+            // of the dynamic range
+            leftChannel[i] = lb - 128;
+            rightChannel[i] = hb - 128;
         }
     }
 
@@ -139,5 +209,18 @@ namespace Aquila
             short hb = sample1, lb = sample2;
             data[i] = ((hb << 8) & 0xFF00) | (lb & 0x00FF);
         }
+    }
+
+    /**
+     * Splits a 16-b number to lower and upper byte.
+     *
+     * @param twoBytes number to split
+     * @param lb lower byte (by reference)
+     * @param hb upper byte (by reference)
+     */
+    void WaveFileHandler::splitBytes(short twoBytes, unsigned char& lb, unsigned char& hb)
+    {
+        lb = twoBytes & 0x00FF;
+        hb = (twoBytes >> 8) & 0x00FF;
     }
 }

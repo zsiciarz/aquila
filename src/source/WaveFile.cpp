@@ -114,8 +114,8 @@ namespace Aquila
      */
     void WaveFile::save(const SignalSource& source, const std::string& filename)
     {
-        WaveFileHandler handler;
-        handler.save(source, filename);
+        WaveFileHandler handler(filename);
+        handler.save(source);
     }
 
     /**

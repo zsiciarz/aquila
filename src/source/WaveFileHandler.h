@@ -20,6 +20,7 @@
 
 #include "../global.h"
 #include "SignalSource.h"
+#include "WaveFile.h"
 #include <boost/cstdint.hpp>
 #include <cstddef>
 #include <string>
@@ -37,17 +38,34 @@ namespace Aquila
     class AQUILA_EXPORT WaveFileHandler
     {
     public:
-        WaveFileHandler();
+        WaveFileHandler(const std::string& filename);
 
-        void save(const SignalSource& source, const std::string& filename);
+        void readHeaderAndChannels(WaveHeader& header,
+            WaveFile::ChannelType& leftChannel, WaveFile::ChannelType& rightChannel);
 
-        static void decode16bit(short* data, std::size_t channelSize);
-        static void decode8bit(short* data, std::size_t channelSize);
+        void save(const SignalSource& source);
+
+        static void decode16bit(WaveFile::ChannelType& channel,
+            short* data, std::size_t channelSize);
+        static void decode16bitStereo(WaveFile::ChannelType& leftChannel,
+            WaveFile::ChannelType& rightChannel, short* data, std::size_t channelSize);
+
+        static void decode8bit(WaveFile::ChannelType& channel,
+            short* data, std::size_t channelSize);
+        static void decode8bitStereo(WaveFile::ChannelType& leftChannel,
+            WaveFile::ChannelType& rightChannel, short* data, std::size_t channelSize);
+
         static void encode16bit(const SignalSource& source, short* data, std::size_t dataSize);
         static void encode8bit(const SignalSource& source, short* data, std::size_t dataSize);
 
     private:
         void createHeader(const SignalSource& source, WaveHeader& header);
+        static void splitBytes(short twoBytes, unsigned char& lb, unsigned char& hb);
+
+        /**
+         * Destination or source file.
+         */
+        std::string m_filename;
     };
 }
 
