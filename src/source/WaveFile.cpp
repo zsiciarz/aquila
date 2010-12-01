@@ -17,11 +17,6 @@
 
 #include "WaveFile.h"
 #include "WaveFileHandler.h"
-#include "../Exceptions.h"
-#include <cmath>
-#include <cstring>
-#include <fstream>
-#include <stdexcept>
 
 namespace Aquila
 {
@@ -66,40 +61,8 @@ namespace Aquila
         if (m_frameLength != 0)
             m_frames.clear();
 
-        // first we read header from the stream
-        // then as we know now the data size, we create a temporary
-        // buffer and read raw data into that buffer
-        std::fstream fs;
-        fs.open(filename.c_str(), std::ios::in | std::ios::binary);
-        loadHeader(fs);
-        short* data = new short[hdr.WaveSize/2];
-        loadRawData(fs, data, hdr.WaveSize);
-        fs.close();
-
-        // initialize data channels (using right channel only in stereo mode)
-        unsigned int channelSize = hdr.WaveSize/hdr.BytesPerSamp;
-        LChTab.resize(channelSize);
-        if (2 == hdr.Channels)
-            RChTab.resize(channelSize);
-
-        // most important conversion happens right here
-        if (16 == hdr.BitsPerSamp)
-        {
-            if (2 == hdr.Channels)
-                convert16Stereo(data, channelSize);
-            else
-                convert16Mono(data, channelSize);
-        }
-        else
-        {
-            if (2 == hdr.Channels)
-                convert8Stereo(data, channelSize);
-            else
-                convert8Mono(data, channelSize);
-        }
-
-        // clear the buffer
-        delete [] data;
+        WaveFileHandler handler(file);
+        handler.readHeaderAndChannels(hdr, LChTab, RChTab);
 
         // when we have the data, it is possible to create frames
         if (m_frameLength != 0)
@@ -147,112 +110,6 @@ namespace Aquila
     }
 
     /**
-     * Reads file header into the struct.
-     *
-     * @param fs input file stream
-     * @see WaveFile::hdr
-     */
-    void WaveFile::loadHeader(std::fstream& fs)
-    {
-        fs.read((char*)(&hdr), sizeof(WaveHeader));
-    }
-
-    /**
-     * Reads raw data into the buffer.
-     *
-     * @param fs input file stream
-     * @param buffer pointer to data array
-     * @param bufferLength data buffer size
-     */
-    void WaveFile::loadRawData(std::fstream& fs, short* buffer,
-            int bufferLength)
-    {
-        fs.read((char*)buffer, bufferLength);
-    }
-
-    /**
-     * Converts the buffer to 16b stereo channels.
-     *
-     * @param data pointer to data buffer
-     * @param channelSize length of the channels
-     */
-    void WaveFile::convert16Stereo(short *data, unsigned int channelSize)
-    {
-        for (unsigned int i = 0; i < channelSize; ++i)
-        {
-            LChTab[i] = data[2*i];
-            RChTab[i] = data[2*i+1];
-        }
-    }
-
-    /**
-     * Converts the buffer to 16b mono channel.
-     *
-     * @param data pointer to data buffer
-     * @param channelSize length of the channel
-     */
-    void WaveFile::convert16Mono(short *data, unsigned int channelSize)
-    {
-        for (unsigned int i = 0; i < channelSize; ++i)
-        {
-            LChTab[i] = data[i];
-        }
-    }
-
-    /**
-     * Converts the buffer to 8b stereo channels.
-     *
-     * @param data pointer to data buffer
-     * @param channelSize length of the channels
-     */
-    void WaveFile::convert8Stereo(short *data, unsigned int channelSize)
-    {
-        // low byte and high byte of a 16b word
-        unsigned char lb, hb;
-        for (unsigned int i = 0; i < channelSize; ++i)
-        {
-            splitBytes(data[i/2], lb, hb);
-            // left channel is in low byte, right in high
-            // values are unipolar, so we move them by half
-            // of the dynamic range
-            LChTab[i] = lb-128;
-            RChTab[i] = hb-128;
-        }
-    }
-
-    /**
-     * Converts the buffer to 8b mono channel.
-     *
-     * @param data pointer to data buffer
-     * @param channelSize length of the channel
-     */
-    void WaveFile::convert8Mono(short *data, unsigned int channelSize)
-    {
-        // low byte and high byte of a 16b word
-        unsigned char lb, hb;
-        for (unsigned int i = 0; i < channelSize; ++i)
-        {
-            splitBytes(data[i/2], lb, hb);
-            // only the left channel collects samples
-            LChTab[i] = lb-128;
-        }
-    }
-
-    /**
-     * Splits a 16-b number to lower and upper byte.
-     *
-     * @param twoBytes number to split
-     * @param lb lower byte (by reference)
-     * @param hb upper byte (by reference)
-     */
-    void WaveFile::splitBytes(short twoBytes, unsigned char& lb,
-            unsigned char& hb)
-    {
-        lb = twoBytes & 0x00FF;
-        hb = (twoBytes >> 8) & 0x00FF;
-    }
-
-    /**
      * Executes frame division, using overlap.
      *
      * Number of samples in an individual frame does not depend on the
@@ -272,6 +129,3 @@ namespace Aquila
         m_frames.divideFrames(*this, samplesPerFrame, samplesPerOverlap);
     }
 }
-
-
-

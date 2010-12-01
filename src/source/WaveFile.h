@@ -354,13 +354,6 @@ namespace Aquila
          */
         FramesCollection m_frames;
 
-        void loadHeader(std::fstream& file);
-        void loadRawData(std::fstream& file, short* buffer, int bufferLength);
-        void convert16Stereo(short* data, unsigned int channelSize);
-        void convert16Mono(short* data, unsigned int channelSize);
-        void convert8Stereo(short* data, unsigned int channelSize);
-        void convert8Mono(short* data, unsigned int channelSize);
-        void splitBytes(short twoBytes, unsigned char& lb, unsigned char& hb);
         void divideFrames();
     };
 }
