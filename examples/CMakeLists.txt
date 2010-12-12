@@ -36,3 +36,13 @@ add_subdirectory(fft_comparison)
 add_subdirectory(fft_simple_spectrum)
 add_subdirectory(fft_filter)
 add_subdirectory(spectrogram)
+
+# Qt-based examples will be built only when Qt itself can be located
+find_package(Qt4)
+if(QT4_FOUND)
+    message("Qt4 was found, GUI examples using Qt will be built.")
+    include(${QT_USE_FILE})
+    add_subdirectory(qt)
+else(QT4_FOUND)
+    message("Qt4 was not found, no GUI examples using Qt will be built.")
+endif(QT4_FOUND)
