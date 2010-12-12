@@ -184,9 +184,9 @@ namespace Aquila
      * @param data the data buffer to be written
      * @param dataSize size of the buffer
      */
-    void WaveFileHandler::encode16bit(const SignalSource& source, short* data, unsigned int dataSize)
+    void WaveFileHandler::encode16bit(const SignalSource& source, short* data, std::size_t dataSize)
     {
-        for (unsigned int i = 0; i < dataSize; ++i)
+        for (std::size_t i = 0; i < dataSize; ++i)
         {
             short sample = static_cast<short>(source.sample(i));
             data[i] = sample;
@@ -200,9 +200,9 @@ namespace Aquila
      * @param data the data buffer to be written
      * @param dataSize size of the buffer
      */
-    void WaveFileHandler::encode8bit(const SignalSource& source, short* data, unsigned int dataSize)
+    void WaveFileHandler::encode8bit(const SignalSource& source, short* data, std::size_t dataSize)
     {
-        for (unsigned int i = 0; i < dataSize; ++i)
+        for (std::size_t i = 0; i < dataSize; ++i)
         {
             unsigned char sample1 = static_cast<unsigned char>(source.sample(2 * i) + 128);
             unsigned char sample2 = static_cast<unsigned char>(source.sample(2 * i + 1) + 128);
