@@ -1,11 +1,15 @@
 #include "aquila/source/generator/SineGenerator.h"
+#include "aquila/source/generator/SquareGenerator.h"
+#include "aquila/source/generator/PinkNoiseGenerator.h"
+#include "aquila/source/generator/WhiteNoiseGenerator.h"
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
 #include <algorithm>
 #include <iostream>
 
 
-void convertSourceToBuffer(const Aquila::SignalSource& source, sf::SoundBuffer& buffer)
+void convertSourceToBuffer(const Aquila::SignalSource& source,
+                           sf::SoundBuffer& buffer)
 {
     sf::Int16* samples = new sf::Int16[source.getSamplesCount()];
     std::copy(source.begin(), source.end(), samples);
@@ -17,22 +21,78 @@ void convertSourceToBuffer(const Aquila::SignalSource& source, sf::SoundBuffer& 
 }
 
 
+void handleGeneratorOptions(Aquila::Generator* generator)
+{
+    Aquila::FrequencyType frequency, maxFrequency = generator->getSampleFrequency() / 2;
+    std::cout << "\nSignal frequency in Hz: \n"
+                 "Enter a number (0-" << maxFrequency << "): ";
+    std::cin >> frequency;
+    if (frequency < 0 || frequency > maxFrequency)
+    {
+        frequency = 1000;
+    }
+    generator->setFrequency(frequency);
+}
+
+
+Aquila::Generator* createGenerator(unsigned int whichGenerator,
+                                   Aquila::FrequencyType sampleFrequency)
+{
+    Aquila::Generator* generator;
+    switch (whichGenerator)
+    {
+    case 1:
+        generator = new Aquila::SineGenerator(sampleFrequency);
+        handleGeneratorOptions(generator);
+        break;
+    case 2:
+        generator = new Aquila::SquareGenerator(sampleFrequency);
+        handleGeneratorOptions(generator);
+        break;
+    case 3:
+        generator = new Aquila::PinkNoiseGenerator(sampleFrequency);
+        break;
+    case 4:
+        generator = new Aquila::WhiteNoiseGenerator(sampleFrequency);
+        break;
+    default:
+        generator = new Aquila::SineGenerator(sampleFrequency);
+        handleGeneratorOptions(generator);
+        break;
+    }
+    generator->setAmplitude(8192);
+    return generator;
+}
+
+
 int main(int argc, char** argv)
 {
+    std::cout << "Choose which kind of signal to play: \n"
+                 "\t 1: Sine wave \n"
+                 "\t 2: Square wave \n"
+                 "\t 3: Pink noise \n"
+                 "\t 4: White noise \n"
+                 "Enter a number (1-4): ";
+    unsigned int whichGenerator = 1;
+    std::cin >> whichGenerator;
     const Aquila::FrequencyType SAMPLE_FREQUENCY = 44100;
-    Aquila::SineGenerator generator(SAMPLE_FREQUENCY);
-    generator.setFrequency(440).setAmplitude(8192).generate(2 * SAMPLE_FREQUENCY);
+    Aquila::Generator* generator = createGenerator(whichGenerator, SAMPLE_FREQUENCY);
 
+    generator->generate(5 * SAMPLE_FREQUENCY);
     sf::SoundBuffer buffer;
-    convertSourceToBuffer(generator, buffer);
-
+    convertSourceToBuffer(*generator, buffer);
     sf::Sound sound;
     sound.SetBuffer(buffer);
     sound.Play();
+    std::cout << "Playing..." << std::endl;
     while (sound.GetStatus() == sf::Sound::Playing)
     {
+        std::cout << ".";
         sf::Sleep(0.1f);
     }
+    std::cout << "\nFinished." << std::endl;
+
+    delete generator;
 
     return 0;
 }
