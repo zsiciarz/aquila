@@ -30,6 +30,22 @@ link_directories(${Boost_LIBRARY_DIRS})
 
 # libraries bundled with Aquila
 add_subdirectory(lib)
+set(Aquila_LIBRARIES_TO_LINK_WITH Ooura_fft)
+
+# additional CMake modules
+set(CMAKE_MODULE_PATH "${Aquila_SOURCE_DIR}/cmake")
+
+# SFML - if available
+set(SFML_STATIC true)
+find_package(SFML COMPONENTS System Audio)
+if(SFML_FOUND)
+    message("SFML was found, wrappers and examples using SFML will be built.")
+    include_directories(${SFML_INCLUDE_DIR})
+    list(APPEND Aquila_LIBRARIES_TO_LINK_WITH ${SFML_LIBRARY})
+else(SFML_FOUND)
+    message(WARNING "SFML was not found, wrappers and examples using SFML will not be built.")
+endif(SFML_FOUND)
+
 
 ################################################################################
 #
@@ -106,7 +122,7 @@ endif(MSVC)
 add_library(Aquila ${Aquila_HEADERS} ${Aquila_SOURCES})
 
 # linking with extra libs
-target_link_libraries(Aquila Ooura_fft)
+target_link_libraries(Aquila ${Aquila_LIBRARIES_TO_LINK_WITH})
 
 # examples
 if(Aquila_BUILD_EXAMPLES)
