@@ -46,3 +46,7 @@ if(QT4_FOUND)
 else(QT4_FOUND)
     message("Qt4 was not found, no GUI examples using Qt will be built.")
 endif(QT4_FOUND)
+
+if(SFML_FOUND)
+    add_subdirectory(sfml)
+endif(SFML_FOUND)
