@@ -4,21 +4,27 @@
 #include <algorithm>
 #include <iostream>
 
+
+void convertSourceToBuffer(const Aquila::SignalSource& source, sf::SoundBuffer& buffer)
+{
+    sf::Int16* samples = new sf::Int16[source.getSamplesCount()];
+    std::copy(source.begin(), source.end(), samples);
+    buffer.LoadFromSamples(samples,
+                           source.getSamplesCount(),
+                           1,
+                           static_cast<unsigned int>(source.getSampleFrequency()));
+    delete [] samples;
+}
+
+
 int main(int argc, char** argv)
 {
     const Aquila::FrequencyType SAMPLE_FREQUENCY = 44100;
     Aquila::SineGenerator generator(SAMPLE_FREQUENCY);
     generator.setFrequency(440).setAmplitude(8192).generate(2 * SAMPLE_FREQUENCY);
 
-    sf::Int16* samples = new sf::Int16[generator.getSamplesCount()];
-    std::copy(generator.begin(), generator.end(), samples);
-
     sf::SoundBuffer buffer;
-    buffer.LoadFromSamples(samples,
-                           generator.getSamplesCount(),
-                           1,
-                           static_cast<unsigned int>(SAMPLE_FREQUENCY));
-    delete [] samples;
+    convertSourceToBuffer(generator, buffer);
 
     sf::Sound sound;
     sound.SetBuffer(buffer);
