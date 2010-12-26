@@ -22,6 +22,12 @@ public:
         generator.setAmplitude(8192);
     }
 
+    /**
+     * Makes a beep.
+     *
+     * @param note frequency of the generated sound
+     * @param duration beep duration in milliseconds
+     */
     void beep(unsigned int note, unsigned int duration)
     {
         unsigned int numSamples = SAMPLE_FREQUENCY * duration / 1000;
@@ -30,9 +36,15 @@ public:
         sf::Sound sound(buffer);
         sound.Play();
 
+        // the additional 50 ms is an intentional pause between beeps
         sf::Sleep(duration / 1000.0f + 0.05f);
     }
 
+    /**
+     * Waits for some time.
+     *
+     * @param duration delay time in milliseconds
+     */
     void delay(unsigned int duration)
     {
         sf::Sleep(duration / 1000.0f);
