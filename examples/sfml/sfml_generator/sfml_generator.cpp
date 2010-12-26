@@ -2,23 +2,10 @@
 #include "aquila/source/generator/SquareGenerator.h"
 #include "aquila/source/generator/PinkNoiseGenerator.h"
 #include "aquila/source/generator/WhiteNoiseGenerator.h"
+#include "aquila/wrappers/SoundBufferAdapter.h"
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
-#include <algorithm>
 #include <iostream>
-
-
-void convertSourceToBuffer(const Aquila::SignalSource& source,
-                           sf::SoundBuffer& buffer)
-{
-    sf::Int16* samples = new sf::Int16[source.getSamplesCount()];
-    std::copy(source.begin(), source.end(), samples);
-    buffer.LoadFromSamples(samples,
-                           source.getSamplesCount(),
-                           1,
-                           static_cast<unsigned int>(source.getSampleFrequency()));
-    delete [] samples;
-}
 
 
 void handleGeneratorOptions(Aquila::Generator* generator)
@@ -77,12 +64,10 @@ int main(int argc, char** argv)
     std::cin >> whichGenerator;
     const Aquila::FrequencyType SAMPLE_FREQUENCY = 44100;
     Aquila::Generator* generator = createGenerator(whichGenerator, SAMPLE_FREQUENCY);
-
     generator->generate(5 * SAMPLE_FREQUENCY);
-    sf::SoundBuffer buffer;
-    convertSourceToBuffer(*generator, buffer);
-    sf::Sound sound;
-    sound.SetBuffer(buffer);
+
+    Aquila::SoundBufferAdapter buffer(*generator);
+    sf::Sound sound(buffer);
     sound.Play();
     std::cout << "Playing..." << std::endl;
     while (sound.GetStatus() == sf::Sound::Playing)
@@ -91,7 +76,6 @@ int main(int argc, char** argv)
         sf::Sleep(0.1f);
     }
     std::cout << "\nFinished." << std::endl;
-
     delete generator;
 
     return 0;
