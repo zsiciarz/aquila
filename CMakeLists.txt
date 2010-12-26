@@ -99,6 +99,16 @@ set(Aquila_SOURCES
     src/tools/TextPlot.cpp
 )
 
+# SFML wrappers
+if(SFML_FOUND)
+    list(APPEND Aquila_HEADERS
+        src/wrappers/SoundBufferAdapter.h
+    )
+    list(APPEND Aquila_SOURCES
+        src/wrappers/SoundBufferAdapter.cpp
+    )
+endif(SFML_FOUND)
+
 
 ################################################################################
 #
