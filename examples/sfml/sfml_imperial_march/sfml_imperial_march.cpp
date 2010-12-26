@@ -6,61 +6,42 @@
  */
 
 #include "aquila/source/generator/SineGenerator.h"
-#include <SFML/System.hpp>
+#include "aquila/wrappers/SoundBufferAdapter.h"
 #include <SFML/Audio.hpp>
-#include <algorithm>
 #include <iostream>
 
-
-void convertSourceToBuffer(const Aquila::SignalSource& source,
-                           sf::SoundBuffer& buffer)
-{
-    sf::Int16* samples = new sf::Int16[source.getSamplesCount()];
-    std::copy(source.begin(), source.end(), samples);
-    buffer.LoadFromSamples(samples,
-                           source.getSamplesCount(),
-                           1,
-                           static_cast<unsigned int>(source.getSampleFrequency()));
-    delete [] samples;
-}
-
+/**
+ * A beepy-beep thingy.
+ */
 class Beeper
 {
 public:
     Beeper(Aquila::FrequencyType sampleFrequency):
-        SAMPLE_FREQUENCY(sampleFrequency),
-        generator(SAMPLE_FREQUENCY)
+        SAMPLE_FREQUENCY(sampleFrequency), generator(SAMPLE_FREQUENCY)
     {
-        generator.setAmplitude(4096);
+        generator.setAmplitude(8192);
     }
 
     void beep(unsigned int note, unsigned int duration)
     {
         unsigned int numSamples = SAMPLE_FREQUENCY * duration / 1000;
         generator.setFrequency(note).generate(numSamples);
-
-        sf::SoundBuffer buffer;
-        convertSourceToBuffer(generator, buffer);
-        sf::Sound sound;
-        sound.SetBuffer(buffer);
+        buffer.LoadFromSignalSource(generator);
+        sf::Sound sound(buffer);
         sound.Play();
 
-        if (duration < 250)
-            duration = 250;
-
-        sf::Sleep(duration / 1000.0f);
+        sf::Sleep(duration / 1000.0f + 0.05f);
     }
 
     void delay(unsigned int duration)
     {
-        if (duration < 250)
-            duration = 250;
         sf::Sleep(duration / 1000.0f);
     }
 
 private:
     const Aquila::FrequencyType SAMPLE_FREQUENCY;
     Aquila::SineGenerator generator;
+    Aquila::SoundBufferAdapter buffer;
 };
 
 
