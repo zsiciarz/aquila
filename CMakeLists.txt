@@ -36,7 +36,7 @@ set(Aquila_LIBRARIES_TO_LINK_WITH Ooura_fft)
 set(CMAKE_MODULE_PATH "${Aquila_SOURCE_DIR}/cmake")
 
 # SFML - if available
-set(SFML_STATIC true)
+#set(SFML_STATIC true)
 find_package(SFML COMPONENTS System Audio)
 if(SFML_FOUND)
     message("SFML was found, wrappers and examples using SFML will be built.")
