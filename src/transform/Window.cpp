@@ -10,7 +10,7 @@
  * @package Aquila
  * @version 3.0.0-dev
  * @author Zbigniew Siciarz
- * @date 2007-2010
+ * @date 2007-2011
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @since 0.5.4
  */
