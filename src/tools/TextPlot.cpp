@@ -16,6 +16,7 @@
  */
 
 #include "TextPlot.h"
+#include <boost/scoped_array.hpp>
 
 namespace Aquila
 {
@@ -60,13 +61,11 @@ namespace Aquila
      */
     void TextPlot::plotSpectrum(Aquila::ComplexType spectrum[], std::size_t length)
     {
-        double* absSpectrum = new double[length/2];
+        boost::scoped_array<double> absSpectrum(new double[length/2]);
         for (std::size_t i = 0; i < length/2; ++i)
         {
             absSpectrum[i] = std::abs(spectrum[i]);
         }
-        plot(absSpectrum, length/2);
-
-        delete [] absSpectrum;
+        plot(absSpectrum.get(), length/2);
     }
 }
