@@ -23,7 +23,7 @@ set(Aquila_BUILD_TESTS ON CACHE BOOL "Build test programs?" FORCE)
 #
 ################################################################################
 
-# Boost 
+# Boost
 find_package(Boost COMPONENTS system filesystem REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
@@ -157,7 +157,7 @@ endif(Aquila_BUILD_TESTS)
 # install the binaries and include files
 install(TARGETS Aquila ARCHIVE DESTINATION lib LIBRARY DESTINATION lib)
 install(DIRECTORY src/ DESTINATION include/aquila FILES_MATCHING PATTERN "*.h")
-install(FILES CHANGELOG LICENSE README DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(FILES CHANGELOG LICENSE README.md DESTINATION ${CMAKE_INSTALL_PREFIX})
 
 
 ################################################################################
