@@ -170,21 +170,8 @@ namespace Aquila
         std::copy(data, data + m_dataLength, m_data);
     }
 
-    /**
-     * "Converts" a SampleType array to SampleType array.
-     *
-     * This specialization exists for faster handling of SampleType arrays of
-     * data. It merely copies the pointer and does not make the ArrayData
-     * object an owner of the data.
-     *
-     * @param data array to "convert"
-     */
     template <>
-    void ArrayData<SampleType>::convertArray(SampleType* data)
-    {
-        m_owns = false;
-        m_data = data;
-    }
+    void ArrayData<SampleType>::convertArray(SampleType* data);
 }
 
 #endif // ARRAYDATA_H
