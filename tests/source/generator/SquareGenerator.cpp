@@ -1,15 +1,12 @@
 #include "aquila/global.h"
 #include "aquila/source/generator/SquareGenerator.h"
 #include <boost/cstdint.hpp>
+#include <boost/lambda/lambda.hpp>
 #include <unittestpp.h>
 #include <algorithm>
 #include <cstddef>
-#include <cstdlib>
-#include <functional>
 
-using std::count_if;
-using std::bind2nd;
-using std::greater;
+using namespace boost::lambda;
 
 SUITE(SquareGenerator)
 {
@@ -21,7 +18,7 @@ SUITE(SquareGenerator)
     {
         double duty = 0.5;
         gen.setDuty(duty).setAmplitude(1).setFrequency(10).generate(1000);
-        int samplesCount = count_if(gen.begin(), gen.end(), bind2nd(greater<Aquila::SampleType>(), 0));
+        int samplesCount = std::count_if(gen.begin(), gen.end(), _1 > 0);
         CHECK_EQUAL(samplesCount, 500);
     }
 
@@ -29,7 +26,7 @@ SUITE(SquareGenerator)
     {
         double duty = 0.25;
         gen.setDuty(duty).setAmplitude(1).setFrequency(10).generate(1000);
-        int samplesCount = count_if(gen.begin(), gen.end(), bind2nd(greater<Aquila::SampleType>(), 0));
+        int samplesCount = std::count_if(gen.begin(), gen.end(), _1 > 0);
         CHECK_EQUAL(samplesCount, 250);
     }
 
@@ -37,7 +34,7 @@ SUITE(SquareGenerator)
     {
         double duty = 0.75;
         gen.setDuty(duty).setAmplitude(1).setFrequency(10).generate(1000);
-        int samplesCount = count_if(gen.begin(), gen.end(), bind2nd(greater<Aquila::SampleType>(), 0));
+        int samplesCount = std::count_if(gen.begin(), gen.end(), _1 > 0);
         CHECK_EQUAL(samplesCount, 750);
     }
 
@@ -45,7 +42,7 @@ SUITE(SquareGenerator)
     {
         double duty = 0.0;
         gen.setDuty(duty).setAmplitude(1).setFrequency(10).generate(1000);
-        int samplesCount = count_if(gen.begin(), gen.end(), bind2nd(greater<Aquila::SampleType>(), 0));
+        int samplesCount = std::count_if(gen.begin(), gen.end(), _1 > 0);
         CHECK_EQUAL(samplesCount, 0);
     }
 
@@ -53,7 +50,7 @@ SUITE(SquareGenerator)
     {
         double duty = 1.0;
         gen.setDuty(duty).setAmplitude(1).setFrequency(10).generate(1000);
-        int samplesCount = count_if(gen.begin(), gen.end(), bind2nd(greater<Aquila::SampleType>(), 0));
+        int samplesCount = std::count_if(gen.begin(), gen.end(), _1 > 0);
         CHECK_EQUAL(samplesCount, 1000);
     }
 
@@ -61,7 +58,7 @@ SUITE(SquareGenerator)
     {
         double duty = 0.01;
         gen.setDuty(duty).setAmplitude(1).setFrequency(10).generate(1000);
-        int samplesCount = count_if(gen.begin(), gen.end(), bind2nd(greater<Aquila::SampleType>(), 0));
+        int samplesCount = std::count_if(gen.begin(), gen.end(), _1 > 0);
         CHECK_EQUAL(samplesCount, 10);
     }
 }
