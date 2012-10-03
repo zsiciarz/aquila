@@ -1,5 +1,5 @@
 /**
- * @file Frame.h
+ * @file ArrayData.h
  *
  * Wrapper around a C-style array.
  *

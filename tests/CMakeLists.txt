@@ -26,6 +26,7 @@ add_subdirectory(transform)
 set(Aquila_Test_SOURCES
     main.cpp
     source/ArrayData.cpp
+    #source/Frame.cpp
 )
 
 include_directories(${UNITTESTPP_DIR})
