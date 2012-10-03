@@ -27,6 +27,7 @@ set(Aquila_Test_SOURCES
     main.cpp
     source/ArrayData.cpp
     source/Frame.cpp
+    source/generator/SquareGenerator.cpp
 )
 
 include_directories(${UNITTESTPP_DIR})
