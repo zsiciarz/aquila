@@ -21,3 +21,13 @@ set(Aquila_TEST_DATA_PATH "${CMAKE_SOURCE_DIR}/tests/data")
 
 add_subdirectory(source)
 add_subdirectory(transform)
+
+# UnitTest++
+set(Aquila_Test_SOURCES
+    main.cpp
+    source/ArrayData.cpp
+)
+
+include_directories(${UNITTESTPP_DIR})
+add_executable(aquila_test ${Aquila_Test_SOURCES})
+target_link_libraries(aquila_test Aquila UnitTest++)

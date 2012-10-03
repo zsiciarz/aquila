@@ -143,6 +143,7 @@ endif(Aquila_BUILD_EXAMPLES)
 #tests
 if(Aquila_BUILD_TESTS)
     enable_testing()
+    set(UNITTESTPP_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lib/unittestpp/")
     add_custom_target(tests)
     add_subdirectory(tests)
 endif(Aquila_BUILD_TESTS)
