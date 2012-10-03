@@ -30,5 +30,5 @@ set(Aquila_Test_SOURCES
 )
 
 include_directories(${UNITTESTPP_DIR})
-add_executable(aquila_test ${Aquila_Test_SOURCES})
+add_executable(aquila_test EXCLUDE_FROM_ALL ${Aquila_Test_SOURCES})
 target_link_libraries(aquila_test Aquila UnitTest++)

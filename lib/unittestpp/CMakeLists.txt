@@ -41,7 +41,7 @@ elseif(WIN32)
     )
 endif(UNIX)
 
-add_library(UnitTest++ STATIC ${UNITTESTPP_SOURCES})
+add_library(UnitTest++ STATIC EXCLUDE_FROM_ALL ${UNITTESTPP_SOURCES})
 
 
 ################################################################################
@@ -72,5 +72,5 @@ set(UNITTESTPP_TEST_SOURCES
     src/tests/TestXmlTestReporter.cpp
 )
 
-add_executable(TestUnitTest++ ${UNITTESTPP_TEST_SOURCES})
+add_executable(TestUnitTest++ EXCLUDE_FROM_ALL ${UNITTESTPP_TEST_SOURCES})
 target_link_libraries(TestUnitTest++ UnitTest++)
