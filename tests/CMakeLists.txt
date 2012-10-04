@@ -20,7 +20,6 @@ endmacro(aquila_test)
 set(Aquila_TEST_DATA_PATH "${CMAKE_SOURCE_DIR}/tests/data")
 
 add_subdirectory(source)
-add_subdirectory(transform)
 
 # UnitTest++
 set(Aquila_Test_SOURCES
