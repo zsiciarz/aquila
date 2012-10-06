@@ -27,3 +27,4 @@ set(Aquila_Test_SOURCES
 include_directories(${UNITTESTPP_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 add_executable(aquila_test EXCLUDE_FROM_ALL ${Aquila_Test_SOURCES})
 target_link_libraries(aquila_test Aquila UnitTest++)
+add_test(Aquila_TEST_SUITE aquila_test)
