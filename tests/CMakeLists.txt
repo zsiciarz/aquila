@@ -19,6 +19,10 @@ endmacro(aquila_test)
 # path to data files used for testing
 set(Aquila_TEST_DATA_PATH "${CMAKE_SOURCE_DIR}/tests/data")
 
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/constants.h.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/constants.h"
+)
+
 add_subdirectory(source)
 
 # UnitTest++
@@ -30,6 +34,6 @@ set(Aquila_Test_SOURCES
     transform/Fft.cpp
 )
 
-include_directories(${UNITTESTPP_DIR})
+include_directories(${UNITTESTPP_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 add_executable(aquila_test EXCLUDE_FROM_ALL ${Aquila_Test_SOURCES})
 target_link_libraries(aquila_test Aquila UnitTest++)
