@@ -1,6 +1,8 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#define Aquila_TEST_TXTFILE "${Aquila_TEST_DATA_PATH}/test.txt"
+
 #define Aquila_TEST_WAVEFILE_8B_MONO "${Aquila_TEST_DATA_PATH}/8b_mono.wav"
 #define Aquila_TEST_WAVEFILE_8B_STEREO "${Aquila_TEST_DATA_PATH}/8b_stereo.wav"
 #define Aquila_TEST_WAVEFILE_16B_MONO "${Aquila_TEST_DATA_PATH}/16b_mono.wav"

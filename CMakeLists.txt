@@ -62,6 +62,7 @@ set(Aquila_HEADERS
     src/source/Frame.h
     src/source/FramesCollection.h
     src/source/ArrayData.h
+    src/source/PlainTextFile.h
     src/source/WaveFile.h
     src/source/WaveFileHandler.h
     src/source/generator/Generator.h
@@ -84,6 +85,7 @@ set(Aquila_SOURCES
     src/source/Frame.cpp
     src/source/FramesCollection.cpp
     src/source/ArrayData.cpp
+    src/source/PlainTextFile.cpp
     src/source/WaveFile.cpp
     src/source/WaveFileHandler.cpp
     src/source/generator/Generator.cpp
