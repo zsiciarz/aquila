@@ -45,72 +45,72 @@ SUITE(Fft)
     TEST(SinePeakDetect1)
     {
         unsigned int peakPosition = findPeak(64, 8000, 1000);
-        CHECK_EQUAL(peakPosition, 8);
+        CHECK_EQUAL(8, peakPosition);
     }
 
     TEST(SinePeakDetect2)
     {
         unsigned int peakPosition = findPeak(64, 8000, 2000);
-        CHECK_EQUAL(peakPosition, 16);
+        CHECK_EQUAL(16, peakPosition);
     }
 
     TEST(SinePeakDetect3)
     {
         unsigned int peakPosition = findPeak(64, 8000, 3999);
-        CHECK_EQUAL(peakPosition, 31);
+        CHECK_EQUAL(31, peakPosition);
     }
 
     TEST(SinePeakDetect4)
     {
         unsigned int peakPosition = findPeak(64, 8000, 1);
-        CHECK_EQUAL(peakPosition, 0);
+        CHECK_EQUAL(0, peakPosition);
     }
 
     TEST(SinePeakDetect5)
     {
         unsigned int peakPosition = findPeak(1024, 8000, 1000);
-        CHECK_EQUAL(peakPosition, 128);
+        CHECK_EQUAL(128, peakPosition);
     }
 
     TEST(SinePeakDetect6)
     {
         unsigned int peakPosition = findPeak(1024, 8000, 2000);
-        CHECK_EQUAL(peakPosition, 256);
+        CHECK_EQUAL(256, peakPosition);
     }
 
     TEST(SinePeakDetect7)
     {
         unsigned int peakPosition = findPeak(1024, 44100, 1000);
-        CHECK_EQUAL(peakPosition, 23);
+        CHECK_EQUAL(23, peakPosition);
     }
 
     TEST(SinePeakDetect8)
     {
         unsigned int peakPosition = findPeak(1024, 44100, 2000);
-        CHECK_EQUAL(peakPosition, 46);
+        CHECK_EQUAL(46, peakPosition);
     }
 
     TEST(SinePeakDetect9)
     {
         unsigned int peakPosition = findPeak(1024, 44100, 4567);
-        CHECK_EQUAL(peakPosition, 106);
+        CHECK_EQUAL(106, peakPosition);
     }
 
     TEST(SinePeakDetect10)
     {
         unsigned int peakPosition = findPeak(1024, 44100, 10000);
-        CHECK_EQUAL(peakPosition, 232);
+        CHECK_EQUAL(232, peakPosition);
     }
 
     TEST(SinePeakDetect11)
     {
         unsigned int peakPosition = findPeak(1024, 44100, 15000);
-        CHECK_EQUAL(peakPosition, 348);
+        CHECK_EQUAL(348, peakPosition);
     }
 
     TEST(SinePeakDetect12)
     {
         unsigned int peakPosition = findPeak(1024, 44100, 21204);
-        CHECK_EQUAL(peakPosition, 492);
+        CHECK_EQUAL(492, peakPosition);
     }
 }

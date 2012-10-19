@@ -19,7 +19,7 @@ SUITE(SquareGenerator)
         double duty = 0.5;
         gen.setDuty(duty).setAmplitude(1).setFrequency(10).generate(1000);
         int samplesCount = std::count_if(gen.begin(), gen.end(), _1 > 0);
-        CHECK_EQUAL(samplesCount, 500);
+        CHECK_EQUAL(500, samplesCount);
     }
 
     TEST(DutyCycle025)
@@ -27,7 +27,7 @@ SUITE(SquareGenerator)
         double duty = 0.25;
         gen.setDuty(duty).setAmplitude(1).setFrequency(10).generate(1000);
         int samplesCount = std::count_if(gen.begin(), gen.end(), _1 > 0);
-        CHECK_EQUAL(samplesCount, 250);
+        CHECK_EQUAL(250, samplesCount);
     }
 
     TEST(DutyCycle075)
@@ -35,7 +35,7 @@ SUITE(SquareGenerator)
         double duty = 0.75;
         gen.setDuty(duty).setAmplitude(1).setFrequency(10).generate(1000);
         int samplesCount = std::count_if(gen.begin(), gen.end(), _1 > 0);
-        CHECK_EQUAL(samplesCount, 750);
+        CHECK_EQUAL(750, samplesCount);
     }
 
     TEST(DutyCycle0)
@@ -43,7 +43,7 @@ SUITE(SquareGenerator)
         double duty = 0.0;
         gen.setDuty(duty).setAmplitude(1).setFrequency(10).generate(1000);
         int samplesCount = std::count_if(gen.begin(), gen.end(), _1 > 0);
-        CHECK_EQUAL(samplesCount, 0);
+        CHECK_EQUAL(0, samplesCount);
     }
 
     TEST(DutyCycle1)
@@ -51,7 +51,7 @@ SUITE(SquareGenerator)
         double duty = 1.0;
         gen.setDuty(duty).setAmplitude(1).setFrequency(10).generate(1000);
         int samplesCount = std::count_if(gen.begin(), gen.end(), _1 > 0);
-        CHECK_EQUAL(samplesCount, 1000);
+        CHECK_EQUAL(1000, samplesCount);
     }
 
     TEST(DutyCycle001)
@@ -59,6 +59,6 @@ SUITE(SquareGenerator)
         double duty = 0.01;
         gen.setDuty(duty).setAmplitude(1).setFrequency(10).generate(1000);
         int samplesCount = std::count_if(gen.begin(), gen.end(), _1 > 0);
-        CHECK_EQUAL(samplesCount, 10);
+        CHECK_EQUAL(10, samplesCount);
     }
 }
