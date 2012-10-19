@@ -16,7 +16,9 @@
  */
 
 #include "PlainTextFile.h"
+#include <algorithm>
 #include <fstream>
+#include <iterator>
 
 namespace Aquila
 {
@@ -32,11 +34,9 @@ namespace Aquila
     {
         std::fstream fs;
         fs.open(filename.c_str(), std::ios::in);
-        SampleType sample;
-        while (fs >> sample)
-        {
-            m_data.push_back(sample);
-        }
+        std::copy(std::istream_iterator<SampleType>(fs),
+                  std::istream_iterator<SampleType>(),
+                  std::back_inserter(m_data));
         fs.close();
     }
 }
