@@ -63,7 +63,7 @@ namespace Aquila
         }
 
         /**
-         * Returns number of samples in the file.
+         * Returns number of samples in file.
          *
          * @return length of samples vector
          */
@@ -73,11 +73,11 @@ namespace Aquila
         }
 
         /**
-         * Returns sample value at a given position in the array.
+         * Returns sample value at a given position in the file.
          *
-         * Doesn't check that the position is valid array index.
+         * Doesn't check that the position is valid.
          *
-         * @param position sample position (from 0 to array length - 1)
+         * @param position sample position
          * @return sample value
          */
         virtual SampleType sample(std::size_t position) const
