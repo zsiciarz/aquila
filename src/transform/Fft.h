@@ -20,7 +20,6 @@
 
 #include "../global.h"
 #include <cstddef>
-#include <boost/noncopyable.hpp>
 
 namespace Aquila
 {
@@ -40,7 +39,7 @@ namespace Aquila
      * plan once - in the constructor (based on FFT length). Later calls
      * to fft() / ifft() should reuse the already created plan/cache.
      */
-    class AQUILA_EXPORT Fft : boost::noncopyable
+    class AQUILA_EXPORT Fft
     {
     public:
         /**
@@ -83,6 +82,10 @@ namespace Aquila
          * Signal and spectrum length.
          */
         std::size_t N;
+
+    private:
+        Fft( const Fft& );
+        const Fft& operator=( const Fft& );
     };
 }
 
