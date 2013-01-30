@@ -50,8 +50,9 @@ int main()
 
     // the following line does the multiplication of two spectra
     // (which is complementary to convolution in time domain)
+    typedef Aquila::ComplexType cplx;
     std::transform(spectrum, spectrum + SIZE, filterSpectrum, spectrum,
-                   std::multiplies<Aquila::ComplexType>());
+                   [] (cplx x, cplx y) { return x * y; });
     plt.setTitle("Signal spectrum after filtration");
     plt.plotSpectrum(spectrum, SIZE);
 
