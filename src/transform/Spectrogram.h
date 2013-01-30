@@ -21,8 +21,8 @@
 #include "../global.h"
 #include "../source/FramesCollection.h"
 #include "Fft.h"
-#include <boost/shared_ptr.hpp>
 #include <cstddef>
+#include <memory>
 #include <vector>
 
 
@@ -89,12 +89,12 @@ namespace Aquila
         /**
          * A shared pointer to FFT algorithm class.
          */
-        boost::shared_ptr<Fft> m_fft;
+        std::shared_ptr<Fft> m_fft;
 
         /**
          * A shared pointer to spectrogram data.
          */
-        boost::shared_ptr<SpectrogramDataType> m_data;
+        std::shared_ptr<SpectrogramDataType> m_data;
     };
 }
 

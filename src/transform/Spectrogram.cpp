@@ -25,9 +25,7 @@ namespace Aquila
     Spectrogram::Spectrogram(FramesCollection& frames):
         m_frameCount(frames.count()),
         m_spectrumSize(frames.getSamplesPerFrame()),
-        // the following line converts an auto_ptr<Fft> returned by getFft
-        // to a shared_ptr<Fft> stored in m_fft class member
-        m_fft(FftFactory::getFft(m_spectrumSize).release()),
+        m_fft(FftFactory::getFft(m_spectrumSize)),
         m_data(new SpectrogramDataType(m_frameCount))
     {
         std::size_t i = 0;

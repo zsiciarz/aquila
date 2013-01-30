@@ -32,18 +32,13 @@ namespace Aquila
      * As of now, the fastest implementation in Aquila is using Ooura's
      * mathematical packages, so this one is always returned.
      *
-     * To keep things safe and clean, the getFft() method returns a
-     * std::auto_ptr instead of a bare pointer. As the FFT object is
-     * created on the heap, using a smart pointer frees the developer
-     * from manually deleting the object after the calculations.
-     *
      * @param length FFT length (number of samples)
-     * @return the FFT object (wrapped in an auto_ptr)
+     * @return the FFT object (wrapped in a shared_ptr)
      */
-    std::auto_ptr<Fft> FftFactory::getFft(std::size_t length)
+    std::shared_ptr<Fft> FftFactory::getFft(std::size_t length)
     {
         Fft* fft = new OouraFft(length);
 
-        return std::auto_ptr<Fft>(fft);
+        return std::shared_ptr<Fft>(fft);
     }
 }

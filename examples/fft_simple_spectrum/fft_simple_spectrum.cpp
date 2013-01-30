@@ -21,7 +21,7 @@ int main()
     plt.plot(x, SIZE);
 
     // calculate the FFT
-    std::auto_ptr<Aquila::Fft> fft = Aquila::FftFactory::getFft(SIZE);
+    auto fft = Aquila::FftFactory::getFft(SIZE);
     Aquila::ComplexType spectrum[SIZE];
     fft->fft(x, spectrum);
 
@@ -30,6 +30,3 @@ int main()
 
     return 0;
 }
-
-
-

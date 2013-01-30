@@ -31,7 +31,7 @@ namespace Aquila
     class AQUILA_EXPORT FftFactory
     {
     public:
-        static std::auto_ptr<Fft> getFft(std::size_t length);
+        static std::shared_ptr<Fft> getFft(std::size_t length);
     };
 }
 
