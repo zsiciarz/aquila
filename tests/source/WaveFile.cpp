@@ -1,8 +1,6 @@
 #include "aquila/global.h"
 #include "aquila/source/WaveFile.h"
 #include "constants.h"
-#include <boost/cstdint.hpp>
-#include <boost/lambda/lambda.hpp>
 #include <unittestpp.h>
 
 
