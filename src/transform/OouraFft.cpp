@@ -17,7 +17,6 @@
 
 #include "OouraFft.h"
 #include <cmath>
-#include <boost/static_assert.hpp>
 
 namespace Aquila
 {
@@ -55,9 +54,10 @@ namespace Aquila
      */
     void OouraFft::fft(const SampleType x[], ComplexType spectrum[])
     {
-        // We assume here that a complex<double> has the same
-        // representation in memory as two consecutive doubles
-        BOOST_STATIC_ASSERT(sizeof(ComplexType[2]) == sizeof(double[4]));
+        static_assert(
+            sizeof(ComplexType[2]) == sizeof(double[4]),
+            "complex<double> has the same memory layout as two consecutive doubles"
+        );
         double* a = reinterpret_cast<double*>(spectrum);
 
         // copying input data to even elements of the array (real values)
@@ -78,9 +78,10 @@ namespace Aquila
      */
     void OouraFft::ifft(ComplexType spectrum[], double x[])
     {
-        // We assume here that a complex<double> has the same
-        // representation in memory as two consecutive doubles
-        BOOST_STATIC_ASSERT(sizeof(ComplexType[2]) == sizeof(double[4]));
+        static_assert(
+            sizeof(ComplexType[2]) == sizeof(double[4]),
+                "complex<double> has the same memory layout as two consecutive doubles"
+        );
         double* a = reinterpret_cast<double*>(spectrum);
 
         // Ooura's function
