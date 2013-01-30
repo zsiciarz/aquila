@@ -23,9 +23,9 @@
 #include "FramesCollection.h"
 #include "SignalSource.h"
 #include <cstddef>
+#include <cstdint>
 #include <string>
 #include <vector>
-#include <boost/cstdint.hpp>
 
 namespace Aquila
 {
@@ -40,18 +40,18 @@ namespace Aquila
     struct WaveHeader
     {
         char   RIFF[4];
-        boost::uint32_t DataLength;
+        std::uint32_t DataLength;
         char   WAVE[4];
         char   fmt_[4];
-        boost::uint32_t SubBlockLength;
-        boost::uint16_t formatTag;
-        boost::uint16_t Channels;
-        boost::uint32_t SampFreq;
-        boost::uint32_t BytesPerSec;
-        boost::uint16_t BytesPerSamp;
-        boost::uint16_t BitsPerSamp;
+        std::uint32_t SubBlockLength;
+        std::uint16_t formatTag;
+        std::uint16_t Channels;
+        std::uint32_t SampFreq;
+        std::uint32_t BytesPerSec;
+        std::uint16_t BytesPerSamp;
+        std::uint16_t BitsPerSamp;
         char   data[4];
-        boost::uint32_t WaveSize;
+        std::uint32_t WaveSize;
     };
 
     /**

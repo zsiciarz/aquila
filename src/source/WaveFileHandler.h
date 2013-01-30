@@ -21,7 +21,6 @@
 #include "../global.h"
 #include "SignalSource.h"
 #include "WaveFile.h"
-#include <boost/cstdint.hpp>
 #include <cstddef>
 #include <string>
 

@@ -1,7 +1,6 @@
 #include "aquila/global.h"
 #include "aquila/source/ArrayData.h"
 #include "aquila/source/Frame.h"
-#include <boost/cstdint.hpp>
 #include <unittestpp.h>
 
 

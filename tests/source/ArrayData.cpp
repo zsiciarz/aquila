@@ -1,6 +1,6 @@
 #include "aquila/global.h"
 #include "aquila/source/ArrayData.h"
-#include <boost/cstdint.hpp>
+#include <cstdint>
 #include <unittestpp.h>
 
 
@@ -17,29 +17,29 @@ SUITE(ArrayData)
 
     TEST(BitsPerSample8)
     {
-        boost::int8_t arr[SIZE] = {0};
-        Aquila::ArrayData<boost::int8_t> data(arr, SIZE, 22050);
+        std::int8_t arr[SIZE] = {0};
+        Aquila::ArrayData<std::int8_t> data(arr, SIZE, 22050);
         CHECK_EQUAL(8 * sizeof(Aquila::SampleType), data.getBitsPerSample());
     }
 
     TEST(BitsPerSample16)
     {
-        boost::int16_t arr[SIZE] = {0};
-        Aquila::ArrayData<boost::int16_t> data(arr, SIZE, 22050);
+        std::int16_t arr[SIZE] = {0};
+        Aquila::ArrayData<std::int16_t> data(arr, SIZE, 22050);
         CHECK_EQUAL(8 * sizeof(Aquila::SampleType), data.getBitsPerSample());
     }
 
     TEST(BitsPerSample32)
     {
-        boost::int32_t arr[SIZE] = {0};
-        Aquila::ArrayData<boost::int32_t> data(arr, SIZE, 22050);
+        std::int32_t arr[SIZE] = {0};
+        Aquila::ArrayData<std::int32_t> data(arr, SIZE, 22050);
         CHECK_EQUAL(8 * sizeof(Aquila::SampleType), data.getBitsPerSample());
     }
 
     TEST(BitsPerSample64)
     {
-        boost::int64_t arr[SIZE] = {0};
-        Aquila::ArrayData<boost::int64_t> data(arr, SIZE, 22050);
+        std::int64_t arr[SIZE] = {0};
+        Aquila::ArrayData<std::int64_t> data(arr, SIZE, 22050);
         CHECK_EQUAL(8 * sizeof(Aquila::SampleType), data.getBitsPerSample());
     }
 

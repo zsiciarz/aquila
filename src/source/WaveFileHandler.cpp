@@ -17,6 +17,7 @@
 
 #include "WaveFileHandler.h"
 #include "WaveFile.h"
+#include <cstdint>
 #include <cstring>
 #include <fstream>
 
@@ -104,15 +105,15 @@ namespace Aquila
      */
     void WaveFileHandler::createHeader(const SignalSource &source, WaveHeader &header)
     {
-        boost::uint32_t frequency = static_cast<boost::uint32_t>(source.getSampleFrequency());
+        std::uint32_t frequency = static_cast<std::uint32_t>(source.getSampleFrequency());
         // saving only mono files at the moment
-        boost::uint16_t channels = 1;
-        boost::uint16_t bitsPerSample = source.getBitsPerSample();
+        std::uint16_t channels = 1;
+        std::uint16_t bitsPerSample = source.getBitsPerSample();
         // higher dynamic sources will be converted down to 16 bits per sample
         if (bitsPerSample > 16)
             bitsPerSample = 16;
-        boost::uint32_t bytesPerSec = frequency * channels * bitsPerSample / 8;
-        boost::uint32_t waveSize = source.getSamplesCount() * channels * bitsPerSample / 8;
+        std::uint32_t bytesPerSec = frequency * channels * bitsPerSample / 8;
+        std::uint32_t waveSize = source.getSamplesCount() * channels * bitsPerSample / 8;
 
         strncpy(header.RIFF, "RIFF", 4);
         // DataLength is the file size excluding first two header fields -
