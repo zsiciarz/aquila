@@ -23,11 +23,6 @@ set(Aquila_BUILD_TESTS ON CACHE BOOL "Build test programs?" FORCE)
 #
 ################################################################################
 
-# Boost
-find_package(Boost COMPONENTS system filesystem REQUIRED)
-include_directories(${Boost_INCLUDE_DIRS})
-link_directories(${Boost_LIBRARY_DIRS})
-
 # libraries bundled with Aquila
 add_subdirectory(lib)
 set(Aquila_LIBRARIES_TO_LINK_WITH Ooura_fft)
