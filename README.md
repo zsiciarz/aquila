@@ -33,7 +33,6 @@ Requirements
 
 The following dependencies are required to build the library from source.
 
- * Boost C++ libraries
  * CMake > 2.6
 
 
