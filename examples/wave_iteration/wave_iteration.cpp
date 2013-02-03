@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     Aquila::WaveFile wav(argv[1]);
     std::cout << "Loaded file: " << wav.getFilename()
               << " (" << wav.getBitsPerSample() << "b)" << std::endl;
-    Aquila::SampleType maxValue = 0, minValue = 0;
+    Aquila::SampleType maxValue = 0, minValue = 0, average = 0;
 
     // simple index-based iteration
     for (std::size_t i = 0; i < wav.getSamplesCount(); ++i)
@@ -32,6 +32,14 @@ int main(int argc, char *argv[])
             minValue = *it;
     }
     std::cout << "Minimum sample value: " << minValue << std::endl;
+
+    // range-based for loop
+    for (auto sample : wav)
+    {
+        average += sample;
+    }
+    average /= wav.getSamplesCount();
+    std::cout << "Average: " << average << std::endl;
 
     // STL algorithms work too, so the previous examples could be rewritten
     // using max/min_element.
