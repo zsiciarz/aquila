@@ -25,10 +25,9 @@ int main(int argc, char *argv[])
               << ", frame size: " << FRAME_SIZE
               << ", number of frames: " << frames.count() << std::endl;
 
-    typedef Aquila::FramesCollection::iterator FrameIterator;
     unsigned int i = 0;
     // here, begin() and end() return iterators that point to frame objects
-    for (FrameIterator it = frames.begin(); it != frames.end(); ++it, ++i)
+    for (auto it = frames.begin(); it != frames.end(); ++it, ++i)
     {
         // and here the iterators returned point to individual samples
         // in each frame
