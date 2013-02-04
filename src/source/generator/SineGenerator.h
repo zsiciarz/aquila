@@ -31,6 +31,25 @@ namespace Aquila
         SineGenerator(FrequencyType sampleFrequency);
 
         virtual void generate(std::size_t samplesCount);
+
+        /**
+         * Sets phase shift of the generated sine wave.
+         *
+         * @param phase phase shift (0 < phase <= 1)
+         * @return the current object for fluent interface
+         */
+        SineGenerator& setPhase(double phase)
+        {
+            m_phase = phase;
+
+            return *this;
+        }
+
+    private:
+        /**
+         * Phase shift as a fraction of whole period (default = 0.0).
+         */
+        double m_phase;
     };
 }
 

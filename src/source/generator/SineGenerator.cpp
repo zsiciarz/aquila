@@ -26,7 +26,7 @@ namespace Aquila
      * @param sampleFrequency sample frequency of the signal
      */
     SineGenerator::SineGenerator(FrequencyType sampleFrequency):
-        Generator(sampleFrequency)
+        Generator(sampleFrequency), m_phase(0.0)
     {
     }
 
@@ -43,7 +43,8 @@ namespace Aquila
         for (std::size_t i = 0; i < samplesCount; ++i)
         {
             m_buffer[i] = m_amplitude *
-                          std::sin(2.0 * M_PI * normalizedFrequency * i);
+                          std::sin(2.0 * M_PI * normalizedFrequency * i +
+                                   m_phase * 2.0 * M_PI);
         }
     }
 }
