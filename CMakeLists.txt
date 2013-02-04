@@ -59,6 +59,7 @@ set(Aquila_HEADERS
     src/source/ArrayData.h
     src/source/PlainTextFile.h
     src/source/RawPcmFile.h
+    src/source/Sum.h
     src/source/WaveFile.h
     src/source/WaveFileHandler.h
     src/source/generator/Generator.h
