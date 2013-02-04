@@ -26,7 +26,7 @@ namespace Aquila
      * @param sampleFrequency sample frequency of the signal
      */
     SineGenerator::SineGenerator(FrequencyType sampleFrequency):
-        Generator(sampleFrequency), m_phase(0.0)
+        Generator(sampleFrequency)
     {
     }
 

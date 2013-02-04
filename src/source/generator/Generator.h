@@ -122,6 +122,19 @@ namespace Aquila
         }
 
         /**
+         * Sets phase shift of the generated wave.
+         *
+         * @param phase phase shift (0 < phase <= 1)
+         * @return the current object for fluent interface
+         */
+        Generator& setPhase(double phase)
+        {
+            m_phase = phase;
+
+            return *this;
+        }
+
+        /**
          * Generates a given number of samples.
          *
          * @param samplesCount how many samples to generate
@@ -148,6 +161,11 @@ namespace Aquila
          * Amplitude of the generated signal (not always used).
          */
         SampleType m_amplitude;
+
+        /**
+         * Phase shift as a fraction of whole period (default = 0.0).
+         */
+        double m_phase;
     };
 }
 
