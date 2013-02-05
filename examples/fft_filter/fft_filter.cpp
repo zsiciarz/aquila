@@ -15,9 +15,9 @@ int main()
     const Aquila::FrequencyType f1 = 96, f2 = 813;
     const Aquila::FrequencyType f_lp = 500;
 
-    Aquila::SineGenerator sineGenerator1 = Aquila::SineGenerator(sampleFreq);
+    Aquila::SineGenerator sineGenerator1(sampleFreq);
     sineGenerator1.setAmplitude(32).setFrequency(f1).generate(SIZE);
-    Aquila::SineGenerator sineGenerator2 = Aquila::SineGenerator(sampleFreq);
+    Aquila::SineGenerator sineGenerator2(sampleFreq);
     sineGenerator2.setAmplitude(8).setFrequency(f2).setPhase(0.75).generate(SIZE);
     Aquila::Sum sum(sineGenerator1, sineGenerator2);
 
