@@ -22,6 +22,7 @@
 #include "SignalSource.h"
 #include <algorithm>
 #include <cstddef>
+#include <vector>
 
 namespace Aquila
 {
@@ -36,12 +37,6 @@ namespace Aquila
      * A plain array does not carry any information about sample rate,
      * so ArrayData's constructor expects sample frequency as its third
      * argument.
-     *
-     * ArrayData doesn't take ownership of the original array. However,
-     * if the data is of some different type than SampleType, it is copied
-     * and converted to SampleType, and that copy is owned by object.
-     * If the data is an array of SampleType values, no copying occurs
-     * and the data are immediately accessible.
      *
      * ArrayData also lacks any array bounds checking in the sample()
      * method - for performance reasons. (A future version may conditionally
@@ -60,19 +55,15 @@ namespace Aquila
          */
         ArrayData(Numeric* data, std::size_t dataLength,
                   FrequencyType sampleFrequency):
-            m_data(0), m_dataLength(dataLength), m_owns(false),
-            m_sampleFrequency(sampleFrequency)
+            m_data(data, data + dataLength), m_sampleFrequency(sampleFrequency)
         {
-            convertArray(data);
         }
 
         /**
-         * Releases the memory if the object owns its data.
+         * No-op destructor.
          */
         ~ArrayData()
         {
-            if (m_owns)
-                delete [] m_data;
         }
 
         /**
@@ -98,11 +89,11 @@ namespace Aquila
         /**
          * Returns number of samples in the array.
          *
-         * @return length of the wrapped array
+         * @return length of the wrapped data
          */
         virtual std::size_t getSamplesCount() const
         {
-            return m_dataLength;
+            return m_data.size();
         }
 
         /**
@@ -121,57 +112,24 @@ namespace Aquila
         /**
          * Returns sample data (read-only!) as a const C-style array.
          *
-         * This is the simplest implementation as it just exposes the data
-         * member.
-         *
          * @return C-style array containing sample data
          */
         virtual const SampleType* toArray() const
         {
-            return m_data;
+            return &m_data[0];
         }
 
     private:
         /**
-         * Pointer to the data array - not owned by the object!
+         * Data vector.
          */
-        SampleType* m_data;
-
-        /**
-         * Array size.
-         */
-        std::size_t m_dataLength;
-
-        /**
-         * Whether the object owns its data table.
-         */
-        bool m_owns;
+        std::vector<SampleType> m_data;
 
         /**
          * Sample frequency of the data.
          */
         FrequencyType m_sampleFrequency;
-
-        void convertArray(Numeric* data);
     };
-
-    /**
-     * Converts a general numeric array to SampleType array.
-     *
-     * Converted data are owned by the object and are freed in the destructor.
-     *
-     * @param data array to convert
-     */
-    template <typename Numeric>
-    void ArrayData<Numeric>::convertArray(Numeric* data)
-    {
-        m_data = new SampleType[m_dataLength];
-        m_owns = true;
-        std::copy(data, data + m_dataLength, m_data);
-    }
-
-    template <>
-    void ArrayData<SampleType>::convertArray(SampleType* data);
 }
 
 #endif // ARRAYDATA_H
