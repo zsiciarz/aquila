@@ -37,10 +37,10 @@ namespace Aquila
      */
     void WhiteNoiseGenerator::generate(std::size_t samplesCount)
     {
-        m_buffer.resize(samplesCount);
+        m_data.resize(samplesCount);
         for (std::size_t i = 0; i < samplesCount; ++i)
         {
-            m_buffer[i] = m_amplitude * (randomDouble() - 0.5);
+            m_data[i] = m_amplitude * (randomDouble() - 0.5);
         }
     }
 }

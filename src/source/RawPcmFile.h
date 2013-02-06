@@ -23,7 +23,6 @@
 #include <algorithm>
 #include <cstddef>
 #include <fstream>
-#include <iterator>
 #include <string>
 
 namespace Aquila
@@ -48,7 +47,7 @@ namespace Aquila
          * @param sampleFrequency sample frequency of the data in file
          */
         RawPcmFile(std::string filename, FrequencyType sampleFrequency):
-            m_sampleFrequency(sampleFrequency)
+            SignalSource(sampleFrequency)
         {
             std::fstream fs;
             fs.open(filename.c_str(), std::ios::in | std::ios::binary);
@@ -66,72 +65,6 @@ namespace Aquila
             delete [] buffer;
             fs.close();
         }
-
-        /**
-         * Returns signal sample frequency.
-         *
-         * @return sample frequency in Hz
-         */
-        virtual FrequencyType getSampleFrequency() const
-        {
-            return m_sampleFrequency;
-        }
-
-        /**
-         * Returns number of bits per sample
-         *
-         * @return 8 * number of bytes per sample
-         */
-        virtual unsigned short getBitsPerSample() const
-        {
-            return 8 * sizeof(SampleType);
-        }
-
-        /**
-         * Returns number of samples in file.
-         *
-         * @return samples count
-         */
-        virtual std::size_t getSamplesCount() const
-        {
-            return m_data.size();
-        }
-
-        /**
-         * Returns sample value at a given position in the file.
-         *
-         * Doesn't check that the position is valid.
-         *
-         * @param position sample position
-         * @return sample value
-         */
-        virtual SampleType sample(std::size_t position) const
-        {
-            return m_data[position];
-        }
-
-        /**
-         * Returns sample data (read-only!) as a const C-style array.
-         *
-         * Uses the same vector trick as WaveFile.
-         *
-         * @return C-style array containing sample data
-         */
-        virtual const SampleType* toArray() const
-        {
-            return &(m_data)[0];
-        }
-
-    private:
-        /**
-         * Actual sample data.
-         */
-        std::vector<SampleType> m_data;
-
-        /**
-         * Sample frequency of the data.
-         */
-        FrequencyType m_sampleFrequency;
     };
 }
 

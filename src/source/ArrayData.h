@@ -20,9 +20,7 @@
 
 #include "../global.h"
 #include "SignalSource.h"
-#include <algorithm>
 #include <cstddef>
-#include <vector>
 
 namespace Aquila
 {
@@ -55,80 +53,10 @@ namespace Aquila
          */
         ArrayData(Numeric* data, std::size_t dataLength,
                   FrequencyType sampleFrequency):
-            m_data(data, data + dataLength), m_sampleFrequency(sampleFrequency)
+            SignalSource(sampleFrequency)
         {
+            m_data.assign(data, data + dataLength);
         }
-
-        /**
-         * No-op destructor.
-         */
-        ~ArrayData()
-        {
-        }
-
-        /**
-         * Returns signal sample frequency.
-         *
-         * @return sample frequency in Hz
-         */
-        virtual FrequencyType getSampleFrequency() const
-        {
-            return m_sampleFrequency;
-        }
-
-        /**
-         * Returns number of bits per sample
-         *
-         * @return 8 * number of bytes per sample
-         */
-        virtual unsigned short getBitsPerSample() const
-        {
-            return 8 * sizeof(SampleType);
-        }
-
-        /**
-         * Returns number of samples in the array.
-         *
-         * @return length of the wrapped data
-         */
-        virtual std::size_t getSamplesCount() const
-        {
-            return m_data.size();
-        }
-
-        /**
-         * Returns sample value at a given position in the array.
-         *
-         * Doesn't check that the position is valid array index.
-         *
-         * @param position sample position (from 0 to array length - 1)
-         * @return sample value
-         */
-        virtual SampleType sample(std::size_t position) const
-        {
-            return m_data[position];
-        }
-
-        /**
-         * Returns sample data (read-only!) as a const C-style array.
-         *
-         * @return C-style array containing sample data
-         */
-        virtual const SampleType* toArray() const
-        {
-            return &m_data[0];
-        }
-
-    private:
-        /**
-         * Data vector.
-         */
-        std::vector<SampleType> m_data;
-
-        /**
-         * Sample frequency of the data.
-         */
-        FrequencyType m_sampleFrequency;
     };
 }
 

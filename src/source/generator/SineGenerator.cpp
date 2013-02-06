@@ -37,14 +37,15 @@ namespace Aquila
      */
     void SineGenerator::generate(std::size_t samplesCount)
     {
-        m_buffer.resize(samplesCount);
+        m_data.resize(samplesCount);
         double normalizedFrequency = m_frequency /
                                      static_cast<double>(m_sampleFrequency);
         for (std::size_t i = 0; i < samplesCount; ++i)
         {
-            m_buffer[i] = m_amplitude *
-                          std::sin(2.0 * M_PI * normalizedFrequency * i +
-                                   m_phase * 2.0 * M_PI);
+            m_data[i] = m_amplitude * std::sin(
+                2.0 * M_PI * normalizedFrequency * i +
+                m_phase * 2.0 * M_PI
+            );
         }
     }
 }

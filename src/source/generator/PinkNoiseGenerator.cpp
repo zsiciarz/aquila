@@ -37,7 +37,7 @@ namespace Aquila
      */
     void PinkNoiseGenerator::generate(std::size_t samplesCount)
     {
-        m_buffer.resize(samplesCount);
+        m_data.resize(samplesCount);
 
         // Voss algorithm initialization
         maxKey = 0xFFFF;
@@ -49,7 +49,7 @@ namespace Aquila
 
         for (std::size_t i = 0; i < samplesCount; ++i)
         {
-            m_buffer[i] = m_amplitude * pinkSample();
+            m_data[i] = m_amplitude * pinkSample();
         }
     }
 

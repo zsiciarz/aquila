@@ -31,6 +31,7 @@ namespace Aquila
      */
     Frame::Frame(const SignalSource& source, unsigned int indexBegin,
             unsigned int indexEnd):
+        SignalSource(source.getSampleFrequency()),
         m_source(&source), m_begin(indexBegin),
         m_end((indexEnd > source.getSamplesCount()) ? source.getSamplesCount() : indexEnd)
     {
@@ -42,6 +43,7 @@ namespace Aquila
      * @param other reference to another frame
      */
     Frame::Frame(const Frame &other):
+        SignalSource(other.m_sampleFrequency),
         m_source(other.m_source), m_begin(other.m_begin), m_end(other.m_end)
     {
     }

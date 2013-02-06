@@ -26,6 +26,7 @@ namespace Aquila
      * @param filename full path to .wav file
      */
     WaveFile::WaveFile(const std::string& filename):
+        SignalSource(),
         m_frameLength(0), m_overlap(0.0), m_sourceChannel(LEFT)
     {
         load(filename);

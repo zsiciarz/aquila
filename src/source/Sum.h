@@ -22,7 +22,6 @@
 #include "SignalSource.h"
 #include <algorithm>
 #include <cstddef>
-#include <vector>
 
 namespace Aquila
 {
@@ -35,6 +34,7 @@ namespace Aquila
     {
     public:
         Sum(const SignalSource& source1, const SignalSource& source2):
+            SignalSource(source1.getSampleFrequency()),
             m_source1(source1), m_source2(source2)
         {
             std::size_t maxLength = std::min(source1.length(), source2.length());
@@ -45,67 +45,9 @@ namespace Aquila
             }
         }
 
-        /**
-         * Returns signal sample frequency.
-         *
-         * @return sample frequency in Hz
-         */
-        virtual FrequencyType getSampleFrequency() const
-        {
-            return m_source1.getSampleFrequency();
-        }
-
-        /**
-         * Returns number of bits per sample
-         *
-         * @return 8 * number of bytes per sample
-         */
-        virtual unsigned short getBitsPerSample() const
-        {
-            return m_source1.getBitsPerSample();
-        }
-
-        /**
-         * Returns number of samples.
-         *
-         * @return length of the wrapped array
-         */
-        virtual std::size_t getSamplesCount() const
-        {
-            return m_source1.getBitsPerSample();
-        }
-
-        /**
-         * Returns sum of sample values at a given position in both input sources.
-         *
-         * @param position sample position
-         * @return sample value
-         */
-        virtual SampleType sample(std::size_t position) const
-        {
-            return m_data[position];
-        }
-
-        /**
-         * Returns sample data (read-only!) as a const C-style array.
-         *
-         * Uses the same vector trick as WaveFile.
-         *
-         * @return C-style array containing sample data
-         */
-        virtual const SampleType* toArray() const
-        {
-            return &(m_data)[0];
-        }
-
     private:
         const SignalSource& m_source1;
         const SignalSource& m_source2;
-
-        /**
-         * Actual sample data.
-         */
-        std::vector<SampleType> m_data;
     };
 }
 

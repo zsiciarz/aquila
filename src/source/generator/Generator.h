@@ -21,7 +21,6 @@
 #include "../SignalSource.h"
 #include "../../global.h"
 #include <cstddef>
-#include <vector>
 
 namespace Aquila
 {
@@ -37,63 +36,6 @@ namespace Aquila
          * @param sampleFrequency sample frequency of the data in array
          */
         Generator(FrequencyType sampleFrequency);
-
-        /**
-         * Returns signal sample frequency.
-         *
-         * @return sample frequency in Hz
-         */
-        virtual FrequencyType getSampleFrequency() const
-        {
-            return m_sampleFrequency;
-        }
-
-        /**
-         * Returns number of bits per sample
-         *
-         * @return 8 * number of bytes per sample
-         */
-        virtual unsigned short getBitsPerSample() const
-        {
-            return 8 * sizeof(SampleType);
-        }
-
-        /**
-         * Returns the length of generator's internal buffer.
-         *
-         * @return samples count
-         */
-        virtual std::size_t getSamplesCount() const
-        {
-            return m_buffer.size();
-        }
-
-        /**
-         * Returns sample value at a given position in the buffer.
-         *
-         * @param position sample position (from 0 to buffer length - 1)
-         * @return sample value
-         */
-        virtual SampleType sample(std::size_t position) const
-        {
-            return m_buffer[position];
-        }
-
-        /**
-         * Returns sample data (read-only!) as a const C-style array.
-         *
-         * Because vector guarantees to be contiguous in memory, we can
-         * return the address of the first element in the vector.
-         * It is valid only before next operation which modifies the vector,
-         * but as we use it only to copy that memory to another buffer,
-         * we can do that safely.
-         *
-         * @return C-style array containing sample data
-         */
-        virtual const SampleType* toArray() const
-        {
-            return &(m_buffer)[0];
-        }
 
         /**
          * Sets frequency of the generated signal.
@@ -142,16 +84,6 @@ namespace Aquila
         virtual void generate(std::size_t samplesCount) = 0;
 
     protected:
-        /**
-         * Sample frequency of the data.
-         */
-        FrequencyType m_sampleFrequency;
-
-        /**
-         * Internal data buffer.
-         */
-        std::vector<SampleType> m_buffer;
-
         /**
          * Frequency of the generated signal (not always used).
          */

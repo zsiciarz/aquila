@@ -25,7 +25,7 @@
 
 namespace Aquila
 {
-	/**
+    /**
      * An ecapsulation of a single frame of the signal.
      *
      * The Frame class wraps a signal frame (short fragment of a signal).
@@ -45,12 +45,12 @@ namespace Aquila
      * original source:        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
      * frame:                          |xxxxxxxxxxxx|
      * sample number in frame:         0             M              @endverbatim
-	 */
+     */
     class AQUILA_EXPORT Frame : public SignalSource
-	{
-	public:
+    {
+    public:
         Frame(const SignalSource& source, unsigned int indexBegin,
-		        unsigned int indexEnd);
+                unsigned int indexEnd);
         Frame(const Frame& other);
         Frame& operator=(const Frame& other);
 
@@ -62,16 +62,6 @@ namespace Aquila
         virtual std::size_t getSamplesCount() const
         {
             return m_end - m_begin;
-        }
-
-        /**
-         * Returns signal sample frequency.
-         *
-         * @return sample frequency of the original signal
-         */
-        virtual FrequencyType getSampleFrequency() const
-        {
-            return m_source->getSampleFrequency();
         }
 
         /**
@@ -108,7 +98,7 @@ namespace Aquila
             return m_source->toArray() + static_cast<std::ptrdiff_t>(m_begin);
         }
 
-	private:
+    private:
         /**
          * A pointer to constant original source (eg. a WAVE file).
          */
@@ -130,7 +120,7 @@ namespace Aquila
             std::swap(m_end,    other.m_end);
             std::swap(m_source, other.m_source);
         }
-	};
+    };
 }
 
 #endif // FRAME_H

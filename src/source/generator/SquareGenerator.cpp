@@ -37,7 +37,7 @@ namespace Aquila
      */
     void SquareGenerator::generate(std::size_t samplesCount)
     {
-        m_buffer.resize(samplesCount);
+        m_data.resize(samplesCount);
         std::size_t samplesPerPeriod = static_cast<std::size_t>(
             m_sampleFrequency / static_cast<double>(m_frequency));
         std::size_t positiveLength = static_cast<std::size_t>(m_duty *
@@ -46,7 +46,7 @@ namespace Aquila
         for (std::size_t i = 0; i < samplesCount; ++i)
         {
             std::size_t t = i % samplesPerPeriod;
-            m_buffer[i] = m_amplitude * (t < positiveLength ? 1 : -1);
+            m_data[i] = m_amplitude * (t < positiveLength ? 1 : -1);
         }
     }
 }

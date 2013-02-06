@@ -30,7 +30,7 @@ namespace Aquila
      */
     PlainTextFile::PlainTextFile(std::string filename,
                                  FrequencyType sampleFrequency):
-        m_sampleFrequency(sampleFrequency)
+        SignalSource(sampleFrequency)
     {
         std::fstream fs;
         fs.open(filename.c_str(), std::ios::in);

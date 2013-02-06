@@ -1,7 +1,7 @@
 /**
  * @file SignalSource.h
  *
- * An abstract signal source interface.
+ * A base signal source class.
  *
  * This file is part of the Aquila DSP library.
  * Aquila is free software, licensed under the MIT/X11 License. A copy of
@@ -21,6 +21,7 @@
 #include "../global.h"
 #include <cstddef>
 #include <iterator>
+#include <vector>
 
 namespace Aquila
 {
@@ -30,8 +31,7 @@ namespace Aquila
      * This is the base class for all signal sources cooperating with the
      * library, be it an array, a text file or a WAVE binary file. Most of
      * algorithms defined in the library expect a pointer or a reference
-     * to SignalSource. As it is an abstract virtual base class, it cannot
-     * be instantiated on its own. The library ships with a few derived
+     * to SignalSource. The library ships with a few derived
      * classes for a quick start, including ArrayData, WaveFile etc.
      *
      * Signal sources support the concept of iteration. Use
@@ -39,25 +39,25 @@ namespace Aquila
      * which allow per-sample data access. The iterators work well with
      * C++ standard library algorithms, so feel free to use them instead of
      * manually looping and calling SignalSource::sample().
-     *
-     * To create your own type of signal source, inherit this class and define
-     * concrete implementations for the following methods:
-     *
-     * - getSampleFrequency()
-     * - getBitsPerSample()
-     * - getSamplesCount()
-     * - sample()
      */
     class AQUILA_EXPORT SignalSource
     {
     public:
         /**
-         * The constructor does nothing.
-         *
-         * Included for symmetry with the destructor, but a compiler-generated
-         * constructor would suffice.
+         * The default constructor sets sample frequency to 0.
          */
-        SignalSource() {}
+        SignalSource():
+            m_sampleFrequency(0)
+        {
+        }
+
+        /**
+         * This overload initializes sample frequency of the source.
+         */
+        SignalSource(FrequencyType sampleFrequency):
+            m_sampleFrequency(sampleFrequency)
+        {
+        }
 
         /**
          * The destructor does nothing, but must be defined as virtual.
@@ -67,48 +67,57 @@ namespace Aquila
         /**
          * Returns sample frequency of the signal.
          *
-         * Needs reimplementing in derived classes.
-         *
          * @return sample frequency in Hz
          */
-        virtual FrequencyType getSampleFrequency() const = 0;
+        virtual FrequencyType getSampleFrequency() const
+        {
+            return m_sampleFrequency;
+        }
 
         /**
          * Returns number of bits per signal sample.
          *
-         * Needs reimplementing in derived classes.
-         *
          * @return sample size in bits
          */
-        virtual unsigned short getBitsPerSample() const = 0;
+        virtual unsigned short getBitsPerSample() const
+        {
+            return 8 * sizeof(SampleType);
+        }
 
         /**
          * Returns number of samples in the source.
          *
-         * Needs reimplementing in derived classes.
-         *
          * @return samples count
          */
-        virtual std::size_t getSamplesCount() const = 0;
+        virtual std::size_t getSamplesCount() const
+        {
+            return m_data.size();
+        }
 
         /**
          * Returns sample located at the "position" in the signal.
          *
-         * Needs reimplementing in derived classes.
-         *
          * @param position sample index in the signal
          * @return sample value
          */
-        virtual SampleType sample(std::size_t position) const = 0;
+        virtual SampleType sample(std::size_t position) const
+        {
+            return m_data[position];
+        }
 
         /**
          * Returns sample data (read-only!) as a const C-style array.
          *
-         * Needs reimplementing in derived classes.
+         * Because vector guarantees to be contiguous in memory, we can
+         * return the address of the first element in the vector.
+         * It is valid only until next operation which modifies the vector.
          *
          * @return C-style array containing sample data
          */
-        virtual const SampleType* toArray() const = 0;
+        virtual const SampleType* toArray() const
+        {
+            return &m_data[0];
+        }
 
         /**
          * Returns number of samples in the source.
@@ -260,6 +269,17 @@ namespace Aquila
              */
             std::size_t idx;
         };
+
+    protected:
+        /**
+         * Actual sample data.
+         */
+        std::vector<SampleType> m_data;
+
+        /**
+         * Sample frequency of the data.
+         */
+        FrequencyType m_sampleFrequency;
     };
 }
 
