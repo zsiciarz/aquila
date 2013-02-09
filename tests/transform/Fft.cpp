@@ -1,43 +1,37 @@
 #include "aquila/global.h"
+#include "aquila/source/generator/SineGenerator.h"
 #include "aquila/transform/OouraFft.h"
 #include <unittestpp.h>
 #include <algorithm>
-#include <cmath>
 #include <cstddef>
-#include <cstdlib>
 #include <iterator>
+#include <vector>
 
 unsigned int findPeak(std::size_t arraySize,
                       Aquila::FrequencyType sampleFrequency,
                       Aquila::FrequencyType signalFrequency)
 {
-    // generate test signal (a sine wave)
-    double dt = 1.0 / sampleFrequency;
-    double* x = new double[arraySize];
-    for (std::size_t i = 0; i < arraySize; ++i)
-    {
-        x[i] = 64 * std::sin(2 * M_PI * signalFrequency * i * dt);
-    }
+    Aquila::SineGenerator generator(sampleFrequency);
+    generator.setAmplitude(64).setFrequency(signalFrequency).generate(arraySize);
 
-    // calculate the FFT and magnitude spectrum
     Aquila::ComplexType* spectrum = new Aquila::ComplexType[arraySize];
     Aquila::OouraFft fft(arraySize);
-    fft.fft(x, spectrum);
-    double* absSpectrum = new double[arraySize / 2];
-    for (std::size_t i = 0; i < arraySize / 2; ++i)
-    {
-        absSpectrum[i] = std::abs(spectrum[i]);
-    }
-    // "iterator" pointing to highest spectrum peak
+    fft.fft(generator.toArray(), spectrum);
+
+    // "iterator" pointing to highest spectrum peak (comparing by magnitude)
     // the pointer difference is the number of spectral peak
-    double* peakPos = std::max_element(absSpectrum, absSpectrum + arraySize / 2);
-    unsigned int distance = std::distance(absSpectrum, peakPos);
+    auto peakPos = std::max_element(
+        spectrum,
+        spectrum + arraySize / 2,
+        [] (Aquila::ComplexType x, Aquila::ComplexType y) -> bool {
+            return std::abs(x) < std::abs(y);
+        }
+    );
 
-    delete [] absSpectrum;
+    unsigned int d = std::distance(spectrum, peakPos);
     delete [] spectrum;
-    delete [] x;
 
-    return distance;
+    return d;
 }
 
 SUITE(Fft)
