@@ -48,7 +48,7 @@ SUITE(ArrayData)
         Aquila::SampleType testArray[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         Aquila::ArrayData<> data(testArray, SIZE, 22050);
         std::size_t i = 0;
-        for (Aquila::ArrayData<>::iterator it = data.begin(); it != data.end(); it++, i++)
+        for (auto it = data.begin(); it != data.end(); it++, i++)
         {
             CHECK_EQUAL(testArray[i], *it);
         }
