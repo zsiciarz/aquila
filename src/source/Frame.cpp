@@ -49,6 +49,17 @@ namespace Aquila
     }
 
     /**
+     * Move constructor.
+     *
+     * @param other rvalue reference to another frame
+     */
+    Frame::Frame(Frame&& other):
+        SignalSource(other.m_sampleFrequency),
+        m_source(other.m_source), m_begin(other.m_begin), m_end(other.m_end)
+    {
+    }
+
+    /**
      * Assignes another frame to this one using copy-and-swap idiom.
      *
      * @param other reference to another frame

@@ -52,6 +52,7 @@ namespace Aquila
         Frame(const SignalSource& source, unsigned int indexBegin,
                 unsigned int indexEnd);
         Frame(const Frame& other);
+        Frame(Frame&& other);
         Frame& operator=(const Frame& other);
 
         /**
@@ -100,7 +101,7 @@ namespace Aquila
 
     private:
         /**
-         * A pointer to constant original source (eg. a WAVE file).
+         * A non-owning pointer to constant original source (eg. a WAVE file).
          */
         const SignalSource* m_source;
 
