@@ -19,6 +19,7 @@ set(Aquila_Test_SOURCES
     main.cpp
     source/ArrayData.cpp
     source/Frame.cpp
+    source/FramesCollection.cpp
     source/PlainTextFile.cpp
     source/RawPcmFile.cpp
     source/WaveFile.cpp
