@@ -94,6 +94,17 @@ namespace Aquila
         }
 
         /**
+         * Returns nth frame in the collection.
+         *
+         * @param index index of the frame in the collection
+         * @return Frame instance
+         */
+        Frame frame(std::size_t index) const
+        {
+            return m_frames[index];
+        }
+
+        /**
          * Returns an iterator pointing to the first frame.
          *
          * @return iterator
