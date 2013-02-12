@@ -77,7 +77,7 @@ namespace Aquila
             // when frame end exceeds source size, break out
             indexBegin = i * nonOverlapped;
             indexEnd = indexBegin + samplesPerFrame;
-            if (indexEnd < sourceSize)
+            if (indexEnd <= sourceSize)
                 m_frames.push_back(Frame(source, indexBegin, indexEnd));
             else
                 break;
