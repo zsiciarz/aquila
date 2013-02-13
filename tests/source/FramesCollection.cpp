@@ -4,12 +4,10 @@
 #include "aquila/source/FramesCollection.h"
 #include <unittestpp.h>
 #include <algorithm>
-#include <vector>
 
-
-bool equalSamples(Aquila::Frame frame, std::vector<Aquila::SampleType> v)
+bool equalSamples(Aquila::Frame frame, Aquila::SampleType arr[])
 {
-    return std::equal(frame.begin(), frame.end(), v.begin());
+    return std::equal(std::begin(frame), std::end(frame), arr);
 }
 
 SUITE(FramesCollection)
@@ -28,36 +26,42 @@ SUITE(FramesCollection)
     {
         Aquila::FramesCollection frames(data, 5);
         CHECK_EQUAL(2, frames.count());
-        CHECK(equalSamples(frames.frame(0), {0, 1, 2, 3, 4}));
-        CHECK(equalSamples(frames.frame(1), {5, 6, 7, 8, 9}));
+        Aquila::SampleType arr0[5] = {0, 1, 2, 3, 4};
+        CHECK(equalSamples(frames.frame(0), arr0));
+        Aquila::SampleType arr1[5] = {5, 6, 7, 8, 9};
+        CHECK(equalSamples(frames.frame(1), arr1));
     }
 
     TEST(TwoSamplesPerFrame)
     {
         Aquila::FramesCollection frames(data, 2);
         CHECK_EQUAL(5, frames.count());
-        CHECK(equalSamples(frames.frame(0), {0, 1}));
+        Aquila::SampleType arr[2] = {0, 1};
+        CHECK(equalSamples(frames.frame(0), arr));
     }
 
     TEST(OneSamplePerFrame)
     {
         Aquila::FramesCollection frames(data, 1);
         CHECK_EQUAL(10, frames.count());
-        CHECK(equalSamples(frames.frame(0), {0}));
+        Aquila::SampleType arr[1] = {0};
+        CHECK(equalSamples(frames.frame(0), arr));
     }
 
     TEST(AllSamplesPerFrame)
     {
         Aquila::FramesCollection frames(data, 10);
         CHECK_EQUAL(1, frames.count());
-        CHECK(equalSamples(frames.frame(0), {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}));
+        Aquila::SampleType arr[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        CHECK(equalSamples(frames.frame(0), arr));
     }
 
     TEST(MoreThanHalfSamplesPerFrame)
     {
         Aquila::FramesCollection frames(data, 7);
         CHECK_EQUAL(1, frames.count());
-        CHECK(equalSamples(frames.frame(0), {0, 1, 2, 3, 4, 5, 6}));
+        Aquila::SampleType arr[7] = {0, 1, 2, 3, 4, 5, 6};
+        CHECK(equalSamples(frames.frame(0), arr));
     }
 
     TEST(TooManySamplesPerFrame)
