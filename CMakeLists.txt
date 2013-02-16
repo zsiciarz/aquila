@@ -50,61 +50,61 @@ endif(SFML_FOUND)
 
 # library headers
 set(Aquila_HEADERS
-    src/global.h
-    src/functions.h
-    src/Exceptions.h
-    src/source/SignalSource.h
-    src/source/Frame.h
-    src/source/FramesCollection.h
-    src/source/ArrayData.h
-    src/source/PlainTextFile.h
-    src/source/RawPcmFile.h
-    src/source/Sum.h
-    src/source/WaveFile.h
-    src/source/WaveFileHandler.h
-    src/source/generator/Generator.h
-    src/source/generator/SineGenerator.h
-    src/source/generator/SquareGenerator.h
-    src/source/generator/TriangleGenerator.h
-    src/source/generator/PinkNoiseGenerator.h
-    src/source/generator/WhiteNoiseGenerator.h
-    src/transform/Fft.h
-    src/transform/AquilaFft.h
-    src/transform/OouraFft.h
-    src/transform/FftFactory.h
-    src/transform/Spectrogram.h
-    src/transform/Window.h
-    src/tools/TextPlot.h
+    aquila/global.h
+    aquila/functions.h
+    aquila/Exceptions.h
+    aquila/source/SignalSource.h
+    aquila/source/Frame.h
+    aquila/source/FramesCollection.h
+    aquila/source/ArrayData.h
+    aquila/source/PlainTextFile.h
+    aquila/source/RawPcmFile.h
+    aquila/source/Sum.h
+    aquila/source/WaveFile.h
+    aquila/source/WaveFileHandler.h
+    aquila/source/generator/Generator.h
+    aquila/source/generator/SineGenerator.h
+    aquila/source/generator/SquareGenerator.h
+    aquila/source/generator/TriangleGenerator.h
+    aquila/source/generator/PinkNoiseGenerator.h
+    aquila/source/generator/WhiteNoiseGenerator.h
+    aquila/transform/Fft.h
+    aquila/transform/AquilaFft.h
+    aquila/transform/OouraFft.h
+    aquila/transform/FftFactory.h
+    aquila/transform/Spectrogram.h
+    aquila/transform/Window.h
+    aquila/tools/TextPlot.h
 )
 
 # library sources
 set(Aquila_SOURCES
-    src/source/Frame.cpp
-    src/source/FramesCollection.cpp
-    src/source/PlainTextFile.cpp
-    src/source/WaveFile.cpp
-    src/source/WaveFileHandler.cpp
-    src/source/generator/Generator.cpp
-    src/source/generator/SineGenerator.cpp
-    src/source/generator/SquareGenerator.cpp
-    src/source/generator/TriangleGenerator.cpp
-    src/source/generator/PinkNoiseGenerator.cpp
-    src/source/generator/WhiteNoiseGenerator.cpp
-    src/transform/AquilaFft.cpp
-    src/transform/OouraFft.cpp
-    src/transform/FftFactory.cpp
-    src/transform/Spectrogram.cpp
-    src/transform/Window.cpp
-    src/tools/TextPlot.cpp
+    aquila/source/Frame.cpp
+    aquila/source/FramesCollection.cpp
+    aquila/source/PlainTextFile.cpp
+    aquila/source/WaveFile.cpp
+    aquila/source/WaveFileHandler.cpp
+    aquila/source/generator/Generator.cpp
+    aquila/source/generator/SineGenerator.cpp
+    aquila/source/generator/SquareGenerator.cpp
+    aquila/source/generator/TriangleGenerator.cpp
+    aquila/source/generator/PinkNoiseGenerator.cpp
+    aquila/source/generator/WhiteNoiseGenerator.cpp
+    aquila/transform/AquilaFft.cpp
+    aquila/transform/OouraFft.cpp
+    aquila/transform/FftFactory.cpp
+    aquila/transform/Spectrogram.cpp
+    aquila/transform/Window.cpp
+    aquila/tools/TextPlot.cpp
 )
 
 # SFML wrappers
 if(SFML_FOUND)
     list(APPEND Aquila_HEADERS
-        src/wrappers/SoundBufferAdapter.h
+        aquila/wrappers/SoundBufferAdapter.h
     )
     list(APPEND Aquila_SOURCES
-        src/wrappers/SoundBufferAdapter.cpp
+        aquila/wrappers/SoundBufferAdapter.cpp
     )
 endif(SFML_FOUND)
 
@@ -169,7 +169,7 @@ endif(Aquila_BUILD_TESTS)
 
 # install the binaries and include files
 install(TARGETS Aquila ARCHIVE DESTINATION lib LIBRARY DESTINATION lib)
-install(DIRECTORY src/ DESTINATION include/aquila FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY aquila/ DESTINATION include/aquila FILES_MATCHING PATTERN "*.h")
 install(FILES CHANGELOG LICENSE README.md DESTINATION ${CMAKE_INSTALL_PREFIX})
 
 
