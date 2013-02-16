@@ -123,6 +123,11 @@ endif(MSVC)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
     add_definitions(-std=gnu++0x)
+    if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+        add_definitions("-O0 -Wall -fprofile-arcs -ftest-coverage")
+        include(CodeCoverage)
+        setup_target_for_coverage(coverage aquila_test htmlcov)
+    endif()
 endif()
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
