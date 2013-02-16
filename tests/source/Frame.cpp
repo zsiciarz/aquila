@@ -22,6 +22,30 @@ SUITE(Frame)
         CHECK_EQUAL(data.getSampleFrequency(), frame.getSampleFrequency());
     }
 
+    TEST(Copying)
+    {
+        Aquila::Frame frame(data, 0, 3);
+        Aquila::Frame frameCopy(frame);
+        CHECK_EQUAL(3, frameCopy.getSamplesCount());
+        CHECK_EQUAL(2, frameCopy.sample(2));
+    }
+
+    TEST(Assignment)
+    {
+        Aquila::Frame frame(data, 0, 3);
+        Aquila::Frame otherFrame(data, 3, 6);
+        otherFrame = frame;
+        CHECK_EQUAL(3, otherFrame.getSamplesCount());
+        CHECK_EQUAL(2, otherFrame.sample(2));
+    }
+
+    TEST(ArrayOffset)
+    {
+        Aquila::Frame frame(data, 5, 8);
+        const Aquila::SampleType* frameArray = frame.toArray();
+        CHECK_EQUAL(5, frameArray - data.toArray());
+    }
+
     TEST(Sample1)
     {
         Aquila::Frame frame(data, 0, 10);
