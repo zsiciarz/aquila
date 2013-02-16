@@ -4,8 +4,7 @@
 #
 ################################################################################
 
-# all examples use installed headers, not the ones in the source distribution
-include_directories("${CMAKE_INSTALL_PREFIX}/include")
+include_directories("${CMAKE_SOURCE_DIR}")
 
 
 # a common setup for most of the examples
