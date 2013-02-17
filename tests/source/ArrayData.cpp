@@ -43,6 +43,34 @@ SUITE(ArrayData)
         CHECK_EQUAL(8 * sizeof(Aquila::SampleType), data.getBitsPerSample());
     }
 
+    TEST(BitsPerSample_u8)
+    {
+        std::uint8_t arr[SIZE] = {0};
+        Aquila::ArrayData<std::uint8_t> data(arr, SIZE, 22050);
+        CHECK_EQUAL(8 * sizeof(Aquila::SampleType), data.getBitsPerSample());
+    }
+
+    TEST(BitsPerSample_u16)
+    {
+        std::uint16_t arr[SIZE] = {0};
+        Aquila::ArrayData<std::uint16_t> data(arr, SIZE, 22050);
+        CHECK_EQUAL(8 * sizeof(Aquila::SampleType), data.getBitsPerSample());
+    }
+
+    TEST(BitsPerSample_u32)
+    {
+        std::uint32_t arr[SIZE] = {0};
+        Aquila::ArrayData<std::uint32_t> data(arr, SIZE, 22050);
+        CHECK_EQUAL(8 * sizeof(Aquila::SampleType), data.getBitsPerSample());
+    }
+
+    TEST(BitsPerSample_u64)
+    {
+        std::uint64_t arr[SIZE] = {0};
+        Aquila::ArrayData<std::uint64_t> data(arr, SIZE, 22050);
+        CHECK_EQUAL(8 * sizeof(Aquila::SampleType), data.getBitsPerSample());
+    }
+
     TEST(Iteration)
     {
         Aquila::SampleType testArray[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
