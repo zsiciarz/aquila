@@ -156,7 +156,7 @@ namespace Aquila
         /**
          * Returns number of bytes per sample.
          *
-         * @return 1 for 8b-mono, 2 for 8b-stereo or 16b-mono, 4 dor 16b-stereo
+         * @return 1 for 8b-mono, 2 for 8b-stereo or 16b-mono, 4 for 16b-stereo
          */
         unsigned int getBytesPerSample() const
         {
