@@ -2,7 +2,9 @@
 #include "aquila/source/WaveFile.h"
 #include "constants.h"
 #include <unittestpp.h>
+#include <algorithm>
 #include <string>
+#include <vector>
 
 
 SUITE(WaveFile)
@@ -30,6 +32,50 @@ SUITE(WaveFile)
     {
         Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_16B_MONO);
         CHECK_EQUAL(16, wav.getBitsPerSample());
+    }
+
+    TEST(BytesPerSample8Mono)
+    {
+        Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_8B_MONO);
+        CHECK_EQUAL(1, wav.getBytesPerSample());
+    }
+
+    TEST(BytesPerSample8Stereo)
+    {
+        Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_8B_STEREO);
+        CHECK_EQUAL(2, wav.getBytesPerSample());
+    }
+
+    TEST(BytesPerSample16Mono)
+    {
+        Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_16B_MONO);
+        CHECK_EQUAL(2, wav.getBytesPerSample());
+    }
+
+    TEST(BytesPerSample16Stereo)
+    {
+        Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_16B_STEREO);
+        CHECK_EQUAL(4, wav.getBytesPerSample());
+    }
+
+    TEST(BytesPerSecond)
+    {
+        std::vector<std::string> filenames;
+        filenames.push_back(Aquila_TEST_WAVEFILE_8B_MONO);
+        filenames.push_back(Aquila_TEST_WAVEFILE_8B_STEREO);
+        filenames.push_back(Aquila_TEST_WAVEFILE_16B_MONO);
+        filenames.push_back(Aquila_TEST_WAVEFILE_16B_STEREO);
+        std::for_each(
+            std::begin(filenames),
+            std::end(filenames),
+            [] (std::string filename) {
+                Aquila::WaveFile wav(filename);
+                unsigned int expected = static_cast<unsigned int>(
+                    wav.getSampleFrequency() * wav.getBytesPerSample()
+                );
+                CHECK_EQUAL(expected, wav.getBytesPerSec());
+            }
+        );
     }
 
     TEST(Channels8Mono)
