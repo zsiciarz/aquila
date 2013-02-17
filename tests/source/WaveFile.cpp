@@ -4,6 +4,7 @@
 #include "constants.h"
 #include <unittestpp.h>
 #include <algorithm>
+#include <cstddef>
 #include <string>
 #include <vector>
 
@@ -139,6 +140,31 @@ SUITE(WaveFile)
     {
         Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_16B_STEREO);
         CHECK_EQUAL(4552, wav.getSamplesCount());
+    }
+
+    TEST(ToArray)
+    {
+        Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_8B_MONO);
+        const Aquila::SampleType* arr = wav.toArray();
+        CHECK_EQUAL(wav.sample(0), arr[0]);
+    }
+
+    TEST(SetStereoChannel)
+    {
+        Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_16B_STEREO);
+        const Aquila::SampleType* arrLeft = wav.toArray();
+        wav.setSourceChannel(Aquila::RIGHT);
+        const Aquila::SampleType* arrRight = wav.toArray();
+        CHECK(arrLeft != arrRight);
+    }
+
+    TEST(SetStereoChannelOnMono)
+    {
+        Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_8B_MONO);
+        const Aquila::SampleType* arrLeft = wav.toArray();
+        wav.setSourceChannel(Aquila::RIGHT);
+        const Aquila::SampleType* arrRight = wav.toArray();
+        CHECK(arrLeft == arrRight);
     }
 
     TEST(FramesCount1)
