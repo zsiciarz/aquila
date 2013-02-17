@@ -36,24 +36,32 @@ SUITE(WaveFile)
     {
         Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_8B_MONO);
         CHECK_EQUAL(1, wav.getChannelsNum());
+        CHECK(wav.isMono());
+        CHECK(!wav.isStereo());
     }
 
     TEST(Channels8Stereo)
     {
         Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_8B_STEREO);
         CHECK_EQUAL(2, wav.getChannelsNum());
+        CHECK(!wav.isMono());
+        CHECK(wav.isStereo());
     }
 
     TEST(Channels16Mono)
     {
         Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_16B_MONO);
         CHECK_EQUAL(1, wav.getChannelsNum());
+        CHECK(wav.isMono());
+        CHECK(!wav.isStereo());
     }
 
     TEST(Channels16Stereo)
     {
         Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_16B_STEREO);
         CHECK_EQUAL(2, wav.getChannelsNum());
+        CHECK(!wav.isMono());
+        CHECK(wav.isStereo());
     }
 
     TEST(SampleFrequency)
