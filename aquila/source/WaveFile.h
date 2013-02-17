@@ -146,7 +146,7 @@ namespace Aquila
         /**
          * Returns the number of bytes per second.
          *
-         * @return product of sample frequency and bytes pare sample
+         * @return product of sample frequency and bytes per sample
          */
         unsigned int getBytesPerSec() const
         {
