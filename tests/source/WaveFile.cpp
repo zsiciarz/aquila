@@ -1,5 +1,6 @@
 #include "aquila/global.h"
 #include "aquila/source/WaveFile.h"
+#include "aquila/source/FramesCollection.h"
 #include "constants.h"
 #include <unittestpp.h>
 #include <algorithm>
@@ -143,48 +144,42 @@ SUITE(WaveFile)
     TEST(FramesCount1)
     {
         Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_8B_MONO);
-        wav.setFrameLength(0);
-        wav.setFrameOverlap(0);
-        CHECK_EQUAL(0, wav.getFramesCount());
+        auto frames = Aquila::FramesCollection::createFromDuration(wav, 0, 0);
+        CHECK_EQUAL(0, frames.count());
     }
 
     TEST(FramesCount2)
     {
         Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_8B_MONO);
-        wav.setFrameLength(10);
-        wav.setFrameOverlap(0);
-        CHECK_EQUAL(10, wav.getFramesCount());
+        auto frames = Aquila::FramesCollection::createFromDuration(wav, 10, 0);
+        CHECK_EQUAL(10, frames.count());
     }
 
     TEST(FramesCount3)
     {
         Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_8B_MONO);
-        wav.setFrameLength(20);
-        wav.setFrameOverlap(0);
-        CHECK_EQUAL(5, wav.getFramesCount());
+        auto frames = Aquila::FramesCollection::createFromDuration(wav, 20, 0);
+        CHECK_EQUAL(5, frames.count());
     }
 
     TEST(FramesCount4)
     {
         Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_8B_MONO);
-        wav.setFrameLength(0);
-        wav.setFrameOverlap(0.5);
-        CHECK_EQUAL(0, wav.getFramesCount());
+        auto frames = Aquila::FramesCollection::createFromDuration(wav, 0, 0.5);
+        CHECK_EQUAL(0, frames.count());
     }
 
     TEST(FramesCount5)
     {
         Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_8B_MONO);
-        wav.setFrameLength(10);
-        wav.setFrameOverlap(0.5);
-        CHECK_EQUAL(19, wav.getFramesCount());
+        auto frames = Aquila::FramesCollection::createFromDuration(wav, 10, 0.5);
+        CHECK_EQUAL(19, frames.count());
     }
 
     TEST(FramesCount6)
     {
         Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_8B_MONO);
-        wav.setFrameLength(20);
-        wav.setFrameOverlap(0.66);
-        CHECK_EQUAL(13, wav.getFramesCount());
+        auto frames = Aquila::FramesCollection::createFromDuration(wav, 20, 0.66);
+        CHECK_EQUAL(13, frames.count());
     }
 }
