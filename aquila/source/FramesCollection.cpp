@@ -50,6 +50,25 @@ namespace Aquila
     }
 
     /**
+     * Creates a collection when duration of each frame is known.
+     *
+     * @param source a reference to source object
+     * @param frameDuration frame duration in milliseconds
+     * @param overlap overlap as a fraction of frame length (0.0 - 1.0)
+     */
+    FramesCollection FramesCollection::createFromDuration(
+        const SignalSource &source, double frameDuration, double overlap)
+    {
+        unsigned int samplesPerFrame = static_cast<unsigned int>(
+            source.getSampleFrequency() * frameDuration / 1000.0
+        );
+        unsigned int samplesPerOverlap = static_cast<unsigned int>(
+            samplesPerFrame * overlap
+        );
+        return FramesCollection(source, samplesPerFrame, samplesPerOverlap);
+    }
+
+    /**
      * Performs the actual frame division.
      *
      * Frames are only "pointing" to the original source. There is no copying

@@ -68,6 +68,10 @@ namespace Aquila
                          unsigned int samplesPerOverlap = 0);
         ~FramesCollection();
 
+        static FramesCollection createFromDuration(const SignalSource& source,
+                                                   double frameDuration,
+                                                   double overlap = 0.0);
+
         void divideFrames(const SignalSource& source,
                           unsigned int samplesPerFrame,
                           unsigned int samplesPerOverlap = 0);
