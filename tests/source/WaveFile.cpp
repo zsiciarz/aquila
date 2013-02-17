@@ -1,4 +1,5 @@
 #include "aquila/global.h"
+#include "aquila/source/ArrayData.h"
 #include "aquila/source/WaveFile.h"
 #include "aquila/source/FramesCollection.h"
 #include "constants.h"
@@ -207,5 +208,44 @@ SUITE(WaveFile)
         Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_8B_MONO);
         auto frames = Aquila::FramesCollection::createFromDuration(wav, 20, 0.66);
         CHECK_EQUAL(13, frames.count());
+    }
+
+    TEST(Save8bit)
+    {
+        Aquila::WaveFile inputWav(Aquila_TEST_WAVEFILE_8B_MONO);
+        Aquila::WaveFile::save(inputWav, Aquila_TEST_WAVEFILE_OUTPUT);
+
+        Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_OUTPUT);
+        CHECK_EQUAL(inputWav.getSampleFrequency(), wav.getSampleFrequency());
+        CHECK_EQUAL(8, wav.getBitsPerSample());
+        CHECK_EQUAL(inputWav.getSamplesCount(), wav.getSamplesCount());
+    }
+
+    TEST(Save16bit)
+    {
+        Aquila::WaveFile inputWav(Aquila_TEST_WAVEFILE_16B_MONO);
+        Aquila::WaveFile::save(inputWav, Aquila_TEST_WAVEFILE_OUTPUT);
+
+        Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_OUTPUT);
+        CHECK_EQUAL(inputWav.getSampleFrequency(), wav.getSampleFrequency());
+        CHECK_EQUAL(16, wav.getBitsPerSample());
+        CHECK_EQUAL(inputWav.getSamplesCount(), wav.getSamplesCount());
+    }
+
+    TEST(SaveArray)
+    {
+        const int SIZE = 10;
+        Aquila::SampleType testArray[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        Aquila::ArrayData<> data(testArray, SIZE, 22050);
+        Aquila::WaveFile::save(data, Aquila_TEST_WAVEFILE_OUTPUT);
+
+        Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_OUTPUT);
+        CHECK_EQUAL(22050, wav.getSampleFrequency());
+        CHECK_EQUAL(16, wav.getBitsPerSample());
+        CHECK_EQUAL(SIZE, wav.getSamplesCount());
+        for (unsigned int i = 0; i < SIZE; ++i)
+        {
+            CHECK_EQUAL(testArray[i], wav.sample(i));
+        }
     }
 }
