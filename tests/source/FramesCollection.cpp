@@ -14,7 +14,8 @@ SUITE(FramesCollection)
 {
     const int SIZE = 10;
     Aquila::SampleType testArray[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    Aquila::ArrayData<> data(testArray, SIZE, 22050);
+    Aquila::FrequencyType sampleFrequency  = 100;
+    Aquila::ArrayData<> data(testArray, SIZE, sampleFrequency);
 
     TEST(Empty)
     {
@@ -68,5 +69,34 @@ SUITE(FramesCollection)
     {
         Aquila::FramesCollection frames(data, 11);
         CHECK_EQUAL(0, frames.count());
+    }
+
+    TEST(Duration)
+    {
+        // sampling at 100 Hz -> 10 miliseconds is 1 sample
+        auto frames = Aquila::FramesCollection::createFromDuration(data, 10);
+        CHECK_EQUAL(10, frames.count());
+    }
+
+    TEST(Duration2)
+    {
+        // sampling at 100 Hz -> 50 miliseconds is 5 samples
+        auto frames = Aquila::FramesCollection::createFromDuration(data, 50);
+        CHECK_EQUAL(2, frames.count());
+    }
+
+    TEST(DurationWithOverlap)
+    {
+        // sampling at 100 Hz -> 50 miliseconds is 5 samples
+        // 80% overlap -> 4 common samples between consecutive frames
+        // frame data:  0  1  2  3  4  5  6  7  8  9
+        // frame 0:    |             |
+        // frame 1:       |             |
+        // frame 2:          |             |
+        // frame 3:             |             |
+        // frame 4:                |             |
+        // frame 5:                   |              |
+        auto frames = Aquila::FramesCollection::createFromDuration(data, 50, 0.8);
+        CHECK_EQUAL(6, frames.count());
     }
 }
