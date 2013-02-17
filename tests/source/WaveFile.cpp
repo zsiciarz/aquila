@@ -2,10 +2,18 @@
 #include "aquila/source/WaveFile.h"
 #include "constants.h"
 #include <unittestpp.h>
+#include <string>
 
 
 SUITE(WaveFile)
 {
+    TEST(Filename)
+    {
+        std::string filename(Aquila_TEST_WAVEFILE_8B_MONO);
+        Aquila::WaveFile wav(filename);
+        CHECK(filename == wav.getFilename());
+    }
+
     TEST(AudioLength)
     {
         Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_8B_MONO);
