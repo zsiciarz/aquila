@@ -111,14 +111,14 @@ namespace Aquila
         unsigned int m_begin, m_end;
 
         /**
-         * Swaps the frame with another one - cannot throw!
+         * Swaps the frame with another one - exception safe.
          *
          * @param other reference to swapped frame
          */
-        void swap(Frame& other) throw()
+        void swap(Frame& other)
         {
-            std::swap(m_begin,  other.m_begin);
-            std::swap(m_end,    other.m_end);
+            std::swap(m_begin, other.m_begin);
+            std::swap(m_end, other.m_end);
             std::swap(m_source, other.m_source);
         }
     };
