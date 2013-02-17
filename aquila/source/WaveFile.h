@@ -19,8 +19,6 @@
 #define WAVEFILE_H
 
 #include "../global.h"
-#include "Frame.h"
-#include "FramesCollection.h"
 #include "SignalSource.h"
 #include <cstddef>
 #include <cstdint>
@@ -71,13 +69,6 @@ namespace Aquila
      * but you can switch to the other one by calling setSourceChannel().
      *
      * There are no requirements for sample frequency of the data.
-     *
-     * The actual data can be accessed per sample, or per frame. Frames are
-     * stored in a FramesCollection object, a reference to which can be
-     * obtained by calling WaveFile::frames(). This method takes care of
-     * dividing the signal into frames of correct length and overlap and
-     * therefore is the most convenient way to handle data in a per-frame
-     * approach.
      */
     class AQUILA_EXPORT WaveFile : public SignalSource
     {
@@ -230,26 +221,6 @@ namespace Aquila
         }
 
         /**
-         * Sets new frame length.
-         *
-         * @param frameLength new frame length in milliseconds
-         */
-        void setFrameLength(unsigned int frameLength)
-        {
-            m_frameLength = frameLength;
-        }
-
-        /**
-         * Sets new frame overlap.
-         *
-         * @param overlap overlap between adjacent frames (0 < overlap < 1)
-         */
-        void setFrameOverlap(double overlap)
-        {
-            m_overlap = overlap;
-        }
-
-        /**
          * Determines which channel (stereo only) will be used as data source.
          *
          * @param whichChannel LEFT or RIGHT (the default setting is LEFT)
@@ -261,36 +232,6 @@ namespace Aquila
 
             m_sourceChannel = whichChannel;
         }
-
-        /**
-         * Returns number of frames in the file.
-         *
-         * @return frame vector length
-         */
-        std::size_t getFramesCount()
-        {
-            return frames().count();
-        }
-
-        /**
-         * Gives read-only access to frames collection.
-         *
-         * Ensures that the frame division happens before accessing frames
-         * collection.
-         *
-         * @return a reference to frames collection
-         */
-        const FramesCollection& frames()
-        {
-            // no frames yet, but the frame length is set
-            if (0 == m_frames.count() && m_frameLength != 0)
-                divideFrames();
-
-            return m_frames;
-        }
-
-        void recalculate(unsigned int newFrameLength = 0,
-                         double newOverlap = 0.66);
 
     private:
         /**
@@ -309,26 +250,9 @@ namespace Aquila
         ChannelType LChTab, RChTab;
 
         /**
-         * Frame length (in milliseconds).
-         */
-        unsigned int m_frameLength;
-
-        /**
-         * Overlap between frames - fraction of frame length (0 < overlap < 1).
-         */
-        double m_overlap;
-
-        /**
          * Which channel will be used in stereo recordings as data source.
          */
         StereoChannel m_sourceChannel;
-
-        /**
-         * Frames collection.
-         */
-        FramesCollection m_frames;
-
-        void divideFrames();
     };
 }
 

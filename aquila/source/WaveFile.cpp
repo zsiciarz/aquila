@@ -26,21 +26,16 @@ namespace Aquila
      * @param filename full path to .wav file
      */
     WaveFile::WaveFile(const std::string& filename):
-        SignalSource(),
-        m_frameLength(0), m_overlap(0.0), m_sourceChannel(LEFT)
+        SignalSource(), m_sourceChannel(LEFT)
     {
         load(filename);
     }
 
     /**
      * Deletes the WaveFile object.
-     *
-     * If there was any frame division, deletes all frames.
      */
     WaveFile::~WaveFile()
     {
-        if (m_frameLength != 0)
-            m_frames.clear();
     }
 
     /**
@@ -59,15 +54,9 @@ namespace Aquila
         filename = file;
         LChTab.clear();
         RChTab.clear();
-        if (m_frameLength != 0)
-            m_frames.clear();
 
         WaveFileHandler handler(file);
         handler.readHeaderAndChannels(hdr, LChTab, RChTab);
-
-        // when we have the data, it is possible to create frames
-        if (m_frameLength != 0)
-            divideFrames();
     }
 
     /**
@@ -91,42 +80,5 @@ namespace Aquila
     {
         return static_cast<unsigned int>(hdr.WaveSize /
                 static_cast<double>(hdr.BytesPerSec) * 1000);
-    }
-
-    /**
-     * Recalculates frame division, taking new arguments into consideration.
-     *
-     * @param newFrameLength new frame length in milliseconds
-     * @param newOverlap new overlap value
-     */
-    void WaveFile::recalculate(unsigned int newFrameLength, double newOverlap)
-    {
-        if (newFrameLength != 0)
-            m_frameLength = newFrameLength;
-
-        m_overlap = newOverlap;
-
-        m_frames.clear();
-        divideFrames();
-    }
-
-    /**
-     * Executes frame division, using overlap.
-     *
-     * Number of samples in an individual frame does not depend on the
-     * overlap value. The overlap affects total number of frames.
-     */
-    void WaveFile::divideFrames()
-    {
-        // calculate how many bytes are in the the frame
-        // based on frame length in milliseconds and number of bytes per sec
-        unsigned int bytesPerFrame = static_cast<unsigned int>(
-                hdr.BytesPerSec * m_frameLength / 1000.0);
-
-        unsigned int samplesPerFrame = bytesPerFrame / hdr.BytesPerSamp;
-        unsigned int samplesPerOverlap =
-            static_cast<unsigned int>(samplesPerFrame * m_overlap);
-
-        m_frames.divideFrames(*this, samplesPerFrame, samplesPerOverlap);
     }
 }
