@@ -21,6 +21,7 @@ set(Aquila_Test_SOURCES
     source/FramesCollection.cpp
     source/PlainTextFile.cpp
     source/RawPcmFile.cpp
+    source/SignalSource.cpp
     source/WaveFile.cpp
     source/generator/SquareGenerator.cpp
     transform/Fft.cpp
