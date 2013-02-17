@@ -23,6 +23,12 @@ SUITE(FramesCollection)
         CHECK_EQUAL(0, frames.count());
     }
 
+    TEST(EmptyWhenZeroSamples)
+    {
+        Aquila::FramesCollection frames(data, 0);
+        CHECK_EQUAL(0, frames.count());
+    }
+
     TEST(FiveSamplesPerFrame)
     {
         Aquila::FramesCollection frames(data, 5);

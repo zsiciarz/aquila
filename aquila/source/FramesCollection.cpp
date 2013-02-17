@@ -83,6 +83,10 @@ namespace Aquila
                                         unsigned int samplesPerFrame,
                                         unsigned int samplesPerOverlap)
     {
+        if (samplesPerFrame == 0)
+        {
+            return;
+        }
         m_samplesPerFrame = samplesPerFrame;
         const std::size_t sourceSize = source.getSamplesCount();
         const unsigned int nonOverlapped = samplesPerFrame - samplesPerOverlap;
