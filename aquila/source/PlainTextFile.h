@@ -38,6 +38,8 @@ namespace Aquila
     {
     public:
         PlainTextFile(std::string filename, FrequencyType sampleFrequency);
+
+        static void save(const SignalSource& source, const std::string& file);
     };
 }
 

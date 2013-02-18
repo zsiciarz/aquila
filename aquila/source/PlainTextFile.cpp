@@ -39,4 +39,21 @@ namespace Aquila
                   std::back_inserter(m_data));
         fs.close();
     }
+
+    /**
+     * Saves the given signal source as a plain text file.
+     *
+     * @param source source of the data to save
+     * @param filename destination file
+     */
+    void PlainTextFile::save(const SignalSource& source,
+                             const std::string& filename)
+    {
+        std::fstream fs;
+        fs.open(filename.c_str(), std::ios::out);
+        std::copy(std::begin(source),
+                  std::end(source),
+                  std::ostream_iterator<SampleType>(fs, "\n"));
+        fs.close();
+    }
 }
