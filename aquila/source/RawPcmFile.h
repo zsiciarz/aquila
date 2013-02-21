@@ -65,6 +65,19 @@ namespace Aquila
             delete [] buffer;
             fs.close();
         }
+
+        static void save(const SignalSource& source, const std::string& filename)
+        {
+            std::fstream fs;
+            fs.open(filename.c_str(), std::ios::out | std::ios::binary);
+            std::size_t samplesCount = source.getSamplesCount();
+            Numeric* buffer = new Numeric[samplesCount];
+            // copy and convert from SampleType to target type
+            std::copy(std::begin(source), std::end(source), buffer);
+            fs.write((char*)buffer, samplesCount * sizeof(Numeric));
+            delete [] buffer;
+            fs.close();
+        }
     };
 }
 

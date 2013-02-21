@@ -1,8 +1,24 @@
 #include "aquila/global.h"
+#include "aquila/source/ArrayData.h"
 #include "aquila/source/RawPcmFile.h"
 #include "constants.h"
 #include <cstdint>
 #include <unittestpp.h>
+
+template <typename Numeric> void savePcmTest()
+{
+    const int SIZE = 10;
+    Numeric testArray[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    Aquila::ArrayData<Numeric> data(testArray, SIZE, 22050);
+    Aquila::RawPcmFile<Numeric>::save(data, Aquila_TEST_PCMFILE_OUTPUT);
+
+    Aquila::RawPcmFile<Numeric> pcm(Aquila_TEST_PCMFILE_OUTPUT, 22050);
+    CHECK_EQUAL(SIZE, pcm.getSamplesCount());
+    for (unsigned int i = 0; i < SIZE; ++i)
+    {
+        CHECK_CLOSE(testArray[i], pcm.sample(i), 0.000001);
+    }
+}
 
 
 SUITE(RawPcmFile)
@@ -26,5 +42,45 @@ SUITE(RawPcmFile)
         CHECK_CLOSE(pcm.sample(1), 2.0, 0.000001);
         CHECK_CLOSE(pcm.sample(2), 3.0, 0.000001);
         CHECK_CLOSE(pcm.sample(3), 4.0, 0.000001);
+    }
+
+    TEST(SaveArrayU8)
+    {
+        savePcmTest<std::uint8_t>();
+    }
+
+    TEST(SaveArrayS8)
+    {
+        savePcmTest<std::int8_t>();
+    }
+
+    TEST(SaveArrayU16)
+    {
+        savePcmTest<std::uint16_t>();
+    }
+
+    TEST(SaveArrayS16)
+    {
+        savePcmTest<std::int16_t>();
+    }
+
+    TEST(SaveArrayU32)
+    {
+        savePcmTest<std::uint32_t>();
+    }
+
+    TEST(SaveArrayS32)
+    {
+        savePcmTest<std::int32_t>();
+    }
+
+    TEST(SaveArrayU64)
+    {
+        savePcmTest<std::uint64_t>();
+    }
+
+    TEST(SaveArrayS64)
+    {
+        savePcmTest<std::int64_t>();
     }
 }
