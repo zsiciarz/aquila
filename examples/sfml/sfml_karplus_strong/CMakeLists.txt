@@ -1,0 +1,4 @@
+
+add_executable(sfml_karplus_strong EXCLUDE_FROM_ALL sfml_karplus_strong.cpp)
+add_dependencies(examples sfml_karplus_strong)
+target_link_libraries(sfml_karplus_strong Aquila ${SFML_LIBRARY})
