@@ -66,7 +66,7 @@ public:
         // cannot be averaged with previous
         arr[delay] = alpha * arr[0];
         //
-        for (std::size_t i = delay; i < totalSamples; ++i)
+        for (std::size_t i = delay + 1; i < totalSamples; ++i)
         {
             // average two consecutive delayed samples and dampen by alpha
              arr[i] = alpha * (0.5 * (arr[i - delay] + arr[i - delay - 1]));
