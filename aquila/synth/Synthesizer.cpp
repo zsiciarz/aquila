@@ -16,6 +16,7 @@
  */
 
 #include "Synthesizer.h"
+#include <SFML/System/Sleep.hpp>
 
 namespace Aquila
 {
