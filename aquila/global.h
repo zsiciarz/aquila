@@ -54,7 +54,7 @@ namespace Aquila
     /**
      * Sample frequency type.
      */
-    typedef unsigned int FrequencyType;
+    typedef double FrequencyType;
 
     /**
      * Our standard complex number type, using double precision.
