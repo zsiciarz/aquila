@@ -105,11 +105,13 @@ if(SFML_FOUND)
         aquila/wrappers/SoundBufferAdapter.h
         aquila/synth/Synthesizer.h
         aquila/synth/KarplusStrongSynthesizer.h
+        aquila/synth/SineSynthesizer.h
     )
     list(APPEND Aquila_SOURCES
         aquila/wrappers/SoundBufferAdapter.cpp
         aquila/synth/Synthesizer.cpp
         aquila/synth/KarplusStrongSynthesizer.cpp
+        aquila/synth/SineSynthesizer.cpp
     )
 endif(SFML_FOUND)
 

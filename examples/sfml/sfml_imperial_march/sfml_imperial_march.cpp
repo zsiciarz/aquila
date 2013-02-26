@@ -5,48 +5,8 @@
  *    http://processors.wiki.ti.com/index.php/Playing_The_Imperial_March
  */
 
-#include "aquila/source/generator/SineGenerator.h"
-#include "aquila/synth/Synthesizer.h"
-#include "aquila/wrappers/SoundBufferAdapter.h"
-#include <SFML/Audio.hpp>
+#include "aquila/synth/SineSynthesizer.h"
 #include <iostream>
-
-using namespace Aquila;
-
-/**
- * A beepy-beep thingy.
- */
-class Beeper : public Synthesizer
-{
-public:
-    Beeper(FrequencyType sampleFrequency):
-        Synthesizer(sampleFrequency), m_generator(sampleFrequency)
-    {
-        m_generator.setAmplitude(8192);
-    }
-
-    /**
-     * Makes a beep.
-     *
-     * @param note frequency of the generated sound
-     * @param duration beep duration in milliseconds
-     */
-    void playFrequency(FrequencyType note, unsigned int duration)
-    {
-        unsigned int numSamples = m_sampleFrequency * duration / 1000;
-        m_generator.setFrequency(note).generate(numSamples);
-        m_buffer.LoadFromSignalSource(m_generator);
-        sf::Sound sound(m_buffer);
-        sound.Play();
-
-        // the additional 50 ms is an intentional pause between beeps
-        sf::Sleep(duration / 1000.0f + 0.05f);
-    }
-
-private:
-    Aquila::SineGenerator m_generator;
-};
-
 
 int main(int argc, char** argv)
 {
@@ -62,7 +22,7 @@ int main(int argc, char** argv)
                  " (c) Zbigniew Siciarz 2010 \n" << std::endl;
 
     const Aquila::FrequencyType SAMPLE_FREQUENCY = 44100;
-    Beeper synth(SAMPLE_FREQUENCY);
+    Aquila::SineSynthesizer synth(SAMPLE_FREQUENCY);
 
     synth.playNote("a", 500);
     synth.playNote("a", 500);
