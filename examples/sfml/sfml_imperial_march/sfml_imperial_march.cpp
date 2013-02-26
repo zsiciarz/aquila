@@ -6,20 +6,23 @@
  */
 
 #include "aquila/source/generator/SineGenerator.h"
+#include "aquila/synth/Synthesizer.h"
 #include "aquila/wrappers/SoundBufferAdapter.h"
 #include <SFML/Audio.hpp>
 #include <iostream>
 
+using namespace Aquila;
+
 /**
  * A beepy-beep thingy.
  */
-class Beeper
+class Beeper : public Synthesizer
 {
 public:
-    Beeper(Aquila::FrequencyType sampleFrequency):
-        SAMPLE_FREQUENCY(sampleFrequency), generator(SAMPLE_FREQUENCY)
+    Beeper(FrequencyType sampleFrequency):
+        Synthesizer(sampleFrequency), m_generator(sampleFrequency)
     {
-        generator.setAmplitude(8192);
+        m_generator.setAmplitude(8192);
     }
 
     /**
@@ -28,54 +31,21 @@ public:
      * @param note frequency of the generated sound
      * @param duration beep duration in milliseconds
      */
-    void beep(unsigned int note, unsigned int duration)
+    void playFrequency(FrequencyType note, unsigned int duration)
     {
-        unsigned int numSamples = SAMPLE_FREQUENCY * duration / 1000;
-        generator.setFrequency(note).generate(numSamples);
-        buffer.LoadFromSignalSource(generator);
-        sf::Sound sound(buffer);
+        unsigned int numSamples = m_sampleFrequency * duration / 1000;
+        m_generator.setFrequency(note).generate(numSamples);
+        m_buffer.LoadFromSignalSource(m_generator);
+        sf::Sound sound(m_buffer);
         sound.Play();
 
         // the additional 50 ms is an intentional pause between beeps
         sf::Sleep(duration / 1000.0f + 0.05f);
     }
 
-    /**
-     * Waits for some time.
-     *
-     * @param duration delay time in milliseconds
-     */
-    void delay(unsigned int duration)
-    {
-        sf::Sleep(duration / 1000.0f);
-    }
-
 private:
-    const Aquila::FrequencyType SAMPLE_FREQUENCY;
-    Aquila::SineGenerator generator;
-    Aquila::SoundBufferAdapter buffer;
+    Aquila::SineGenerator m_generator;
 };
-
-
-#define c 261
-#define d 294
-#define e 329
-#define f 349
-#define g 391
-#define gS 415
-#define a 440
-#define aS 455
-#define b 466
-#define cH 523
-#define cSH 554
-#define dH 587
-#define dSH 622
-#define eH 659
-#define fH 698
-#define fSH 740
-#define gH 784
-#define gSH 830
-#define aH 880
 
 
 int main(int argc, char** argv)
@@ -92,93 +62,93 @@ int main(int argc, char** argv)
                  " (c) Zbigniew Siciarz 2010 \n" << std::endl;
 
     const Aquila::FrequencyType SAMPLE_FREQUENCY = 44100;
-    Beeper beeper(SAMPLE_FREQUENCY);
+    Beeper synth(SAMPLE_FREQUENCY);
 
-    beeper.beep(a, 500);
-    beeper.beep(a, 500);
-    beeper.beep(a, 500);
-    beeper.beep(f, 350);
-    beeper.beep(cH, 150);
-    beeper.beep(a, 500);
-    beeper.beep(f, 350);
-    beeper.beep(cH, 150);
-    beeper.beep(a, 650);
+    synth.playNote("a", 500);
+    synth.playNote("a", 500);
+    synth.playNote("a", 500);
+    synth.playNote("f", 350);
+    synth.playNote("cH", 150);
+    synth.playNote("a", 500);
+    synth.playNote("f", 350);
+    synth.playNote("cH", 150);
+    synth.playNote("a", 650);
 
-    beeper.delay(150);
+    synth.playNote("pause", 150);
 
-    beeper.beep(eH, 500);
-    beeper.beep(eH, 500);
-    beeper.beep(eH, 500);
-    beeper.beep(fH, 350);
-    beeper.beep(cH, 150);
-    beeper.beep(gS, 500);
-    beeper.beep(f, 350);
-    beeper.beep(cH, 150);
-    beeper.beep(a, 650);
+    synth.playNote("eH", 500);
+    synth.playNote("eH", 500);
+    synth.playNote("eH", 500);
+    synth.playNote("fH", 350);
+    synth.playNote("cH", 150);
+    synth.playNote("gS", 500);
+    synth.playNote("f", 350);
+    synth.playNote("cH", 150);
+    synth.playNote("a", 650);
 
-    beeper.delay(150);
+    synth.playNote("pause", 150);
 
-    beeper.beep(aH, 500);
-    beeper.beep(a, 300);
-    beeper.beep(a, 150);
-    beeper.beep(aH, 400);
-    beeper.beep(gSH, 200);
-    beeper.beep(gH, 200);
-    beeper.beep(fSH, 125);
-    beeper.beep(fH, 125);
-    beeper.beep(fSH, 250);
+    synth.playNote("aH", 500);
+    synth.playNote("a", 300);
+    synth.playNote("a", 150);
+    synth.playNote("aH", 400);
+    synth.playNote("gSH", 200);
+    synth.playNote("gH", 200);
+    synth.playNote("fSH", 125);
+    synth.playNote("fH", 125);
+    synth.playNote("fSH", 250);
 
-    beeper.delay(250);
+    synth.playNote("pause", 250);
 
-    beeper.beep(aS, 250);
-    beeper.beep(dSH, 400);
-    beeper.beep(dH, 200);
-    beeper.beep(cSH, 200);
-    beeper.beep(cH, 125);
-    beeper.beep(b, 125);
-    beeper.beep(cH, 250);
+    synth.playNote("aS", 250);
+    synth.playNote("dSH", 400);
+    synth.playNote("dH", 200);
+    synth.playNote("cSH", 200);
+    synth.playNote("cH", 125);
+    synth.playNote("b", 125);
+    synth.playNote("cH", 250);
 
-    beeper.delay(250);
+    synth.playNote("pause", 250);
 
-    beeper.beep(f, 125);
-    beeper.beep(gS, 500);
-    beeper.beep(f, 375);
-    beeper.beep(a, 125);
-    beeper.beep(cH, 500);
-    beeper.beep(a, 375);
-    beeper.beep(cH, 125);
-    beeper.beep(eH, 650);
+    synth.playNote("f", 125);
+    synth.playNote("gS", 500);
+    synth.playNote("f", 375);
+    synth.playNote("a", 125);
+    synth.playNote("cH", 500);
+    synth.playNote("a", 375);
+    synth.playNote("cH", 125);
+    synth.playNote("eH", 650);
 
-    beeper.beep(aH, 500);
-    beeper.beep(a, 300);
-    beeper.beep(a, 150);
-    beeper.beep(aH, 400);
-    beeper.beep(gSH, 200);
-    beeper.beep(gH, 200);
-    beeper.beep(fSH, 125);
-    beeper.beep(fH, 125);
-    beeper.beep(fSH, 250);
+    synth.playNote("aH", 500);
+    synth.playNote("a", 300);
+    synth.playNote("a", 150);
+    synth.playNote("aH", 400);
+    synth.playNote("gSH", 200);
+    synth.playNote("gH", 200);
+    synth.playNote("fSH", 125);
+    synth.playNote("fH", 125);
+    synth.playNote("fSH", 250);
 
-    beeper.delay(250);
+    synth.playNote("pause", 250);
 
-    beeper.beep(aS, 250);
-    beeper.beep(dSH, 400);
-    beeper.beep(dH, 200);
-    beeper.beep(cSH, 200);
-    beeper.beep(cH, 125);
-    beeper.beep(b, 125);
-    beeper.beep(cH, 250);
+    synth.playNote("aS", 250);
+    synth.playNote("dSH", 400);
+    synth.playNote("dH", 200);
+    synth.playNote("cSH", 200);
+    synth.playNote("cH", 125);
+    synth.playNote("b", 125);
+    synth.playNote("cH", 250);
 
-    beeper.delay(250);
+    synth.playNote("pause", 250);
 
-    beeper.beep(f, 250);
-    beeper.beep(gS, 500);
-    beeper.beep(f, 375);
-    beeper.beep(cH, 125);
-    beeper.beep(a, 500);
-    beeper.beep(f, 375);
-    beeper.beep(cH, 125);
-    beeper.beep(a, 650);
+    synth.playNote("f", 250);
+    synth.playNote("gS", 500);
+    synth.playNote("f", 375);
+    synth.playNote("cH", 125);
+    synth.playNote("a", 500);
+    synth.playNote("f", 375);
+    synth.playNote("cH", 125);
+    synth.playNote("a", 650);
 
     return 0;
 }
