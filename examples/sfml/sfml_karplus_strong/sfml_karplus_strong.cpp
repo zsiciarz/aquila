@@ -9,50 +9,32 @@
 
 #include "aquila/source/ArrayData.h"
 #include "aquila/source/generator/WhiteNoiseGenerator.h"
-#include "aquila/wrappers/SoundBufferAdapter.h"
+#include "aquila/synth/Synthesizer.h"
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
 
-#define c 261
-#define d 294
-#define e 329
-#define f 349
-#define g 391
-#define gS 415
-#define a 440
-#define aS 455
-#define b 466
-#define cH 523
-#define cSH 554
-#define dH 587
-#define dSH 622
-#define eH 659
-#define fH 698
-#define fSH 740
-#define gH 784
-#define gSH 830
-#define aH 880
+using namespace Aquila;
 
 /**
  * Very simple guitar synthesizer using Karplus-Strong algorithm.
  */
-class GuitarSynthesizer
+class KarplusStrongSynthesizer : public Synthesizer
 {
 public:
-    GuitarSynthesizer(Aquila::FrequencyType sampleFrequency):
-        m_sampleFrequency(sampleFrequency),
-        m_generator(sampleFrequency)
+    KarplusStrongSynthesizer(FrequencyType sampleFrequency):
+        Synthesizer(sampleFrequency), m_generator(sampleFrequency)
     {
     }
 
+protected:
     /**
      * Plays a single note.
      *
      * @param frequency frequency of the generated note
      * @param duration duration in milliseconds
      */
-    void pluck(Aquila::FrequencyType frequency, unsigned int duration = 500)
+    void playFrequency(Aquila::FrequencyType frequency, unsigned int duration = 500)
     {
         double alpha = 0.99;
         std::size_t delay = static_cast<std::size_t>(m_sampleFrequency / frequency);
@@ -65,15 +47,14 @@ public:
         // first sample that goes into feedback loop;
         // cannot be averaged with previous
         arr[delay] = alpha * arr[0];
-        //
         for (std::size_t i = delay + 1; i < totalSamples; ++i)
         {
             // average two consecutive delayed samples and dampen by alpha
              arr[i] = alpha * (0.5 * (arr[i - delay] + arr[i - delay - 1]));
         }
 
-        buffer.LoadFromSamples(arr, totalSamples, 1, m_sampleFrequency);
-        sf::Sound sound(buffer);
+        m_buffer.LoadFromSamples(arr, totalSamples, 1, m_sampleFrequency);
+        sf::Sound sound(m_buffer);
         sound.Play();
         sf::Sleep(duration / 1000.0f);
 
@@ -81,9 +62,7 @@ public:
     }
 
 private:
-    const Aquila::FrequencyType m_sampleFrequency;
-    Aquila::WhiteNoiseGenerator m_generator;
-    Aquila::SoundBufferAdapter buffer;
+    WhiteNoiseGenerator m_generator;
 };
 
 
@@ -92,25 +71,25 @@ int main(int argc, char** argv)
     std::cout << "Plucked string synthesis using Karplus-Strong algorithm\n";
     const Aquila::FrequencyType SAMPLE_FREQUENCY = 44100;
 
-    GuitarSynthesizer synth(SAMPLE_FREQUENCY);
+    KarplusStrongSynthesizer synth(SAMPLE_FREQUENCY);
     // play the C major scale up and down
-    synth.pluck(c);
-    synth.pluck(d);
-    synth.pluck(e);
-    synth.pluck(f);
-    synth.pluck(g);
-    synth.pluck(a);
-    synth.pluck(b);
-    synth.pluck(cH);
-    sf::Sleep(0.5f);
-    synth.pluck(cH);
-    synth.pluck(b);
-    synth.pluck(a);
-    synth.pluck(g);
-    synth.pluck(f);
-    synth.pluck(e);
-    synth.pluck(d);
-    synth.pluck(c);
+    synth.playNote("c");
+    synth.playNote("d");
+    synth.playNote("e");
+    synth.playNote("f");
+    synth.playNote("g");
+    synth.playNote("a");
+    synth.playNote("b");
+    synth.playNote("cH");
+    synth.playNote("pause");
+    synth.playNote("cH");
+    synth.playNote("b");
+    synth.playNote("a");
+    synth.playNote("g");
+    synth.playNote("f");
+    synth.playNote("e");
+    synth.playNote("d");
+    synth.playNote("c");
 
     return 0;
 }

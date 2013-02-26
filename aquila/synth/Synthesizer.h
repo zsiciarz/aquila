@@ -46,9 +46,9 @@ namespace Aquila
 
         void playNote(std::string note, unsigned int duration = 500);
 
+    protected:
         virtual void playFrequency(FrequencyType frequency, unsigned int duration) = 0;
 
-    protected:
         /**
          * Sample frequency of the generated signal.
          */
