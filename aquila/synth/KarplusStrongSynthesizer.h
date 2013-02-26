@@ -36,8 +36,17 @@ namespace Aquila
          * @param sampleFrequency sample frequency of the audio signal
          */
         KarplusStrongSynthesizer(FrequencyType sampleFrequency):
-            Synthesizer(sampleFrequency), m_generator(sampleFrequency)
+            Synthesizer(sampleFrequency), m_generator(sampleFrequency),
+            m_alpha(0.99)
         {
+        }
+
+        /**
+         * Sets feedback loop parameter.
+         */
+        void setAlpha(double alpha)
+        {
+            m_alpha = alpha;
         }
 
     protected:
@@ -48,6 +57,11 @@ namespace Aquila
          * Generator used to provide initial noise burst.
          */
         WhiteNoiseGenerator m_generator;
+
+        /**
+         * Feedback loop parameter.
+         */
+        double m_alpha;
     };
 }
 

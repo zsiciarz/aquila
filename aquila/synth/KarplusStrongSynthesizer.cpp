@@ -34,7 +34,6 @@ namespace Aquila
     void KarplusStrongSynthesizer::playFrequency(FrequencyType frequency,
                                                  unsigned int duration)
     {
-        double alpha = 0.99;
         std::size_t delay = static_cast<std::size_t>(m_sampleFrequency / frequency);
         std::size_t totalSamples = static_cast<std::size_t>(m_sampleFrequency * duration / 1000.0);
         m_generator.setAmplitude(8192).generate(delay);
@@ -44,11 +43,11 @@ namespace Aquila
         std::copy(std::begin(m_generator), std::end(m_generator), arr);
         // first sample that goes into feedback loop;
         // cannot be averaged with previous
-        arr[delay] = alpha * arr[0];
+        arr[delay] = m_alpha * arr[0];
         for (std::size_t i = delay + 1; i < totalSamples; ++i)
         {
             // average two consecutive delayed samples and dampen by alpha
-             arr[i] = alpha * (0.5 * (arr[i - delay] + arr[i - delay - 1]));
+             arr[i] = m_alpha * (0.5 * (arr[i - delay] + arr[i - delay - 1]));
         }
 
         m_buffer.LoadFromSamples(arr, totalSamples, 1, m_sampleFrequency);
