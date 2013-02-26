@@ -28,25 +28,25 @@ namespace Aquila
     NoteMapType initNoteMap()
     {
         NoteMapType notes;
-        notes["c"] = 261;
-        notes["d"] = 294;
-        notes["e"] = 329;
-        notes["f"] = 349;
-        notes["g"] = 391;
-        notes["gS"] = 415;
-        notes["a"] = 440;
-        notes["aS"] = 455;
-        notes["b"] = 466;
-        notes["cH"] = 523;
-        notes["cSH"] = 554;
-        notes["dH"] = 587;
-        notes["dSH"] = 622;
-        notes["eH"] = 659;
-        notes["fH"] = 698;
-        notes["fSH"] = 740;
-        notes["gH"] = 784;
-        notes["gSH"] = 830;
-        notes["aH"] = 880;
+        notes["c"] = 261.626;
+        notes["d"] = 293.665;
+        notes["e"] = 329.628;
+        notes["f"] = 349.228;
+        notes["g"] = 391.995;
+        notes["gS"] = 415.305;
+        notes["a"] = 440.0;
+        notes["aS"] = 466.164;
+        notes["b"] = 493.883;
+        notes["cH"] = 523.251;
+        notes["cSH"] = 554.365;
+        notes["dH"] = 587.33;
+        notes["dSH"] = 622.254;
+        notes["eH"] = 659.255;
+        notes["fH"] = 698.456;
+        notes["fSH"] = 739.989;
+        notes["gH"] = 783.991;
+        notes["gSH"] = 830.609;
+        notes["aH"] = 880.0;
         return notes;
     }
 
