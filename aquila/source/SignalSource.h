@@ -281,6 +281,23 @@ namespace Aquila
          */
         FrequencyType m_sampleFrequency;
     };
+
+    /***************************************************************************
+     *
+     * Free-standing functions closely related to signals.
+     *
+     **************************************************************************/
+
+    double mean(const SignalSource& source);
+
+    double energy(const SignalSource& source);
+
+    double power(const SignalSource& source);
+
+    double norm(const SignalSource& source);
+
+    double rms(const SignalSource& source);
+
 }
 
 #endif // SIGNALSOURCE_H

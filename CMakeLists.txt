@@ -79,6 +79,7 @@ set(Aquila_HEADERS
 
 # library sources
 set(Aquila_SOURCES
+    aquila/source/SignalSource.cpp
     aquila/source/Frame.cpp
     aquila/source/FramesCollection.cpp
     aquila/source/PlainTextFile.cpp

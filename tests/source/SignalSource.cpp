@@ -53,4 +53,29 @@ SUITE(SignalSource)
         auto it1 = data.begin(), it2 = data2.begin();
         CHECK(it1 != it2);
     }
+
+    TEST(Mean)
+    {
+        CHECK_CLOSE(4.5, Aquila::mean(data), 0.000001);
+    }
+
+    TEST(Energy)
+    {
+        CHECK_CLOSE(285.0, Aquila::energy(data), 0.000001);
+    }
+
+    TEST(Power)
+    {
+        CHECK_CLOSE(28.5, Aquila::power(data), 0.000001);
+    }
+
+    TEST(Norm)
+    {
+        CHECK_CLOSE(16.881943, Aquila::norm(data), 0.000001);
+    }
+
+    TEST(Rms)
+    {
+        CHECK_CLOSE(5.338539, Aquila::rms(data), 0.000001);
+    }
 }
