@@ -103,9 +103,11 @@ set(Aquila_SOURCES
 if(SFML_FOUND)
     list(APPEND Aquila_HEADERS
         aquila/wrappers/SoundBufferAdapter.h
+        aquila/synth/Synthesizer.h
     )
     list(APPEND Aquila_SOURCES
         aquila/wrappers/SoundBufferAdapter.cpp
+        aquila/synth/Synthesizer.cpp
     )
 endif(SFML_FOUND)
 
