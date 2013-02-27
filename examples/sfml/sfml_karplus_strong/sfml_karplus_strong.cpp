@@ -4,33 +4,94 @@
  */
 
 #include "aquila/synth/KarplusStrongSynthesizer.h"
+#include <fstream>
 #include <iostream>
+#include <sstream>
+#include <string>
 
+
+class NoteReader
+{
+public:
+    NoteReader(Aquila::Synthesizer& synthesizer):
+        m_synthesizer(synthesizer)
+    {
+    }
+
+    void playString(const std::string& notes)
+    {
+        std::istringstream stream(notes);
+        playStream(stream);
+    }
+
+    void playFile(const std::string& filename)
+    {
+        std::ifstream stream(filename);
+        playStream(stream);
+    }
+
+    void playStream(std::istream& stream)
+    {
+        std::string line, note;
+        unsigned int duration, lineNumber;
+        while(std::getline(stream, line))
+        {
+            lineNumber++;
+            if (!line.empty())
+            {
+                std::istringstream lineStream(line);
+                if (lineStream >> note >> duration)
+                {
+                    m_synthesizer.playNote(note, duration);
+                }
+                else
+                {
+                    std::cerr << "Parse error on line " << lineNumber
+                              << ": '" << line << "'" << std::endl;
+                }
+            }
+        }
+    }
+
+private:
+    Aquila::Synthesizer& m_synthesizer;
+};
+
+const std::string Cmajor =
+    "c 500\n"
+    "d 500\n"
+    "e 500\n"
+    "f 500\n"
+    "g 500\n"
+    "a 500\n"
+    "b 500\n"
+    "cH 500\n"
+    "pause 500\n"
+    "cH 500\n"
+    "b 500\n"
+    "a 500\n"
+    "g 500\n"
+    "f 500\n"
+    "e 500\n"
+    "d 500\n"
+    "c 500\n";
 
 int main(int argc, char** argv)
 {
     std::cout << "Plucked string synthesis using Karplus-Strong algorithm\n";
     const Aquila::FrequencyType SAMPLE_FREQUENCY = 44100;
-
     Aquila::KarplusStrongSynthesizer synth(SAMPLE_FREQUENCY);
-    // play the C major scale up and down
-    synth.playNote("c");
-    synth.playNote("d");
-    synth.playNote("e");
-    synth.playNote("f");
-    synth.playNote("g");
-    synth.playNote("a");
-    synth.playNote("b");
-    synth.playNote("cH");
-    synth.playNote("pause");
-    synth.playNote("cH");
-    synth.playNote("b");
-    synth.playNote("a");
-    synth.playNote("g");
-    synth.playNote("f");
-    synth.playNote("e");
-    synth.playNote("d");
-    synth.playNote("c");
+    NoteReader reader(synth);
+    if (argc < 2)
+    {
+        std::cout << "No filename provided, playing C major scale" << std::endl;
+        reader.playString(Cmajor);
+    }
+    else
+    {
+        std::cout << "Playing notes from " << argv[1] << std::endl;
+        reader.playFile(argv[1]);
+    }
 
     return 0;
 }
