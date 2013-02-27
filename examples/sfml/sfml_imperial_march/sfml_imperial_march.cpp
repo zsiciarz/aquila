@@ -24,91 +24,91 @@ int main(int argc, char** argv)
     const Aquila::FrequencyType SAMPLE_FREQUENCY = 44100;
     Aquila::SineSynthesizer synth(SAMPLE_FREQUENCY);
 
-    synth.playNote("a", 500);
-    synth.playNote("a", 500);
-    synth.playNote("a", 500);
-    synth.playNote("f", 350);
-    synth.playNote("cH", 150);
-    synth.playNote("a", 500);
-    synth.playNote("f", 350);
-    synth.playNote("cH", 150);
-    synth.playNote("a", 650);
+    synth.playNote("A4", 500);
+    synth.playNote("A4", 500);
+    synth.playNote("A4", 500);
+    synth.playNote("F4", 350);
+    synth.playNote("C5", 150);
+    synth.playNote("A4", 500);
+    synth.playNote("F4", 350);
+    synth.playNote("C5", 150);
+    synth.playNote("A4", 650);
 
     synth.playNote("pause", 150);
 
-    synth.playNote("eH", 500);
-    synth.playNote("eH", 500);
-    synth.playNote("eH", 500);
-    synth.playNote("fH", 350);
-    synth.playNote("cH", 150);
-    synth.playNote("gS", 500);
-    synth.playNote("f", 350);
-    synth.playNote("cH", 150);
-    synth.playNote("a", 650);
+    synth.playNote("E5", 500);
+    synth.playNote("E5", 500);
+    synth.playNote("E5", 500);
+    synth.playNote("F5", 350);
+    synth.playNote("C5", 150);
+    synth.playNote("G4S", 500);
+    synth.playNote("F4", 350);
+    synth.playNote("C5", 150);
+    synth.playNote("A4", 650);
 
     synth.playNote("pause", 150);
 
-    synth.playNote("aH", 500);
-    synth.playNote("a", 300);
-    synth.playNote("a", 150);
-    synth.playNote("aH", 400);
-    synth.playNote("gSH", 200);
-    synth.playNote("gH", 200);
-    synth.playNote("fSH", 125);
-    synth.playNote("fH", 125);
-    synth.playNote("fSH", 250);
+    synth.playNote("A5", 500);
+    synth.playNote("A4", 300);
+    synth.playNote("A4", 150);
+    synth.playNote("A5", 400);
+    synth.playNote("G5S", 200);
+    synth.playNote("G5", 200);
+    synth.playNote("F5S", 125);
+    synth.playNote("F5", 125);
+    synth.playNote("F5S", 250);
 
     synth.playNote("pause", 250);
 
-    synth.playNote("aS", 250);
-    synth.playNote("dSH", 400);
-    synth.playNote("dH", 200);
-    synth.playNote("cSH", 200);
-    synth.playNote("cH", 125);
-    synth.playNote("b", 125);
-    synth.playNote("cH", 250);
+    synth.playNote("A4S", 250);
+    synth.playNote("D5S", 400);
+    synth.playNote("D5", 200);
+    synth.playNote("C5S", 200);
+    synth.playNote("C5", 125);
+    synth.playNote("B4", 125);
+    synth.playNote("C5", 250);
 
     synth.playNote("pause", 250);
 
-    synth.playNote("f", 125);
-    synth.playNote("gS", 500);
-    synth.playNote("f", 375);
-    synth.playNote("a", 125);
-    synth.playNote("cH", 500);
-    synth.playNote("a", 375);
-    synth.playNote("cH", 125);
-    synth.playNote("eH", 650);
+    synth.playNote("F4", 125);
+    synth.playNote("G4S", 500);
+    synth.playNote("F4", 375);
+    synth.playNote("A4", 125);
+    synth.playNote("C5", 500);
+    synth.playNote("A4", 375);
+    synth.playNote("C5", 125);
+    synth.playNote("E5", 650);
 
-    synth.playNote("aH", 500);
-    synth.playNote("a", 300);
-    synth.playNote("a", 150);
-    synth.playNote("aH", 400);
-    synth.playNote("gSH", 200);
-    synth.playNote("gH", 200);
-    synth.playNote("fSH", 125);
-    synth.playNote("fH", 125);
-    synth.playNote("fSH", 250);
-
-    synth.playNote("pause", 250);
-
-    synth.playNote("aS", 250);
-    synth.playNote("dSH", 400);
-    synth.playNote("dH", 200);
-    synth.playNote("cSH", 200);
-    synth.playNote("cH", 125);
-    synth.playNote("b", 125);
-    synth.playNote("cH", 250);
+    synth.playNote("A5", 500);
+    synth.playNote("A4", 300);
+    synth.playNote("A4", 150);
+    synth.playNote("A5", 400);
+    synth.playNote("G5S", 200);
+    synth.playNote("G5", 200);
+    synth.playNote("F5S", 125);
+    synth.playNote("F5", 125);
+    synth.playNote("F5S", 250);
 
     synth.playNote("pause", 250);
 
-    synth.playNote("f", 250);
-    synth.playNote("gS", 500);
-    synth.playNote("f", 375);
-    synth.playNote("cH", 125);
-    synth.playNote("a", 500);
-    synth.playNote("f", 375);
-    synth.playNote("cH", 125);
-    synth.playNote("a", 650);
+    synth.playNote("A4S", 250);
+    synth.playNote("D5S", 400);
+    synth.playNote("D5", 200);
+    synth.playNote("C5S", 200);
+    synth.playNote("C5", 125);
+    synth.playNote("B4", 125);
+    synth.playNote("C5", 250);
+
+    synth.playNote("pause", 250);
+
+    synth.playNote("F4", 250);
+    synth.playNote("G4S", 500);
+    synth.playNote("F4", 375);
+    synth.playNote("C5", 125);
+    synth.playNote("A4", 500);
+    synth.playNote("F4", 375);
+    synth.playNote("C5", 125);
+    synth.playNote("A4", 650);
 
     return 0;
 }

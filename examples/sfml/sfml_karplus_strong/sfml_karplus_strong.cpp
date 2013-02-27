@@ -58,23 +58,23 @@ private:
 };
 
 const std::string Cmajor =
-    "c 500\n"
-    "d 500\n"
-    "e 500\n"
-    "f 500\n"
-    "g 500\n"
-    "a 500\n"
-    "b 500\n"
-    "cH 500\n"
+    "C4 500\n"
+    "D4 500\n"
+    "E4 500\n"
+    "F4 500\n"
+    "G4 500\n"
+    "A4 500\n"
+    "B4 500\n"
+    "C5 500\n"
     "pause 500\n"
-    "cH 500\n"
-    "b 500\n"
-    "a 500\n"
-    "g 500\n"
-    "f 500\n"
-    "e 500\n"
-    "d 500\n"
-    "c 500\n";
+    "C5 500\n"
+    "B4 500\n"
+    "A4 500\n"
+    "G4 500\n"
+    "F4 500\n"
+    "E4 500\n"
+    "D4 500\n"
+    "C4 500\n";
 
 int main(int argc, char** argv)
 {
