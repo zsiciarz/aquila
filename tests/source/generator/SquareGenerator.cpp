@@ -6,11 +6,11 @@
 
 SUITE(SquareGenerator)
 {
-    // sample frequency is fixed at 1 kHz, signal frequency at 10 Hz
+    // sample frequency is fixed at 1 kHz
     Aquila::SquareGenerator gen(1000);
     auto isPositive = [](double x) { return x > 0; };
 
-    // prints number of positive samples in generated signal
+    // counts number of positive samples in generated signal
     TEST(DutyCycle05)
     {
         double duty = 0.5;
