@@ -1,12 +1,13 @@
 #include "aquila/global.h"
 #include "aquila/source/ArrayData.h"
+#include <cstddef>
 #include <cstdint>
 #include <unittestpp.h>
 
 
 SUITE(SignalSource)
 {
-    const int SIZE = 10;
+    const std::size_t SIZE = 10;
     Aquila::SampleType testArray[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     // any other SignalSource subclass would work here
     Aquila::ArrayData<> data(testArray, SIZE, 22050);
@@ -19,9 +20,9 @@ SUITE(SignalSource)
     TEST(IteratorPosition)
     {
         auto it = data.begin();
-        CHECK_EQUAL(0, it.getPosition());
+        CHECK_EQUAL(0u, it.getPosition());
         it++;
-        CHECK_EQUAL(1, it.getPosition());
+        CHECK_EQUAL(1u, it.getPosition());
     }
 
     TEST(IteratorAssignment)
@@ -29,7 +30,7 @@ SUITE(SignalSource)
         auto it1 = data.begin(), it2 = data.begin();
         it1++;
         it2 = it1;
-        CHECK_EQUAL(1, it2.getPosition());
+        CHECK_EQUAL(1u, it2.getPosition());
     }
 
     TEST(IteratorsEqual)

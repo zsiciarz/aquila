@@ -3,6 +3,7 @@
 #include "aquila/source/PlainTextFile.h"
 #include "constants.h"
 #include <unittestpp.h>
+#include <cstddef>
 
 
 SUITE(PlainTextFile)
@@ -16,7 +17,7 @@ SUITE(PlainTextFile)
     TEST(SamplesCount)
     {
         Aquila::PlainTextFile txt(Aquila_TEST_TXTFILE, 22050);
-        CHECK_EQUAL(4, txt.getSamplesCount());
+        CHECK_EQUAL(4u, txt.getSamplesCount());
     }
 
     TEST(Sample)
@@ -30,7 +31,7 @@ SUITE(PlainTextFile)
 
     TEST(SaveArray)
     {
-        const int SIZE = 10;
+        const std::size_t SIZE = 10;
         Aquila::SampleType testArray[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         Aquila::ArrayData<> data(testArray, SIZE, 22050);
         Aquila::PlainTextFile::save(data, Aquila_TEST_TXTFILE_OUTPUT);
