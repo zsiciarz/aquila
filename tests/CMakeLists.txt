@@ -23,6 +23,7 @@ set(Aquila_Test_SOURCES
     source/RawPcmFile.cpp
     source/SignalSource.cpp
     source/WaveFile.cpp
+    source/generator/SineGenerator.cpp
     source/generator/SquareGenerator.cpp
     transform/Fft.cpp
 )
