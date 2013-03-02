@@ -2,12 +2,13 @@
 #include "aquila/source/ArrayData.h"
 #include "aquila/source/RawPcmFile.h"
 #include "constants.h"
+#include <cstddef>
 #include <cstdint>
 #include <unittestpp.h>
 
 template <typename Numeric> void savePcmTest()
 {
-    const int SIZE = 10;
+    const std::size_t SIZE = 10;
     Numeric testArray[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     Aquila::ArrayData<Numeric> data(testArray, SIZE, 22050);
     Aquila::RawPcmFile<Numeric>::save(data, Aquila_TEST_PCMFILE_OUTPUT);
@@ -26,22 +27,22 @@ SUITE(RawPcmFile)
     TEST(SampleFrequency)
     {
         Aquila::RawPcmFile<std::uint16_t> pcm(Aquila_TEST_PCMFILE, 22050);
-        CHECK_EQUAL(pcm.getSampleFrequency(), 22050);
+        CHECK_EQUAL(22050, pcm.getSampleFrequency());
     }
 
     TEST(SamplesCount)
     {
         Aquila::RawPcmFile<std::uint16_t> pcm(Aquila_TEST_PCMFILE, 22050);
-        CHECK_EQUAL(pcm.getSamplesCount(), 4);
+        CHECK_EQUAL(4u, pcm.getSamplesCount());
     }
 
     TEST(Sample)
     {
         Aquila::RawPcmFile<std::uint16_t> pcm(Aquila_TEST_PCMFILE, 22050);
-        CHECK_CLOSE(pcm.sample(0), 1.0, 0.000001);
-        CHECK_CLOSE(pcm.sample(1), 2.0, 0.000001);
-        CHECK_CLOSE(pcm.sample(2), 3.0, 0.000001);
-        CHECK_CLOSE(pcm.sample(3), 4.0, 0.000001);
+        CHECK_CLOSE(1.0, pcm.sample(0), 0.000001);
+        CHECK_CLOSE(2.0, pcm.sample(1), 0.000001);
+        CHECK_CLOSE(3.0, pcm.sample(2), 0.000001);
+        CHECK_CLOSE(4.0, pcm.sample(3), 0.000001);
     }
 
     TEST(SaveArrayU8)

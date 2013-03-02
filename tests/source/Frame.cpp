@@ -26,7 +26,7 @@ SUITE(Frame)
     {
         Aquila::Frame frame(data, 0, 3);
         Aquila::Frame frameCopy(frame);
-        CHECK_EQUAL(3, frameCopy.getSamplesCount());
+        CHECK_EQUAL(3u, frameCopy.getSamplesCount());
         CHECK_EQUAL(2, frameCopy.sample(2));
     }
 
@@ -35,7 +35,7 @@ SUITE(Frame)
         Aquila::Frame frame(data, 0, 3);
         Aquila::Frame otherFrame(data, 3, 6);
         otherFrame = frame;
-        CHECK_EQUAL(3, otherFrame.getSamplesCount());
+        CHECK_EQUAL(3u, otherFrame.getSamplesCount());
         CHECK_EQUAL(2, otherFrame.sample(2));
     }
 
@@ -79,30 +79,30 @@ SUITE(Frame)
     TEST(SampleCount1)
     {
         Aquila::Frame frame(data, 0, 1);
-        CHECK_EQUAL(1, frame.getSamplesCount());
+        CHECK_EQUAL(1u, frame.getSamplesCount());
     }
 
     TEST(SampleCount2)
     {
         Aquila::Frame frame(data, 0, 4);
-        CHECK_EQUAL(4, frame.getSamplesCount());
+        CHECK_EQUAL(4u, frame.getSamplesCount());
     }
 
     TEST(SampleCount3)
     {
         Aquila::Frame frame(data, 0, 10);
-        CHECK_EQUAL(10, frame.getSamplesCount());
+        CHECK_EQUAL(10u, frame.getSamplesCount());
     }
 
     TEST(SampleCount4)
     {
         Aquila::Frame frame(data, 0, 15);
-        CHECK_EQUAL(10, frame.getSamplesCount());
+        CHECK_EQUAL(10u, frame.getSamplesCount());
     }
 
     TEST(SampleCount5)
     {
         Aquila::Frame frame(data, 9, 20);
-        CHECK_EQUAL(1, frame.getSamplesCount());
+        CHECK_EQUAL(1u, frame.getSamplesCount());
     }
 }
