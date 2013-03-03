@@ -45,10 +45,12 @@ namespace Aquila
             m_sampleFrequency / static_cast<double>(m_frequency));
         std::size_t risingLength = static_cast<std::size_t>(m_width *
                                                             samplesPerPeriod);
+        std::size_t fallingLength = samplesPerPeriod - risingLength;
 
-        double risingIncrement =  2.0 * m_amplitude / risingLength;
-        double fallingDecrement = 2.0 * m_amplitude /
-                                  (samplesPerPeriod - risingLength);
+        double risingIncrement =
+            (risingLength != 0) ? (2.0 * m_amplitude / risingLength) : 0;
+        double fallingDecrement =
+            (fallingLength != 0) ? (2.0 * m_amplitude / fallingLength) : 0;
 
         for (std::size_t i = 0; i < samplesCount; ++i)
         {
