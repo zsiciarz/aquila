@@ -45,5 +45,28 @@ SUITE(Dft)
         double expected[SIZE] = {SIZE * 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
         CHECK_ARRAY_CLOSE(expected, absSpectrum, SIZE, 0.0001);
     }
-}
 
+    TEST(DeltaInverse)
+    {
+        const std::size_t SIZE = 8;
+        Aquila::ComplexType spectrum[SIZE] = {1, 0, 0, 0, 0, 0, 0, 0};
+        Aquila::SampleType output[SIZE];
+        Aquila::Dft fft(SIZE);
+        fft.ifft(spectrum, output);
+
+        double expected[SIZE] = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
+        CHECK_ARRAY_CLOSE(expected, output, SIZE, 0.0001);
+    }
+
+    TEST(ConstInverse)
+    {
+        const std::size_t SIZE = 8;
+        Aquila::ComplexType spectrum[SIZE] = {1, 1, 1, 1, 1, 1, 1, 1};
+        Aquila::SampleType output[SIZE];
+        Aquila::Dft fft(SIZE);
+        fft.ifft(spectrum, output);
+
+        double expected[SIZE] = {SIZE * 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+        CHECK_ARRAY_CLOSE(expected, output, SIZE, 0.0001);
+    }
+}
