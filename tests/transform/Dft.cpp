@@ -15,15 +15,17 @@ SUITE(Dft)
         const std::size_t SIZE = 8;
         Aquila::SampleType testArray[SIZE] = {1, 0, 0, 0, 0, 0, 0, 0};
         Aquila::ArrayData<> data(testArray, SIZE, 22050);
-        Aquila::ComplexType* spectrum = new Aquila::ComplexType[SIZE];
+        Aquila::ComplexType spectrum[SIZE];
         Aquila::Dft fft(SIZE);
         fft.fft(data.toArray(), spectrum);
 
-        std::for_each(spectrum, spectrum + SIZE, [](Aquila::ComplexType x) {
-            CHECK_CLOSE(1.0, std::abs(x), 0.000001);
+        double absSpectrum[SIZE] = {0};
+        std::transform(spectrum, spectrum + SIZE, absSpectrum, [] (Aquila::ComplexType x) {
+            return std::abs(x);
         });
 
-        delete [] spectrum;
+        double expected[SIZE] = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
+        CHECK_ARRAY_CLOSE(absSpectrum, expected, SIZE, 0.0001);
     }
 
     TEST(ConstSignal)
@@ -31,16 +33,17 @@ SUITE(Dft)
         const std::size_t SIZE = 8;
         Aquila::SampleType testArray[SIZE] = {1, 1, 1, 1, 1, 1, 1, 1};
         Aquila::ArrayData<> data(testArray, SIZE, 22050);
-        Aquila::ComplexType* spectrum = new Aquila::ComplexType[SIZE];
+        Aquila::ComplexType spectrum[SIZE];
         Aquila::Dft fft(SIZE);
         fft.fft(data.toArray(), spectrum);
 
-        CHECK_CLOSE(1.0 * SIZE, std::abs(spectrum[0]), 0.000001);
-        std::for_each(spectrum + 1, spectrum + SIZE, [](Aquila::ComplexType x) {
-            CHECK_CLOSE(0.0, std::abs(x), 0.000001);
+        double absSpectrum[SIZE] = {0};
+        std::transform(spectrum, spectrum + SIZE, absSpectrum, [] (Aquila::ComplexType x) {
+            return std::abs(x);
         });
 
-        delete [] spectrum;
+        double expected[SIZE] = {SIZE * 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+        CHECK_ARRAY_CLOSE(absSpectrum, expected, SIZE, 0.0001);
     }
 }
 
