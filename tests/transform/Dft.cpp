@@ -25,7 +25,7 @@ SUITE(Dft)
         });
 
         double expected[SIZE] = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
-        CHECK_ARRAY_CLOSE(absSpectrum, expected, SIZE, 0.0001);
+        CHECK_ARRAY_CLOSE(expected, absSpectrum, SIZE, 0.0001);
     }
 
     TEST(ConstSignal)
@@ -43,7 +43,7 @@ SUITE(Dft)
         });
 
         double expected[SIZE] = {SIZE * 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-        CHECK_ARRAY_CLOSE(absSpectrum, expected, SIZE, 0.0001);
+        CHECK_ARRAY_CLOSE(expected, absSpectrum, SIZE, 0.0001);
     }
 }
 
