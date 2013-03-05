@@ -115,7 +115,7 @@ namespace Aquila
             doPlot(plot, data, data + length);
         }
 
-        void plotSpectrum(Aquila::ComplexType spectrum[], std::size_t length);
+        void plotSpectrum(SpectrumType spectrum);
 
     private:
         /**
