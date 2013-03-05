@@ -17,6 +17,7 @@
 
 #include "OouraFft.h"
 #include <cmath>
+#include <cstddef>
 
 namespace Aquila
 {
@@ -50,24 +51,32 @@ namespace Aquila
      * Applies the transformation to the signal.
      *
      * @param x input signal
-     * @param spectrum output spectrum
+     * @return calculated spectrum
      */
-    void OouraFft::fft(const SampleType x[], ComplexType spectrum[])
+    SpectrumType OouraFft::fft(const SampleType x[])
     {
         static_assert(
             sizeof(ComplexType[2]) == sizeof(double[4]),
             "complex<double> has the same memory layout as two consecutive doubles"
         );
-        double* a = reinterpret_cast<double*>(spectrum);
-
-        // copying input data to even elements of the array (real values)
-        for (size_t i = 0; i < N; ++i)
+        // create a temporary storage array and copy input to even elements
+        // of the array (real values), leaving imaginary components at 0
+        double* a = new double[2 * N];
+        for (std::size_t i = 0; i < N; ++i)
         {
-            a[2*i] = x[i];
+            a[2 * i] = x[i];
+            a[2 * i + 1] = 0.0;
         }
 
         // let's call the C function from Ooura's package
         cdft(2*N, -1, a, ip, w);
+
+        // convert the array back to complex values and return as vector
+        ComplexType* tmpPtr = reinterpret_cast<ComplexType*>(a);
+        SpectrumType spectrum(tmpPtr, tmpPtr + N);
+        delete [] a;
+
+        return spectrum;
     }
 
     /**
@@ -88,7 +97,7 @@ namespace Aquila
         cdft(2*N, 1, a, ip, w);
 
         // copy the data to the double array and scale it
-        for (size_t i = 0; i < N; ++i)
+        for (std::size_t i = 0; i < N; ++i)
         {
             x[i] = a[2*i] / static_cast<double>(N);
         }

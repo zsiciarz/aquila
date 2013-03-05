@@ -30,14 +30,16 @@ namespace Aquila
      * Applies the transformation to the signal.
      *
      * @param x input signal
-     * @param spectrum output spectrum
+     * @return calculated spectrum
      */
-    void AquilaFft::fft(const SampleType x[], ComplexType spectrum[])
+    SpectrumType AquilaFft::fft(const SampleType x[])
     {
+        SpectrumType spectrum(N);
+
         // bit-reversing the samples - a requirement of radix-2
         // instead of reversing in place, put the samples to result array
         unsigned int a = 1, b = 0, c = 0;
-        std::copy(x, x + N, spectrum);
+        std::copy(x, x + N, std::begin(spectrum));
         for (b = 1; b < N; ++b)
         {
             if (b < a)
@@ -93,6 +95,8 @@ namespace Aquila
                 Wi = Wi_cache[k][p];
             }
         }
+
+        return spectrum;
     }
 
     /**

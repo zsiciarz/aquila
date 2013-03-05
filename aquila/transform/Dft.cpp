@@ -35,11 +35,13 @@ namespace Aquila
      * Applies the transformation to the signal.
      *
      * @param x input signal
-     * @param spectrum output spectrum
+     * @return calculated spectrum
      */
-    void Dft::fft(const SampleType x[], ComplexType spectrum[])
+    SpectrumType Dft::fft(const SampleType x[])
     {
+        SpectrumType spectrum(N);
         ComplexType WN = std::exp((-j) * 2.0 * M_PI / static_cast<double>(N));
+
         for (unsigned int k = 0; k < N; ++k)
         {
             ComplexType sum(0, 0);
@@ -49,6 +51,8 @@ namespace Aquila
             }
             spectrum[k] = sum;
         }
+
+        return spectrum;
     }
 
     /**
