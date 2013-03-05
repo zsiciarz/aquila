@@ -15,22 +15,20 @@ unsigned int findPeak(std::size_t arraySize,
     Aquila::SineGenerator generator(sampleFrequency);
     generator.setAmplitude(64).setFrequency(signalFrequency).generate(arraySize);
 
-    Aquila::ComplexType* spectrum = new Aquila::ComplexType[arraySize];
     auto fft = Aquila::FftFactory::getFft(arraySize);
-    fft->fft(generator.toArray(), spectrum);
+    Aquila::SpectrumType spectrum = fft->fft(generator.toArray());
 
     // "iterator" pointing to highest spectrum peak (comparing by magnitude)
     // the pointer difference is the number of spectral peak
     auto peakPos = std::max_element(
-        spectrum,
-        spectrum + arraySize / 2,
+        std::begin(spectrum),
+        std::begin(spectrum) + arraySize / 2,
         [] (Aquila::ComplexType x, Aquila::ComplexType y) -> bool {
             return std::abs(x) < std::abs(y);
         }
     );
 
-    unsigned int d = std::distance(spectrum, peakPos);
-    delete [] spectrum;
+    unsigned int d = std::distance(std::begin(spectrum), peakPos);
 
     return d;
 }
@@ -42,12 +40,11 @@ SUITE(Fft)
         const std::size_t SIZE = 8;
         Aquila::SampleType testArray[SIZE] = {1, 0, 0, 0, 0, 0, 0, 0};
         Aquila::ArrayData<> data(testArray, SIZE, 22050);
-        Aquila::ComplexType spectrum[SIZE];
         auto fft = Aquila::FftFactory::getFft(SIZE);
-        fft->fft(data.toArray(), spectrum);
+        Aquila::SpectrumType spectrum = fft->fft(data.toArray());
 
         double absSpectrum[SIZE] = {0};
-        std::transform(spectrum, spectrum + SIZE, absSpectrum, [] (Aquila::ComplexType x) {
+        std::transform(std::begin(spectrum), std::end(spectrum), absSpectrum, [] (Aquila::ComplexType x) {
             return std::abs(x);
         });
 
@@ -60,12 +57,11 @@ SUITE(Fft)
         const std::size_t SIZE = 8;
         Aquila::SampleType testArray[SIZE] = {1, 1, 1, 1, 1, 1, 1, 1};
         Aquila::ArrayData<> data(testArray, SIZE, 22050);
-        Aquila::ComplexType spectrum[SIZE];
         auto fft = Aquila::FftFactory::getFft(SIZE);
-        fft->fft(data.toArray(), spectrum);
+        Aquila::SpectrumType spectrum = fft->fft(data.toArray());
 
         double absSpectrum[SIZE] = {0};
-        std::transform(spectrum, spectrum + SIZE, absSpectrum, [] (Aquila::ComplexType x) {
+        std::transform(std::begin(spectrum), std::end(spectrum), absSpectrum, [] (Aquila::ComplexType x) {
             return std::abs(x);
         });
 
