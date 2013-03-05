@@ -22,11 +22,10 @@ int main()
 
     // calculate the FFT
     auto fft = Aquila::FftFactory::getFft(SIZE);
-    Aquila::ComplexType spectrum[SIZE];
-    fft->fft(sum.toArray(), spectrum);
+    Aquila::SpectrumType spectrum = fft->fft(sum.toArray());
 
     plt.setTitle("Spectrum");
-    plt.plotSpectrum(spectrum, SIZE);
+    plt.plotSpectrum(spectrum);
 
     return 0;
 }
