@@ -99,7 +99,7 @@ namespace Aquila
         // copy the data to the double array and scale it
         for (std::size_t i = 0; i < N; ++i)
         {
-            x[i] = a[2*i] / static_cast<double>(N);
+            x[i] = a[2 * i] / static_cast<double>(N);
         }
     }
 }

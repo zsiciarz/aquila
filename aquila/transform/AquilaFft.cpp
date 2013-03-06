@@ -61,7 +61,7 @@ namespace Aquila
 
         // FFT stages count
         unsigned int numStages = static_cast<unsigned int>(
-                std::log(double(N)) / LN_2);
+            std::log(static_cast<double>(N)) / LN_2);
 
         // L = 2^k - DFT block length and offset
         // M = 2^(k-1) - butterflies per block, butterfly width
@@ -126,20 +126,20 @@ namespace Aquila
         }
 
         // nothing in cache, calculate twiddle factors
-        ComplexType** Wi = new ComplexType*[numStages+1];
+        ComplexType** Wi = new ComplexType*[numStages + 1];
         for (unsigned int k = 1; k <= numStages; ++k)
         {
             // L = 2^k - DFT block length and offset
             // M = 2^(k-1) - butterflies per block, butterfly width
             // W - Fourier base multiplying factor
             unsigned int L = 1 << k;
-            unsigned int M = 1 << (k-1);
-            ComplexType W = exp((-j) * 2.0 * M_PI / double(L));
-            Wi[k] = new ComplexType[M+1];
+            unsigned int M = 1 << (k - 1);
+            ComplexType W = exp((-j) * 2.0 * M_PI / static_cast<double>(L));
+            Wi[k] = new ComplexType[M + 1];
             Wi[k][0] = ComplexType(1.0);
             for (unsigned int p = 1; p <= M; ++p)
             {
-                Wi[k][p] = Wi[k][p-1] * W;
+                Wi[k][p] = Wi[k][p - 1] * W;
             }
         }
 
@@ -154,8 +154,7 @@ namespace Aquila
      */
     void AquilaFft::clearFftWiCache()
     {
-        fftWiCacheType::const_iterator it;
-        for (it = fftWiCache.begin(); it != fftWiCache.end(); it++)
+        for (auto it = fftWiCache.begin(); it != fftWiCache.end(); it++)
         {
             ComplexType** c = it->second;
             unsigned int numStages = it->first;
