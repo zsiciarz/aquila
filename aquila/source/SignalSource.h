@@ -75,6 +75,17 @@ namespace Aquila
         }
 
         /**
+         * Sets sample frequency of the signal.
+         *
+         * @param frequency sample frequency in Hz
+         */
+        virtual void setSampleFrequency(FrequencyType frequency)
+        {
+            m_sampleFrequency = frequency;
+        }
+
+
+        /**
          * Returns number of bits per signal sample.
          *
          * @return sample size in bits
