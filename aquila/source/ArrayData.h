@@ -52,7 +52,7 @@ namespace Aquila
          * @param sampleFrequency sample frequency of the data in array
          */
         ArrayData(Numeric* data, std::size_t dataLength,
-                  FrequencyType sampleFrequency):
+                  FrequencyType sampleFrequency = 0):
             SignalSource(sampleFrequency)
         {
             m_data.assign(data, data + dataLength);

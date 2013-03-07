@@ -15,6 +15,15 @@ SUITE(ArrayData)
         CHECK_EQUAL(22050, data.getSampleFrequency());
     }
 
+    TEST(DefaultSampleFrequency)
+    {
+        Aquila::SampleType testArray[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        Aquila::ArrayData<> data(testArray, SIZE);
+        CHECK_EQUAL(0, data.getSampleFrequency());
+        data.setSampleFrequency(22050);
+        CHECK_EQUAL(22050, data.getSampleFrequency());
+    }
+
     TEST(BitsPerSample8)
     {
         std::int8_t arr[SIZE] = {0};
