@@ -29,7 +29,7 @@ namespace Aquila
     /**
      * Forward declaration to avoid including WaveFile.h header.
      */
-    class WaveHeader;
+    struct WaveHeader;
 
     /**
      * A utility class to handle loading and saving of .wav files.
