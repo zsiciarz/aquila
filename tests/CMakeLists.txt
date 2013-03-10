@@ -27,6 +27,7 @@ set(Aquila_Test_SOURCES
     source/generator/SquareGenerator.cpp
     transform/AquilaFft.cpp
     transform/Dft.cpp
+    transform/Fft.h
     transform/Fft.cpp
     transform/OouraFft.cpp
 )
