@@ -6,7 +6,6 @@
 #define AQUILA_TEST_FFT_H
 
 #include "aquila/global.h"
-#include "aquila/source/ArrayData.h"
 #include "aquila/transform/AquilaFft.h"
 #include <unittestpp.h>
 #include <algorithm>
@@ -18,17 +17,20 @@
 template <typename FftType, std::size_t SIZE = 8>
 void deltaSpectrumTest()
 {
-    Aquila::SampleType testArray[SIZE] = {1, 0, 0, 0, 0, 0, 0, 0};
-    Aquila::ArrayData<> data(testArray, SIZE, 22050);
+    // delta signal: 1, 0, 0, 0...
+    Aquila::SampleType testArray[SIZE] = {0};
+    testArray[0] = 1;
+
     FftType fft(SIZE);
-    Aquila::SpectrumType spectrum = fft.fft(data.toArray());
+    Aquila::SpectrumType spectrum = fft.fft(testArray);
 
     double absSpectrum[SIZE] = {0};
     std::transform(std::begin(spectrum), std::end(spectrum), absSpectrum, [] (Aquila::ComplexType x) {
         return std::abs(x);
     });
 
-    double expected[SIZE] = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
+    double expected[SIZE];
+    std::fill_n(expected, SIZE, 1.0);
     CHECK_ARRAY_CLOSE(expected, absSpectrum, SIZE, 0.0001);
 }
 
@@ -38,17 +40,20 @@ void deltaSpectrumTest()
 template <typename FftType, std::size_t SIZE = 8>
 void constSpectrumTest()
 {
-    Aquila::SampleType testArray[SIZE] = {1, 1, 1, 1, 1, 1, 1, 1};
-    Aquila::ArrayData<> data(testArray, SIZE, 22050);
+    Aquila::SampleType testArray[SIZE];
+    std::fill_n(testArray, SIZE, 1.0);
+
     FftType fft(SIZE);
-    Aquila::SpectrumType spectrum = fft.fft(data.toArray());
+    Aquila::SpectrumType spectrum = fft.fft(testArray);
 
     double absSpectrum[SIZE] = {0};
     std::transform(std::begin(spectrum), std::end(spectrum), absSpectrum, [] (Aquila::ComplexType x) {
         return std::abs(x);
     });
 
-    double expected[SIZE] = {SIZE * 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    // expecting a delta scaled by SIZE
+    double expected[SIZE] = {0};
+    expected[0] = SIZE * 1.0;
     CHECK_ARRAY_CLOSE(expected, absSpectrum, SIZE, 0.0001);
 }
 
@@ -58,13 +63,14 @@ void constSpectrumTest()
 template <typename FftType, std::size_t SIZE = 8>
 void deltaInverseTest()
 {
-    Aquila::ComplexType s[SIZE] = {SIZE, 0, 0, 0, 0, 0, 0, 0};
-    Aquila::SpectrumType spectrum(s, s + SIZE);
+    Aquila::SpectrumType spectrum(SIZE, 0);
+    spectrum[0] = SIZE * 1.0;
     Aquila::SampleType output[SIZE];
     FftType fft(SIZE);
     fft.ifft(spectrum, output);
 
-    double expected[SIZE] = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
+    double expected[SIZE];
+    std::fill_n(expected, SIZE, 1.0);
     CHECK_ARRAY_CLOSE(expected, output, SIZE, 0.0001);
 }
 
@@ -74,13 +80,13 @@ void deltaInverseTest()
 template <typename FftType, std::size_t SIZE = 8>
 void constInverseTest()
 {
-    Aquila::ComplexType s[SIZE] = {1, 1, 1, 1, 1, 1, 1, 1};
-    Aquila::SpectrumType spectrum(s, s + SIZE);
+    Aquila::SpectrumType spectrum(SIZE, 1.0);
     Aquila::SampleType output[SIZE];
     FftType fft(SIZE);
     fft.ifft(spectrum, output);
 
-    double expected[SIZE] = {1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    double expected[SIZE] = {0};
+    expected[0] = 1.0;
     CHECK_ARRAY_CLOSE(expected, output, SIZE, 0.0001);
 }
 
