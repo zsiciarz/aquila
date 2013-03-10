@@ -47,7 +47,7 @@ SUITE(Dft)
     TEST(DeltaInverse)
     {
         const std::size_t SIZE = 8;
-        Aquila::ComplexType spectrum[SIZE] = {1, 0, 0, 0, 0, 0, 0, 0};
+        Aquila::ComplexType spectrum[SIZE] = {SIZE, 0, 0, 0, 0, 0, 0, 0};
         Aquila::SampleType output[SIZE];
         Aquila::Dft fft(SIZE);
         fft.ifft(spectrum, output);
@@ -64,7 +64,7 @@ SUITE(Dft)
         Aquila::Dft fft(SIZE);
         fft.ifft(spectrum, output);
 
-        double expected[SIZE] = {SIZE * 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+        double expected[SIZE] = {1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
         CHECK_ARRAY_CLOSE(expected, output, SIZE, 0.0001);
     }
 }
