@@ -37,4 +37,12 @@ SUITE(OouraFft)
         constInverseTest<Aquila::OouraFft, 128>();
         constInverseTest<Aquila::OouraFft, 1024>();
     }
+
+    TEST(Identity)
+    {
+        identityTest<Aquila::OouraFft>();
+        identityTest<Aquila::OouraFft, 16>();
+        identityTest<Aquila::OouraFft, 128>();
+        identityTest<Aquila::OouraFft, 1024>();
+    }
 }

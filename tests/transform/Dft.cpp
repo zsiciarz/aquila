@@ -37,4 +37,12 @@ SUITE(Dft)
         constInverseTest<Aquila::Dft, 128>();
         constInverseTest<Aquila::Dft, 1024>();
     }
+
+    TEST(Identity)
+    {
+        identityTest<Aquila::Dft>();
+        identityTest<Aquila::Dft, 16>();
+        identityTest<Aquila::Dft, 128>();
+        identityTest<Aquila::Dft, 1024>();
+    }
 }

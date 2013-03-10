@@ -90,4 +90,22 @@ void constInverseTest()
     CHECK_ARRAY_CLOSE(expected, output, SIZE, 0.0001);
 }
 
+/**
+ * Test that IFFT(FFT(x)) == x.
+ */
+template <typename FftType, std::size_t SIZE = 8>
+void identityTest()
+{
+    Aquila::SampleType testArray[SIZE];
+    std::fill_n(testArray, SIZE, 1.0);
+
+    FftType fft(SIZE);
+    Aquila::SpectrumType spectrum = fft.fft(testArray);
+
+    Aquila::SampleType output[SIZE];
+    fft.ifft(spectrum, output);
+
+    CHECK_ARRAY_CLOSE(testArray, output, SIZE, 0.0001);
+}
+
 #endif // AQUILA_TEST_FFT_H
