@@ -69,7 +69,7 @@ namespace Aquila
             ComplexType sum(0, 0);
             for (unsigned int n = 0; n < N; ++n)
             {
-                sum += spectrum[n] * std::pow(WN, -n * k);
+                sum += spectrum[n] * std::pow(WN, -static_cast<int>(n * k));
             }
             x[k] = std::abs(sum) / static_cast<double>(N);
         }
