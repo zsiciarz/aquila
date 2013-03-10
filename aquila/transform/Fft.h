@@ -75,7 +75,7 @@ namespace Aquila
          * @param spectrum input spectrum
          * @param x output signal
          */
-        virtual void ifft(ComplexType spectrum[], double x[]) = 0;
+        virtual void ifft(SpectrumType spectrum, double x[]) = 0;
 
     protected:
         /**

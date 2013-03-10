@@ -16,6 +16,7 @@
  */
 
 #include "OouraFft.h"
+#include <algorithm>
 #include <cmath>
 #include <cstddef>
 
@@ -85,13 +86,17 @@ namespace Aquila
      * @param spectrum input spectrum
      * @param x output signal
      */
-    void OouraFft::ifft(ComplexType spectrum[], double x[])
+    void OouraFft::ifft(SpectrumType spectrum, double x[])
     {
         static_assert(
             sizeof(ComplexType[2]) == sizeof(double[4]),
                 "complex<double> has the same memory layout as two consecutive doubles"
         );
-        double* a = reinterpret_cast<double*>(spectrum);
+        // interpret the vector as consecutive pairs of doubles (re,im)
+        // and copy to input/output array
+        double* tmpPtr = reinterpret_cast<double*>(&spectrum[0]);
+        double* a = new double[2 * N];
+        std::copy(tmpPtr, tmpPtr + 2 * N, a);
 
         // Ooura's function
         cdft(2*N, 1, a, ip, w);
@@ -101,5 +106,6 @@ namespace Aquila
         {
             x[i] = a[2 * i] / static_cast<double>(N);
         }
+        delete [] a;
     }
 }

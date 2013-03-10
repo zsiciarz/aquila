@@ -37,7 +37,7 @@ namespace Aquila
         ~OouraFft();
 
         virtual SpectrumType fft(const SampleType x[]);
-        virtual void ifft(ComplexType spectrum[], double x[]);
+        virtual void ifft(SpectrumType spectrum, double x[]);
 
     private:
         /**

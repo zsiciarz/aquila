@@ -105,7 +105,7 @@ namespace Aquila
      * @param spectrum input spectrum
      * @param x output signal
      */
-    void AquilaFft::ifft(ComplexType spectrum[], double x[])
+    void AquilaFft::ifft(SpectrumType spectrum, double x[])
     {
         // TO BE IMPLEMENTED!
     }

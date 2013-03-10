@@ -61,7 +61,7 @@ namespace Aquila
      * @param spectrum input spectrum
      * @param x output signal
      */
-    void Dft::ifft(ComplexType spectrum[], double x[])
+    void Dft::ifft(SpectrumType spectrum, double x[])
     {
         ComplexType WN = std::exp((-j) * 2.0 * M_PI / static_cast<double>(N));
         for (unsigned int k = 0; k < N; ++k)
