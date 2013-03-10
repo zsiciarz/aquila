@@ -71,7 +71,7 @@ namespace Aquila
             {
                 sum += spectrum[n] * std::pow(WN, -n * k);
             }
-            x[k] = std::abs(sum);
+            x[k] = std::abs(sum) / static_cast<double>(N);
         }
     }
 }
