@@ -63,7 +63,7 @@ int main()
 
     // Inverse FFT moves us back to time domain
     double x1[SIZE];
-    fft->ifft(&spectrum[0], x1);
+    fft->ifft(spectrum, x1);
     plt.setTitle("Signal waveform after filtration");
     plt.plot(x1, SIZE);
 
