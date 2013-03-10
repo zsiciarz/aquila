@@ -28,6 +28,7 @@ set(Aquila_Test_SOURCES
     transform/AquilaFft.cpp
     transform/Dft.cpp
     transform/Fft.cpp
+    transform/OouraFft.cpp
 )
 
 include_directories(${UNITTESTPP_DIR} ${CMAKE_CURRENT_BINARY_DIR})
