@@ -16,7 +16,6 @@
  */
 
 #include "TextPlot.h"
-#include <memory>
 
 namespace Aquila
 {
@@ -61,11 +60,11 @@ namespace Aquila
     void TextPlot::plotSpectrum(Aquila::SpectrumType spectrum)
     {
         std::size_t halfLength = spectrum.size() / 2;
-        std::unique_ptr<double[]> absSpectrum(new double[halfLength]);
+        std::vector<double> absSpectrum(halfLength);
         for (std::size_t i = 0; i < halfLength; ++i)
         {
             absSpectrum[i] = std::abs(spectrum[i]);
         }
-        plot(absSpectrum.get(), halfLength);
+        plot(absSpectrum);
     }
 }
