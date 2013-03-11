@@ -1,5 +1,5 @@
 /**
- * @file WaveFile.cpp
+ * @file Window.cpp
  *
  * Window functions.
  *

@@ -1,5 +1,5 @@
 /**
- * @file WaveFile.h
+ * @file Window.h
  *
  * Window functions.
  *
