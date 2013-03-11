@@ -27,7 +27,7 @@ namespace Aquila
     /**
      * Sine wave synthesizer.
      */
-    class SineSynthesizer : public Synthesizer
+    class AQUILA_EXPORT SineSynthesizer : public Synthesizer
     {
     public:
         /**
