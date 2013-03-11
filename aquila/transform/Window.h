@@ -26,14 +26,14 @@
 
 namespace Aquila
 {
-	/**
+    /**
      * Possible window functions.
-	 */
+     */
     enum WindowType {WIN_RECT, WIN_HAMMING, WIN_HANN, WIN_BARLETT, WIN_BLACKMAN,
                      WIN_FLATTOP };
 
 
-	/**
+    /**
      * Class defining different window types as static methods.
      *
      * In signal processing, window functions are used to "cut out" a part
@@ -48,10 +48,10 @@ namespace Aquila
      *
      * Windows are cached with window type combined with its length
      * as a key. It is an efficient way to reduce calls to math functions.
-	 */
+     */
     class AQUILA_EXPORT Window
-	{
-	public:
+    {
+    public:
         /**
          *  Window vector type.
          */
@@ -61,7 +61,7 @@ namespace Aquila
 
         const WindowDataType& getData();
 
-	private:
+    private:
         /**
          * Window function type.
          */
@@ -120,7 +120,7 @@ namespace Aquila
              */
             double (*windowMethod)(unsigned int, unsigned int);
         };
-	};
+    };
 }
 
 #endif

@@ -57,7 +57,7 @@ namespace Aquila
      * @param windowKey a cache key
      */
     void Window::createWindow(const KeyType& windowKey)
-	{
+    {
         WindowType type = windowKey.first;
         unsigned int N = windowKey.second;
 
@@ -73,7 +73,7 @@ namespace Aquila
             WindowDataType data(N, 1.0);
             windowsCache[windowKey] = data;
         }
-	}
+    }
 
     /**
      * Hamming window.
