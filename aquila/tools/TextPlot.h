@@ -121,7 +121,7 @@ namespace Aquila
         /**
          * The internal representation of the plot.
          */
-        typedef std::vector< std::vector<char> > PlotMatrixType;
+        typedef std::vector<std::vector<char>> PlotMatrixType;
 
         /**
          * Prepares an internal "pixel" matrix and calls drawPlotMatrix().
