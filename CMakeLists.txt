@@ -37,9 +37,9 @@ if(SFML_FOUND)
     message("SFML was found, wrappers and examples using SFML will be built.")
     include_directories(${SFML_INCLUDE_DIR})
     list(APPEND Aquila_LIBRARIES_TO_LINK_WITH ${SFML_LIBRARY})
-else(SFML_FOUND)
+else()
     message(WARNING "SFML was not found, wrappers and examples using SFML will not be built.")
-endif(SFML_FOUND)
+endif()
 
 
 ################################################################################
@@ -115,7 +115,7 @@ if(SFML_FOUND)
         aquila/synth/KarplusStrongSynthesizer.cpp
         aquila/synth/SineSynthesizer.cpp
     )
-endif(SFML_FOUND)
+endif()
 
 
 ################################################################################
@@ -127,24 +127,25 @@ endif(SFML_FOUND)
 if(MSVC)
     # disable "strncpy is deprecated" warning and enable math constants
     add_definitions("/D_CRT_NONSTDC_NO_DEPRECATE /D_USE_MATH_DEFINES")
-endif(MSVC)
+endif()
 
 
 if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x")
-    if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+    if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -Wall -fprofile-arcs -ftest-coverage")
         include(CodeCoverage)
         setup_target_for_coverage(coverage aquila_test htmlcov)
     endif()
 endif()
 
-if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
     if(APPLE)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
     endif()
 endif()
+
 
 ################################################################################
 #
@@ -162,7 +163,7 @@ target_link_libraries(Aquila ${Aquila_LIBRARIES_TO_LINK_WITH})
 if(Aquila_BUILD_EXAMPLES)
     add_custom_target(examples)
     add_subdirectory(examples)
-endif(Aquila_BUILD_EXAMPLES)
+endif()
 
 #tests
 if(Aquila_BUILD_TESTS)
@@ -170,7 +171,7 @@ if(Aquila_BUILD_TESTS)
     enable_testing()
     set(UNITTESTPP_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lib/unittestpp/")
     add_subdirectory(tests)
-endif(Aquila_BUILD_TESTS)
+endif()
 
 
 ################################################################################
@@ -191,10 +192,12 @@ install(FILES CHANGELOG LICENSE README.md DESTINATION ${CMAKE_INSTALL_PREFIX})
 #
 ################################################################################
 
-CONFIGURE_FILE(
-  "${CMAKE_CURRENT_SOURCE_DIR}/uninstall.cmake.in"
-  "${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake"
-  IMMEDIATE @ONLY)
+configure_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/uninstall.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake"
+    IMMEDIATE @ONLY
+)
 
-ADD_CUSTOM_TARGET(uninstall
-  "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake")
+add_custom_target(uninstall
+    "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake"
+)

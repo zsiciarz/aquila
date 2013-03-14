@@ -39,7 +39,7 @@ elseif(WIN32)
     list(APPEND UNITTESTPP_SOURCES
         src/Win32/TimeHelpers.cpp
     )
-endif(UNIX)
+endif()
 
 add_library(UnitTest++ STATIC EXCLUDE_FROM_ALL ${UNITTESTPP_SOURCES})
 

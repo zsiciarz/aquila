@@ -7,4 +7,4 @@ add_library(Ooura_fft ${Ooura_fft_SOURCES})
 # UnitTest++
 if(Aquila_BUILD_TESTS)
     add_subdirectory(unittestpp)
-endif(Aquila_BUILD_TESTS)
+endif()
