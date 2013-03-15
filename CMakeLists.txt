@@ -73,6 +73,7 @@ set(Aquila_HEADERS
     aquila/transform/AquilaFft.h
     aquila/transform/OouraFft.h
     aquila/transform/FftFactory.h
+    aquila/transform/Dct.h
     aquila/transform/Spectrogram.h
     aquila/transform/Window.h
     aquila/tools/TextPlot.h
@@ -96,6 +97,7 @@ set(Aquila_SOURCES
     aquila/transform/AquilaFft.cpp
     aquila/transform/OouraFft.cpp
     aquila/transform/FftFactory.cpp
+    aquila/transform/Dct.cpp
     aquila/transform/Spectrogram.cpp
     aquila/transform/Window.cpp
     aquila/tools/TextPlot.cpp
