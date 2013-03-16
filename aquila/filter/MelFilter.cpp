@@ -1,0 +1,31 @@
+/**
+ * @file MelFilter.cpp
+ *
+ * Triangular filters in Mel frequency scale.
+ *
+ * This file is part of the Aquila DSP library.
+ * Aquila is free software, licensed under the MIT/X11 License. A copy of
+ * the license is provided with the library in the LICENSE file.
+ *
+ * @package Aquila
+ * @version 3.0.0-dev
+ * @author Zbigniew Siciarz
+ * @date 2007-2013
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ * @since 0.3.3
+ */
+
+#include "MelFilter.h"
+
+namespace Aquila
+{
+    /**
+     * Creates the filter and sets sample frequency.
+     *
+     * @param sampleFrequency sample frequency in Hz
+     */
+    MelFilter::MelFilter(FrequencyType sampleFrequency):
+        m_sampleFrequency(sampleFrequency)
+    {
+    }
+}
