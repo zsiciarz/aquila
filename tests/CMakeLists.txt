@@ -16,6 +16,7 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/constants.h.in"
 # UnitTest++
 set(Aquila_Test_SOURCES
     main.cpp
+    filter/MelFilter.cpp
     source/ArrayData.cpp
     source/Frame.cpp
     source/FramesCollection.cpp
