@@ -19,7 +19,9 @@
 #define MELFILTER_H
 
 #include "../global.h"
+#include <cstddef>
 #include <cmath>
+#include <vector>
 
 namespace Aquila
 {
@@ -30,6 +32,11 @@ namespace Aquila
     {
     public:
         explicit MelFilter(FrequencyType sampleFrequency);
+
+        void createFilter(unsigned short filterNum, std::size_t melFilterWidth,
+                          std::size_t N);
+
+        double apply(const SpectrumType& dataSpectrum) const;
 
         /**
          * Converts frequency from linear to Mel scale.
@@ -55,6 +62,15 @@ namespace Aquila
 
     private:
         FrequencyType m_sampleFrequency;
+
+        /**
+         * Filter spectrum (real-valued).
+         */
+        std::vector<double> m_spectrum;
+
+        void generateFilterSpectrum(FrequencyType minFreq,
+                                    FrequencyType centerFreq,
+                                    FrequencyType maxFreq, std::size_t N);
     };
 }
 
