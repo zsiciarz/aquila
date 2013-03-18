@@ -77,39 +77,29 @@ namespace Aquila
                                            FrequencyType maxFreq, std::size_t N)
     {
         m_spectrum.clear();
-        m_spectrum.resize(N);
+        m_spectrum.resize(N, 0.0);
 
-        // scale the frequencies according to spectrum size
-        minFreq *= N / m_sampleFrequency;
-        centerFreq *= N / m_sampleFrequency;
-        maxFreq *= N / m_sampleFrequency;
+        // find spectral peak positions corresponding to frequencies
+        std::size_t minPos = static_cast<std::size_t>(N * minFreq / m_sampleFrequency);
+        std::size_t centerPos = static_cast<std::size_t>(N * centerFreq / m_sampleFrequency);
+        std::size_t maxPos = static_cast<std::size_t>(N * maxFreq / m_sampleFrequency);
 
-        double max = 1.0, value;
+        const double max = 1.0;
 
-        for (unsigned int k = 0; k < N; ++k)
+        // outside the triangle spectrum values are 0, guaranteed by
+        // earlier call to resize
+        for (unsigned int k = minPos; k <= maxPos; ++k)
         {
-            // outside the triangle spectrum values are 0
-            if (k < minFreq || k > maxFreq)
+            if (k < centerPos)
             {
-                value = 0.0;
+                // in the triangle on the ascending slope
+                m_spectrum[k] = (k - minPos) * max / (centerPos - minPos);
             }
             else
             {
-                // in the triangle on the ascending slope
-                if (k < centerFreq)
-                {
-                    value = k * max / (centerFreq - minFreq) -
-                        minFreq * max / (centerFreq - minFreq);
-                }
                 // in the triangle on the descending slope
-                else
-                {
-                    value = k * max / (centerFreq - maxFreq) -
-                        maxFreq * max / (centerFreq - maxFreq);
-                }
+                m_spectrum[k] = (maxPos - k) * max / (maxPos - centerPos);
             }
-
-            m_spectrum[k] = value;
         }
     }
 }
