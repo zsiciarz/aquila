@@ -1,6 +1,7 @@
 #include "aquila/global.h"
 #include "aquila/filter/MelFilter.h"
 #include <unittestpp.h>
+#include <cstddef>
 
 
 SUITE(MelFilter)
@@ -11,5 +12,40 @@ SUITE(MelFilter)
         auto melFrequency = Aquila::MelFilter::linearToMel(frequency);
         auto linearFrequency = Aquila::MelFilter::melToLinear(melFrequency);
         CHECK_CLOSE(frequency, linearFrequency, 0.00001);
+    }
+
+    TEST(OutsideTriangle)
+    {
+        Aquila::FrequencyType sampleFrequency = 44100.0;
+        const std::size_t N = 2048;
+
+        // single spectral peak at highest frequency
+        Aquila::SpectrumType spectrum(N);
+        spectrum[N / 2 - 1] = 5000;
+
+        // 0-th filter for lowest frequencies
+        Aquila::MelFilter filter(sampleFrequency);
+        filter.createFilter(0, 200, N);
+        double output = filter.apply(spectrum);
+        CHECK_CLOSE(0.0, output, 0.000001);
+    }
+
+    TEST(InsideTriangle)
+    {
+        Aquila::FrequencyType sampleFrequency = 44100.0;
+        const std::size_t N = 2048;
+
+        // create a single spectral peak at middle frequency of 0-th Mel filter
+        Aquila::SpectrumType spectrum(N);
+        Aquila::FrequencyType melFrequency = 100.0;
+        Aquila::FrequencyType linearFrequency = Aquila::MelFilter::melToLinear(melFrequency);
+        std::size_t peakNumber = N  * (linearFrequency / sampleFrequency);
+        spectrum[peakNumber] = 5000.0;
+
+        // 0-th filter for lowest frequencies
+        Aquila::MelFilter filter(sampleFrequency);
+        filter.createFilter(0, 200, N);
+        double output = filter.apply(spectrum);
+        CHECK_CLOSE(5000.0, output, 0.000001);
     }
 }
