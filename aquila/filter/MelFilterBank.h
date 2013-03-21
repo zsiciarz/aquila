@@ -59,7 +59,7 @@ namespace Aquila
         /**
          * Vector of Mel filters.
          */
-        std::vector<MelFilter> filters;
+        std::vector<MelFilter> m_filters;
 
         /**
          * Sample frequency of the filtered signal.

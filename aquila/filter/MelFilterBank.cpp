@@ -32,11 +32,11 @@ namespace Aquila
                                  ):
         m_sampleFrequency(sampleFrequency), N(length)
     {
-        filters.reserve(MELFILTERS);
+        m_filters.reserve(MELFILTERS);
         for (unsigned int i = 0; i < MELFILTERS; ++i)
         {
-            filters.push_back(MelFilter(m_sampleFrequency));
-            filters[i].createFilter(i, melFilterWidth, N);
+            m_filters.push_back(MelFilter(m_sampleFrequency));
+            m_filters[i].createFilter(i, melFilterWidth, N);
         }
     }
 
@@ -51,7 +51,7 @@ namespace Aquila
         std::vector<double> output(MELFILTERS, 0.0);
         for (unsigned int i = 0; i < MELFILTERS; ++i)
         {
-            output[i] = filters[i].apply(frameSpectrum);
+            output[i] = m_filters[i].apply(frameSpectrum);
         }
         return output;
     }
