@@ -16,6 +16,7 @@
  */
 
 #include "MelFilter.h"
+#include <utility>
 
 namespace Aquila
 {
@@ -26,6 +27,17 @@ namespace Aquila
      */
     MelFilter::MelFilter(FrequencyType sampleFrequency):
         m_sampleFrequency(sampleFrequency)
+    {
+    }
+
+    /**
+     * Move constructor.
+     *
+     * @param other other filter to be moved from
+     */
+    MelFilter::MelFilter(MelFilter&& other):
+        m_sampleFrequency(other.m_sampleFrequency),
+        m_spectrum(std::move(other.m_spectrum))
     {
     }
 
