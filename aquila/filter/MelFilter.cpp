@@ -84,6 +84,21 @@ namespace Aquila
         return value;
     }
 
+    /**
+     * Generates a vector of values shaped as a triangular filter.
+     *
+     * ^                       [2]
+     * |                        /\
+     * |                       /  \
+     * |                      /    \
+     * |_____________________/      \__________________
+     * +--------------------[1]----[3]---------------------> f
+     *
+     * @param minFreq frequency at [1] in linear scale
+     * @param centerFreq frequency at [2] in linear scale
+     * @param maxFreq frequency at [3] in linear scale
+     * @param N length of the spectrum
+     */
     void MelFilter::generateFilterSpectrum(FrequencyType minFreq,
                                            FrequencyType centerFreq,
                                            FrequencyType maxFreq, std::size_t N)
