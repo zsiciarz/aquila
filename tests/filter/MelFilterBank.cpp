@@ -39,11 +39,27 @@ SUITE(MelFilter)
         CHECK_EQUAL(2048u, filters.getSpectrumLength());
     }
 
-    TEST(FilterOutput)
+    TEST(FilterOutput1024)
+    {
+        for (unsigned int i = 0; i < Aquila::MELFILTERS; ++i)
+        {
+            testMelFilterBankOutput<1024>(i);
+        }
+    }
+
+    TEST(FilterOutput2048)
     {
         for (unsigned int i = 0; i < Aquila::MELFILTERS; ++i)
         {
             testMelFilterBankOutput<2048>(i);
+        }
+    }
+
+    TEST(FilterOutput4096)
+    {
+        for (unsigned int i = 0; i < Aquila::MELFILTERS; ++i)
+        {
+            testMelFilterBankOutput<4096>(i);
         }
     }
 }
