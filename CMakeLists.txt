@@ -54,6 +54,7 @@ set(Aquila_HEADERS
     aquila/functions.h
     aquila/Exceptions.h
     aquila/filter/MelFilter.h
+    aquila/filter/MelFilterBank.h
     aquila/source/SignalSource.h
     aquila/source/Frame.h
     aquila/source/FramesCollection.h
@@ -83,6 +84,7 @@ set(Aquila_HEADERS
 # library sources
 set(Aquila_SOURCES
     aquila/filter/MelFilter.cpp
+    aquila/filter/MelFilterBank.cpp
     aquila/source/SignalSource.cpp
     aquila/source/Frame.cpp
     aquila/source/FramesCollection.cpp
