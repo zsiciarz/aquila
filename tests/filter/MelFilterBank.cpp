@@ -4,7 +4,7 @@
 #include <unittestpp.h>
 #include <cstddef>
 
-template <std::size_t N = 2048>
+template <std::size_t N>
 void testMelFilterBankOutput(const std::size_t k)
 {
     Aquila::FrequencyType sampleFrequency = 44100.0;

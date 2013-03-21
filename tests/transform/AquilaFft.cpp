@@ -8,7 +8,7 @@ SUITE(AquilaFft)
 {
     TEST(Delta)
     {
-        deltaSpectrumTest<Aquila::AquilaFft>();
+        deltaSpectrumTest<Aquila::AquilaFft, 8>();
         deltaSpectrumTest<Aquila::AquilaFft, 16>();
         deltaSpectrumTest<Aquila::AquilaFft, 128>();
         deltaSpectrumTest<Aquila::AquilaFft, 1024>();
@@ -16,7 +16,7 @@ SUITE(AquilaFft)
 
     TEST(ConstSignal)
     {
-        constSpectrumTest<Aquila::AquilaFft>();
+        constSpectrumTest<Aquila::AquilaFft, 8>();
         constSpectrumTest<Aquila::AquilaFft, 16>();
         constSpectrumTest<Aquila::AquilaFft, 128>();
         constSpectrumTest<Aquila::AquilaFft, 1024>();

@@ -14,7 +14,7 @@
 /**
  * Test that spectrum of a delta signal is constant.
  */
-template <typename FftType, std::size_t SIZE = 8>
+template <typename FftType, std::size_t SIZE>
 void deltaSpectrumTest()
 {
     // delta signal: 1, 0, 0, 0...
@@ -37,7 +37,7 @@ void deltaSpectrumTest()
 /**
  * Test that spectrum of a constant signal is a scaled delta.
  */
-template <typename FftType, std::size_t SIZE = 8>
+template <typename FftType, std::size_t SIZE>
 void constSpectrumTest()
 {
     Aquila::SampleType testArray[SIZE];
@@ -60,7 +60,7 @@ void constSpectrumTest()
 /**
  * Test that inverse of a delta spectrum is a constant signal.
  */
-template <typename FftType, std::size_t SIZE = 8>
+template <typename FftType, std::size_t SIZE>
 void deltaInverseTest()
 {
     Aquila::SpectrumType spectrum(SIZE, 0);
@@ -77,7 +77,7 @@ void deltaInverseTest()
 /**
  * Test that inverse of a constant spectrum is a delta signal.
  */
-template <typename FftType, std::size_t SIZE = 8>
+template <typename FftType, std::size_t SIZE>
 void constInverseTest()
 {
     Aquila::SpectrumType spectrum(SIZE, 1.0);
@@ -93,7 +93,7 @@ void constInverseTest()
 /**
  * Test that IFFT(FFT(x)) == x.
  */
-template <typename FftType, std::size_t SIZE = 8>
+template <typename FftType, std::size_t SIZE>
 void identityTest()
 {
     Aquila::SampleType testArray[SIZE];
