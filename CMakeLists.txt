@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8)
 project(Aquila CXX)
 
 set(Aquila_VERSION_MAJOR 3)
