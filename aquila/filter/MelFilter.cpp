@@ -42,6 +42,19 @@ namespace Aquila
     }
 
     /**
+     * Copy assignment operator.
+     *
+     * @param other filter to be copied from
+     * @return reference to assigned value
+     */
+    MelFilter& MelFilter::operator=(const MelFilter& other)
+    {
+        m_sampleFrequency = other.m_sampleFrequency;
+        m_spectrum = other.m_spectrum;
+        return *this;
+    }
+
+    /**
      * Designs the Mel filter and creates triangular spectrum.
      *
      * @param filterNum which filter in a sequence it is
