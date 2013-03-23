@@ -64,9 +64,9 @@ namespace Aquila
      * - 16-bit mono
      * - 16-bit stereo*
      *
-     * *For stereo data, both channels are read into memory, but only one
-     * of them can be processed at a time. By default this is the left channel,
-     * but you can switch to the other one by calling setSourceChannel().
+     * For stereo data, only only one of the channels is loaded from file.
+     * By default this is the left channel, but you can control this from the
+     * constructor parameter.
      *
      * There are no requirements for sample frequency of the data.
      */
@@ -74,14 +74,15 @@ namespace Aquila
     {
     public:
         /**
-         * Audio channel representation as a vector.
+         * Audio channel representation.
          */
-        typedef std::vector<SampleType> ChannelType;
+        typedef decltype(m_data) ChannelType;
 
-        explicit WaveFile(const std::string& filename);
+        explicit WaveFile(const std::string& filename,
+                          StereoChannel channel = LEFT);
         ~WaveFile();
 
-        void load(const std::string& file);
+        void load(const std::string& file, StereoChannel channel);
         static void save(const SignalSource& source, const std::string& file);
 
         /**
@@ -177,61 +178,7 @@ namespace Aquila
             return hdr.WaveSize;
         }
 
-        /**
-         * Returns the real data length.
-         *
-         * @return left channel vector size
-         */
-        virtual std::size_t getSamplesCount() const
-        {
-            return getDataVector().size();
-        }
-
-        /**
-         * Returns sample value at a given position in source channel.
-         *
-         * @param position sample position (from 0 to channel length)
-         * @return sample value
-         */
-        virtual SampleType sample(std::size_t position) const
-        {
-            return getDataVector()[position];
-        }
-
         unsigned int getAudioLength() const;
-
-        /**
-         * Returns sample data (read-only!) as a const C-style array.
-         *
-         * @return C-style array containing sample data
-         */
-        virtual const SampleType* toArray() const
-        {
-            return &(getDataVector())[0];
-        }
-
-        /**
-         * Returns a const reference to channel source.
-         *
-         * @return source vector
-         */
-        const ChannelType& getDataVector() const
-        {
-            return (LEFT == m_sourceChannel) ? LChTab : RChTab;
-        }
-
-        /**
-         * Determines which channel (stereo only) will be used as data source.
-         *
-         * @param whichChannel LEFT or RIGHT (the default setting is LEFT)
-         */
-        void setSourceChannel(StereoChannel whichChannel)
-        {
-            if (!isStereo())
-                return;
-
-            m_sourceChannel = whichChannel;
-        }
 
     private:
         /**
@@ -243,16 +190,6 @@ namespace Aquila
          * Header structure.
          */
         WaveHeader hdr;
-
-        /**
-         * Data from both channels.
-         */
-        ChannelType LChTab, RChTab;
-
-        /**
-         * Which channel will be used in stereo recordings as data source.
-         */
-        StereoChannel m_sourceChannel;
     };
 }
 

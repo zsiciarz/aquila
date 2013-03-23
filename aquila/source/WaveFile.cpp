@@ -24,11 +24,12 @@ namespace Aquila
      * Creates a wave file object and immediately loads data from file.
      *
      * @param filename full path to .wav file
+     * @param channel LEFT or RIGHT (the default setting is LEFT)
      */
-    WaveFile::WaveFile(const std::string& filename):
-        SignalSource(), m_sourceChannel(LEFT)
+    WaveFile::WaveFile(const std::string& filename, StereoChannel channel):
+        SignalSource()
     {
-        load(filename);
+        load(filename, channel);
     }
 
     /**
@@ -49,14 +50,20 @@ namespace Aquila
      *
      * @param file full path to .wav file
      */
-    void WaveFile::load(const std::string& file)
+    void WaveFile::load(const std::string& file, StereoChannel channel)
     {
         filename = file;
-        LChTab.clear();
-        RChTab.clear();
-
+        m_data.clear();
+        ChannelType dummy;
         WaveFileHandler handler(file);
-        handler.readHeaderAndChannels(hdr, LChTab, RChTab);
+        if (LEFT == channel)
+        {
+            handler.readHeaderAndChannels(hdr, m_data, dummy);
+        }
+        else
+        {
+            handler.readHeaderAndChannels(hdr, dummy, m_data);
+        }
     }
 
     /**
