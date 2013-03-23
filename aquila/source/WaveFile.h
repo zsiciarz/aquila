@@ -126,16 +126,6 @@ namespace Aquila
         }
 
         /**
-         * Returns signal sample frequency.
-         *
-         * @return sample frequency in Hz
-         */
-        virtual FrequencyType getSampleFrequency() const
-        {
-            return hdr.SampFreq;
-        }
-
-        /**
          * Returns the number of bytes per second.
          *
          * @return product of sample frequency and bytes per sample

@@ -64,6 +64,7 @@ namespace Aquila
         {
             handler.readHeaderAndChannels(hdr, dummy, m_data);
         }
+        m_sampleFrequency = hdr.SampFreq;
     }
 
     /**
