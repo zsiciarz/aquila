@@ -60,7 +60,6 @@ set(Aquila_HEADERS
     aquila/source/FramesCollection.h
     aquila/source/PlainTextFile.h
     aquila/source/RawPcmFile.h
-    aquila/source/Sum.h
     aquila/source/WaveFile.h
     aquila/source/WaveFileHandler.h
     aquila/source/generator/Generator.h
