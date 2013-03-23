@@ -1,6 +1,5 @@
 #include "aquila/global.h"
 #include "aquila/source/generator/SineGenerator.h"
-#include "aquila/source/Sum.h"
 #include "aquila/transform/FftFactory.h"
 #include "aquila/tools/TextPlot.h"
 
@@ -15,7 +14,7 @@ int main()
     sineGenerator1.setAmplitude(32).setFrequency(f1).generate(SIZE);
     Aquila::SineGenerator sineGenerator2 = Aquila::SineGenerator(sampleFreq);
     sineGenerator2.setAmplitude(8).setFrequency(f2).setPhase(0.75).generate(SIZE);
-    Aquila::Sum sum(sineGenerator1, sineGenerator2);
+    auto sum = sineGenerator1 + sineGenerator2;
 
     Aquila::TextPlot plt("Input signal");
     plt.plot(sum);
