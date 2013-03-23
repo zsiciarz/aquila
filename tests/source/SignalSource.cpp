@@ -11,9 +11,31 @@ SUITE(SignalSource)
     Aquila::SampleType testArray[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     Aquila::SignalSource data(testArray, SIZE, 22050);
 
+    TEST(SampleFrequency)
+    {
+        CHECK_EQUAL(22050, data.getSampleFrequency());
+    }
+
+    TEST(DefaultSampleFrequency)
+    {
+        Aquila::SignalSource data2(testArray, SIZE);
+        CHECK_EQUAL(0, data2.getSampleFrequency());
+        data2.setSampleFrequency(22050);
+        CHECK_EQUAL(22050, data2.getSampleFrequency());
+    }
+
     TEST(LengthAlias)
     {
         CHECK_EQUAL(data.getSamplesCount(), data.length());
+    }
+
+    TEST(Iteration)
+    {
+        std::size_t i = 0;
+        for (auto it = data.begin(); it != data.end(); it++, i++)
+        {
+            CHECK_EQUAL(testArray[i], *it);
+        }
     }
 
     TEST(IteratorPosition)
