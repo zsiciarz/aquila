@@ -60,6 +60,18 @@ namespace Aquila
         }
 
         /**
+         * Initialize the source from a C-style array.
+         * @param data pointer to an array of samples (numeric values)
+         * @param dataLength length of the array
+         */
+        template <typename Numeric = SampleType>
+        SignalSource(Numeric* data, std::size_t dataLength,
+                     FrequencyType sampleFrequency = 0):
+            m_data(data, data + dataLength), m_sampleFrequency(sampleFrequency)
+        {
+        }
+
+        /**
          * The destructor does nothing, but must be defined as virtual.
          */
         virtual ~SignalSource() {}
