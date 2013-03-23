@@ -1,5 +1,5 @@
 #include "aquila/global.h"
-#include "aquila/source/ArrayData.h"
+#include "aquila/source/SignalSource.h"
 #include <cstddef>
 #include <cstdint>
 #include <unittestpp.h>
@@ -9,8 +9,7 @@ SUITE(SignalSource)
 {
     const std::size_t SIZE = 10;
     Aquila::SampleType testArray[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    // any other SignalSource subclass would work here
-    Aquila::ArrayData<> data(testArray, SIZE, 22050);
+    Aquila::SignalSource data(testArray, SIZE, 22050);
 
     TEST(LengthAlias)
     {
@@ -50,7 +49,7 @@ SUITE(SignalSource)
 
     TEST(IteratorsToDifferentSources)
     {
-        Aquila::ArrayData<> data2(testArray, SIZE, 22050);
+        Aquila::SignalSource data2(testArray, SIZE, 22050);
         auto it1 = data.begin(), it2 = data2.begin();
         CHECK(it1 != it2);
     }
