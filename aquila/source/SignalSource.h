@@ -32,7 +32,7 @@ namespace Aquila
      * library, be it an array, a text file or a WAVE binary file. Most of
      * algorithms defined in the library expect a pointer or a reference
      * to SignalSource. The library ships with a few derived
-     * classes for a quick start, including ArrayData, WaveFile etc.
+     * classes for a quick start, including WaveFile, generators etc.
      *
      * Signal sources support the concept of iteration. Use
      * SignalSource::begin() and SignalSource::end() to obtain iterator objects,

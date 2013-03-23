@@ -58,7 +58,6 @@ set(Aquila_HEADERS
     aquila/source/SignalSource.h
     aquila/source/Frame.h
     aquila/source/FramesCollection.h
-    aquila/source/ArrayData.h
     aquila/source/PlainTextFile.h
     aquila/source/RawPcmFile.h
     aquila/source/Sum.h
