@@ -19,10 +19,47 @@
 #include <algorithm>
 #include <cmath>
 #include <numeric>
+#include <utility>
 
 
 namespace Aquila
 {
+    /**
+     * Per-sample addition of other signal source.
+     *
+     * @param rhs source on the right-hand side of the operator
+     * @return sum of two sources
+     */
+    SignalSource& SignalSource::operator+=(const SignalSource& rhs)
+    {
+        std::transform(
+            std::begin(m_data),
+            std::end(m_data),
+            std::begin(rhs.m_data),
+            std::begin(m_data),
+            [] (SampleType x, SampleType y) { return x + y; }
+        );
+        return *this;
+    }
+
+    SignalSource operator+(const SignalSource& lhs, const SignalSource& rhs)
+    {
+        SignalSource result(lhs);
+        return result += rhs;
+    }
+
+    SignalSource operator+(SignalSource&& lhs, const SignalSource& rhs)
+    {
+        lhs += rhs;
+        return std::move(lhs);
+    }
+
+    SignalSource operator+(const SignalSource& lhs, SignalSource&& rhs)
+    {
+        rhs += lhs;
+        return std::move(rhs);
+    }
+
     /**
      * Calculates mean value of the signal.
      *

@@ -293,6 +293,8 @@ namespace Aquila
             std::size_t idx;
         };
 
+        SignalSource& operator+=(const SignalSource& rhs);
+
     protected:
         /**
          * Actual sample data.
@@ -304,6 +306,10 @@ namespace Aquila
          */
         FrequencyType m_sampleFrequency;
     };
+
+    SignalSource operator+(const SignalSource& lhs, const SignalSource& rhs);
+    SignalSource operator+(SignalSource&& lhs, const SignalSource& rhs);
+    SignalSource operator+(const SignalSource& lhs, SignalSource&& rhs);
 
     /***************************************************************************
      *
