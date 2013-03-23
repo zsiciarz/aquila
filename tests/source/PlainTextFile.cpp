@@ -1,5 +1,5 @@
 #include "aquila/global.h"
-#include "aquila/source/ArrayData.h"
+#include "aquila/source/SignalSource.h"
 #include "aquila/source/PlainTextFile.h"
 #include "constants.h"
 #include <unittestpp.h>
@@ -33,7 +33,7 @@ SUITE(PlainTextFile)
     {
         const std::size_t SIZE = 10;
         Aquila::SampleType testArray[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        Aquila::ArrayData<> data(testArray, SIZE, 22050);
+        Aquila::SignalSource data(testArray, SIZE, 22050);
         Aquila::PlainTextFile::save(data, Aquila_TEST_TXTFILE_OUTPUT);
 
         Aquila::PlainTextFile txt(Aquila_TEST_TXTFILE_OUTPUT, 22050);

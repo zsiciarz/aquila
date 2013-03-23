@@ -1,5 +1,5 @@
 #include "aquila/global.h"
-#include "aquila/source/ArrayData.h"
+#include "aquila/source/SignalSource.h"
 #include "aquila/source/RawPcmFile.h"
 #include "constants.h"
 #include <cstddef>
@@ -10,7 +10,7 @@ template <typename Numeric> void savePcmTest()
 {
     const std::size_t SIZE = 10;
     Numeric testArray[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    Aquila::ArrayData<Numeric> data(testArray, SIZE, 22050);
+    Aquila::SignalSource data(testArray, SIZE, 22050);
     Aquila::RawPcmFile<Numeric>::save(data, Aquila_TEST_PCMFILE_OUTPUT);
 
     Aquila::RawPcmFile<Numeric> pcm(Aquila_TEST_PCMFILE_OUTPUT, 22050);

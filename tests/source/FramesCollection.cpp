@@ -1,5 +1,5 @@
 #include "aquila/global.h"
-#include "aquila/source/ArrayData.h"
+#include "aquila/source/SignalSource.h"
 #include "aquila/source/Frame.h"
 #include "aquila/source/FramesCollection.h"
 #include <unittestpp.h>
@@ -15,7 +15,7 @@ SUITE(FramesCollection)
     const int SIZE = 10;
     Aquila::SampleType testArray[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     Aquila::FrequencyType sampleFrequency  = 100;
-    Aquila::ArrayData<> data(testArray, SIZE, sampleFrequency);
+    Aquila::SignalSource data(testArray, SIZE, sampleFrequency);
 
     TEST(Empty)
     {
