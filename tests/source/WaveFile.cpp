@@ -150,24 +150,6 @@ SUITE(WaveFile)
         CHECK_EQUAL(wav.sample(0), arr[0]);
     }
 
-    TEST(SetStereoChannel)
-    {
-        Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_16B_STEREO);
-        const Aquila::SampleType* arrLeft = wav.toArray();
-        wav.setSourceChannel(Aquila::RIGHT);
-        const Aquila::SampleType* arrRight = wav.toArray();
-        CHECK(arrLeft != arrRight);
-    }
-
-    TEST(SetStereoChannelOnMono)
-    {
-        Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_8B_MONO);
-        const Aquila::SampleType* arrLeft = wav.toArray();
-        wav.setSourceChannel(Aquila::RIGHT);
-        const Aquila::SampleType* arrRight = wav.toArray();
-        CHECK(arrLeft == arrRight);
-    }
-
     TEST(FramesCount1)
     {
         Aquila::WaveFile wav(Aquila_TEST_WAVEFILE_8B_MONO);
