@@ -98,6 +98,28 @@ SUITE(SignalSource)
         }
     }
 
+    TEST(MultiplyByConstant)
+    {
+        const Aquila::SampleType scale = 10.0;
+        auto result = data * scale;
+        std::size_t i = 0;
+        for (auto it = result.begin(); it != result.end(); it++, i++)
+        {
+            CHECK_EQUAL(testArray[i] * scale, result.sample(i));
+        }
+    }
+
+    TEST(MultiplyByConstantRhs)
+    {
+        const Aquila::SampleType scale = 10.0;
+        auto result = scale * data;
+        std::size_t i = 0;
+        for (auto it = result.begin(); it != result.end(); it++, i++)
+        {
+            CHECK_EQUAL(testArray[i] * scale, result.sample(i));
+        }
+    }
+
     TEST(SimpleSum)
     {
         Aquila::SignalSource data2(testArray, SIZE, 22050);
