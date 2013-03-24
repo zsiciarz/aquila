@@ -293,6 +293,7 @@ namespace Aquila
             std::size_t idx;
         };
 
+        SignalSource& operator+=(SampleType x);
         SignalSource& operator+=(const SignalSource& rhs);
 
     protected:
