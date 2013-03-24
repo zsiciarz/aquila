@@ -308,6 +308,10 @@ namespace Aquila
         FrequencyType m_sampleFrequency;
     };
 
+    SignalSource operator+(const SignalSource& lhs, SampleType x);
+    SignalSource operator+(SignalSource&& lhs, SampleType x);
+    SignalSource operator+(SampleType x, const SignalSource& rhs);
+    SignalSource operator+(SampleType x, SignalSource&& rhs);
     SignalSource operator+(const SignalSource& lhs, const SignalSource& rhs);
     SignalSource operator+(SignalSource&& lhs, const SignalSource& rhs);
     SignalSource operator+(const SignalSource& lhs, SignalSource&& rhs);
