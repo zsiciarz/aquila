@@ -69,6 +69,7 @@ set(Aquila_HEADERS
     aquila/source/generator/PinkNoiseGenerator.h
     aquila/source/generator/WhiteNoiseGenerator.h
     aquila/source/window/BarlettWindow.h
+    aquila/source/window/BlackmanWindow.h
     aquila/source/window/HammingWindow.h
     aquila/source/window/HannWindow.h
     aquila/source/window/RectangularWindow.h
@@ -100,6 +101,7 @@ set(Aquila_SOURCES
     aquila/source/generator/PinkNoiseGenerator.cpp
     aquila/source/generator/WhiteNoiseGenerator.cpp
     aquila/source/window/BarlettWindow.cpp
+    aquila/source/window/BlackmanWindow.cpp
     aquila/source/window/HammingWindow.cpp
     aquila/source/window/HannWindow.cpp
     aquila/transform/Dft.cpp
