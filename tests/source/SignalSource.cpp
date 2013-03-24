@@ -131,6 +131,17 @@ SUITE(SignalSource)
         }
     }
 
+    TEST(SimpleMultiplication)
+    {
+        Aquila::SignalSource data2(testArray, SIZE, 22050);
+        auto result = data * data2;
+        std::size_t i = 0;
+        for (auto it = result.begin(); it != result.end(); it++, i++)
+        {
+            CHECK_EQUAL(testArray[i] * testArray[i], result.sample(i));
+        }
+    }
+
     TEST(Mean)
     {
         CHECK_CLOSE(4.5, Aquila::mean(data), 0.000001);
