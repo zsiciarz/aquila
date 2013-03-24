@@ -59,6 +59,23 @@ namespace Aquila
         return *this;
     }
 
+    /**
+     * Multiply each sample by a constant value.
+     *
+     * @param x multiplier
+     * @return updated source
+     */
+    SignalSource& SignalSource::operator*=(SampleType x)
+    {
+        std::transform(
+            std::begin(m_data),
+            std::end(m_data),
+            std::begin(m_data),
+            [x] (SampleType y) { return x * y; }
+        );
+        return *this;
+    }
+
     SignalSource operator+(const SignalSource& lhs, SampleType x)
     {
         SignalSource result(lhs);
@@ -98,6 +115,30 @@ namespace Aquila
     SignalSource operator+(const SignalSource& lhs, SignalSource&& rhs)
     {
         rhs += lhs;
+        return std::move(rhs);
+    }
+
+    SignalSource operator*(const SignalSource& lhs, SampleType x)
+    {
+        SignalSource result(lhs);
+        return result *= x;
+    }
+
+    SignalSource operator*(SignalSource&& lhs, SampleType x)
+    {
+        lhs *= x;
+        return std::move(lhs);
+    }
+
+    SignalSource operator*(SampleType x, const SignalSource& rhs)
+    {
+        SignalSource result(rhs);
+        return result *= x;
+    }
+
+    SignalSource operator*(SampleType x, SignalSource&& rhs)
+    {
+        rhs *= x;
         return std::move(rhs);
     }
 
