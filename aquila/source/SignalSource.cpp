@@ -71,13 +71,13 @@ namespace Aquila
         return std::move(lhs);
     }
 
-    SignalSource operator+(double x, const SignalSource& rhs)
+    SignalSource operator+(SampleType x, const SignalSource& rhs)
     {
         SignalSource result(rhs);
         return result += x;
     }
 
-    SignalSource operator+(double x, SignalSource&& rhs)
+    SignalSource operator+(SampleType x, SignalSource&& rhs)
     {
         rhs += x;
         return std::move(rhs);
