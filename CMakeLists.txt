@@ -68,6 +68,7 @@ set(Aquila_HEADERS
     aquila/source/generator/TriangleGenerator.h
     aquila/source/generator/PinkNoiseGenerator.h
     aquila/source/generator/WhiteNoiseGenerator.h
+    aquila/source/window/HammingWindow.h
     aquila/source/window/RectangularWindow.h
     aquila/transform/Fft.h
     aquila/transform/Dft.h
@@ -96,6 +97,7 @@ set(Aquila_SOURCES
     aquila/source/generator/TriangleGenerator.cpp
     aquila/source/generator/PinkNoiseGenerator.cpp
     aquila/source/generator/WhiteNoiseGenerator.cpp
+    aquila/source/window/HammingWindow.cpp
     aquila/transform/Dft.cpp
     aquila/transform/AquilaFft.cpp
     aquila/transform/OouraFft.cpp
