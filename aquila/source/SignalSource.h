@@ -296,6 +296,7 @@ namespace Aquila
         SignalSource& operator+=(SampleType x);
         SignalSource& operator+=(const SignalSource& rhs);
         SignalSource& operator*=(SampleType x);
+        SignalSource& operator*=(const SignalSource& rhs);
 
     protected:
         /**
@@ -321,6 +322,9 @@ namespace Aquila
     SignalSource operator*(SignalSource&& lhs, SampleType x);
     SignalSource operator*(SampleType x, const SignalSource& rhs);
     SignalSource operator*(SampleType x, SignalSource&& rhs);
+    SignalSource operator*(const SignalSource& lhs, const SignalSource& rhs);
+    SignalSource operator*(SignalSource&& lhs, const SignalSource& rhs);
+    SignalSource operator*(const SignalSource& lhs, SignalSource&& rhs);
 
     /***************************************************************************
      *

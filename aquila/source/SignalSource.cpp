@@ -76,6 +76,24 @@ namespace Aquila
         return *this;
     }
 
+    /**
+     * Per-sample multiplication with other signal source.
+     *
+     * @param rhs source on the right-hand side of the operator
+     * @return product of two sources
+     */
+    SignalSource& SignalSource::operator*=(const SignalSource& rhs)
+    {
+        std::transform(
+            std::begin(m_data),
+            std::end(m_data),
+            std::begin(rhs.m_data),
+            std::begin(m_data),
+            [] (SampleType x, SampleType y) { return x * y; }
+        );
+        return *this;
+    }
+
     SignalSource operator+(const SignalSource& lhs, SampleType x)
     {
         SignalSource result(lhs);
@@ -139,6 +157,24 @@ namespace Aquila
     SignalSource operator*(SampleType x, SignalSource&& rhs)
     {
         rhs *= x;
+        return std::move(rhs);
+    }
+
+    SignalSource operator*(const SignalSource& lhs, const SignalSource& rhs)
+    {
+        SignalSource result(lhs);
+        return result *= rhs;
+    }
+
+    SignalSource operator*(SignalSource&& lhs, const SignalSource& rhs)
+    {
+        lhs *= rhs;
+        return std::move(lhs);
+    }
+
+    SignalSource operator*(const SignalSource& lhs, SignalSource&& rhs)
+    {
+        rhs *= lhs;
         return std::move(rhs);
     }
 
