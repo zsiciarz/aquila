@@ -76,6 +76,28 @@ SUITE(SignalSource)
         CHECK(it1 != it2);
     }
 
+    TEST(SumWithConstant)
+    {
+        const Aquila::SampleType offset = 99.0;
+        auto result = data + offset;
+        std::size_t i = 0;
+        for (auto it = result.begin(); it != result.end(); it++, i++)
+        {
+            CHECK_EQUAL(testArray[i] + offset, result.sample(i));
+        }
+    }
+
+    TEST(SumWithConstantRhs)
+    {
+        const Aquila::SampleType offset = 99.0;
+        auto result = offset + data;
+        std::size_t i = 0;
+        for (auto it = result.begin(); it != result.end(); it++, i++)
+        {
+            CHECK_EQUAL(testArray[i] + offset, result.sample(i));
+        }
+    }
+
     TEST(SimpleSum)
     {
         Aquila::SignalSource data2(testArray, SIZE, 22050);
