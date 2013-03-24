@@ -26,6 +26,7 @@ set(Aquila_Test_SOURCES
     source/WaveFile.cpp
     source/generator/SineGenerator.cpp
     source/generator/SquareGenerator.cpp
+    source/window/RectangularWindow.cpp
     transform/AquilaFft.cpp
     transform/Dft.cpp
     transform/Fft.h
