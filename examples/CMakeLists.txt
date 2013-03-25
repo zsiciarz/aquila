@@ -31,6 +31,8 @@ add_subdirectory(square_generator)
 add_subdirectory(triangle_generator)
 add_subdirectory(generators)
 
+add_subdirectory(am_modulation)
+
 add_subdirectory(fft_comparison)
 add_subdirectory(fft_simple_spectrum)
 add_subdirectory(fft_filter)
