@@ -21,6 +21,7 @@
 #include "../global.h"
 #include <cstddef>
 #include <iterator>
+#include <utility>
 #include <vector>
 
 namespace Aquila
@@ -68,6 +69,28 @@ namespace Aquila
         SignalSource(Numeric* data, std::size_t dataLength,
                      FrequencyType sampleFrequency = 0):
             m_data(data, data + dataLength), m_sampleFrequency(sampleFrequency)
+        {
+        }
+
+        /**
+         * Create the source from a vector of samples.
+         *
+         * @param data vector of samples
+         */
+        SignalSource(const std::vector<SampleType>& data,
+                     FrequencyType sampleFrequency = 0):
+            m_data(data), m_sampleFrequency(sampleFrequency)
+        {
+        }
+
+        /**
+         * Create the source from a (temporary) vector of samples.
+         *
+         * @param data vector of samples
+         */
+        SignalSource(std::vector<SampleType>&& data,
+                     FrequencyType sampleFrequency = 0):
+            m_data(std::move(data)), m_sampleFrequency(sampleFrequency)
         {
         }
 
