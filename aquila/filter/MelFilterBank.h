@@ -26,18 +26,13 @@
 namespace Aquila
 {
     /**
-     * Total number of Mel frequency filters.
-     */
-    const unsigned int MELFILTERS = 24;
-
-    /**
      * A wrapper class for a vector of triangular filters.
      */
     class AQUILA_EXPORT MelFilterBank
     {
     public:
         MelFilterBank(FrequencyType sampleFrequency, std::size_t length,
-                      std::size_t melFilterWidth = 200);
+                      std::size_t melFilterWidth = 200, std::size_t size = 24);
 
         std::vector<double> applyAll(const SpectrumType &frameSpectrum) const;
 
@@ -54,6 +49,13 @@ namespace Aquila
          * @return spectrum size
          */
         std::size_t getSpectrumLength() const { return N; }
+
+        /**
+         * Returns the number of filters in bank.
+         *
+         * @return number of filters
+         */
+        std::size_t size() const { return m_filters.size(); }
 
     private:
         /**
