@@ -3,25 +3,29 @@
 #include "aquila/filter/MelFilterBank.h"
 #include <unittestpp.h>
 #include <cstddef>
+#include <vector>
 
 template <std::size_t N>
-void testMelFilterBankOutput(const std::size_t k)
+void testMelFilterBankOutput()
 {
     Aquila::FrequencyType sampleFrequency = 44100.0;
-
-    // create a single spectral peak at middle frequency of k-th Mel filter
-    Aquila::SpectrumType spectrum(N);
-    Aquila::FrequencyType melFrequency = 100.0 + k * 100.0;
-    Aquila::FrequencyType linearFrequency = Aquila::MelFilter::melToLinear(melFrequency);
-    std::size_t peakNumber = N  * (linearFrequency / sampleFrequency);
-    spectrum[peakNumber] = 5000.0;
-
     Aquila::MelFilterBank filters(sampleFrequency, N);
-    auto output = filters.applyAll(spectrum);
 
-    double expected[Aquila::MELFILTERS] = {0};
-    expected[k] = 5000.0;
-    CHECK_ARRAY_CLOSE(expected, output, Aquila::MELFILTERS, 0.000001);
+    for (std::size_t k = 0; k < filters.size(); ++k)
+    {
+        // create a single spectral peak at middle frequency of k-th Mel filter
+        Aquila::SpectrumType spectrum(N);
+        Aquila::FrequencyType melFrequency = 100.0 + k * 100.0;
+        Aquila::FrequencyType linearFrequency = Aquila::MelFilter::melToLinear(melFrequency);
+        std::size_t peakNumber = N  * (linearFrequency / sampleFrequency);
+        spectrum[peakNumber] = 5000.0;
+
+        auto output = filters.applyAll(spectrum);
+
+        std::vector<double> expected(filters.size(), 0.0);
+        expected[k] = 5000.0;
+        CHECK_ARRAY_CLOSE(expected, output, filters.size(), 0.000001);
+    }
 }
 
 
@@ -41,25 +45,16 @@ SUITE(MelFilter)
 
     TEST(FilterOutput1024)
     {
-        for (unsigned int i = 0; i < Aquila::MELFILTERS; ++i)
-        {
-            testMelFilterBankOutput<1024>(i);
-        }
+        testMelFilterBankOutput<1024>();
     }
 
     TEST(FilterOutput2048)
     {
-        for (unsigned int i = 0; i < Aquila::MELFILTERS; ++i)
-        {
-            testMelFilterBankOutput<2048>(i);
-        }
+        testMelFilterBankOutput<2048>();
     }
 
     TEST(FilterOutput4096)
     {
-        for (unsigned int i = 0; i < Aquila::MELFILTERS; ++i)
-        {
-            testMelFilterBankOutput<4096>(i);
-        }
+        testMelFilterBankOutput<4096>();
     }
 }
