@@ -121,7 +121,6 @@ namespace Aquila
 
         // find spectral peak positions corresponding to frequencies
         std::size_t minPos = static_cast<std::size_t>(N * minFreq / m_sampleFrequency);
-        std::size_t centerPos = static_cast<std::size_t>(N * centerFreq / m_sampleFrequency);
         std::size_t maxPos = static_cast<std::size_t>(N * maxFreq / m_sampleFrequency);
 
         const double max = 1.0;
@@ -130,15 +129,23 @@ namespace Aquila
         // earlier call to resize
         for (unsigned int k = minPos; k <= maxPos; ++k)
         {
-            if (k < centerPos)
+            Aquila::FrequencyType currentFreq = (k * m_sampleFrequency) / N;
+            if (currentFreq < minFreq)
+            {
+                continue;
+            }
+            if (currentFreq < centerFreq)
             {
                 // in the triangle on the ascending slope
-                m_spectrum[k] = (k - minPos) * max / (centerPos - minPos);
+                m_spectrum[k] = (currentFreq - minFreq) * max / (centerFreq - minFreq);
             }
             else
             {
-                // in the triangle on the descending slope
-                m_spectrum[k] = (maxPos - k) * max / (maxPos - centerPos);
+                if (currentFreq < maxFreq)
+                {
+                    // in the triangle on the descending slope
+                    m_spectrum[k] = (maxFreq - currentFreq) * max / (maxFreq - centerFreq);
+                }
             }
         }
     }
