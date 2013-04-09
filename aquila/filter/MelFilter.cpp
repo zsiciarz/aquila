@@ -16,6 +16,7 @@
  */
 
 #include "MelFilter.h"
+#include <algorithm>
 #include <utility>
 
 namespace Aquila
@@ -122,6 +123,8 @@ namespace Aquila
         // find spectral peak positions corresponding to frequencies
         std::size_t minPos = static_cast<std::size_t>(N * minFreq / m_sampleFrequency);
         std::size_t maxPos = static_cast<std::size_t>(N * maxFreq / m_sampleFrequency);
+        // limit maxPos not to write out of bounds of vector storage
+        maxPos = std::min(maxPos, N - 1);
 
         const double max = 1.0;
 
