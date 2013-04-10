@@ -34,7 +34,7 @@ namespace Aquila
      * @param samplesPerFrame how many samples will each frame hold
      * @param samplesPerOverlap how many samples are common to adjacent frames
      */
-    FramesCollection::FramesCollection(const SignalSource &source,
+    FramesCollection::FramesCollection(const SignalSource& source,
                                        unsigned int samplesPerFrame,
                                        unsigned int samplesPerOverlap)
     {
@@ -79,7 +79,7 @@ namespace Aquila
      * @param samplesPerFrame how many samples will each frame hold
      * @param samplesPerOverlap how many samples are common to adjacent frames
      */
-    void FramesCollection::divideFrames(const SignalSource &source,
+    void FramesCollection::divideFrames(const SignalSource& source,
                                         unsigned int samplesPerFrame,
                                         unsigned int samplesPerOverlap)
     {
