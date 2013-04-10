@@ -19,7 +19,6 @@
 #define SPECTROGRAM_H
 
 #include "../global.h"
-#include "../source/FramesCollection.h"
 #include "Fft.h"
 #include <cstddef>
 #include <memory>
@@ -28,6 +27,8 @@
 
 namespace Aquila
 {
+    class FramesCollection;
+
     /**
      * Spectrogram class.
      *

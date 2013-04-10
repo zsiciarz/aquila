@@ -19,11 +19,12 @@
 #define SOUNDBUFFERADAPTER_H
 
 #include "../global.h"
-#include "../source/SignalSource.h"
 #include <SFML/Audio.hpp>
 
 namespace Aquila
 {
+    class SignalSource;
+
     /**
      * A wrapper around SignalSource to use as a sound buffer in SFML.
      */

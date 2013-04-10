@@ -18,6 +18,7 @@
 #include "Spectrogram.h"
 #include "FftFactory.h"
 #include "../source/Frame.h"
+#include "../source/FramesCollection.h"
 
 namespace Aquila
 {

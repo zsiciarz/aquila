@@ -16,6 +16,7 @@
  */
 
 #include "SoundBufferAdapter.h"
+#include "../source/SignalSource.h"
 #include <SFML/System.hpp>
 #include <algorithm>
 
