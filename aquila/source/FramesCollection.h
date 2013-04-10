@@ -20,12 +20,13 @@
 
 #include "../global.h"
 #include "Frame.h"
-#include "SignalSource.h"
 #include <cstddef>
 #include <vector>
 
 namespace Aquila
 {
+    class SignalSource;
+
     /**
      * A lightweight wrapper for a vector of Frames.
      *

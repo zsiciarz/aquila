@@ -16,6 +16,7 @@
  */
 
 #include "FramesCollection.h"
+#include "SignalSource.h"
 
 namespace Aquila
 {
