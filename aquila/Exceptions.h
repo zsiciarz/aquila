@@ -32,35 +32,35 @@ namespace Aquila
      * as the last resort (but catch(...)).
      */
     class AQUILA_EXPORT Exception : public std::runtime_error
-	{
-	public:
-	    /**
+    {
+    public:
+        /**
          * Creates an exception object.
-	     *
+         *
          * @param what exception message
-	     */
-		Exception(const std::string& what):
-			runtime_error(what)
-		{
-		}
-	};
+         */
+        Exception(const std::string& what):
+            runtime_error(what)
+        {
+        }
+    };
 
-	/**
+    /**
      * Data format-related exception.
-	 */
+     */
     class AQUILA_EXPORT FormatException : public Exception
-	{
-	public:
+    {
+    public:
         /**
          * Creates a data format exception object.
          *
          * @param what exception message
          */
-	    FormatException(const std::string& what):
-			Exception(what)
-		{
-		}
-	};
+        FormatException(const std::string& what):
+            Exception(what)
+        {
+        }
+    };
 
     /**
      * Runtime configuration exception.
