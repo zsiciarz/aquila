@@ -142,6 +142,23 @@ SUITE(SignalSource)
         }
     }
 
+    TEST(ComplexExpression)
+    {
+        Aquila::SignalSource data2(testArray, SIZE, 22050);
+        auto result = data2 + data2 * (3.0 + 2.0 * (1.0 + data + 5.0)) * 2.0 * data2;
+        std::size_t i = 0;
+        for (auto it = result.begin(); it != result.end(); it++, i++)
+        {
+            CHECK_EQUAL(
+                testArray[i] +
+                    testArray[i] *
+                    (3.0 + 2.0 * (1.0 + testArray[i] + 5.0)) * 2.0 *
+                    testArray[i],
+                result.sample(i)
+            );
+        }
+    }
+
     TEST(Mean)
     {
         CHECK_CLOSE(4.5, Aquila::mean(data), 0.000001);
