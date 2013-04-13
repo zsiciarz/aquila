@@ -62,6 +62,16 @@ namespace Aquila
             return 700.0 * (std::exp(melFrequency / 1127.01048) - 1.0);
         }
 
+        /**
+         * Returns sample frequency for which the filter was designed.
+         *
+         * @return sample frequency
+         */
+        FrequencyType getSampleFrequency() const
+        {
+            return m_sampleFrequency;
+        }
+
     private:
         FrequencyType m_sampleFrequency;
 
