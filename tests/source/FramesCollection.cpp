@@ -125,4 +125,14 @@ SUITE(FramesCollection)
         Aquila::SampleType expected[2] = {4.0, 9.0};
         CHECK_ARRAY_CLOSE(expected, maximums, 2, 0.000001);
     }
+
+    TEST(ApplyMemberFunction)
+    {
+        Aquila::FramesCollection frames(data, 5);
+        auto lengths = frames.apply<std::size_t>(
+            &Aquila::SignalSource::getSamplesCount
+        );
+        std::size_t expected[2] = {5, 5};
+        CHECK_ARRAY_EQUAL(expected, lengths, 2);
+    }
 }
