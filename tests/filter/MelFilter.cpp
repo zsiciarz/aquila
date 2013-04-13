@@ -21,6 +21,15 @@ SUITE(MelFilter)
         CHECK_EQUAL(sampleFrequency, filter.getSampleFrequency());
     }
 
+    TEST(Assignment)
+    {
+        Aquila::FrequencyType sampleFrequency = 44100.0;
+        Aquila::MelFilter filter(sampleFrequency);
+        Aquila::MelFilter other(1000.0);
+        other = filter;
+        CHECK_EQUAL(44100.0, other.getSampleFrequency());
+    }
+
     TEST(OutsideTriangle)
     {
         Aquila::FrequencyType sampleFrequency = 44100.0;
