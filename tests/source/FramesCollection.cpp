@@ -105,4 +105,12 @@ SUITE(FramesCollection)
         auto frames = Aquila::FramesCollection::createFromDuration(data, 50, 0.8);
         CHECK_EQUAL(6u, frames.count());
     }
+
+    TEST(ApplySimpleFunction)
+    {
+        Aquila::FramesCollection frames(data, 5);
+        auto energies = frames.apply<double>(Aquila::mean);
+        double expected[2] = {2.0, 7.0};
+        CHECK_ARRAY_CLOSE(expected, energies, 2, 0.000001);
+    }
 }
