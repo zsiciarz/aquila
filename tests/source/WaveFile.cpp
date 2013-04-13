@@ -61,6 +61,13 @@ SUITE(WaveFile)
         CHECK_EQUAL(4u, wav.getBytesPerSample());
     }
 
+    TEST(OtherStereoChannel)
+    {
+        Aquila::WaveFile wavLeft(Aquila_TEST_WAVEFILE_16B_STEREO);
+        Aquila::WaveFile wavRight(Aquila_TEST_WAVEFILE_16B_STEREO, Aquila::RIGHT);
+        CHECK_EQUAL(wavLeft.getSamplesCount(), wavRight.getSamplesCount());
+    }
+
     TEST(BytesPerSecond)
     {
         std::vector<std::string> filenames;
