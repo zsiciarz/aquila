@@ -65,7 +65,7 @@ namespace Aquila
          * @param data pointer to an array of samples (numeric values)
          * @param dataLength length of the array
          */
-        template <typename Numeric = SampleType>
+        template <typename Numeric>
         SignalSource(Numeric* data, std::size_t dataLength,
                      FrequencyType sampleFrequency = 0):
             m_data(data, data + dataLength), m_sampleFrequency(sampleFrequency)
