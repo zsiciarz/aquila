@@ -113,4 +113,16 @@ SUITE(FramesCollection)
         double expected[2] = {2.0, 7.0};
         CHECK_ARRAY_CLOSE(expected, energies, 2, 0.000001);
     }
+
+    TEST(ApplyLambda)
+    {
+        Aquila::FramesCollection frames(data, 5);
+        auto maximums = frames.apply<Aquila::SampleType>(
+            [&](const Aquila::SignalSource& s) {
+                return *std::max_element(s.begin(), s.end());
+            }
+        );
+        Aquila::SampleType expected[2] = {4.0, 9.0};
+        CHECK_ARRAY_CLOSE(expected, maximums, 2, 0.000001);
+    }
 }
