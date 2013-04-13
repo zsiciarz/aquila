@@ -130,7 +130,11 @@ SUITE(FramesCollection)
     {
         Aquila::FramesCollection frames(data, 5);
         auto lengths = frames.apply<std::size_t>(
+#ifdef _MSC_VER
+            std::mem_fn(&Aquila::SignalSource::getSamplesCount)
+#else
             &Aquila::SignalSource::getSamplesCount
+#endif // _MSC_VER
         );
         std::size_t expected[2] = {5, 5};
         CHECK_ARRAY_EQUAL(expected, lengths, 2);
