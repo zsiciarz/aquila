@@ -26,7 +26,7 @@ void testMelFilterBankOutput()
 }
 
 
-SUITE(MelFilter)
+SUITE(MelFilterBank)
 {
     TEST(SampleFrequency)
     {
