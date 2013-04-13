@@ -20,7 +20,9 @@
 
 #include "../global.h"
 #include "Frame.h"
+#include <algorithm>
 #include <cstddef>
+#include <functional>
 #include <vector>
 
 namespace Aquila
@@ -147,6 +149,21 @@ namespace Aquila
         const_iterator end() const
         {
             return m_frames.end();
+        }
+
+        /**
+         * Applies the calculation f to all frames in the collection.
+         *
+         * @param f a function whose single argument is a SignalSource
+         * @return vector of return values of f - one for each frame
+         */
+        template <typename ResultType>
+        std::vector<ResultType> apply(
+            std::function<ResultType (const SignalSource&)> f) const
+        {
+            std::vector<ResultType> results;
+            std::transform(begin(), end(), std::back_inserter(results), f);
+            return results;
         }
 
     private:
