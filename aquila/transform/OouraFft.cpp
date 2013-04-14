@@ -30,13 +30,12 @@ namespace Aquila
      * @param length input signal size (usually a power of 2)
      */
     OouraFft::OouraFft(std::size_t length):
-        Fft(length)
-    {
+        Fft(length),
         // according to the description: "length of ip >= 2+sqrt(n)"
-        ip = new int[static_cast<std::size_t>(
-                     2 + std::sqrt(static_cast<double>(N)))];
+        ip(new int[static_cast<std::size_t>(2 + std::sqrt(static_cast<double>(N)))]),
+        w(new double[N / 2])
+    {
         ip[0] = 0;
-        w = new double[N / 2];
     }
 
     /**
