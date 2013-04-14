@@ -82,7 +82,7 @@ namespace Aquila
                           StereoChannel channel = LEFT);
         ~WaveFile();
 
-        void load(const std::string& file, StereoChannel channel);
+        void load(const std::string& filename, StereoChannel channel);
         static void save(const SignalSource& source, const std::string& file);
 
         /**
@@ -92,7 +92,7 @@ namespace Aquila
          */
         std::string getFilename() const
         {
-            return filename;
+            return m_filename;
         }
 
         /**
@@ -102,7 +102,7 @@ namespace Aquila
          */
         unsigned short getChannelsNum() const
         {
-            return hdr.Channels;
+            return m_header.Channels;
         }
 
         /**
@@ -132,7 +132,7 @@ namespace Aquila
          */
         unsigned int getBytesPerSec() const
         {
-            return hdr.BytesPerSec;
+            return m_header.BytesPerSec;
         }
 
         /**
@@ -142,7 +142,7 @@ namespace Aquila
          */
         unsigned int getBytesPerSample() const
         {
-            return hdr.BytesPerSamp;
+            return m_header.BytesPerSamp;
         }
 
         /**
@@ -152,7 +152,7 @@ namespace Aquila
          */
         virtual unsigned short getBitsPerSample() const
         {
-            return hdr.BitsPerSamp;
+            return m_header.BitsPerSamp;
         }
 
         /**
@@ -165,7 +165,7 @@ namespace Aquila
          */
         unsigned int getWaveSize() const
         {
-            return hdr.WaveSize;
+            return m_header.WaveSize;
         }
 
         unsigned int getAudioLength() const;
@@ -174,12 +174,12 @@ namespace Aquila
         /**
          * Full path of the .wav file.
          */
-        std::string filename;
+        std::string m_filename;
 
         /**
          * Header structure.
          */
-        WaveHeader hdr;
+        WaveHeader m_header;
     };
 }
 

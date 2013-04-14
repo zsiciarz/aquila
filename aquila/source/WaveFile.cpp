@@ -27,9 +27,9 @@ namespace Aquila
      * @param channel LEFT or RIGHT (the default setting is LEFT)
      */
     WaveFile::WaveFile(const std::string& filename, StereoChannel channel):
-        SignalSource()
+        SignalSource(), m_filename(filename)
     {
-        load(filename, channel);
+        load(m_filename, channel);
     }
 
     /**
@@ -50,21 +50,21 @@ namespace Aquila
      *
      * @param file full path to .wav file
      */
-    void WaveFile::load(const std::string& file, StereoChannel channel)
+    void WaveFile::load(const std::string& filename, StereoChannel channel)
     {
-        filename = file;
+        m_filename = filename;
         m_data.clear();
         ChannelType dummy;
-        WaveFileHandler handler(file);
+        WaveFileHandler handler(m_filename);
         if (LEFT == channel)
         {
-            handler.readHeaderAndChannels(hdr, m_data, dummy);
+            handler.readHeaderAndChannels(m_header, m_data, dummy);
         }
         else
         {
-            handler.readHeaderAndChannels(hdr, dummy, m_data);
+            handler.readHeaderAndChannels(m_header, dummy, m_data);
         }
-        m_sampleFrequency = hdr.SampFreq;
+        m_sampleFrequency = m_header.SampFreq;
     }
 
     /**
@@ -86,7 +86,7 @@ namespace Aquila
      */
     unsigned int WaveFile::getAudioLength() const
     {
-        return static_cast<unsigned int>(hdr.WaveSize /
-                static_cast<double>(hdr.BytesPerSec) * 1000);
+        return static_cast<unsigned int>(m_header.WaveSize /
+                static_cast<double>(m_header.BytesPerSec) * 1000);
     }
 }
