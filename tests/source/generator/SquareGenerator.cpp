@@ -19,6 +19,16 @@ SUITE(SquareGenerator)
         CHECK_EQUAL(-250, min);
     }
 
+    TEST(UnipolarAmplitude)
+    {
+        gen.setAmplitude(250).setFrequency(10).generate(1000);
+        auto getUnipolar = gen + 250;
+        auto max = *std::max_element(getUnipolar.begin(), getUnipolar.end());
+        CHECK_EQUAL(500, max);
+        auto min = *std::min_element(getUnipolar.begin(), getUnipolar.end());
+        CHECK_EQUAL(0, min);
+    }
+
     // counts number of positive samples in generated signal
     TEST(DutyCycle05)
     {
