@@ -29,7 +29,7 @@ namespace Aquila
     MelFilterBank::MelFilterBank(FrequencyType sampleFrequency,
                                  std::size_t length, std::size_t melFilterWidth,
                                  std::size_t size):
-        m_sampleFrequency(sampleFrequency), N(length)
+        m_filters(), m_sampleFrequency(sampleFrequency), N(length)
     {
         m_filters.reserve(size);
         for (unsigned int i = 0; i < size; ++i)

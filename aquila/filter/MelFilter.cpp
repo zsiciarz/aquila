@@ -27,7 +27,7 @@ namespace Aquila
      * @param sampleFrequency sample frequency in Hz
      */
     MelFilter::MelFilter(FrequencyType sampleFrequency):
-        m_sampleFrequency(sampleFrequency)
+        m_sampleFrequency(sampleFrequency), m_spectrum()
     {
     }
 

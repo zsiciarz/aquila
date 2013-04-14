@@ -24,7 +24,7 @@ namespace Aquila
      * Creates an empty frames collection.
      */
     FramesCollection::FramesCollection():
-        m_samplesPerFrame(0)
+        m_frames(), m_samplesPerFrame(0)
     {
     }
 
@@ -37,7 +37,8 @@ namespace Aquila
      */
     FramesCollection::FramesCollection(const SignalSource& source,
                                        unsigned int samplesPerFrame,
-                                       unsigned int samplesPerOverlap)
+                                       unsigned int samplesPerOverlap):
+        m_frames(), m_samplesPerFrame(0)
     {
         divideFrames(source, samplesPerFrame, samplesPerOverlap);
     }

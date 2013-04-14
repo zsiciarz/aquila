@@ -48,7 +48,7 @@ namespace Aquila
          * The default constructor sets sample frequency to 0.
          */
         SignalSource():
-            m_sampleFrequency(0)
+            m_data(), m_sampleFrequency(0)
         {
         }
 
@@ -56,7 +56,7 @@ namespace Aquila
          * This overload initializes sample frequency of the source.
          */
         SignalSource(FrequencyType sampleFrequency):
-            m_sampleFrequency(sampleFrequency)
+            m_data(), m_sampleFrequency(sampleFrequency)
         {
         }
 
