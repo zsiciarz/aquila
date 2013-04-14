@@ -26,7 +26,7 @@ namespace Aquila
      * @param sampleFrequency sample frequency of the signal
      */
     PinkNoiseGenerator::PinkNoiseGenerator(FrequencyType sampleFrequency):
-        Generator(sampleFrequency)
+        Generator(sampleFrequency), key(0), maxKey(0xFFFF)
     {
     }
 
