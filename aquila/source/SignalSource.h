@@ -289,7 +289,7 @@ namespace Aquila
              *
              * @return signal sample value.
              */
-            const SampleType operator*() const
+            SampleType operator*() const
             {
                 return m_source->sample(idx);
             }
