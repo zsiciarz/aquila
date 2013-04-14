@@ -41,7 +41,7 @@ namespace Aquila
          * @param length input signal size (usually a power of 2)
          */
         AquilaFft(std::size_t length):
-            Fft(length)
+            Fft(length), fftWiCache()
         {
         }
 

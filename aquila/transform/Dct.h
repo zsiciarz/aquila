@@ -35,7 +35,10 @@ namespace Aquila
         /**
          * Initializes the transform.
          */
-        Dct() {}
+        Dct():
+            cosineCache()
+        {
+        }
 
         /**
          * Destroys the transform object.
