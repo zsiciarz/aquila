@@ -10,6 +10,15 @@ SUITE(SquareGenerator)
     Aquila::SquareGenerator gen(1000);
     auto isPositive = [](double x) { return x > 0; };
 
+    TEST(Amplitude)
+    {
+        gen.setAmplitude(250).setFrequency(10).generate(1000);
+        auto max = *std::max_element(gen.begin(), gen.end());
+        CHECK_EQUAL(250, max);
+        auto min = *std::min_element(gen.begin(), gen.end());
+        CHECK_EQUAL(-250, min);
+    }
+
     // counts number of positive samples in generated signal
     TEST(DutyCycle05)
     {
