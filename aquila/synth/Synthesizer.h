@@ -40,9 +40,14 @@ namespace Aquila
          * @param sampleFrequency sample frequency of the audio signal
          */
         Synthesizer(FrequencyType sampleFrequency):
-            m_sampleFrequency(sampleFrequency)
+            m_sampleFrequency(sampleFrequency), m_buffer()
         {
         }
+
+        /**
+         * No-op virtual destructor.
+         */
+        virtual ~Synthesizer() {}
 
         void playNote(std::string note, unsigned int duration = 500);
 
