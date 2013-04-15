@@ -130,7 +130,7 @@ namespace Aquila
 
         // outside the triangle spectrum values are 0, guaranteed by
         // earlier call to resize
-        for (unsigned int k = minPos; k <= maxPos; ++k)
+        for (std::size_t k = minPos; k <= maxPos; ++k)
         {
             Aquila::FrequencyType currentFreq = (k * m_sampleFrequency) / N;
             if (currentFreq < minFreq)
