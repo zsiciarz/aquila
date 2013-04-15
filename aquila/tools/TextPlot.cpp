@@ -35,9 +35,9 @@ namespace Aquila
      *
      * @param plot internal plot data
      */
-    void TextPlot::drawPlotMatrix(const PlotMatrixType &plot)
+    void TextPlot::drawPlotMatrix(const PlotMatrixType &plotData)
     {
-        const std::size_t length = plot.size();
+        const std::size_t length = plotData.size();
 
         m_out << "\n" << m_title << "\n";
         // output the plot data, flushing only at the end
@@ -45,7 +45,7 @@ namespace Aquila
         {
             for (unsigned int x = 0; x < length; ++x)
             {
-                m_out << plot[x][y];
+                m_out << plotData[x][y];
             }
             m_out << "\n";
         }

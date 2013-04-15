@@ -83,8 +83,8 @@ namespace Aquila
          */
         void plot(const SignalSource& source)
         {
-            PlotMatrixType plot(source.length());
-            doPlot(plot, source.begin(), source.end());
+            PlotMatrixType plotData(source.length());
+            doPlot(plotData, source.begin(), source.end());
         }
 
         /**
@@ -95,8 +95,8 @@ namespace Aquila
         template<typename Numeric>
         void plot(const std::vector<Numeric>& data)
         {
-            PlotMatrixType plot(data.size());
-            doPlot(plot, data.begin(), data.end());
+            PlotMatrixType plotData(data.size());
+            doPlot(plotData, data.begin(), data.end());
         }
 
         /**
@@ -111,8 +111,8 @@ namespace Aquila
         template<typename Numeric>
         void plot(Numeric data[], std::size_t length)
         {
-            PlotMatrixType plot(length);
-            doPlot(plot, data, data + length);
+            PlotMatrixType plotData(length);
+            doPlot(plotData, data, data + length);
         }
 
         void plotSpectrum(SpectrumType spectrum);
@@ -134,15 +134,15 @@ namespace Aquila
          * @param end an iterator pointing "one past end" of plotted data
          */
         template <typename Iterator>
-        void doPlot(PlotMatrixType& plot, Iterator begin, Iterator end)
+        void doPlot(PlotMatrixType& plotData, Iterator begin, Iterator end)
         {
             const double max = *std::max_element(begin, end);
             const double min = *std::min_element(begin, end);
             const double range = max - min;
 
-            for (std::size_t xPos = 0; xPos < plot.size(); ++xPos)
+            for (std::size_t xPos = 0; xPos < plotData.size(); ++xPos)
             {
-                plot[xPos].resize(m_height, ' ');
+                plotData[xPos].resize(m_height, ' ');
                 double normalizedValue = (*begin++ - min) / range;
                 std::size_t yPos = m_height - static_cast<std::size_t>(
                     std::ceil(m_height * normalizedValue));
@@ -150,13 +150,13 @@ namespace Aquila
                 // bound the value so it stays within vector dimension
                 if (yPos >= m_height)
                     yPos = m_height - 1;
-                plot[xPos][yPos] = '*';
+                plotData[xPos][yPos] = '*';
             }
 
-            drawPlotMatrix(plot);
+            drawPlotMatrix(plotData);
         }
 
-        void drawPlotMatrix(const PlotMatrixType& plot);
+        void drawPlotMatrix(const PlotMatrixType& plotData);
 
         /**
          * Plot title.

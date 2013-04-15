@@ -32,7 +32,8 @@ namespace Aquila
     {
     public:
         MelFilterBank(FrequencyType sampleFrequency, std::size_t length,
-                      std::size_t melFilterWidth = 200, std::size_t size = 24);
+                      std::size_t melFilterWidth = 200,
+                      std::size_t bankSize = 24);
 
         std::vector<double> applyAll(const SpectrumType &frameSpectrum) const;
 

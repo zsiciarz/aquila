@@ -23,16 +23,17 @@ namespace Aquila
      * Creates all the filters in the bank.
      *
      * @param sampleFrequency sample frequency in Hz
+     * @param length spectrum size of each filter
      * @param melFilterWidth filter width in Mel frequency scale
-     * @param N spectrum size of each filter
+     * @param bankSize number of filters in the bank
      */
     MelFilterBank::MelFilterBank(FrequencyType sampleFrequency,
                                  std::size_t length, std::size_t melFilterWidth,
-                                 std::size_t size):
+                                 std::size_t bankSize):
         m_filters(), m_sampleFrequency(sampleFrequency), N(length)
     {
-        m_filters.reserve(size);
-        for (unsigned int i = 0; i < size; ++i)
+        m_filters.reserve(bankSize);
+        for (unsigned int i = 0; i < bankSize; ++i)
         {
             m_filters.push_back(MelFilter(m_sampleFrequency));
             m_filters[i].createFilter(i, melFilterWidth, N);
