@@ -62,8 +62,8 @@ namespace Aquila
      * @param melFilterWidth filter width in Mel scale (eg. 200)
      * @param N filter spectrum size (must be the same as filtered spectrum)
      */
-    void MelFilter::createFilter(unsigned short filterNum,
-                                 std::size_t melFilterWidth, std::size_t N)
+    void MelFilter::createFilter(std::size_t filterNum,
+                                 FrequencyType melFilterWidth, std::size_t N)
     {
         // calculate frequencies in Mel scale
         FrequencyType melMinFreq = filterNum * melFilterWidth / 2.0;

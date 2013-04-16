@@ -35,7 +35,7 @@ namespace Aquila
         MelFilter(MelFilter&& other);
         MelFilter& operator=(const MelFilter& other);
 
-        void createFilter(unsigned short filterNum, std::size_t melFilterWidth,
+        void createFilter(std::size_t filterNum, FrequencyType melFilterWidth,
                           std::size_t N);
 
         double apply(const SpectrumType& dataSpectrum) const;

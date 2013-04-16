@@ -28,7 +28,8 @@ namespace Aquila
      * @param bankSize number of filters in the bank
      */
     MelFilterBank::MelFilterBank(FrequencyType sampleFrequency,
-                                 std::size_t length, std::size_t melFilterWidth,
+                                 std::size_t length,
+                                 FrequencyType melFilterWidth,
                                  std::size_t bankSize):
         m_filters(), m_sampleFrequency(sampleFrequency), N(length)
     {
