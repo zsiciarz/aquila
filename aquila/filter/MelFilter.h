@@ -46,7 +46,7 @@ namespace Aquila
          * @param linearFrequency frequency in linear scale
          * @return frequency in Mel scale
          */
-        static FrequencyType linearToMel(const FrequencyType linearFrequency)
+        static FrequencyType linearToMel(FrequencyType linearFrequency)
         {
             return 1127.01048 * std::log(1.0 + linearFrequency / 700.0);
         }
@@ -57,7 +57,7 @@ namespace Aquila
          * @param melFrequency frequency in Mel scale
          * @return frequency in linear scale
          */
-        static FrequencyType melToLinear(const FrequencyType melFrequency)
+        static FrequencyType melToLinear(FrequencyType melFrequency)
         {
             return 700.0 * (std::exp(melFrequency / 1127.01048) - 1.0);
         }
