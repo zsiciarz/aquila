@@ -91,7 +91,7 @@ namespace Aquila
         double value = 0.0;
         const std::size_t N = dataSpectrum.size();
         // iteration over first half of the spectrum
-        for (unsigned int i = 0; i < N / 2 - 1; ++i)
+        for (std::size_t i = 0; i < N / 2 - 1; ++i)
         {
             value += std::abs(dataSpectrum[i]) * m_spectrum[i];
         }
