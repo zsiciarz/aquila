@@ -46,9 +46,9 @@ namespace Aquila
         // cached cosine values
         double** cosines = getCachedCosines(inputLength, outputLength);
 
-        for (unsigned int n = 0; n < outputLength; ++n)
+        for (std::size_t n = 0; n < outputLength; ++n)
         {
-            for (unsigned int k = 0; k < inputLength; ++k)
+            for (std::size_t k = 0; k < inputLength; ++k)
             {
                 output[n] += data[k] * cosines[n][k];
             }
@@ -79,10 +79,10 @@ namespace Aquila
 
         // nothing in cache for that pair, calculate cosines
         double** cosines = new double*[outputLength];
-        for (unsigned int n = 0; n < outputLength; ++n)
+        for (std::size_t n = 0; n < outputLength; ++n)
         {
             cosines[n] = new double[inputLength];
-            for (unsigned int k = 0; k < inputLength; ++k)
+            for (std::size_t k = 0; k < inputLength; ++k)
             {
                 // from the definition of DCT-II
                 cosines[n][k] = std::cos((M_PI * (2 * k + 1) * n) /
@@ -104,7 +104,7 @@ namespace Aquila
             auto key = it->first;
             double** cosines = it->second;
             std::size_t outputLength = key.second;
-            for (unsigned int i = 0; i < outputLength; ++i)
+            for (std::size_t i = 0; i < outputLength; ++i)
             {
                 delete [] cosines[i];
             }
