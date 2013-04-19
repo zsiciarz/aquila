@@ -36,15 +36,13 @@ namespace Aquila
      */
     std::vector<double> Dct::dct(const std::vector<double>& data, std::size_t outputLength)
     {
-        using namespace std;
-
         // zero-initialize output vector
         std::vector<double> output(outputLength, 0.0);
         std::size_t inputLength = data.size();
 
         // DCT scaling factor
-        double c0 = sqrt(1.0 / inputLength);
-        double cn = sqrt(2.0 / inputLength);
+        double c0 = std::sqrt(1.0 / inputLength);
+        double cn = std::sqrt(2.0 / inputLength);
         // cached cosine values
         double** cosines = getCachedCosines(inputLength, outputLength);
 
