@@ -41,29 +41,31 @@ namespace Aquila
     void TriangleGenerator::generate(std::size_t samplesCount)
     {
         m_data.resize(samplesCount);
-        std::size_t samplesPerPeriod = static_cast<std::size_t>(
-            m_sampleFrequency / static_cast<double>(m_frequency));
-        std::size_t risingLength = static_cast<std::size_t>(m_width *
-                                                            samplesPerPeriod);
-        std::size_t fallingLength = samplesPerPeriod - risingLength;
 
+        double dt = 1.0 / m_sampleFrequency, period = 1.0 / m_frequency;
+        double risingLength = m_width * period;
+        double fallingLength = period - risingLength;
         double risingIncrement =
             (risingLength != 0) ? (2.0 * m_amplitude / risingLength) : 0;
         double fallingDecrement =
             (fallingLength != 0) ? (2.0 * m_amplitude / fallingLength) : 0;
 
+        double t = 0;
         for (std::size_t i = 0; i < samplesCount; ++i)
         {
-            std::size_t t = i % samplesPerPeriod;
+            if (t > period)
+            {
+                t -= period;
+            }
             if (t < risingLength)
             {
                 m_data[i] = -m_amplitude + t * risingIncrement;
             }
             else
             {
-                m_data[i] = m_amplitude -
-                              (t - risingLength) * fallingDecrement;
+                m_data[i] = m_amplitude - (t - risingLength) * fallingDecrement;
             }
+            t += dt;
         }
     }
 }
