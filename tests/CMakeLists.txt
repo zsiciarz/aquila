@@ -27,6 +27,7 @@ set(Aquila_Test_SOURCES
     source/generator/SineGenerator.cpp
     source/generator/SquareGenerator.cpp
     source/window/BarlettWindow.cpp
+    source/window/HammingWindow.cpp
     source/window/RectangularWindow.cpp
     transform/AquilaFft.cpp
     transform/Dft.cpp
