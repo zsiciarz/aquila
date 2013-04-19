@@ -26,6 +26,7 @@ set(Aquila_Test_SOURCES
     source/WaveFile.cpp
     source/generator/SineGenerator.cpp
     source/generator/SquareGenerator.cpp
+    source/generator/TriangleGenerator.cpp
     source/window/BarlettWindow.cpp
     source/window/HammingWindow.cpp
     source/window/RectangularWindow.cpp
