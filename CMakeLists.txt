@@ -80,6 +80,7 @@ set(Aquila_HEADERS
     aquila/transform/OouraFft.h
     aquila/transform/FftFactory.h
     aquila/transform/Dct.h
+    aquila/transform/Mfcc.h
     aquila/transform/Spectrogram.h
     aquila/tools/TextPlot.h
 )
@@ -110,6 +111,7 @@ set(Aquila_SOURCES
     aquila/transform/OouraFft.cpp
     aquila/transform/FftFactory.cpp
     aquila/transform/Dct.cpp
+    aquila/transform/Mfcc.cpp
     aquila/transform/Spectrogram.cpp
     aquila/tools/TextPlot.cpp
 )
