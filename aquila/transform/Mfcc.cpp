@@ -41,6 +41,6 @@ namespace Aquila
         auto filterOutput = bank.applyAll(spectrum);
 
         Aquila::Dct dct;
-        return dct.dct(filterOutput, 12);
+        return dct.dct(filterOutput, numFeatures);
     }
 }
