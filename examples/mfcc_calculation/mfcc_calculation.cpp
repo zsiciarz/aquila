@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     Aquila::SineGenerator input(sampleFrequency);
     input.setAmplitude(5).setFrequency(64).generate(SIZE);
 
-    Aquila::Mfcc mfcc;
+    Aquila::Mfcc mfcc(input.getSamplesCount());
     auto mfccValues = mfcc.calculate(input);
     std::cout << "MFCC coefficients: \n";
     std::copy(
