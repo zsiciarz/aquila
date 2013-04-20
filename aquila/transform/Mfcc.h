@@ -28,6 +28,8 @@ namespace Aquila
 
     /**
      * The Mfcc class implements calculation of MFCC features from input signal.
+     *
+     * MFCC coefficients are commonly used in speech recognition.
      */
     class AQUILA_EXPORT Mfcc
     {
