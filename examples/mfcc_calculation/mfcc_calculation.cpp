@@ -1,8 +1,6 @@
 #include "aquila/global.h"
-#include "aquila/filter/MelFilterBank.h"
 #include "aquila/source/generator/SineGenerator.h"
-#include "aquila/transform/Dct.h"
-#include "aquila/transform/FftFactory.h"
+#include "aquila/transform/Mfcc.h"
 #include <algorithm>
 #include <cstddef>
 #include <iostream>
@@ -16,22 +14,12 @@ int main(int argc, char *argv[])
     Aquila::SineGenerator input(sampleFrequency);
     input.setAmplitude(5).setFrequency(64).generate(SIZE);
 
-    // FFT
-    auto fft = Aquila::FftFactory::getFft(SIZE);
-    auto spectrum = fft->fft(input.toArray());
-
-    // Mel-frequency filtering
-    Aquila::MelFilterBank bank(sampleFrequency, SIZE);
-    auto filterOutput = bank.applyAll(spectrum);
-
-    // DCT
-    Aquila::Dct dct;
-    auto mfcc = dct.dct(filterOutput, 12);
-
+    Aquila::Mfcc mfcc;
+    auto mfccValues = mfcc.calculate(input);
     std::cout << "MFCC coefficients: \n";
     std::copy(
-        std::begin(mfcc),
-        std::end(mfcc),
+        std::begin(mfccValues),
+        std::end(mfccValues),
         std::ostream_iterator<double>(std::cout, " ")
     );
     std::cout << "\n";
