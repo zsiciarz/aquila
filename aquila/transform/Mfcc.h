@@ -49,8 +49,14 @@ namespace Aquila
                                       std::size_t numFeatures = 12);
 
     private:
+        /**
+         * Number of samples in each processed input.
+         */
         const std::size_t m_inputSize;
 
+        /**
+         * FFT calculator.
+         */
         std::shared_ptr<Fft> m_fft;
     };
 }
