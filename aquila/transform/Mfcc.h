@@ -19,6 +19,7 @@
 #define MFCC_H
 
 #include "../global.h"
+#include "FftFactory.h"
 #include <cstddef>
 #include <vector>
 
@@ -35,14 +36,22 @@ namespace Aquila
     {
     public:
         /**
-         * No-op default constructor.
+         * Constructor creates the FFT object to reuse between calculations.
+         *
+         * @param inputSize input length (common to all inputs)
          */
-        Mfcc()
+        Mfcc(std::size_t inputSize):
+            m_inputSize(inputSize), m_fft(FftFactory::getFft(inputSize))
         {
         }
 
         std::vector<double> calculate(const SignalSource& source,
                                       std::size_t numFeatures = 12);
+
+    private:
+        const std::size_t m_inputSize;
+
+        std::shared_ptr<Fft> m_fft;
     };
 }
 

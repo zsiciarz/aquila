@@ -17,7 +17,6 @@
 
 #include "Mfcc.h"
 #include "Dct.h"
-#include "FftFactory.h"
 #include "../source/SignalSource.h"
 #include "../filter/MelFilterBank.h"
 
@@ -33,11 +32,9 @@ namespace Aquila
     std::vector<double> Mfcc::calculate(const SignalSource &source,
                                         std::size_t numFeatures)
     {
-        const std::size_t SIZE = source.getSamplesCount();
-        auto fft = Aquila::FftFactory::getFft(SIZE);
-        auto spectrum = fft->fft(source.toArray());
+        auto spectrum = m_fft->fft(source.toArray());
 
-        Aquila::MelFilterBank bank(source.getSampleFrequency(), SIZE);
+        Aquila::MelFilterBank bank(source.getSampleFrequency(), m_inputSize);
         auto filterOutput = bank.applyAll(spectrum);
 
         Aquila::Dct dct;
