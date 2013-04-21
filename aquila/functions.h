@@ -94,6 +94,23 @@ namespace Aquila
     {
         return std::rand() / static_cast<double>(RAND_MAX);
     }
+
+    /**
+     * Returns Euclidean distance between two vectors.
+     *
+     * @param v1 first vector
+     * @param v2 second vector
+     * @return Euclidean distance
+     */
+    AQUILA_EXPORT inline double euclideanDistance(const std::vector<double>& v1,
+                                                  const std::vector<double>& v2)
+    {
+        double distance = 0.0;
+        for (std::size_t i = 0, size = v1.size(); i < size; i++)
+            distance += (v1[i] - v2[i])*(v1[i] - v2[i]);
+
+        return std::sqrt(distance);
+    }
 }
 
 #endif // FUNCTIONS_H
