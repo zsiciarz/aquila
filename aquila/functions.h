@@ -111,6 +111,23 @@ namespace Aquila
 
         return std::sqrt(distance);
     }
+
+    /**
+     * Returns Manhattan (taxicab) distance between two vectors.
+     *
+     * @param v1 first vector
+     * @param v2 second vector
+     * @return Manhattan distance
+     */
+    AQUILA_EXPORT inline double manhattanDistance(const std::vector<double>& v1,
+                                                  const std::vector<double>& v2)
+    {
+        double distance = 0.0;
+        for (std::size_t i = 0, size = v1.size(); i < size; i++)
+            distance += std::abs(v1[i] - v2[i]);
+
+        return distance;
+    }
 }
 
 #endif // FUNCTIONS_H
