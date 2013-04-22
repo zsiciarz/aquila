@@ -35,4 +35,17 @@ SUITE(Functions)
         double distance = Aquila::manhattanDistance(v1, v2);
         CHECK_CLOSE(3.0, distance, 0.000001);
     }
+
+    TEST(ChebyshevDistanceToItself)
+    {
+        double distance = Aquila::chebyshevDistance(v1, v1);
+        CHECK_CLOSE(0.0, distance, 0.000001);
+    }
+
+    TEST(ChebyshevDistance)
+    {
+        double distance = Aquila::chebyshevDistance(v1, v2);
+        CHECK_CLOSE(1.0, distance, 0.000001);
+    }
+
 }
