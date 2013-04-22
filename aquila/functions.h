@@ -128,6 +128,29 @@ namespace Aquila
 
         return distance;
     }
+
+    /**
+     * Returns Chebyshev distance between two vectors.
+     *
+     * @param v1 first vector
+     * @param v2 second vector
+     * @return Chebyshev distance
+     */
+    AQUILA_EXPORT inline double chebyshevDistance(const std::vector<double>& v1,
+                                                  const std::vector<double>& v2)
+    {
+        double distance = 0.0, max = 0.0;
+        for (std::size_t i = 0, size = v1.size(); i < size; i++)
+        {
+            distance = std::abs(v1[i] - v2[i]);
+            if (distance > max)
+            {
+                max = distance;
+            }
+        }
+
+        return max;
+    }
 }
 
 #endif // FUNCTIONS_H
