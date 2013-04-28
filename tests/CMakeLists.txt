@@ -19,6 +19,7 @@ set(Aquila_Test_SOURCES
     functions.cpp
     filter/MelFilter.cpp
     filter/MelFilterBank.cpp
+    ml/Dtw.cpp
     source/Frame.cpp
     source/FramesCollection.cpp
     source/PlainTextFile.cpp
