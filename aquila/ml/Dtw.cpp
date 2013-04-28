@@ -32,6 +32,7 @@ namespace Aquila
         m_toSize = to.size();
 
         // fill the local distances array
+        m_points.clear();
         m_points.resize(m_fromSize);
         for (std::size_t i = 0; i < m_fromSize; ++i)
         {
