@@ -56,6 +56,7 @@ set(Aquila_HEADERS
     aquila/filter/MelFilter.h
     aquila/filter/MelFilterBank.h
     aquila/ml/DtwPoint.h
+    aquila/ml/Dtw.h
     aquila/source/SignalSource.h
     aquila/source/Frame.h
     aquila/source/FramesCollection.h
@@ -90,6 +91,7 @@ set(Aquila_HEADERS
 set(Aquila_SOURCES
     aquila/filter/MelFilter.cpp
     aquila/filter/MelFilterBank.cpp
+    aquila/ml/Dtw.cpp
     aquila/source/SignalSource.cpp
     aquila/source/Frame.cpp
     aquila/source/FramesCollection.cpp
