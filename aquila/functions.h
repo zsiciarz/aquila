@@ -22,6 +22,7 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
+#include <functional>
 
 namespace Aquila
 {
@@ -94,6 +95,12 @@ namespace Aquila
     {
         return std::rand() / static_cast<double>(RAND_MAX);
     }
+
+    /**
+     * Prototype of distance calculating functions.
+     */
+    typedef std::function<double(const std::vector<double>&,
+                                 const std::vector<double>&)> DistanceFunctionType;
 
     /**
      * Returns Euclidean distance between two vectors.
