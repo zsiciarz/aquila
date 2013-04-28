@@ -55,6 +55,7 @@ set(Aquila_HEADERS
     aquila/Exceptions.h
     aquila/filter/MelFilter.h
     aquila/filter/MelFilterBank.h
+    aquila/ml/DtwPoint.h
     aquila/source/SignalSource.h
     aquila/source/Frame.h
     aquila/source/FramesCollection.h
