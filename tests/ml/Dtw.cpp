@@ -86,5 +86,33 @@ SUITE(Dtw)
 
         CHECK_CLOSE(9.0, distance, 0.000001);
     }
+
+    TEST(Similarity)
+    {
+        const std::size_t SIZE = 3;
+        double arr1[SIZE] = {0, 0, 0}, arr2[SIZE] = {1, 1, 1};
+        std::vector<double> zeros(arr1, arr1 + SIZE), ones(arr2, arr2 + SIZE);
+
+        Aquila::DtwDataType from, to1, to2;
+        from.push_back(zeros);
+        from.push_back(zeros);
+        from.push_back(zeros);
+        to1.push_back(zeros);
+        to1.push_back(zeros);
+        to1.push_back(ones);
+        to2.push_back(zeros);
+        to2.push_back(ones);
+        to2.push_back(ones);
+
+        /**
+         * 000 is more "similar" to 001 than 011, therefore distance between
+         * from and to1 should be smaller
+         */
+        Aquila::Dtw dtw;
+        double distance1 = dtw.getDistance(from, to1);
+        double distance2 = dtw.getDistance(from, to2);
+
+        CHECK(distance1 < distance2);
+    }
 }
 
