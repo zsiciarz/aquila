@@ -38,6 +38,7 @@ add_subdirectory(fft_simple_spectrum)
 add_subdirectory(fft_filter)
 add_subdirectory(spectrogram)
 add_subdirectory(mfcc_calculation)
+add_subdirectory(dtw_path_recovery)
 
 # Qt-based examples will be built only when Qt itself can be located
 if(NOT MSVC)
