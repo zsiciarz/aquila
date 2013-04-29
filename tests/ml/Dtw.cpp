@@ -141,5 +141,22 @@ SUITE(Dtw)
 
         CHECK(distance1 < distance2);
     }
+
+    TEST(TrivialPath)
+    {
+        const std::size_t SIZE = 3;
+        double arr1[SIZE] = {0, 0, 0}, arr2[SIZE] = {1, 1, 1};
+        std::vector<double> zeros(arr1, arr1 + SIZE), ones(arr2, arr2 + SIZE);
+
+        Aquila::DtwDataType from, to;
+        from.push_back(zeros);
+        to.push_back(ones);
+
+        Aquila::Dtw dtw;
+        dtw.getDistance(from, to);
+        auto path = dtw.getPath();
+
+        CHECK_EQUAL(1ul, path.size());
+    }
 }
 
