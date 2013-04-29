@@ -2,7 +2,18 @@
 #include "aquila/functions.h"
 #include "aquila/ml/Dtw.h"
 #include <unittestpp.h>
+#include <utility>
 #include <vector>
+
+
+void checkEqualPaths(Aquila::DtwPathType expectedPath, Aquila::DtwPathType path)
+{
+    for (std::size_t i = 0; i < path.size(); ++i)
+    {
+        CHECK_EQUAL(expectedPath[i].first, path[i].first);
+        CHECK_EQUAL(expectedPath[i].second, path[i].second);
+    }
+}
 
 
 SUITE(Dtw)
@@ -157,6 +168,10 @@ SUITE(Dtw)
         auto path = dtw.getPath();
 
         CHECK_EQUAL(1ul, path.size());
+
+        Aquila::DtwPathType expectedPath;
+        expectedPath.push_back(std::make_pair(0, 0));
+        checkEqualPaths(expectedPath, path);
     }
 }
 
