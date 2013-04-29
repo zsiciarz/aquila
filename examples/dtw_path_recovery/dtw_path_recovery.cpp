@@ -9,6 +9,31 @@
 #include <ctime>
 #include <vector>
 
+void drawDtwPath(const Aquila::Dtw& dtw, std::size_t xSize, std::size_t ySize)
+{
+    std::vector<std::vector<char>> data(ySize);
+    for (auto it = data.rbegin(); it != data.rend(); ++it)
+    {
+        std::fill_n(std::back_inserter(*it), xSize, '.');
+    }
+
+    auto path = dtw.getPath();
+    for (auto it = path.begin(); it != path.end(); ++it)
+    {
+        data[it->first][it->second] = 'o';
+    }
+
+    for (auto it = data.rbegin(); it != data.rend(); ++it)
+    {
+        std::copy(
+            std::begin(*it),
+            std::end(*it),
+            std::ostream_iterator<char>(std::cout, " ")
+        );
+        std::cout << "\n";
+    }
+}
+
 int main(int argc, char *argv[])
 {
     std::srand(std::time(0));
@@ -35,28 +60,7 @@ int main(int argc, char *argv[])
     Aquila::Dtw dtw;
     double distance = dtw.getDistance(from, to);
     std::cout << "DTW distance: " << distance << "\n";
-
-    std::vector<std::vector<char> > data(from.size());
-    for (auto it = data.rbegin(); it != data.rend(); ++it)
-    {
-        std::fill_n(std::back_inserter(*it), to.size(), '.');
-    }
-
-    auto path = dtw.getPath();
-    for (auto it = path.begin(); it != path.end(); ++it)
-    {
-        data[it->first][it->second] = 'o';
-    }
-
-    for (auto it = data.rbegin(); it != data.rend(); ++it)
-    {
-        std::copy(
-            std::begin(*it),
-            std::end(*it),
-            std::ostream_iterator<char>(std::cout, " ")
-        );
-        std::cout << "\n";
-    }
+    drawDtwPath(dtw, X_SIZE, Y_SIZE);
 
     return 0;
 }
