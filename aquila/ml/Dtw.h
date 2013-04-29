@@ -22,7 +22,6 @@
 #include "../functions.h"
 #include "DtwPoint.h"
 #include <cstddef>
-#include <list>
 #include <utility>
 #include <vector>
 
@@ -45,9 +44,9 @@ namespace Aquila
     typedef std::pair<std::size_t, std::size_t> DtwPathPointType;
 
     /**
-     * Lowest-cost path is a list of points.
+     * Lowest-cost path is a vector of points.
      */
-    typedef std::list<DtwPathPointType> DtwPathType;
+    typedef std::vector<DtwPathPointType> DtwPathType;
 
     class AQUILA_EXPORT Dtw
     {
