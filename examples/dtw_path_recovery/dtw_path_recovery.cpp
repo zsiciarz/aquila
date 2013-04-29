@@ -59,8 +59,13 @@ int main(int argc, char *argv[])
 
     Aquila::Dtw dtw;
     double distance = dtw.getDistance(from, to);
-    std::cout << "DTW distance: " << distance << "\n";
+    std::cout << "DTW distance (neighbors): " << distance << "\n";
     drawDtwPath(dtw, X_SIZE, Y_SIZE);
+
+    Aquila::Dtw dtwDiag(Aquila::euclideanDistance, Aquila::Dtw::Diagonals);
+    distance = dtwDiag.getDistance(from, to);
+    std::cout << "DTW distance (diagonals): " << distance << "\n";
+    drawDtwPath(dtwDiag, X_SIZE, Y_SIZE);
 
     return 0;
 }
