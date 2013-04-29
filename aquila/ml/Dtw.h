@@ -90,6 +90,8 @@ namespace Aquila
             return m_points[m_fromSize - 1][m_toSize - 1];
         }
 
+        DtwPathType getPath() const;
+
     private:
         /**
          * Distance definition used in DTW (eg. Euclidean, Manhattan etc).

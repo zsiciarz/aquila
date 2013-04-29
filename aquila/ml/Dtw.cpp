@@ -87,4 +87,25 @@ namespace Aquila
 
         return getFinalPoint().dAccumulated;
     }
+
+    /**
+     * Returns the lowest-cost path in the DTW array.
+     *
+     * @return path
+     */
+    DtwPathType Dtw::getPath() const
+    {
+        DtwPathType path;
+        DtwPoint finalPoint = getFinalPoint();
+        DtwPoint* point = &finalPoint;
+
+        path.push_back(std::make_pair(point->x, point->y));
+        while(point->previous != 0)
+        {
+            point = point->previous;
+            path.push_back(std::make_pair(point->x, point->y));
+        }
+
+        return path;
+    }
 }
