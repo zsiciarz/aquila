@@ -200,5 +200,33 @@ SUITE(Dtw)
         expectedPath.push_back(std::make_pair(0, 0));
         checkEqualPaths(expectedPath, path);
     }
+
+    TEST(DiagonalPathPassTypeDiagonal)
+    {
+        const std::size_t SIZE = 3;
+        double arr1[SIZE] = {0, 0, 0}, arr2[SIZE] = {1, 1, 1};
+        std::vector<double> zeros(arr1, arr1 + SIZE), ones(arr2, arr2 + SIZE);
+
+        Aquila::DtwDataType from, to;
+        from.push_back(zeros);
+        from.push_back(zeros);
+        from.push_back(zeros);
+        to.push_back(ones);
+        to.push_back(ones);
+        to.push_back(ones);
+
+        Aquila::Dtw dtw(Aquila::euclideanDistance, Aquila::Dtw::Diagonals);
+        dtw.getDistance(from, to);
+        auto path = dtw.getPath();
+
+        displayDtw(dtw);
+
+        CHECK_EQUAL(2ul, path.size());
+
+        Aquila::DtwPathType expectedPath;
+        expectedPath.push_back(std::make_pair(2, 2));
+        expectedPath.push_back(std::make_pair(0, 1));
+        checkEqualPaths(expectedPath, path);
+    }
 }
 
