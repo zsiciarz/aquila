@@ -219,8 +219,6 @@ SUITE(Dtw)
         dtw.getDistance(from, to);
         auto path = dtw.getPath();
 
-        displayDtw(dtw);
-
         CHECK_EQUAL(2ul, path.size());
 
         Aquila::DtwPathType expectedPath;
