@@ -73,12 +73,18 @@ namespace Aquila
                 }
 
                 if (top->dAccumulated < center->dAccumulated)
+                {
                     previous = top;
+                }
                 else
+                {
                     previous = center;
+                }
 
                 if (bottom->dAccumulated < previous->dAccumulated)
+                {
                     previous = bottom;
+                }
 
                 m_points[i][j].dAccumulated = m_points[i][j].dLocal + previous->dAccumulated;
                 m_points[i][j].previous = previous;
