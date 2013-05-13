@@ -114,7 +114,9 @@ namespace Aquila
     {
         double distance = 0.0;
         for (std::size_t i = 0, size = v1.size(); i < size; i++)
+        {
             distance += (v1[i] - v2[i])*(v1[i] - v2[i]);
+        }
 
         return std::sqrt(distance);
     }
@@ -131,7 +133,9 @@ namespace Aquila
     {
         double distance = 0.0;
         for (std::size_t i = 0, size = v1.size(); i < size; i++)
+        {
             distance += std::abs(v1[i] - v2[i]);
+        }
 
         return distance;
     }
