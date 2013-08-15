@@ -58,8 +58,6 @@ namespace Aquila
         virtual SpectrumType fft(const SampleType x[]);
         virtual void ifft(SpectrumType spectrum, double x[]);
 
-
-
     private:
         /**
          * Complex unit (0.0 + 1.0j).
