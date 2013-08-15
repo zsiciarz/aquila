@@ -102,6 +102,7 @@ namespace Aquila
     /**
      * Applies the inverse transform to the spectrum.
      *
+     * @todo replace with a real IFFT implementation
      * @param spectrum input spectrum
      * @param x output signal
      */
