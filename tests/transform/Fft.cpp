@@ -1,6 +1,7 @@
 #include "aquila/global.h"
 #include "aquila/source/generator/SineGenerator.h"
 #include "aquila/transform/FftFactory.h"
+#include "Fft.h"
 #include <unittestpp.h>
 #include <algorithm>
 #include <cstddef>
@@ -33,6 +34,11 @@ unsigned int findPeak(std::size_t arraySize,
 
 SUITE(Fft)
 {
+    TEST(Identity)
+    {
+        identityTest<Aquila::AquilaFft, 8>();
+    }
+
     TEST(SinePeakDetect1)
     {
         unsigned int peakPosition = findPeak(64, 8000, 1000);
