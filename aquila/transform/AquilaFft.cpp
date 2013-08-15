@@ -18,6 +18,7 @@
 #include "AquilaFft.h"
 #include <algorithm>
 #include <cmath>
+#include <iostream>
 
 namespace Aquila
 {
@@ -108,15 +109,50 @@ namespace Aquila
      */
     void AquilaFft::ifft(SpectrumType spectrum, double x[])
     {
-        ComplexType WN = std::exp((-j) * 2.0 * M_PI / static_cast<double>(N));
+        SpectrumType spectrumCopy(spectrum);
+        unsigned int a = 1, b = 0, c = 0;
+        for (b = 1; b < N; ++b)
+        {
+            if (b < a)
+            {
+                spectrumCopy[a - 1] = spectrum[b - 1];
+                spectrumCopy[b - 1] = spectrum[a - 1];
+            }
+            c = N / 2;
+            while (c < a)
+            {
+                a -= c;
+                c /= 2;
+            }
+            a += c;
+        }
+
+        unsigned int numStages = static_cast<unsigned int>(
+            std::log(static_cast<double>(N)) / LN_2);
+        unsigned int L = 0, M = 0, p = 0, q = 0, r = 0;
+        ComplexType Wi(0, 0), Temp(0, 0);
+        ComplexType** Wi_cache = getCachedFftWi(numStages);
+        for (unsigned int k = 1; k <= numStages; ++k)
+        {
+            L = 1 << k;
+            M = 1 << (k - 1);
+            Wi = -Wi_cache[k][0];
+            for (p = 1; p <= M; ++p)
+            {
+                for (q = p; q <= N; q += L)
+                {
+                    r = q + M;
+                    Temp = spectrumCopy[r - 1] * Wi;
+                    spectrumCopy[r - 1] = spectrumCopy[q - 1] - Temp;
+                    spectrumCopy[q - 1] = spectrumCopy[q - 1] + Temp;
+                }
+                Wi = -Wi_cache[k][p];
+            }
+        }
+
         for (unsigned int k = 0; k < N; ++k)
         {
-            ComplexType sum(0, 0);
-            for (unsigned int n = 0; n < N; ++n)
-            {
-                sum += spectrum[n] * std::pow(WN, -static_cast<int>(n * k));
-            }
-            x[k] = std::abs(sum) / static_cast<double>(N);
+            x[k] = std::abs(spectrumCopy[k]) / static_cast<double>(N);
         }
     }
 
