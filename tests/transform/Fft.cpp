@@ -37,6 +37,9 @@ SUITE(Fft)
     TEST(Identity)
     {
         identityTest<Aquila::AquilaFft, 8>();
+        identityTest<Aquila::AquilaFft, 16>();
+        identityTest<Aquila::AquilaFft, 128>();
+        identityTest<Aquila::AquilaFft, 1024>();
     }
 
     TEST(SinePeakDetect1)
