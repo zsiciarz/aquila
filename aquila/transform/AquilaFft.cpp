@@ -107,7 +107,16 @@ namespace Aquila
      */
     void AquilaFft::ifft(SpectrumType spectrum, double x[])
     {
-        // TO BE IMPLEMENTED!
+        ComplexType WN = std::exp((-j) * 2.0 * M_PI / static_cast<double>(N));
+        for (unsigned int k = 0; k < N; ++k)
+        {
+            ComplexType sum(0, 0);
+            for (unsigned int n = 0; n < N; ++n)
+            {
+                sum += spectrum[n] * std::pow(WN, -static_cast<int>(n * k));
+            }
+            x[k] = std::abs(sum) / static_cast<double>(N);
+        }
     }
 
     /**
