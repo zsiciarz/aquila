@@ -8,7 +8,9 @@ Report issues
 
 If you think you found a **bug** in Aquila or have an awesome **feature
 request**, feel free to [file an issue](http://github.com/zsiciarz/aquila/issues).
-Aquila relies on GitHub for issue tracking.
+Aquila relies on GitHub for issue tracking. Please, search through existing
+issues before you file a new one; perhaps your problem was already discussed
+or fixed.
 
 Contribute code
 ---------------
