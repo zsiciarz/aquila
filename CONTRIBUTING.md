@@ -12,6 +12,16 @@ Aquila relies on GitHub for issue tracking. Please, search through existing
 issues before you file a new one; perhaps your problem was already discussed
 or fixed.
 
+When submitting an issue, please include the following:
+
+ * problem description
+ * steps to reproduce (a smallest possible code example that reproduces the
+   issue would be most welcome!)
+ * expected outcome
+ * actual outcome
+ * platform information: your operating system, compiler version, build type etc.
+ * any other relevant information
+
 Contribute code
 ---------------
 
