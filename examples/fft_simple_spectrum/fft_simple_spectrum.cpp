@@ -7,8 +7,7 @@ int main()
 {
     // input signal parameters
     const std::size_t SIZE = 64;
-    const Aquila::FrequencyType sampleFreq = 2000;
-    const Aquila::FrequencyType f1 = 125, f2 = 700;
+    const Aquila::FrequencyType sampleFreq = 2000, f1 = 125, f2 = 700;
 
     Aquila::SineGenerator sineGenerator1(sampleFreq);
     sineGenerator1.setAmplitude(32).setFrequency(f1).generate(SIZE);
