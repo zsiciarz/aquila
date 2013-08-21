@@ -127,6 +127,7 @@ set(Aquila_SOURCES
 # SFML wrappers
 if(SFML_FOUND)
     list(APPEND Aquila_HEADERS
+        aquila/synth.h
         aquila/wrappers/SoundBufferAdapter.h
         aquila/synth/Synthesizer.h
         aquila/synth/KarplusStrongSynthesizer.h
