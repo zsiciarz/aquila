@@ -1,15 +1,8 @@
 What is Aquila?
 ===============
 
-Aquila is a digital signal processing library written in C++.
-
-NOTE: Aquila 3 is an experimental release breaking backwards compatibility.
-We're moving from Subversion to Git, from qmake to CMake, reorganizing 
-core classes and introducing major API changes. The work is still under
-heavy development and at some commits the source code may even not compile. 
-Remember, you were warned :)
-
-See http://code.google.com/p/aquila for the stable 2.5 branch.
+Aquila is an open source and cross-platform DSP (Digital Signal Processing)
+library for C++11.
 
 
 Features
