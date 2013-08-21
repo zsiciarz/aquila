@@ -8,15 +8,13 @@ library for C++11.
 Features
 ========
 
- * reading input files in WAVE format, 8 or 16-bit per sample, mono or stereo,
-   with almost any sample frequency
- * dividing input signals into short frames and applying mathematical
-   transformations to each frame
+ * various signal sources (generators, text/binary/WAVE files)
+ * signal windowing and filtering
+ * performing operations on a frame-by-frame basis
  * calculating energy, power, FFT and DCT of a signal
  * feature extraction, including MFCC and HFCC features, widely used in
    speech recognition
- * a simple DTW (dynamic time warping) pattern matching algorithm which
-   also can be used for recognition
+ * pattern matching with DTW (dynamic time warping) algorithm
 
 
 Requirements
