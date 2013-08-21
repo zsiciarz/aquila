@@ -50,6 +50,7 @@ endif()
 
 # library headers
 set(Aquila_HEADERS
+    aquila/aquila.h
     aquila/global.h
     aquila/functions.h
     aquila/Exceptions.h
