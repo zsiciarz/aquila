@@ -54,6 +54,7 @@ set(Aquila_HEADERS
     aquila/functions.h
     aquila/Exceptions.h
     aquila/source.h
+    aquila/transform.h
     aquila/filter/MelFilter.h
     aquila/filter/MelFilterBank.h
     aquila/ml/DtwPoint.h
