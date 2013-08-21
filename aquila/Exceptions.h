@@ -39,8 +39,8 @@ namespace Aquila
          *
          * @param what exception message
          */
-        Exception(const std::string& what):
-            runtime_error(what)
+        Exception(const std::string& message):
+            runtime_error(message)
         {
         }
     };
@@ -56,8 +56,8 @@ namespace Aquila
          *
          * @param what exception message
          */
-        FormatException(const std::string& what):
-            Exception(what)
+        FormatException(const std::string& message):
+            Exception(message)
         {
         }
     };
@@ -73,8 +73,8 @@ namespace Aquila
          *
          * @param what exception message
          */
-        ConfigurationException(const std::string& what):
-            Exception(what)
+        ConfigurationException(const std::string& message):
+            Exception(message)
         {
         }
     };
