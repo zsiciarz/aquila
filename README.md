@@ -36,7 +36,7 @@ is distributed with the library in the LICENSE file.
 Authors
 =======
 
-Zbigniew Siciarz <antyqjon@interia.pl>
+Zbigniew Siciarz (zbigniew at siciarz dot net)
 
 This library includes code from Takuya Ooura's mathematical software packages,
 which are available at http://www.kurims.kyoto-u.ac.jp/~ooura/.
