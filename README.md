@@ -15,8 +15,6 @@ See http://code.google.com/p/aquila for the stable 2.5 branch.
 Features
 ========
 
-This is copied from Aquila 2.5 description.
-
  * reading input files in WAVE format, 8 or 16-bit per sample, mono or stereo,
    with almost any sample frequency
  * dividing input signals into short frames and applying mathematical
