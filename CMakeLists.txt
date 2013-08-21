@@ -57,6 +57,7 @@ set(Aquila_HEADERS
     aquila/tools.h
     aquila/transform.h
     aquila/filter.h
+    aquila/ml.h
     aquila/filter/MelFilter.h
     aquila/filter/MelFilterBank.h
     aquila/ml/DtwPoint.h
