@@ -37,6 +37,9 @@ int main()
 }
 ```
 
+For more usage examples see the `examples` directory or
+[browse them online](http://aquila-dsp.org/articles/examples/).
+
 
 Features
 ========
