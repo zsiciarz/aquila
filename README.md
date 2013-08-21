@@ -22,7 +22,8 @@ Requirements
 
 The following dependencies are required to build the library from source.
 
- * CMake > 2.6
+ * a modern C++11 compiler
+ * CMake >= 2.8
 
 
 License
