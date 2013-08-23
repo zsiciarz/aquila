@@ -62,6 +62,12 @@ The following dependencies are required to build the library from source.
  * CMake >= 2.8
 
 
+Contributing
+============
+
+See CONTRIBUTING.md for some guidelines how to get involved.
+
+
 License
 =======
 
