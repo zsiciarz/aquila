@@ -22,6 +22,13 @@
 
 namespace Aquila
 {
+    /**
+     * Creates the spectrogram from a collection of signal frames.
+     *
+     * Calculates frame spectra immediately after initialization.
+     *
+     * @param frames input frames
+     */
     Spectrogram::Spectrogram(FramesCollection& frames):
         m_frameCount(frames.count()),
         m_spectrumSize(frames.getSamplesPerFrame()),
