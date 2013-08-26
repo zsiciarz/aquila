@@ -31,6 +31,9 @@ namespace Aquila
 
     NoteMapType initNoteMap();
 
+    /**
+     * An abstract class from which sound synthesizers should be derived.
+     */
     class AQUILA_EXPORT Synthesizer
     {
     public:
