@@ -52,6 +52,14 @@ namespace Aquila
         void playNote(std::string note, unsigned int duration = 500);
 
     protected:
+        /**
+         * Plays a tone at given frequency.
+         *
+         * Must be overriden in child classes.
+         *
+         * @param frequency base frequency of the generated sound
+         * @param duration tone duration in milliseconds
+         */
         virtual void playFrequency(FrequencyType frequency, unsigned int duration) = 0;
 
         /**

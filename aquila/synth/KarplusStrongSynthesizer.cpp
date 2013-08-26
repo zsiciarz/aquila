@@ -30,6 +30,9 @@ namespace Aquila
      * a first-order lowpass filter (in this case a simple moving average).
      * Resulting waveform is played using SFML - the sound is similar to a
      * plucked guitar string.
+     *
+     * @param frequency base frequency of the guitar note
+     * @param duration tone duration in milliseconds
      */
     void KarplusStrongSynthesizer::playFrequency(FrequencyType frequency,
                                                  unsigned int duration)

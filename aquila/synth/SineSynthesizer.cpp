@@ -25,7 +25,7 @@ namespace Aquila
     /**
      * Plays a tone at given frequency.
      *
-     * @param note frequency of the generated sound
+     * @param frequency frequency of the generated sound
      * @param duration beep duration in milliseconds
      */
     void SineSynthesizer::playFrequency(FrequencyType frequency,
