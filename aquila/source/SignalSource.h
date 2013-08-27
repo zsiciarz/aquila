@@ -53,7 +53,9 @@ namespace Aquila
         }
 
         /**
-         * This overload initializes sample frequency of the source.
+         * CThis overload initializes sample frequency of the source.
+         *
+         * @param sampleFrequency sample frequency in Hz
          */
         SignalSource(FrequencyType sampleFrequency):
             m_data(), m_sampleFrequency(sampleFrequency)
@@ -61,9 +63,11 @@ namespace Aquila
         }
 
         /**
-         * Initialize the source from a C-style array.
-         * @param data pointer to an array of samples (numeric values)
+         * Initialize the source from data sampled at a given frequency.
+         *
+         * @param data pointer to a C-style array of samples (numeric values)
          * @param dataLength length of the array
+         * @param sampleFrequency sample frequency in Hz
          */
         template <typename Numeric>
         SignalSource(Numeric* data, std::size_t dataLength,
@@ -76,6 +80,7 @@ namespace Aquila
          * Create the source from a vector of samples.
          *
          * @param data vector of samples
+         * @param sampleFrequency sample frequency in Hz
          */
         SignalSource(const std::vector<SampleType>& data,
                      FrequencyType sampleFrequency = 0):
@@ -87,6 +92,7 @@ namespace Aquila
          * Create the source from a (temporary) vector of samples.
          *
          * @param data vector of samples
+         * @param sampleFrequency sample frequency in Hz
          */
         SignalSource(std::vector<SampleType>&& data,
                      FrequencyType sampleFrequency = 0):
@@ -112,11 +118,11 @@ namespace Aquila
         /**
          * Sets sample frequency of the signal.
          *
-         * @param frequency sample frequency in Hz
+         * @param sampleFrequency sample frequency in Hz
          */
-        virtual void setSampleFrequency(FrequencyType frequency)
+        virtual void setSampleFrequency(FrequencyType sampleFrequency)
         {
-            m_sampleFrequency = frequency;
+            m_sampleFrequency = sampleFrequency;
         }
 
 
