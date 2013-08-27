@@ -144,6 +144,13 @@ namespace Aquila
         header.WaveSize = waveSize;
     }
 
+    /**
+     * Decodes 16 bit mono data into a suitable audio channel format.
+     *
+     * @param channel a reference to audio channel
+     * @param data raw data buffer
+     * @param channelSize expected number of samples in channel
+     */
     void WaveFileHandler::decode16bit(WaveFile::ChannelType& channel, short* data, std::size_t channelSize)
     {
         for (std::size_t i = 0; i < channelSize; ++i)
@@ -152,6 +159,14 @@ namespace Aquila
         }
     }
 
+    /**
+     * Decodes 16 bit stereo data into two audio channels.
+     *
+     * @param leftChannel a reference to left audio channel
+     * @param rightChannel a reference to right audio channel
+     * @param data raw data buffer
+     * @param channelSize expected number of samples (same for both channels)
+     */
     void WaveFileHandler::decode16bitStereo(WaveFile::ChannelType& leftChannel,
         WaveFile::ChannelType& rightChannel, short* data, std::size_t channelSize)
     {
@@ -162,6 +177,13 @@ namespace Aquila
         }
     }
 
+    /**
+     * Decodes 8 bit mono data into a suitable audio channel format.
+     *
+     * @param channel a reference to audio channel
+     * @param data raw data buffer
+     * @param channelSize expected number of samples in channel
+     */
     void WaveFileHandler::decode8bit(WaveFile::ChannelType& channel, short* data, std::size_t channelSize)
     {
         // low byte and high byte of a 16b word
@@ -174,6 +196,14 @@ namespace Aquila
         }
     }
 
+    /**
+     * Decodes 8 bit stereo data into two audio channels.
+     *
+     * @param leftChannel a reference to left audio channel
+     * @param rightChannel a reference to right audio channel
+     * @param data raw data buffer
+     * @param channelSize expected number of samples (same for both channels)
+     */
     void WaveFileHandler::decode8bitStereo(WaveFile::ChannelType& leftChannel,
         WaveFile::ChannelType& rightChannel, short* data, std::size_t channelSize)
     {
