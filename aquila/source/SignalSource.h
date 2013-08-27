@@ -125,7 +125,6 @@ namespace Aquila
             m_sampleFrequency = sampleFrequency;
         }
 
-
         /**
          * Returns number of bits per signal sample.
          *
@@ -370,7 +369,6 @@ namespace Aquila
     double norm(const SignalSource& source);
 
     double rms(const SignalSource& source);
-
 }
 
 #endif // SIGNALSOURCE_H
