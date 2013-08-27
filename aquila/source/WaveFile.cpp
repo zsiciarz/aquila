@@ -48,7 +48,8 @@ namespace Aquila
      *
      * To improve performance, no format checking is performed.
      *
-     * @param file full path to .wav file
+     * @param filename full path to .wav file
+     * @param channel which audio channel to read (for formats other than mono)
      */
     void WaveFile::load(const std::string& filename, StereoChannel channel)
     {
