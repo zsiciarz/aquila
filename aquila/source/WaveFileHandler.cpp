@@ -23,11 +23,23 @@
 
 namespace Aquila
 {
+    /**
+     * Create the handler and tell it which file to read later.
+     *
+     * @param filename .wav file name
+     */
     WaveFileHandler::WaveFileHandler(const std::string& filename):
         m_filename(filename)
     {
     }
 
+    /**
+     * Reads WAVE header and audio channel data from file.
+     *
+     * @param header reference to header instance which will be filled
+     * @param leftChannel reference to left audio channel
+     * @param rightChannel reference to right audio channel
+     */
     void WaveFileHandler::readHeaderAndChannels(WaveHeader &header,
         WaveFile::ChannelType& leftChannel, WaveFile::ChannelType& rightChannel)
     {
