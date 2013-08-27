@@ -48,6 +48,9 @@ namespace Aquila
      */
     typedef std::vector<DtwPathPointType> DtwPathType;
 
+    /**
+     * Dynamic Time Warping implementation.
+     */
     class AQUILA_EXPORT Dtw
     {
     public:
