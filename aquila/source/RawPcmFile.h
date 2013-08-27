@@ -43,7 +43,7 @@ namespace Aquila
         /**
          * Creates the data source.
          *
-         * @param filename full path to .txt file
+         * @param filename full path to data file
          * @param sampleFrequency sample frequency of the data in file
          */
         RawPcmFile(std::string filename, FrequencyType sampleFrequency):
