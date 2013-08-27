@@ -37,7 +37,7 @@ namespace Aquila
         /**
          * Creates an exception object.
          *
-         * @param what exception message
+         * @param message exception message
          */
         Exception(const std::string& message):
             runtime_error(message)
@@ -54,7 +54,7 @@ namespace Aquila
         /**
          * Creates a data format exception object.
          *
-         * @param what exception message
+         * @param message exception message
          */
         FormatException(const std::string& message):
             Exception(message)
@@ -71,7 +71,7 @@ namespace Aquila
         /**
          * Creates a configuration exception object.
          *
-         * @param what exception message
+         * @param message exception message
          */
         ConfigurationException(const std::string& message):
             Exception(message)
