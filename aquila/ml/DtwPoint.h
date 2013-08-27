@@ -52,9 +52,14 @@ namespace Aquila
         }
 
         /**
-         * Coordinates of the point in the DTW array.
+         * X coordinate of the point in the DTW array.
          */
-        std::size_t x, y;
+        std::size_t x;
+
+        /**
+         * Y coordinate of the point in the DTW array.
+         */
+        std::size_t y;
 
         /**
          * Local distance at this point.
