@@ -63,6 +63,7 @@ namespace Aquila
          * Creates the DTW algorithm wrapper object.
          *
          * @param distanceFunction which function to use for calculating distance
+         * @param passType pass type - how to move through distance array
          */
         Dtw(DistanceFunctionType distanceFunction = euclideanDistance,
             PassType passType = Neighbors):
