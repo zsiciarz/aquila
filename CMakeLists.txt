@@ -198,6 +198,27 @@ if(Aquila_BUILD_TESTS)
     add_subdirectory(tests)
 endif()
 
+################################################################################
+#
+# Documentation
+#
+################################################################################
+
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+    configure_file(
+        "${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in"
+        "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
+        IMMEDIATE @ONLY
+    )
+    add_custom_target(docs
+        "${DOXYGEN_EXECUTABLE}"
+        "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
+    )
+else()
+    message(WARNING "Doxygen not found, documentation will not be built")
+endif()
+
 
 ################################################################################
 #
