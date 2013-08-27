@@ -66,6 +66,12 @@ namespace Aquila
             fs.close();
         }
 
+        /**
+         * Saves the given signal source as a raw PCM file.
+         *
+         * @param source source of the data to save
+         * @param filename destination file
+         */
         static void save(const SignalSource& source, const std::string& filename)
         {
             std::fstream fs;
