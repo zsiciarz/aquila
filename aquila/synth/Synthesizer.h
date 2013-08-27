@@ -27,6 +27,9 @@
 
 namespace Aquila
 {
+    /**
+     * Type of the mapping from note names to frequencies.
+     */
     typedef std::map<std::string, FrequencyType> NoteMapType;
 
     NoteMapType initNoteMap();
