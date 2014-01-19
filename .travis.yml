@@ -2,7 +2,7 @@ language: cpp
 compiler:
   - clang
 before_install:
-  - sudo apt-get install cmake
+  - sudo apt-get install cmake libsfml-dev
 script:
   - mkdir _build && cd _build
   - cmake ..
