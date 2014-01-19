@@ -1,6 +1,7 @@
 language: cpp
 compiler:
   - clang
+  - gcc
 before_install:
   - sudo apt-get install cmake libsfml-dev
 script:
