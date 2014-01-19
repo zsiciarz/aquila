@@ -105,11 +105,11 @@ namespace Aquila
         DtwPoint finalPoint = getFinalPoint();
         DtwPoint* point = &finalPoint;
 
-        path.push_back(std::make_pair(point->x, point->y));
+        path.push_back(*point);
         while(point->previous != 0)
         {
             point = point->previous;
-            path.push_back(std::make_pair(point->x, point->y));
+            path.push_back(*point);
         }
 
         return path;

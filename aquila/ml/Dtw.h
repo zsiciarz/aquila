@@ -39,14 +39,9 @@ namespace Aquila
     typedef std::vector<std::vector<DtwPoint>> DtwPointsArrayType;
 
     /**
-     * Type of a single point (x, y) on the DTW lowest-cost path.
-     */
-    typedef std::pair<std::size_t, std::size_t> DtwPathPointType;
-
-    /**
      * Lowest-cost path is a vector of points.
      */
-    typedef std::vector<DtwPathPointType> DtwPathType;
+    typedef std::vector<DtwPoint> DtwPathType;
 
     /**
      * Dynamic Time Warping implementation.
