@@ -1,0 +1,10 @@
+language: cpp
+compiler:
+  - clang
+before_install:
+  - sudo apt-get install cmake
+script:
+  - mkdir _build && cd _build
+  - cmake ..
+  - make Aquila aquila_test
+  - ctest
