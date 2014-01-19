@@ -10,8 +10,8 @@ void checkEqualPaths(Aquila::DtwPathType expectedPath, Aquila::DtwPathType path)
 {
     for (std::size_t i = 0; i < path.size(); ++i)
     {
-        CHECK_EQUAL(expectedPath[i].first, path[i].first);
-        CHECK_EQUAL(expectedPath[i].second, path[i].second);
+        CHECK_EQUAL(expectedPath[i].x, path[i].x);
+        CHECK_EQUAL(expectedPath[i].y, path[i].y);
     }
 }
 
@@ -170,7 +170,7 @@ SUITE(Dtw)
         CHECK_EQUAL(1ul, path.size());
 
         Aquila::DtwPathType expectedPath;
-        expectedPath.push_back(std::make_pair(0, 0));
+        expectedPath.push_back(Aquila::DtwPoint(0, 0));
         checkEqualPaths(expectedPath, path);
     }
 
@@ -195,9 +195,9 @@ SUITE(Dtw)
         CHECK_EQUAL(3ul, path.size());
 
         Aquila::DtwPathType expectedPath;
-        expectedPath.push_back(std::make_pair(2, 2));
-        expectedPath.push_back(std::make_pair(1, 1));
-        expectedPath.push_back(std::make_pair(0, 0));
+        expectedPath.push_back(Aquila::DtwPoint(2, 2));
+        expectedPath.push_back(Aquila::DtwPoint(1, 1));
+        expectedPath.push_back(Aquila::DtwPoint(0, 0));
         checkEqualPaths(expectedPath, path);
     }
 
@@ -222,9 +222,8 @@ SUITE(Dtw)
         CHECK_EQUAL(2ul, path.size());
 
         Aquila::DtwPathType expectedPath;
-        expectedPath.push_back(std::make_pair(2, 2));
-        expectedPath.push_back(std::make_pair(0, 1));
+        expectedPath.push_back(Aquila::DtwPoint(2, 2));
+        expectedPath.push_back(Aquila::DtwPoint(0, 1));
         checkEqualPaths(expectedPath, path);
     }
 }
-
