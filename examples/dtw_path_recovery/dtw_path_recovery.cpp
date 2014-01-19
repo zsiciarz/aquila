@@ -20,7 +20,7 @@ void drawDtwPath(const Aquila::Dtw& dtw, std::size_t xSize, std::size_t ySize)
     auto path = dtw.getPath();
     for (auto it = path.begin(); it != path.end(); ++it)
     {
-        data[it->first][it->second] = 'o';
+        data[it->x][it->y] = 'o';
     }
 
     for (auto it = data.rbegin(); it != data.rend(); ++it)
