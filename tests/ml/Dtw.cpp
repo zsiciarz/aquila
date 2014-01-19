@@ -2,7 +2,6 @@
 #include "aquila/functions.h"
 #include "aquila/ml/Dtw.h"
 #include <unittestpp.h>
-#include <utility>
 #include <vector>
 
 

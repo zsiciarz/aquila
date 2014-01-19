@@ -22,7 +22,6 @@
 #include "../functions.h"
 #include "DtwPoint.h"
 #include <cstddef>
-#include <utility>
 #include <vector>
 
 namespace Aquila
