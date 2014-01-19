@@ -43,7 +43,7 @@ namespace Aquila
          * @param y_ y coordinate in DTW array
          * @param distanceLocal value of local distance at (x, y)
          */
-        DtwPoint(std::size_t x_, std::size_t y_, double distanceLocal):
+        DtwPoint(std::size_t x_, std::size_t y_, double distanceLocal = 0.0):
             x(x_), y(y_), dLocal(distanceLocal),
             // at the edges set accumulated distance to local. otherwise 0
             dAccumulated((0 == x || 0 == y) ? dLocal : 0.0),
