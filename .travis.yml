@@ -8,7 +8,7 @@ before_install:
 script:
   - mkdir _build && cd _build
   - cmake ..
-  - make Aquila aquila_test
+  - make VERBOSE=1 Aquila aquila_test
   - ctest
 after_success:
   - find . -name '*.gcno'
