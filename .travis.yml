@@ -3,7 +3,7 @@ compiler:
   - clang
   - gcc
 before_install:
-  - sudo apt-get install cmake libsfml-dev
+  - sudo apt-get install cmake libsfml-dev gcov lcov
   - sudo pip install cpp-coveralls --use-mirrors
 script:
   - mkdir _build && cd _build
