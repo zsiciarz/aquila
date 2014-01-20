@@ -11,4 +11,6 @@ script:
   - make Aquila aquila_test
   - ctest
 after_success:
+  - find . -name '*.gcno'
+  - find . -name '*.gcda'
   - coveralls --verbose --exclude lib --exclude tests
