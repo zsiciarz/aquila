@@ -4,8 +4,11 @@ compiler:
   - gcc
 before_install:
   - sudo apt-get install cmake libsfml-dev
+  - sudo pip install cpp-coveralls --use-mirrors
 script:
   - mkdir _build && cd _build
   - cmake ..
   - make Aquila aquila_test
   - ctest
+after_success:
+  - coveralls --exclude lib --exclude tests
