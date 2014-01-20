@@ -7,7 +7,7 @@ before_install:
   - sudo pip install cpp-coveralls --use-mirrors
 script:
   - mkdir _build && cd _build
-  - cmake ..
+  - cmake -DCMAKE_BUILD_TYPE="Debug" ..
   - make VERBOSE=1 Aquila aquila_test
   - ctest
 after_success:
