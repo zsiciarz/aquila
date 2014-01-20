@@ -11,4 +11,4 @@ script:
   - make Aquila aquila_test
   - ctest
 after_success:
-  - coveralls --verbose --exclude lib --exclude tests
+  - coveralls --verbose --root .. --build-root . --exclude lib --exclude tests
