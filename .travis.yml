@@ -6,9 +6,8 @@ before_install:
   - sudo apt-get install cmake libsfml-dev lcov
   - sudo pip install cpp-coveralls --use-mirrors
 script:
-  - mkdir _build && cd _build
-  - cmake -DCMAKE_BUILD_TYPE="Debug" ..
+  - cmake -DCMAKE_BUILD_TYPE="Debug" .
   - make Aquila aquila_test
   - ctest
 after_success:
-  - coveralls --verbose --root .. --build-root . --exclude lib --exclude tests
+  - coveralls --verbose --exclude lib --exclude tests
