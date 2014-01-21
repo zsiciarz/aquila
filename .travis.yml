@@ -10,4 +10,4 @@ script:
   - make Aquila aquila_test
   - ctest
 after_success:
-  - coveralls --verbose --exclude lib --exclude tests
+  - coveralls --verbose --exclude examples --exclude lib --exclude tests
