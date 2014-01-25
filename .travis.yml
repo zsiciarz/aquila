@@ -10,5 +10,4 @@ script:
   - make Aquila aquila_test
   - ctest
 after_success:
-  - echo $CXX
-  - bash -c 'if [[ $CXX == */g++* ]]; then coveralls --exclude examples --exclude lib --exclude tests; fi'
+  - bash -c 'if [[ $CXX == "g++" ]]; then coveralls --exclude examples --exclude lib --exclude tests; fi'
