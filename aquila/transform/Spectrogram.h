@@ -19,7 +19,6 @@
 #define SPECTROGRAM_H
 
 #include "../global.h"
-#include "Fft.h"
 #include <cstddef>
 #include <memory>
 #include <vector>
@@ -27,6 +26,7 @@
 
 namespace Aquila
 {
+    class Fft;
     class FramesCollection;
 
     /**
