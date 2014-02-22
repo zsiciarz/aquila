@@ -124,6 +124,9 @@ namespace Aquila
         std::size_t maxPos = static_cast<std::size_t>(N * maxFreq / m_sampleFrequency);
         // limit maxPos not to write out of bounds of vector storage
         maxPos = std::min(maxPos, N - 1);
+        if (maxPos <= minPos) {
+            return;
+        }
 
         const double max = 1.0;
 
