@@ -77,7 +77,7 @@ namespace Aquila
     {
         sf::Int16* samples = new sf::Int16[source.getSamplesCount()];
         std::copy(source.begin(), source.end(), samples);
-        bool result = LoadFromSamples(samples,
+        bool result = loadFromSamples(samples,
                                      source.getSamplesCount(),
                                      1,
                                      static_cast<unsigned int>(source.getSampleFrequency()));

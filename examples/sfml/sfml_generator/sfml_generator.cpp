@@ -68,12 +68,12 @@ int main(int argc, char** argv)
 
     Aquila::SoundBufferAdapter buffer(*generator);
     sf::Sound sound(buffer);
-    sound.Play();
+    sound.play();
     std::cout << "Playing..." << std::endl;
-    while (sound.GetStatus() == sf::Sound::Playing)
+    while (sound.getStatus() == sf::Sound::Playing)
     {
         std::cout << ".";
-        sf::Sleep(0.1f);
+        sf::sleep(sf::milliseconds(100));
     }
     std::cout << "\nFinished." << std::endl;
     delete generator;

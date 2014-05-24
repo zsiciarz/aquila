@@ -53,10 +53,10 @@ namespace Aquila
              arr[i] = m_alpha * (0.5 * (arr[i - delay] + arr[i - delay - 1]));
         }
 
-        m_buffer.LoadFromSamples(arr, totalSamples, 1, m_sampleFrequency);
+        m_buffer.loadFromSamples(arr, totalSamples, 1, m_sampleFrequency);
         sf::Sound sound(m_buffer);
-        sound.Play();
-        sf::Sleep(duration / 1000.0f);
+        sound.play();
+        sf::sleep(sf::milliseconds(duration));
 
         delete [] arr;
     }

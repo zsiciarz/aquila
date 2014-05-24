@@ -35,8 +35,8 @@ namespace Aquila
         m_generator.setFrequency(frequency).generate(numSamples);
         m_buffer.LoadFromSignalSource(m_generator);
         sf::Sound sound(m_buffer);
-        sound.Play();
+        sound.play();
         // the additional 50 ms is an intentional pause between tones
-        sf::Sleep(duration / 1000.0f + 0.05f);
+        sf::sleep(sf::milliseconds(duration + 50));
     }
 }

@@ -97,7 +97,7 @@ namespace Aquila
     {
         if (m_notes.count(note) == 0)
         {
-            sf::Sleep(duration / 1000.0f);
+            sf::sleep(sf::milliseconds(duration));
         }
         else
         {
