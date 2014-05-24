@@ -80,6 +80,7 @@ set(Aquila_HEADERS
     aquila/source/window/BarlettWindow.h
     aquila/source/window/BlackmanWindow.h
     aquila/source/window/FlattopWindow.h
+    aquila/source/window/GaussianWindow.h
     aquila/source/window/HammingWindow.h
     aquila/source/window/HannWindow.h
     aquila/source/window/RectangularWindow.h
@@ -114,6 +115,7 @@ set(Aquila_SOURCES
     aquila/source/window/BarlettWindow.cpp
     aquila/source/window/BlackmanWindow.cpp
     aquila/source/window/FlattopWindow.cpp
+    aquila/source/window/GaussianWindow.cpp
     aquila/source/window/HammingWindow.cpp
     aquila/source/window/HannWindow.cpp
     aquila/transform/Dft.cpp

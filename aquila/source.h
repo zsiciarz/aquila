@@ -35,6 +35,7 @@
 #include "source/window/BarlettWindow.h"
 #include "source/window/BlackmanWindow.h"
 #include "source/window/FlattopWindow.h"
+#include "source/window/GaussianWindow.h"
 #include "source/window/HammingWindow.h"
 #include "source/window/HannWindow.h"
 #include "source/window/RectangularWindow.h"
