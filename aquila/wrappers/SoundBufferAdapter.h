@@ -36,7 +36,7 @@ namespace Aquila
         SoundBufferAdapter(const SignalSource& source);
         ~SoundBufferAdapter();
 
-        bool LoadFromSignalSource(const SignalSource& source);
+        bool loadFromSignalSource(const SignalSource& source);
     };
 }
 

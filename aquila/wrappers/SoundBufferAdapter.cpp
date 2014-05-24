@@ -48,7 +48,7 @@ namespace Aquila
     SoundBufferAdapter::SoundBufferAdapter(const SignalSource &source):
         SoundBuffer()
     {
-        LoadFromSignalSource(source);
+        loadFromSignalSource(source);
     }
 
     /**
@@ -73,7 +73,7 @@ namespace Aquila
      * @param source signal source
      * @return true if successfully loaded
      */
-    bool SoundBufferAdapter::LoadFromSignalSource(const SignalSource &source)
+    bool SoundBufferAdapter::loadFromSignalSource(const SignalSource &source)
     {
         sf::Int16* samples = new sf::Int16[source.getSamplesCount()];
         std::copy(source.begin(), source.end(), samples);

@@ -33,7 +33,7 @@ namespace Aquila
     {
         std::size_t numSamples = static_cast<std::size_t>(m_sampleFrequency * duration / 1000);
         m_generator.setFrequency(frequency).generate(numSamples);
-        m_buffer.LoadFromSignalSource(m_generator);
+        m_buffer.loadFromSignalSource(m_generator);
         sf::Sound sound(m_buffer);
         sound.play();
         // the additional 50 ms is an intentional pause between tones
