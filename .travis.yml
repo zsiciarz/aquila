@@ -3,6 +3,8 @@ compiler:
   - clang
   - gcc
 before_install:
+  - sudo apt-add-repository ppa:sonkun/sfml-stable
+  - sudo apt-get update -q
   - sudo apt-get install cmake libsfml-dev lcov
   - sudo pip install cpp-coveralls --use-mirrors
 script:
