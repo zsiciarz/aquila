@@ -19,4 +19,4 @@ add_executable(qt_wave_properties WIN32 EXCLUDE_FROM_ALL
                ${qt_wave_properties_MOC_SOURCES}
                ${qt_wave_properties_UI_SOURCES})
 add_dependencies(examples qt_wave_properties)
-target_link_libraries(qt_wave_properties Aquila ${QT_LIBRARIES})
+target_link_libraries(qt_wave_properties Aquila Qt5::Widgets)
