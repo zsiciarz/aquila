@@ -11,7 +11,7 @@ before_install:
 script:
   - cmake --version
   - cmake -DCMAKE_BUILD_TYPE="Debug" .
-  - make Aquila aquila_test
+  - make aquila_test
   - ctest
 after_success:
   - bash -c 'if [[ $CXX == "g++" ]]; then coveralls --exclude examples --exclude lib --exclude tests; fi'
