@@ -49,7 +49,7 @@ if(NOT MSVC)
         set(CMAKE_AUTOMOC ON)
         add_subdirectory(qt)
     else()
-        message("Qt4 was not found, no GUI examples using Qt will be built.")
+        message("Qt5 was not found, no GUI examples using Qt will be built.")
     endif()
 endif()
 
