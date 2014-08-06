@@ -10,9 +10,7 @@ set(qt_wave_properties_MOC_HEADERS
 set(qt_wave_properties_UIS
     MainWindow.ui
 )
-qt4_wrap_cpp(qt_wave_properties_MOC_SOURCES ${qt_wave_properties_MOC_HEADERS})
-qt4_wrap_ui(qt_wave_properties_UI_SOURCES ${qt_wave_properties_UIS})
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
+qt5_wrap_ui(qt_wave_properties_UI_SOURCES ${qt_wave_properties_UIS})
 
 add_executable(qt_wave_properties WIN32 EXCLUDE_FROM_ALL
                ${qt_wave_properties_SOURCES}
