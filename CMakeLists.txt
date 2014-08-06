@@ -195,7 +195,6 @@ endif()
 
 #tests
 if(Aquila_BUILD_TESTS)
-    include(CTest)
     enable_testing()
     set(UNITTESTPP_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lib/unittestpp/")
     add_subdirectory(tests)
