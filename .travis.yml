@@ -14,4 +14,4 @@ script:
   - make aquila_test
   - ctest
 after_success:
-  - coveralls --exclude examples --exclude lib --exclude tests --exclude CMakeFiles
+  - coveralls --exclude examples --exclude lib --exclude tests
