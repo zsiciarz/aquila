@@ -15,4 +15,4 @@ script:
   - make aquila_test
   - ctest
 after_success:
-  - bash -c 'if [[ $CXX == "g++" ]]; then coveralls --exclude examples --exclude lib --exclude tests; fi'
+  - coveralls --exclude examples --exclude lib --exclude tests
