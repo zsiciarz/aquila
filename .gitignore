@@ -1,4 +1,5 @@
 *.user*
+*.pyc
 *~
 *.swp
 doc/
