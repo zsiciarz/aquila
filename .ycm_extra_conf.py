@@ -14,6 +14,10 @@ flags = [
 '-std=c++11',
 '-x',
 'c++',
+'-I',
+'.',
+'-I',
+'./lib/unittestpp',
 ]
 
 
