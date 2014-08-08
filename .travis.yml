@@ -10,6 +10,7 @@ before_install:
   - sudo pip install cpp-coveralls
 script:
   - cmake --version
+  - ls -la /usr/bin/gcov*
   - cmake -DCMAKE_BUILD_TYPE="Debug" .
   - make aquila_test
   - ctest
