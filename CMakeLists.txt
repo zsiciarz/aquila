@@ -160,11 +160,6 @@ endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x")
-    if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -Wall -Wextra -Wcast-qual -Wcast-align -Wno-unused-parameter -Wmissing-include-dirs -Wpointer-arith -Wredundant-decls -Wshadow -fprofile-arcs -ftest-coverage")
-        include(CodeCoverage)
-        setup_target_for_coverage(coverage aquila_test htmlcov)
-    endif()
 endif()
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
@@ -172,6 +167,12 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     if(APPLE)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
     endif()
+endif()
+
+if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -Wall -Wextra -Wcast-qual -Wcast-align -Wno-unused-parameter -Wmissing-include-dirs -Wpointer-arith -Wredundant-decls -Wshadow -fprofile-arcs -ftest-coverage")
+    include(CodeCoverage)
+    setup_target_for_coverage(coverage aquila_test htmlcov)
 endif()
 
 
