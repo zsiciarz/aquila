@@ -30,6 +30,7 @@ set(Aquila_Test_SOURCES
     source/generator/SquareGenerator.cpp
     source/generator/TriangleGenerator.cpp
     source/generator/WhiteNoiseGenerator.cpp
+    source/generator/PinkNoiseGenerator.cpp
     source/window/BarlettWindow.cpp
     source/window/GaussianWindow.cpp
     source/window/HammingWindow.cpp
