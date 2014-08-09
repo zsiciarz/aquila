@@ -11,6 +11,19 @@ class AquilaTestReporter : public UnitTest::TestReporterStdout
     {
         std::cout << test.suiteName << "::" << test.testName;
     }
+
+    void ReportTestFinish(UnitTest::TestDetails const& /* test */, float secondsElapsed)
+    {
+        std::cout << " [";
+        if (secondsElapsed < 0.05) {
+            std::cout << "\033[92m";
+        } else if (secondsElapsed < 0.5) {
+            std::cout << "\033[93m";
+        } else {
+            std::cout << "\033[1m\033[91m";
+        }
+        std::cout << secondsElapsed * 1000 << "\033[0m ms]" << std::endl;
+    }
 };
 
 
