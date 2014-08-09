@@ -9,7 +9,7 @@ class AquilaTestReporter : public UnitTest::TestReporterStdout
 {
     void ReportTestStart(UnitTest::TestDetails const& test)
     {
-        std::cout << test.testName << std::endl;
+        std::cout << test.suiteName << "::" << test.testName;
     }
 };
 
