@@ -7,7 +7,7 @@
 
 #include "aquila/global.h"
 #include "aquila/transform/AquilaFft.h"
-#include <unittestpp.h>
+#include "UnitTest++/UnitTest++.h"
 #include <algorithm>
 #include <cstddef>
 

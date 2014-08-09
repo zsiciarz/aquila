@@ -1,7 +1,7 @@
 #include "aquila/global.h"
 #include "aquila/source/window/BarlettWindow.h"
 #include "aquila/source/generator/SquareGenerator.h"
-#include <unittestpp.h>
+#include "UnitTest++/UnitTest++.h"
 #include <cstddef>
 
 SUITE(BarlettWindow)

@@ -1,8 +1,8 @@
 #include <iostream>
-#include "src/TestDetails.h"
-#include "src/TestReporterStdout.h"
-#include "src/TestRunner.h"
-#include "src/Test.h"
+#include "UnitTest++/TestDetails.h"
+#include "UnitTest++/TestReporterStdout.h"
+#include "UnitTest++/TestRunner.h"
+#include "UnitTest++/Test.h"
 
 
 class AquilaTestReporter : public UnitTest::TestReporterStdout

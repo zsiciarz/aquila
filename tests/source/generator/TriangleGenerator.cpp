@@ -1,6 +1,6 @@
 #include "aquila/global.h"
 #include "aquila/source/generator/TriangleGenerator.h"
-#include <unittestpp.h>
+#include "UnitTest++/UnitTest++.h"
 #include <algorithm>
 #include <cstddef>
 

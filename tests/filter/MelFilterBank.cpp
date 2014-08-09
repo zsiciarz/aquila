@@ -1,7 +1,7 @@
 #include "aquila/global.h"
 #include "aquila/filter/MelFilter.h"
 #include "aquila/filter/MelFilterBank.h"
-#include <unittestpp.h>
+#include "UnitTest++/UnitTest++.h"
 #include <cstddef>
 #include <vector>
 

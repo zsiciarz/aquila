@@ -1,0 +1,3 @@
+/home/zbyszek/Development/unittest-cpp/build-gcc/CMakeFiles/TestUnitTest++.dir
+/home/zbyszek/Development/unittest-cpp/build-gcc/CMakeFiles/UnitTest++.dir
+/home/zbyszek/Development/unittest-cpp/build-gcc/CMakeFiles/check.dir

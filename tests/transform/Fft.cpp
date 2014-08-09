@@ -1,7 +1,7 @@
 #include "aquila/global.h"
 #include "aquila/source/generator/SineGenerator.h"
 #include "aquila/transform/FftFactory.h"
-#include <unittestpp.h>
+#include "UnitTest++/UnitTest++.h"
 #include <algorithm>
 #include <cstddef>
 #include <iterator>

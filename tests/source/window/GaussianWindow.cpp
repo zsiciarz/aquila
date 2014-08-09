@@ -1,6 +1,6 @@
 #include "aquila/global.h"
 #include "aquila/source/window/GaussianWindow.h"
-#include <unittestpp.h>
+#include "UnitTest++/UnitTest++.h"
 #include <cstddef>
 
 SUITE(GaussianWindow)

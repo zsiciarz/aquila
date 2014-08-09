@@ -2,7 +2,7 @@
 #include "aquila/source/SignalSource.h"
 #include "aquila/source/PlainTextFile.h"
 #include "constants.h"
-#include <unittestpp.h>
+#include "UnitTest++/UnitTest++.h"
 #include <cstddef>
 
 

@@ -1,7 +1,7 @@
 #include "aquila/global.h"
 #include "aquila/functions.h"
 #include "aquila/ml/Dtw.h"
-#include <unittestpp.h>
+#include "UnitTest++/UnitTest++.h"
 #include <vector>
 
 

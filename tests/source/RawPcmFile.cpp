@@ -2,9 +2,9 @@
 #include "aquila/source/SignalSource.h"
 #include "aquila/source/RawPcmFile.h"
 #include "constants.h"
+#include "UnitTest++/UnitTest++.h"
 #include <cstddef>
 #include <cstdint>
-#include <unittestpp.h>
 
 template <typename Numeric> void savePcmTest()
 {

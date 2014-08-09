@@ -1,7 +1,7 @@
 #include "aquila/global.h"
 #include "aquila/source/window/RectangularWindow.h"
 #include "aquila/source/generator/SquareGenerator.h"
-#include <unittestpp.h>
+#include "UnitTest++/UnitTest++.h"
 #include <cstddef>
 
 SUITE(RectangularWindow)

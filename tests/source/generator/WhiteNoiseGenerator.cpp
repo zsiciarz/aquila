@@ -1,6 +1,6 @@
 #include "aquila/global.h"
 #include "aquila/source/generator/WhiteNoiseGenerator.h"
-#include <unittestpp.h>
+#include "UnitTest++/UnitTest++.h"
 #include <algorithm>
 #include <cstddef>
 #include <cstdlib>

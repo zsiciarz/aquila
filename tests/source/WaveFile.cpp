@@ -3,7 +3,7 @@
 #include "aquila/source/WaveFile.h"
 #include "aquila/source/FramesCollection.h"
 #include "constants.h"
-#include <unittestpp.h>
+#include "UnitTest++/UnitTest++.h"
 #include <algorithm>
 #include <cstddef>
 #include <string>

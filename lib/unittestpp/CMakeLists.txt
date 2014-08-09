@@ -1,76 +1,63 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8.1)
+project(UnitTest++)
 
-project(UnitTest++ CXX)
+option(UTPP_USE_PLUS_SIGN "Set this to OFF is you with to use '-cpp' instead of '++' in lib/include paths" ON)
 
-include_directories(src)
+# get the main sources
+file(GLOB headers_ RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} UnitTest++/*.h)
+file(GLOB sources_ RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} UnitTest++/*.cpp)
+source_group("" FILES ${headers_} ${sources_})
 
-################################################################################
-#
-# UnitTest++ sources
-#
-################################################################################
+# get platform specific sources
+if (WIN32)
+    add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
+    set(platformDir_ Win32)
+else()
+    set(platformDir_ Posix)
+endif(WIN32)
 
-set(UNITTESTPP_SOURCES
-    src/AssertException.cpp
-    src/Checks.cpp
-    src/CompositeTestReporter.cpp
-    src/CurrentTest.cpp
-    src/DeferredTestReporter.cpp
-    src/DeferredTestResult.cpp
-    src/MemoryOutStream.cpp
-    src/ReportAssert.cpp
-    src/Test.cpp
-    src/TestDetails.cpp
-    src/TestList.cpp
-    src/TestReporter.cpp
-    src/TestReporterStdout.cpp
-    src/TestResults.cpp
-    src/TestRunner.cpp
-    src/TimeConstraint.cpp
-    src/XmlTestReporter.cpp
-)
+file(GLOB platformHeaders_ RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} UnitTest++/${platformDir_}/*.h)
+file(GLOB platformSources_ RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} UnitTest++/${platformDir_}/*.cpp)
+source_group(${platformDir_} FILES ${platformHeaders_} ${platformSources_})
 
-if(UNIX)
-    list(APPEND UNITTESTPP_SOURCES
-        src/Posix/SignalTranslator.cpp
-        src/Posix/TimeHelpers.cpp
-    )
-elseif(WIN32)
-    list(APPEND UNITTESTPP_SOURCES
-        src/Win32/TimeHelpers.cpp
-    )
+# create the lib
+add_library(UnitTest++ STATIC ${headers_} ${sources_} ${platformHeaders_} ${platformSources_})
+
+if(${UTPP_USE_PLUS_SIGN})
+	set_target_properties(UnitTest++ PROPERTIES OUTPUT_NAME UnitTest++)
 endif()
 
-add_library(UnitTest++ STATIC EXCLUDE_FROM_ALL ${UNITTESTPP_SOURCES})
 
+# build the test runner
+file(GLOB TEST_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} tests/*.cpp tests/*.h)
+source_group( "" FILES ${TEST_SRCS})
+add_executable(TestUnitTest++ ${TEST_SRCS})
+include_directories(.)
 
-################################################################################
-#
-# UnitTest++ self-test sources
-#
-################################################################################
+if(${UTPP_USE_PLUS_SIGN})
+	set_target_properties(TestUnitTest++ PROPERTIES OUTPUT_NAME TestUnitTest++)
+endif()
 
-set(UNITTESTPP_TEST_SOURCES
-    src/tests/Main.cpp
-    src/tests/TestAssertHandler.cpp
-    src/tests/TestCheckMacros.cpp
-    src/tests/TestChecks.cpp
-    src/tests/TestCompositeTestReporter.cpp
-    src/tests/TestCurrentTest.cpp
-    src/tests/TestDeferredTestReporter.cpp
-    src/tests/TestExceptions.cpp
-    src/tests/TestMemoryOutStream.cpp
-    src/tests/TestTest.cpp
-    src/tests/TestTestList.cpp
-    src/tests/TestTestMacros.cpp
-    src/tests/TestTestResults.cpp
-    src/tests/TestTestRunner.cpp
-    src/tests/TestTestSuite.cpp
-    src/tests/TestTimeConstraint.cpp
-    src/tests/TestTimeConstraintMacro.cpp
-    src/tests/TestUnitTestPP.cpp
-    src/tests/TestXmlTestReporter.cpp
-)
-
-add_executable(TestUnitTest++ EXCLUDE_FROM_ALL ${UNITTESTPP_TEST_SOURCES})
 target_link_libraries(TestUnitTest++ UnitTest++)
+
+# turn on testing
+enable_testing()
+add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} -V)
+
+# add the test runner as a test
+add_test(NAME TestUnitTest++ COMMAND TestUnitTest++ ${CONFIG_PATH} ${CONFIG_TASKS_PATH} ${SOUND_LOG_PATH})
+add_dependencies(check TestUnitTest++)
+
+
+# add install targets
+# need a custom install path?
+# define CMAKE_INSTALL_PREFIX to change root folder
+if(${UTPP_USE_PLUS_SIGN})
+	set (UTPP_INSTALL_DESTINATION "include/UnitTest++")
+else()
+	set (UTPP_INSTALL_DESTINATION "include/UnitTestPP")
+endif()
+
+install(TARGETS UnitTest++ DESTINATION lib)
+install(FILES ${headers_} DESTINATION ${UTPP_INSTALL_DESTINATION})
+install(FILES ${platformHeaders_} DESTINATION ${UTPP_INSTALL_DESTINATION}/${platformDir_})

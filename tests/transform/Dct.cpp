@@ -1,6 +1,6 @@
 #include "aquila/global.h"
 #include "aquila/transform/Dct.h"
-#include <unittestpp.h>
+#include "UnitTest++/UnitTest++.h"
 #include <cstddef>
 #include <vector>
 

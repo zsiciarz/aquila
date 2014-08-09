@@ -1,8 +1,8 @@
 #include "aquila/global.h"
 #include "aquila/source/SignalSource.h"
+#include "UnitTest++/UnitTest++.h"
 #include <cstddef>
 #include <cstdint>
-#include <unittestpp.h>
 
 
 SUITE(SignalSource)

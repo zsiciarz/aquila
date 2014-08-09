@@ -1,7 +1,7 @@
 #include "Fft.h"
 #include "aquila/global.h"
 #include "aquila/transform/OouraFft.h"
-#include <unittestpp.h>
+#include "UnitTest++/UnitTest++.h"
 
 
 SUITE(OouraFft)

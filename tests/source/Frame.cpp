@@ -1,7 +1,7 @@
 #include "aquila/global.h"
 #include "aquila/source/SignalSource.h"
 #include "aquila/source/Frame.h"
-#include <unittestpp.h>
+#include "UnitTest++/UnitTest++.h"
 
 
 SUITE(Frame)

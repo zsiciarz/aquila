@@ -2,7 +2,7 @@
 #include "aquila/source/SignalSource.h"
 #include "aquila/source/Frame.h"
 #include "aquila/source/FramesCollection.h"
-#include <unittestpp.h>
+#include "UnitTest++/UnitTest++.h"
 #include <algorithm>
 
 bool equalSamples(Aquila::Frame frame, Aquila::SampleType arr[])
