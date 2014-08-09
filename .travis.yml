@@ -10,7 +10,9 @@ before_install:
   - sudo pip install cpp-coveralls
 script:
   - cmake --version
-  - cmake -DCMAKE_BUILD_TYPE="Debug" .
+  - mkdir build
+  - cd build
+  - cmake -DCMAKE_BUILD_TYPE="Debug" ..
   - make aquila_test
   - make coverage
   - ctest
