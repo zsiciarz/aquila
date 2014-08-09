@@ -221,7 +221,7 @@ namespace Aquila
              * @param source pointer to a source on which the iterator will work
              * @param i index of the sample in the source
              */
-            explicit iterator(const SignalSource* source, unsigned int i = 0):
+            explicit iterator(const SignalSource* source = nullptr, unsigned int i = 0):
                 m_source(source), idx(i)
             {
             }
