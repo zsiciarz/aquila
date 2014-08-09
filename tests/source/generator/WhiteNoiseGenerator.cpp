@@ -26,6 +26,6 @@ SUITE(WhiteNoiseGenerator)
         std::srand(std::time(0));
         gen.setAmplitude(1).generate(2048);
         auto mean = Aquila::mean(gen);
-        CHECK_CLOSE(0.0, mean, 0.01);
+        CHECK_CLOSE(0.0, mean, 0.1);
     }
 }
