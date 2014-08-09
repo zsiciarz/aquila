@@ -17,4 +17,4 @@ script:
   - make coverage
   - ctest
 after_success:
-  - coveralls --exclude examples --exclude lib --exclude tests --root .. --build-root .
+  - coveralls --exclude examples --exclude lib --exclude tests --root .. --build-root . --gcov-options '\-lp'
