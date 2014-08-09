@@ -20,4 +20,12 @@ SUITE(WhiteNoiseGenerator)
         CHECK(*result.first > -amplitude);
         CHECK(*result.second < amplitude);
     }
+
+    TEST(ZeroMean)
+    {
+        std::srand(std::time(0));
+        gen.setAmplitude(1).generate(2048);
+        auto mean = Aquila::mean(gen);
+        CHECK_CLOSE(0.0, mean, 0.01);
+    }
 }
