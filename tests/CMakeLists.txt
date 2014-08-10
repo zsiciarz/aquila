@@ -33,6 +33,7 @@ set(Aquila_Test_SOURCES
     source/generator/PinkNoiseGenerator.cpp
     source/window/BarlettWindow.cpp
     source/window/BlackmanWindow.cpp
+    source/window/FlattopWindow.cpp
     source/window/GaussianWindow.cpp
     source/window/HammingWindow.cpp
     source/window/RectangularWindow.cpp
