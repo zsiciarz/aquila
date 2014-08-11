@@ -1,4 +1,6 @@
 #include <iostream>
+#include <iomanip>
+#include <string>
 #include "UnitTest++/TestDetails.h"
 #include "UnitTest++/TestReporterStdout.h"
 #include "UnitTest++/TestRunner.h"
@@ -9,7 +11,8 @@ class AquilaTestReporter : public UnitTest::TestReporterStdout
 {
     void ReportTestStart(UnitTest::TestDetails const& test)
     {
-        std::cout << test.suiteName << "::" << test.testName;
+        std::cout << std::setw(64) << std::setfill('.') << std::left;
+        std::cout << test.suiteName + std::string("::") + test.testName;
     }
 
     void ReportTestFinish(UnitTest::TestDetails const& /* test */, float secondsElapsed)
