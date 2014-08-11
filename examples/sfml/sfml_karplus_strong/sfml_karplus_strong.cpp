@@ -33,7 +33,7 @@ public:
     void playStream(std::istream& stream)
     {
         std::string line, note;
-        unsigned int duration, lineNumber;
+        unsigned int duration, lineNumber = 0;
         while(std::getline(stream, line))
         {
             lineNumber++;
