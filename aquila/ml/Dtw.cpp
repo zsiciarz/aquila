@@ -47,7 +47,7 @@ namespace Aquila
         }
 
         // the actual pathfinding algorithm
-        DtwPoint *top = 0, *center = 0, *bottom = 0, *previous = 0;
+        DtwPoint *top = nullptr, *center = nullptr, *bottom = nullptr, *previous = nullptr;
         for (std::size_t i = 1; i < m_fromSize; ++i)
         {
             for (std::size_t j = 1; j < m_toSize; ++j)
@@ -106,7 +106,7 @@ namespace Aquila
         DtwPoint* point = &finalPoint;
 
         path.push_back(*point);
-        while(point->previous != 0)
+        while(point->previous)
         {
             point = point->previous;
             path.push_back(*point);
