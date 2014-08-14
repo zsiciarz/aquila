@@ -13,7 +13,7 @@ before_install:
   - sudo pip install cpp-coveralls
 script:
   - cmake --version
-  - mkdir build
+  - mkdir -p build
   - cd build
   - cmake -DCMAKE_BUILD_TYPE="Debug" ..
   - make aquila_test
@@ -28,6 +28,6 @@ addons:
       version: 3.0.0-dev
       description: "Digital signal processing library for C++11"
     notification_email: zbigniew@aquila-dsp.org
-    build_command_prepend: "mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE='Debug' .."
+    build_command_prepend: "mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE='Debug' .."
     build_command: make
     branch_pattern: coverity_scan
