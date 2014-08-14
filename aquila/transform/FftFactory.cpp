@@ -37,8 +37,6 @@ namespace Aquila
      */
     std::shared_ptr<Fft> FftFactory::getFft(std::size_t length)
     {
-        Fft* fft = new OouraFft(length);
-
-        return std::shared_ptr<Fft>(fft);
+        return std::shared_ptr<Fft>(new OouraFft(length));
     }
 }
