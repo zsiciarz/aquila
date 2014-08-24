@@ -116,7 +116,7 @@ namespace Aquila
             return 2 * n;
         }
         auto shift = static_cast<Integer>(std::log2(n));
-        return 1 << (shift + 1);
+        return static_cast<Integer>(1) << (shift + 1);
     }
 
     /**
