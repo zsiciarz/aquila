@@ -97,6 +97,14 @@ namespace Aquila
     }
 
     /**
+     * Returns the smallest power of 2 greater than n.
+     */
+    AQUILA_EXPORT inline bool isPowerOf2(int n)
+    {
+        return (n > 0) && ((n & (n - 1)) == 0);
+    }
+
+    /**
      * Prototype of distance calculating functions.
      */
     typedef std::function<double(const std::vector<double>&,
