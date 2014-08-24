@@ -66,6 +66,24 @@ SUITE(Functions)
         }
     }
 
+    TEST(IsPowerOf2ForNonPowers)
+    {
+        CHECK(!Aquila::isPowerOf2(0));
+        CHECK(!Aquila::isPowerOf2(3));
+        CHECK(!Aquila::isPowerOf2(15));
+        CHECK(!Aquila::isPowerOf2(247));
+        CHECK(!Aquila::isPowerOf2(32769));
+    }
+
+    TEST(IsPowerOf2ForPowers)
+    {
+        CHECK(Aquila::isPowerOf2(1));
+        CHECK(Aquila::isPowerOf2(2));
+        CHECK(Aquila::isPowerOf2(16));
+        CHECK(Aquila::isPowerOf2(1024));
+        CHECK(Aquila::isPowerOf2(32768));
+    }
+
     TEST(EuclideanDistanceToItself)
     {
         double distance = Aquila::euclideanDistance(v1, v1);
