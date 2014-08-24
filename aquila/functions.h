@@ -97,7 +97,7 @@ namespace Aquila
     }
 
     /**
-     * Returns the smallest power of 2 greater than n.
+     * Checks if n is an exact power of 2.
      */
     template<typename Integer>
     AQUILA_EXPORT inline bool isPowerOf2(Integer n)
