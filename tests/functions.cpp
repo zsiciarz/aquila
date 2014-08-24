@@ -82,6 +82,7 @@ SUITE(Functions)
         CHECK(Aquila::isPowerOf2(16));
         CHECK(Aquila::isPowerOf2(1024));
         CHECK(Aquila::isPowerOf2(32768));
+        CHECK(Aquila::isPowerOf2(1152921504606846976ul));
     }
 
     TEST(EuclideanDistanceToItself)
