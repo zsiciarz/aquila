@@ -106,6 +106,20 @@ namespace Aquila
     }
 
     /**
+     * Returns the smallest power of 2 greater than n.
+     */
+    template<typename Integer>
+    AQUILA_EXPORT inline Integer nextPowerOf2(Integer n)
+    {
+        if (isPowerOf2(n))
+        {
+            return 2 * n;
+        }
+        auto shift = static_cast<Integer>(std::log2(n));
+        return 1 << (shift + 1);
+    }
+
+    /**
      * Prototype of distance calculating functions.
      */
     typedef std::function<double(const std::vector<double>&,
