@@ -17,6 +17,28 @@ void checkEqualPaths(Aquila::DtwPathType expectedPath, Aquila::DtwPathType path)
 
 SUITE(Dtw)
 {
+    TEST(GetPointsDimensions)
+    {
+        const std::size_t SIZE = 3;
+        double arr1[SIZE] = {0, 1, 2}, arr2[SIZE] = {1, 2, 3};
+        std::vector<double> v1(arr1, arr1 + SIZE), v2(arr2, arr2 + SIZE);
+
+        Aquila::DtwDataType from, to;
+        from.push_back(v1);
+        from.push_back(v2);
+        to.push_back(v1);
+        to.push_back(v2);
+        to.push_back(v1);
+        to.push_back(v2);
+
+        Aquila::Dtw dtw;
+        dtw.getDistance(from, to);
+        auto points = dtw.getPoints();
+
+        CHECK_EQUAL(from.size(), points.size());
+        CHECK_EQUAL(to.size(), points[0].size());
+    }
+
     TEST(DistanceToItself)
     {
         const std::size_t SIZE = 3;
