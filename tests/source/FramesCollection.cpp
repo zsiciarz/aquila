@@ -84,6 +84,15 @@ SUITE(FramesCollection)
         CHECK_EQUAL(0u, frames.count());
     }
 
+    TEST(Iteration)
+    {
+        Aquila::FramesCollection frames(data, 2);
+        for (auto it = frames.begin(); it != frames.end(); it++)
+        {
+            CHECK_EQUAL(2, it->length());
+        }
+    }
+
     TEST(Duration)
     {
         // sampling at 100 Hz -> 10 miliseconds is 1 sample
