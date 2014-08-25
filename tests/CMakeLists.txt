@@ -44,6 +44,7 @@ set(Aquila_Test_SOURCES
     transform/Fft.cpp
     transform/OouraFft.cpp
     transform/Dct.cpp
+    transform/Spectrogram.cpp
 )
 
 include_directories(${UNITTESTPP_DIR} ${CMAKE_CURRENT_BINARY_DIR})
