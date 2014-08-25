@@ -89,7 +89,7 @@ SUITE(FramesCollection)
         Aquila::FramesCollection frames(data, 2);
         for (auto it = frames.begin(); it != frames.end(); it++)
         {
-            CHECK_EQUAL(2, it->length());
+            CHECK_EQUAL(2u, it->length());
         }
     }
 
