@@ -14,7 +14,7 @@ SUITE(FramesCollection)
 {
     const int SIZE = 10;
     Aquila::SampleType testArray[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    Aquila::FrequencyType sampleFrequency  = 100;
+    Aquila::FrequencyType sampleFrequency = 100;
     Aquila::SignalSource data(testArray, SIZE, sampleFrequency);
 
     TEST(Empty)
