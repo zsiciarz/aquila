@@ -20,18 +20,21 @@ SUITE(FramesCollection)
     TEST(Empty)
     {
         Aquila::FramesCollection frames;
+        CHECK_EQUAL(0u, frames.getSamplesPerFrame());
         CHECK_EQUAL(0u, frames.count());
     }
 
     TEST(EmptyWhenZeroSamples)
     {
         Aquila::FramesCollection frames(data, 0);
+        CHECK_EQUAL(0u, frames.getSamplesPerFrame());
         CHECK_EQUAL(0u, frames.count());
     }
 
     TEST(FiveSamplesPerFrame)
     {
         Aquila::FramesCollection frames(data, 5);
+        CHECK_EQUAL(5u, frames.getSamplesPerFrame());
         CHECK_EQUAL(2u, frames.count());
         Aquila::SampleType arr0[5] = {0, 1, 2, 3, 4};
         CHECK(equalSamples(frames.frame(0), arr0));
@@ -42,6 +45,7 @@ SUITE(FramesCollection)
     TEST(TwoSamplesPerFrame)
     {
         Aquila::FramesCollection frames(data, 2);
+        CHECK_EQUAL(2u, frames.getSamplesPerFrame());
         CHECK_EQUAL(5u, frames.count());
         Aquila::SampleType arr[2] = {0, 1};
         CHECK(equalSamples(frames.frame(0), arr));
@@ -50,6 +54,7 @@ SUITE(FramesCollection)
     TEST(OneSamplePerFrame)
     {
         Aquila::FramesCollection frames(data, 1);
+        CHECK_EQUAL(1u, frames.getSamplesPerFrame());
         CHECK_EQUAL(10u, frames.count());
         Aquila::SampleType arr[1] = {0};
         CHECK(equalSamples(frames.frame(0), arr));
@@ -58,6 +63,7 @@ SUITE(FramesCollection)
     TEST(AllSamplesPerFrame)
     {
         Aquila::FramesCollection frames(data, 10);
+        CHECK_EQUAL(10u, frames.getSamplesPerFrame());
         CHECK_EQUAL(1u, frames.count());
         Aquila::SampleType arr[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         CHECK(equalSamples(frames.frame(0), arr));
@@ -66,6 +72,7 @@ SUITE(FramesCollection)
     TEST(MoreThanHalfSamplesPerFrame)
     {
         Aquila::FramesCollection frames(data, 7);
+        CHECK_EQUAL(7u, frames.getSamplesPerFrame());
         CHECK_EQUAL(1u, frames.count());
         Aquila::SampleType arr[7] = {0, 1, 2, 3, 4, 5, 6};
         CHECK(equalSamples(frames.frame(0), arr));
