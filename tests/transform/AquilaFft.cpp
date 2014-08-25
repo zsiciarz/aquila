@@ -1,7 +1,6 @@
 #include "Fft.h"
 #include "aquila/global.h"
 #include "aquila/transform/AquilaFft.h"
-#include "Fft.h"
 #include "UnitTest++/UnitTest++.h"
 
 
