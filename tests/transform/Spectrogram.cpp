@@ -14,7 +14,7 @@ void testSpectrumPeaks(std::size_t SIZE,
     // divide into 4 frames
     const std::size_t samplesPerFrame = SIZE / 4;
     Aquila::FramesCollection frames(generator, samplesPerFrame);
-    CHECK_EQUAL(4, frames.count());
+    CHECK_EQUAL(4u, frames.count());
 
     Aquila::Spectrogram spectrogram(frames);
 
@@ -47,7 +47,7 @@ SUITE(Spectrogram)
 
         // divide into 4 frames, 128 samples each
         Aquila::FramesCollection frames(generator, SIZE / 4);
-        CHECK_EQUAL(4, frames.count());
+        CHECK_EQUAL(4u, frames.count());
 
         Aquila::Spectrogram spectrogram(frames);
         CHECK_EQUAL(frames.count(), spectrogram.getFrameCount());
