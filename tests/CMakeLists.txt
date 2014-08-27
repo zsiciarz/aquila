@@ -39,6 +39,7 @@ set(Aquila_Test_SOURCES
     source/window/HammingWindow.cpp
     source/window/HannWindow.cpp
     source/window/RectangularWindow.cpp
+    tools/TextPlot.cpp
     transform/AquilaFft.cpp
     transform/Dft.cpp
     transform/Fft.h
