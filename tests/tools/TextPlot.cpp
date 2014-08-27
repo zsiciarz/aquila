@@ -4,6 +4,7 @@
 #include "UnitTest++/UnitTest++.h"
 #include <cstddef>
 #include <sstream>
+#include <vector>
 
 
 SUITE(TextPlot)
@@ -72,6 +73,18 @@ SUITE(TextPlot)
         std::stringstream out;
         Aquila::TextPlot plot("Data plot", out);
         plot.plot(generator.toArray(), generator.length());
+        CHECK_EQUAL(expectedSinePlot, out.str());
+    }
+
+    TEST(PlotSineWaveFromVector)
+    {
+        Aquila::SineGenerator generator(128);
+        generator.setAmplitude(1).setFrequency(8).generate(64);
+        auto arr = generator.toArray();
+        std::vector<double> vec(arr, arr + generator.length());
+        std::stringstream out;
+        Aquila::TextPlot plot("Data plot", out);
+        plot.plot(vec);
         CHECK_EQUAL(expectedSinePlot, out.str());
     }
 }
