@@ -1,7 +1,9 @@
 #include "aquila/global.h"
+#include "aquila/source/generator/SineGenerator.h"
 #include "aquila/tools/TextPlot.h"
 #include "UnitTest++/UnitTest++.h"
 #include <cstddef>
+#include <sstream>
 
 
 SUITE(TextPlot)
@@ -32,5 +34,34 @@ SUITE(TextPlot)
         plot.setSize(80, 12);
         CHECK_EQUAL(plot.getWidth(), 80u);
         CHECK_EQUAL(plot.getHeight(), 12u);
+    }
+
+    TEST(PlotSineWave)
+    {
+        Aquila::SineGenerator generator(128);
+        generator.setAmplitude(1).setFrequency(8).generate(64);
+        std::stringstream out;
+        Aquila::TextPlot plot("Data plot", out);
+        auto expectedOutput =
+            "\nData plot\n"
+            "   ***             ***             ***             ***          \n"
+            "                                                                \n"
+            "  *   *           *   *           *   *           *   *         \n"
+            "                                                                \n"
+            " *     *         *     *         *     *         *     *        \n"
+            "                                                                \n"
+            "                                                                \n"
+            "        *               *               *               *       \n"
+            "*               *               *               *               \n"
+            "                                                                \n"
+            "                                                                \n"
+            "         *     *         *     *         *     *         *     *\n"
+            "                                                                \n"
+            "          *   *           *   *           *   *           *   * \n"
+            "                                                                \n"
+            "           ***             ***             ***             ***  \n";
+
+        plot.plot(generator);
+        CHECK_EQUAL(expectedOutput, out.str());
     }
 }
