@@ -22,15 +22,15 @@ SUITE(TextPlot)
     TEST(DefaultSize)
     {
         Aquila::TextPlot plot;
-        CHECK_EQUAL(plot.getWidth(), 64);
-        CHECK_EQUAL(plot.getHeight(), 16);
+        CHECK_EQUAL(plot.getWidth(), 64u);
+        CHECK_EQUAL(plot.getHeight(), 16u);
     }
 
     TEST(CustomSize)
     {
         Aquila::TextPlot plot;
         plot.setSize(80, 12);
-        CHECK_EQUAL(plot.getWidth(), 80);
-        CHECK_EQUAL(plot.getHeight(), 12);
+        CHECK_EQUAL(plot.getWidth(), 80u);
+        CHECK_EQUAL(plot.getHeight(), 12u);
     }
 }
