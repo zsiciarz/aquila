@@ -65,6 +65,26 @@ namespace Aquila
         }
 
         /**
+         * Returns plot width.
+         *
+         * @return plot width
+         */
+        std::size_t getWidth() const
+        {
+            return m_width;
+        }
+
+        /**
+         * Returns plot height.
+         *
+         * @return plot height
+         */
+        std::size_t getHeight() const
+        {
+            return m_height;
+        }
+
+        /**
          * Sets plot dimensions.
          *
          * @param width plot width, currently ignored
