@@ -64,4 +64,33 @@ SUITE(TextPlot)
         plot.plot(generator);
         CHECK_EQUAL(expectedOutput, out.str());
     }
+
+    TEST(PlotSineWaveFromArray)
+    {
+        Aquila::SineGenerator generator(128);
+        generator.setAmplitude(1).setFrequency(8).generate(64);
+        std::stringstream out;
+        Aquila::TextPlot plot("Data plot", out);
+        auto expectedOutput =
+            "\nData plot\n"
+            "   ***             ***             ***             ***          \n"
+            "                                                                \n"
+            "  *   *           *   *           *   *           *   *         \n"
+            "                                                                \n"
+            " *     *         *     *         *     *         *     *        \n"
+            "                                                                \n"
+            "                                                                \n"
+            "        *               *               *               *       \n"
+            "*               *               *               *               \n"
+            "                                                                \n"
+            "                                                                \n"
+            "         *     *         *     *         *     *         *     *\n"
+            "                                                                \n"
+            "          *   *           *   *           *   *           *   * \n"
+            "                                                                \n"
+            "           ***             ***             ***             ***  \n";
+
+        plot.plot(generator.toArray(), generator.length());
+        CHECK_EQUAL(expectedOutput, out.str());
+    }
 }
