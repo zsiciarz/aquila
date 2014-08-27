@@ -1,6 +1,7 @@
 #include "aquila/global.h"
 #include "aquila/source/generator/SineGenerator.h"
 #include "aquila/tools/TextPlot.h"
+#include "aquila/transform/FftFactory.h"
 #include "UnitTest++/UnitTest++.h"
 #include <cstddef>
 #include <sstream>
@@ -27,6 +28,25 @@ SUITE(TextPlot)
         "          *   *           *   *           *   *           *   * \n"
         "                                                                \n"
         "           ***             ***             ***             ***  \n";
+
+    auto expectedSpectrum =
+        "\nSpectrum\n"
+        "    *                           \n"
+        "                                \n"
+        "                                \n"
+        "                                \n"
+        "                                \n"
+        "                                \n"
+        "                                \n"
+        "                                \n"
+        "                                \n"
+        "                                \n"
+        "                                \n"
+        "                                \n"
+        "                                \n"
+        "                                \n"
+        "                                \n"
+        "**** ***************************\n";
 
     TEST(DefaultTitle)
     {
@@ -86,5 +106,17 @@ SUITE(TextPlot)
         Aquila::TextPlot plot("Data plot", out);
         plot.plot(vec);
         CHECK_EQUAL(expectedSinePlot, out.str());
+    }
+
+    TEST(PlotSpectrum)
+    {
+        Aquila::SineGenerator generator(128);
+        generator.setAmplitude(1).setFrequency(8).generate(64);
+        auto fft = Aquila::FftFactory::getFft(generator.length());
+        Aquila::SpectrumType spectrum = fft->fft(generator.toArray());
+        std::stringstream out;
+        Aquila::TextPlot plot("Spectrum", out);
+        plot.plotSpectrum(spectrum);
+        CHECK_EQUAL(expectedSpectrum, out.str());
     }
 }
