@@ -17,6 +17,7 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/constants.h.in"
 set(Aquila_Test_SOURCES
     main.cpp
     functions.cpp
+    Exceptions.cpp
     filter/MelFilter.cpp
     filter/MelFilterBank.cpp
     ml/Dtw.cpp
