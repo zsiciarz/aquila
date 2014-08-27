@@ -8,6 +8,25 @@
 
 SUITE(TextPlot)
 {
+    auto expectedSinePlot =
+        "\nData plot\n"
+        "   ***             ***             ***             ***          \n"
+        "                                                                \n"
+        "  *   *           *   *           *   *           *   *         \n"
+        "                                                                \n"
+        " *     *         *     *         *     *         *     *        \n"
+        "                                                                \n"
+        "                                                                \n"
+        "        *               *               *               *       \n"
+        "*               *               *               *               \n"
+        "                                                                \n"
+        "                                                                \n"
+        "         *     *         *     *         *     *         *     *\n"
+        "                                                                \n"
+        "          *   *           *   *           *   *           *   * \n"
+        "                                                                \n"
+        "           ***             ***             ***             ***  \n";
+
     TEST(DefaultTitle)
     {
         Aquila::TextPlot plot;
@@ -42,27 +61,8 @@ SUITE(TextPlot)
         generator.setAmplitude(1).setFrequency(8).generate(64);
         std::stringstream out;
         Aquila::TextPlot plot("Data plot", out);
-        auto expectedOutput =
-            "\nData plot\n"
-            "   ***             ***             ***             ***          \n"
-            "                                                                \n"
-            "  *   *           *   *           *   *           *   *         \n"
-            "                                                                \n"
-            " *     *         *     *         *     *         *     *        \n"
-            "                                                                \n"
-            "                                                                \n"
-            "        *               *               *               *       \n"
-            "*               *               *               *               \n"
-            "                                                                \n"
-            "                                                                \n"
-            "         *     *         *     *         *     *         *     *\n"
-            "                                                                \n"
-            "          *   *           *   *           *   *           *   * \n"
-            "                                                                \n"
-            "           ***             ***             ***             ***  \n";
-
         plot.plot(generator);
-        CHECK_EQUAL(expectedOutput, out.str());
+        CHECK_EQUAL(expectedSinePlot, out.str());
     }
 
     TEST(PlotSineWaveFromArray)
@@ -71,26 +71,7 @@ SUITE(TextPlot)
         generator.setAmplitude(1).setFrequency(8).generate(64);
         std::stringstream out;
         Aquila::TextPlot plot("Data plot", out);
-        auto expectedOutput =
-            "\nData plot\n"
-            "   ***             ***             ***             ***          \n"
-            "                                                                \n"
-            "  *   *           *   *           *   *           *   *         \n"
-            "                                                                \n"
-            " *     *         *     *         *     *         *     *        \n"
-            "                                                                \n"
-            "                                                                \n"
-            "        *               *               *               *       \n"
-            "*               *               *               *               \n"
-            "                                                                \n"
-            "                                                                \n"
-            "         *     *         *     *         *     *         *     *\n"
-            "                                                                \n"
-            "          *   *           *   *           *   *           *   * \n"
-            "                                                                \n"
-            "           ***             ***             ***             ***  \n";
-
         plot.plot(generator.toArray(), generator.length());
-        CHECK_EQUAL(expectedOutput, out.str());
+        CHECK_EQUAL(expectedSinePlot, out.str());
     }
 }
