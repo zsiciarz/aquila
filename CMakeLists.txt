@@ -14,9 +14,8 @@ set(Aquila_VERSION "${Aquila_VERSION_MAJOR}.${Aquila_VERSION_MINOR}.${Aquila_VER
 #
 ################################################################################
 
-set(Aquila_BUILD_EXAMPLES ON CACHE BOOL "Build example programs?" FORCE)
-set(Aquila_BUILD_TESTS ON CACHE BOOL "Build test programs?" FORCE)
-
+option (Aquila_BUILD_EXAMPLES "Build example programs?" ON)
+option (Aquila_BUILD_TESTS "Build test programs?" ON)
 
 ################################################################################
 #
