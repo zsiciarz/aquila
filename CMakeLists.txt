@@ -232,7 +232,7 @@ endif()
 # install the binaries and include files
 install(TARGETS Aquila ARCHIVE DESTINATION lib LIBRARY DESTINATION lib)
 install(DIRECTORY aquila/ DESTINATION include/aquila FILES_MATCHING PATTERN "*.h")
-install(FILES CHANGELOG LICENSE README.md DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(FILES CHANGELOG LICENSE README.md DESTINATION share/aquila)
 
 
 ################################################################################
