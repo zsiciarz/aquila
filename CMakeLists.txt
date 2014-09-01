@@ -229,7 +229,10 @@ endif()
 ################################################################################
 
 # install the binaries and include files
-install(TARGETS Aquila ARCHIVE DESTINATION lib LIBRARY DESTINATION lib)
+install(TARGETS Aquila
+        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION lib
+        RUNTIME DESTINATION bin)
 install(DIRECTORY aquila/ DESTINATION include/aquila FILES_MATCHING PATTERN "*.h")
 install(FILES CHANGELOG LICENSE README.md DESTINATION share/aquila)
 
