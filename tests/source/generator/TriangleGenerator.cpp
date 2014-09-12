@@ -15,4 +15,18 @@ SUITE(TriangleGenerator)
         auto min = *std::min_element(gen.begin(), gen.end());
         CHECK_EQUAL(-250, min);
     }
+
+    TEST(SymmetricTriangle)
+    {
+        gen.setWidth(0.5).setAmplitude(250).setFrequency(10).generate(100);
+        auto min = *std::min_element(gen.begin(), gen.end());
+        CHECK_EQUAL(-250, min);
+    }
+
+    TEST(UnevenPeriod)
+    {
+        gen.setWidth(0.5).setAmplitude(250).setFrequency(13).generate(100);
+        auto min = *std::min_element(gen.begin(), gen.end());
+        CHECK_EQUAL(-250, min);
+    }
 }
