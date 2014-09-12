@@ -51,6 +51,8 @@ set(Aquila_Test_SOURCES
 
 if(SFML_FOUND)
     list(APPEND Aquila_Test_SOURCES
+        synth/KarplusStrongSynthesizer.cpp
+        synth/SineSynthesizer.cpp
         wrappers/SoundBufferAdapter.cpp
     )
 endif()
