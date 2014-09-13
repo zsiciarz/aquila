@@ -44,6 +44,7 @@ set(Aquila_Test_SOURCES
     transform/Dft.cpp
     transform/Fft.h
     transform/Fft.cpp
+    transform/Mfcc.cpp
     transform/OouraFft.cpp
     transform/Dct.cpp
     transform/Spectrogram.cpp
