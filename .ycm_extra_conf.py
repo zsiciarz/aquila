@@ -28,6 +28,8 @@ flags = [
 '/usr/include/qt5/QtCore',
 '-I',
 '/usr/include/SFML',
+'-I',
+'/usr/include/qwt',
 ]
 
 
