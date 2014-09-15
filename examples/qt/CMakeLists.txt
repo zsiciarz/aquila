@@ -5,3 +5,7 @@
 ################################################################################
 
 add_subdirectory(qt_wave_properties)
+if(QWT_FOUND)
+    include_directories(${QWT_INCLUDE_DIRS})
+    add_subdirectory(qwt_wave_plot)
+endif()
