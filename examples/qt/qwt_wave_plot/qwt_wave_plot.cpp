@@ -47,6 +47,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     auto plot = new QwtPlot();
     plot->setTitle("Wave plot");
+    plot->setAxisTitle(QwtPlot::xBottom, "time [s]");
+    plot->setAxisTitle(QwtPlot::yLeft, "sample value");
 
     auto curve = new QwtPlotCurve();
     curve->setPen(Qt::blue, 1);
