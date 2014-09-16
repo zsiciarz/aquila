@@ -25,7 +25,7 @@ public:
     {
         std::size_t frame = Aquila::clamp(0ul, static_cast<std::size_t>(x), m_spectrogram.getFrameCount() - 1ul);
         std::size_t peak = Aquila::clamp(0ul, static_cast<std::size_t>(y), m_spectrogram.getSpectrumSize() - 1ul);
-        return 20.0 * std::log10(std::abs(m_spectrogram.getPoint(frame, peak)));
+        return Aquila::dB(m_spectrogram.getPoint(frame, peak));
     }
 
 private:
