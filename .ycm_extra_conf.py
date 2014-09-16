@@ -1,3 +1,4 @@
+import glob
 import os
 import ycm_core
 
@@ -31,6 +32,10 @@ flags = [
 '-I',
 '/usr/include/qwt',
 ]
+
+for path in glob.glob('/usr/local/qwt*/include'):
+    flags.append('-I')
+    flags.append(path)
 
 
 # Set this to the absolute path to the folder (NOT the file!) containing the
