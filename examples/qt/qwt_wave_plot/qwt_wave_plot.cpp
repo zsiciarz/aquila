@@ -28,7 +28,7 @@ public:
 
     QPointF sample(std::size_t i) const
     {
-        return QPointF(i, m_source.sample(i));
+        return QPointF(i / m_source.getSampleFrequency(), m_source.sample(i));
     }
 
 private:
