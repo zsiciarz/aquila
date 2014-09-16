@@ -5,6 +5,7 @@
 #include "aquila/transform/Spectrogram.h"
 #include <QApplication>
 #include <QMainWindow>
+#include <qwt_color_map.h>
 #include <qwt_plot.h>
 #include <qwt_plot_spectrogram.h>
 #include <qwt_raster_data.h>
@@ -47,6 +48,12 @@ int main(int argc, char *argv[])
     plot->setTitle("Spectrogram");
 
     auto plotSpectrogram = new QwtPlotSpectrogram();
+    QwtLinearColorMap colorMap(Qt::black, Qt::red);
+    colorMap.addColorStop(0.3, Qt::darkBlue);
+    colorMap.addColorStop(0.4, Qt::blue);
+    colorMap.addColorStop(0.65, Qt::green);
+    colorMap.addColorStop(0.85, Qt::yellow);
+    plotSpectrogram->setColorMap(&colorMap);
     auto data = new SpectrogramData(spectrogram);
     plotSpectrogram->setData(data);
     plotSpectrogram->attach(plot);
