@@ -5,6 +5,36 @@
 #include <QMainWindow>
 #include <qwt_plot.h>
 #include <qwt_plot_curve.h>
+#include <qwt_series_data.h>
+
+
+class SignalSourceData : public QwtSeriesData<QPointF>
+{
+public:
+    SignalSourceData(const Aquila::SignalSource& source):
+        m_source(source)
+    {
+    }
+
+    std::size_t size() const
+    {
+        return m_source.getSamplesCount();
+    }
+
+    QRectF boundingRect() const
+    {
+        return qwtBoundingRect(*this);
+    }
+
+    QPointF sample(std::size_t i) const
+    {
+        return QPointF(i, m_source.sample(i));
+    }
+
+private:
+    const Aquila::SignalSource& m_source;
+};
+
 
 int main(int argc, char *argv[])
 {
@@ -13,23 +43,19 @@ int main(int argc, char *argv[])
 
     Aquila::SineGenerator generator(sampleFrequency);
     generator.setAmplitude(5).setFrequency(64).generate(SIZE);
-    double x_data[SIZE] = {0};
-    double acc = 0.0;
-    std::generate_n(x_data, SIZE, [&] () {
-        acc += 1.0;
-        return acc;
-    });
-    auto y_data = generator.toArray();
 
     QApplication a(argc, argv);
-
     auto plot = new QwtPlot();
     plot->setTitle("Wave plot");
+
     auto curve = new QwtPlotCurve();
     curve->setPen(Qt::blue, 1);
     curve->setRenderHint(QwtPlotItem::RenderAntialiased, true);
-    curve->setSamples(x_data, y_data, SIZE);
+
+    auto data = new SignalSourceData(generator);
+    curve->setSamples(data);
     curve->attach(plot);
+
     plot->show();
     return a.exec();
 }
