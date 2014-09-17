@@ -6,27 +6,38 @@
 #include "aquila/transform/Spectrogram.h"
 #include <QApplication>
 #include <QMainWindow>
+#include <QVector>
 #include <qwt_color_map.h>
+#include <qwt_matrix_raster_data.h>
 #include <qwt_plot.h>
 #include <qwt_plot_spectrogram.h>
-#include <qwt_raster_data.h>
 
-class SpectrogramData : public QwtRasterData
+class SpectrogramData : public QwtMatrixRasterData
 {
 public:
     SpectrogramData(const Aquila::Spectrogram& spectrogram):
         m_spectrogram(spectrogram)
     {
-        setInterval(Qt::XAxis, QwtInterval(0.0, m_spectrogram.getFrameCount()));
-        setInterval(Qt::YAxis, QwtInterval(0.0, m_spectrogram.getSpectrumSize() / 2));
-        setInterval(Qt::ZAxis, QwtInterval(0.0, 50));
-    }
-
-    double value(double x, double y) const
-    {
-        std::size_t frame = Aquila::clamp(0ul, static_cast<std::size_t>(x), m_spectrogram.getFrameCount() - 1ul);
-        std::size_t peak = Aquila::clamp(0ul, static_cast<std::size_t>(y), m_spectrogram.getSpectrumSize() - 1ul);
-        return Aquila::dB(m_spectrogram.getPoint(frame, peak));
+        const std::size_t width = m_spectrogram.getFrameCount();
+        const std::size_t height = m_spectrogram.getSpectrumSize() / 2;
+        QVector<double> values;
+        double maxValue = 0.0;
+        for (std::size_t y = 0; y < height; ++y)
+        {
+            for (std::size_t x = 0; x < width; ++x)
+            {
+                auto val = Aquila::dB(m_spectrogram.getPoint(x, y));
+                values << val;
+                if (val > maxValue)
+                {
+                    maxValue = val;
+                }
+            }
+        }
+        setValueMatrix(values, width);
+        setInterval(Qt::XAxis, QwtInterval(0.0, width));
+        setInterval(Qt::YAxis, QwtInterval(0.0, height));
+        setInterval(Qt::ZAxis, QwtInterval(0.0, maxValue));
     }
 
 private:
