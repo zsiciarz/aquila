@@ -1,5 +1,6 @@
 #include "aquila/global.h"
 #include "aquila/functions.h"
+#include "aquila/source/WaveFile.h"
 #include "aquila/source/generator/SineGenerator.h"
 #include "aquila/source/FramesCollection.h"
 #include "aquila/transform/Spectrogram.h"
@@ -38,9 +39,19 @@ int main(int argc, char *argv[])
     const Aquila::FrequencyType sampleFrequency = 44100;
     const std::size_t SIZE = sampleFrequency * 2;
 
-    Aquila::SineGenerator generator(sampleFrequency);
-    generator.setAmplitude(5).setFrequency(1000).generate(SIZE);
-    Aquila::FramesCollection frames(generator, 1024);
+    Aquila::SignalSource* source = nullptr;
+    if (argc >= 2)
+    {
+        source = new Aquila::WaveFile(argv[1]);
+    }
+    else
+    {
+        auto generator = new Aquila::SineGenerator(sampleFrequency);
+        generator->setAmplitude(5).setFrequency(1000).generate(SIZE);
+        source = generator;
+    }
+
+    Aquila::FramesCollection frames(*source, 1024);
     Aquila::Spectrogram spectrogram(frames);
 
     QApplication a(argc, argv);
