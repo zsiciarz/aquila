@@ -1,0 +1,9 @@
+init:
+  - cmd: cmake --version
+
+before_build:
+  - cmd: mkdir build
+  - cmd: cd build
+  - cmd: cmake -DCMAKE_BUILD_TYPE="Debug" -G"Visual Studio 12" ..
+
+build: false
