@@ -4,8 +4,10 @@ What is Aquila?
 Aquila is an open source and cross-platform DSP (Digital Signal Processing)
 library for C++11.
 
-[![Build Status](https://travis-ci.org/zsiciarz/aquila.png?branch=master)](https://travis-ci.org/zsiciarz/aquila) [![Coverage Status](https://coveralls.io/repos/zsiciarz/aquila/badge.png)](https://coveralls.io/r/zsiciarz/aquila) [![Coverity Scan Build Status](https://scan.coverity.com/projects/2786/badge.svg)](https://scan.coverity.com/projects/2786)
-
+[![Build Status](https://travis-ci.org/zsiciarz/aquila.png?branch=master)](https://travis-ci.org/zsiciarz/aquila)
+[![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/zsiciarz/aquila?branch=master&svg=true)](https://ci.appveyor.com/project/zsiciarz/aquila)
+[![Coverage Status](https://coveralls.io/repos/zsiciarz/aquila/badge.png)](https://coveralls.io/r/zsiciarz/aquila)
+[![Coverity Scan Build Status](https://scan.coverity.com/projects/2786/badge.svg)](https://scan.coverity.com/projects/2786)
 
 
 Example
