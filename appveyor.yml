@@ -12,4 +12,4 @@ build_script:
   - cmd: msbuild Aquila.sln /target:Aquila
 
 test_script:
-  - cmd: msbuild Aquila.sln /target:RUN_TESTS
+  - cmd: msbuild Aquila.sln /target:tests
