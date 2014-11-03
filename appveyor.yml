@@ -10,3 +10,9 @@ before_build:
 
 build_script:
   - cmd: msbuild Aquila.sln /target:Aquila
+
+before_test:
+  - cmd: msbuild tests\aquila_test.vcxproj
+  
+test_script:
+  - cmd: msbuild RUN_TESTS.vcxproj
