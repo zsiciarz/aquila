@@ -9,5 +9,7 @@ before_build:
   - cmd: cmake -G"Visual Studio 12" ..
 
 build_script:
-  - cmd: dir
-  - cmd: msbuild Aquila.sln
+  - cmd: msbuild Aquila.sln /target:Aquila
+
+test_script:
+  - cmd: msbuild Aquila.sln /target:RUN_TESTS
