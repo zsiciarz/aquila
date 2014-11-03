@@ -10,6 +10,3 @@ before_build:
 
 build_script:
   - cmd: msbuild Aquila.sln /target:Aquila
-
-test_script:
-  - cmd: msbuild Aquila.sln /target:tests
