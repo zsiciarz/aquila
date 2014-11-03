@@ -10,3 +10,4 @@ before_build:
 
 build_script:
   - cmd: dir
+  - cmd: msbuild Aquila.sln
