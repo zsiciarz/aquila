@@ -115,8 +115,12 @@ namespace Aquila
         {
             return 2 * n;
         }
-        auto shift = static_cast<Integer>(std::log2(n));
-        return static_cast<Integer>(1) << (shift + 1);
+        constexpr size_t size_in_bits = sizeof(Integer) * 8;
+        for (size_t shift = 1; shift < size_in_bits; shift *= 2)
+        {
+            n |= (n >> shift);
+        }
+        return (n + 1);
     }
 
     /**
