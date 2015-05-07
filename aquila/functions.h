@@ -115,7 +115,13 @@ namespace Aquila
         {
             return 2 * n;
         }
+        
+        #ifdef MSVC
+        size_t size_in_bits = sizeof(Integer) * 8;
+        #else
         constexpr size_t size_in_bits = sizeof(Integer) * 8;
+        #endif
+
         for (size_t shift = 1; shift < size_in_bits; shift *= 2)
         {
             n |= (n >> shift);
