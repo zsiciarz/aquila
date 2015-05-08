@@ -10,6 +10,24 @@ library for C++11.
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/2786/badge.svg)](https://scan.coverity.com/projects/2786)
 
 
+Building
+========
+
+## Linux
+Generate `Makefile`.
+```shell
+$ cmake CMakeLists.txt
+```
+Compile (N should be a number of threads available plus one).
+```shell
+$ make -jN
+```
+Install as root for the whole system.
+```shell
+# make install
+```
+
+
 Example
 =======
 
