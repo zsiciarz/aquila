@@ -49,6 +49,17 @@ namespace Aquila
         std::fstream fs;
         fs.open(m_filename.c_str(), std::ios::in | std::ios::binary);
         fs.read((char*)(&header), sizeof(WaveHeader));
+
+        // FIXME ignore LIST chunk
+        if (header.data[0] == 'L'
+                && header.data[1] == 'I'
+                && header.data[2] == 'S'
+                && header.data[3] == 'T'){
+            fs.ignore(header.WaveSize);
+            fs.read((char*)header.data, 4);
+            fs.read((char*)&header.WaveSize, 4);
+        }
+
         short* data = new short[header.WaveSize/2];
         fs.read((char*)data, header.WaveSize);
         fs.close();
