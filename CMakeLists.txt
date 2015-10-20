@@ -83,6 +83,11 @@ set(Aquila_HEADERS
     aquila/source/window/HammingWindow.h
     aquila/source/window/HannWindow.h
     aquila/source/window/RectangularWindow.h
+    aquila/source/window/WelchWindow.h
+    aquila/source/window/CosineWindow.h
+    aquila/source/window/NuttallWindow.h
+    aquila/source/window/BlackmanNuttallWindow.h
+    aquila/source/window/BlackmanHarrisWindow.h
     aquila/transform/Fft.h
     aquila/transform/Dft.h
     aquila/transform/AquilaFft.h
@@ -117,6 +122,11 @@ set(Aquila_SOURCES
     aquila/source/window/GaussianWindow.cpp
     aquila/source/window/HammingWindow.cpp
     aquila/source/window/HannWindow.cpp
+    aquila/source/window/WelchWindow.cpp
+    aquila/source/window/CosineWindow.cpp
+    aquila/source/window/NuttallWindow.cpp
+    aquila/source/window/BlackmanNuttallWindow.cpp
+    aquila/source/window/BlackmanHarrisWindow.cpp
     aquila/transform/Dft.cpp
     aquila/transform/AquilaFft.cpp
     aquila/transform/OouraFft.cpp
