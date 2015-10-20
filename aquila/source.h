@@ -39,5 +39,10 @@
 #include "source/window/HammingWindow.h"
 #include "source/window/HannWindow.h"
 #include "source/window/RectangularWindow.h"
+#include "source/window/WelchWindow.h"
+#include "source/window/BlackmanHarrisWindow.h"
+#include "source/window/NuttallWindow.h"
+#include "source/window/BlackmanNuttallWindow.h"
+#include "source/window/CosineWindow.h"
 
 #endif // AQUILA_SOURCE_H
