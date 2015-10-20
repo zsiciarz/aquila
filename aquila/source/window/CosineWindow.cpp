@@ -32,7 +32,7 @@ namespace Aquila
         const double lhalf = ((double)size - 1.0) / 2.0; // L / 2
         m_data.reserve(size);
         for (std::size_t n = 0; n < size; ++n) {
-            m_data.push_back(std::sin(n * M_PI / (double)(size - 1)));
+            m_data.push_back(std::sin(n * M_PI / double(size - 1)));
         }
     }
 }
