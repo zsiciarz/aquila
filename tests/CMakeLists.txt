@@ -39,6 +39,8 @@ set(Aquila_Test_SOURCES
     source/window/HammingWindow.cpp
     source/window/HannWindow.cpp
     source/window/RectangularWindow.cpp
+    source/window/BlackmanHarrisWindow.cpp
+    source/window/BlackmanNuttallWindow.cpp
     tools/TextPlot.cpp
     transform/AquilaFft.cpp
     transform/Dft.cpp
