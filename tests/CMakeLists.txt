@@ -43,6 +43,7 @@ set(Aquila_Test_SOURCES
     source/window/BlackmanNuttallWindow.cpp
     source/window/NuttallWindow.cpp
     source/window/WelchWindow.cpp
+    source/window/CosineWindow.cpp
     tools/TextPlot.cpp
     transform/AquilaFft.cpp
     transform/Dft.cpp
