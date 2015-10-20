@@ -33,8 +33,8 @@ namespace Aquila
         m_data.reserve(size);
         for (std::size_t n = 0; n < size; ++n)
         {
-            double v = (n - lhalf) / lhalf;
-            m_data.push_back(v * v);
+            double v = ((double)n - lhalf) / lhalf;
+            m_data.push_back(1 - (v * v));
         }
     }
 }

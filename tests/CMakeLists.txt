@@ -41,6 +41,8 @@ set(Aquila_Test_SOURCES
     source/window/RectangularWindow.cpp
     source/window/BlackmanHarrisWindow.cpp
     source/window/BlackmanNuttallWindow.cpp
+    source/window/NuttallWindow.cpp
+    source/window/WelchWindow.cpp
     tools/TextPlot.cpp
     transform/AquilaFft.cpp
     transform/Dft.cpp
