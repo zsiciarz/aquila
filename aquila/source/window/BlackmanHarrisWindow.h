@@ -1,7 +1,7 @@
 /**
- * @file BlackmanNuttallWindow.h
+ * @file BlackmanHarrisWindow.h
  *
- * Blackman-Nuttall window.
+ * Blackman-Harris window.
  *
  * This file is part of the Aquila DSP library.
  * Aquila is free software, licensed under the MIT/X11 License. A copy of
@@ -15,8 +15,8 @@
  * @since 3.0.0
  */
 
-#ifndef BLACKMANNUTTALLWINDOW_H
-#define BLACKMANNUTTALLWINDOW_H
+#ifndef BLACKMANHARRISWINDOW_H
+#define BLACKMANHARRISWINDOW_H
 
 #include "../../global.h"
 #include "../SignalSource.h"
@@ -27,11 +27,11 @@ namespace Aquila
     /**
      * Nuttall window.
      */
-    class AQUILA_EXPORT BlackmanNuttallWindow : public SignalSource
+    class AQUILA_EXPORT BlackmanHarrisWindow : public SignalSource
     {
     public:
-        BlackmanNuttallWindow(std::size_t size);
+        BlackmanHarrisWindow(std::size_t size);
     };
 }
 
-#endif // BLACKMANNUTTALLWINDOW_H
+#endif // BLACKMANHARRISWINDOW_H
